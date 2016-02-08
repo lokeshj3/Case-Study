@@ -1,4 +1,4 @@
-/.idea/
-/Case-Study.iml
-/target/
+.idea/
+Case-Study.iml
+target/
 src/main/resources/files/*.ser
