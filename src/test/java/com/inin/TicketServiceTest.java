@@ -63,6 +63,41 @@ public class TicketServiceTest {
         ticketService.delete(ticket.getId());
     }
 
+    @Test
+    public void testUpdateTicket(){
+        TicketService ticketService = getTicketServiceInstance();
+        Set<String> tags = new HashSet<>(Arrays.asList("tag1","tag2","tag3"));
+        Set<String> newTags = new HashSet<>(Arrays.asList("NewTag1","NewTag2"));
+        int id = ticketService.create("Test Subject","Agent1",tags);
+        Ticket ticket = ticketService.update(1, "AgentVinod", newTags);
+        Assert.assertEquals("AgentVinod",ticket.getAgent());
+        Assert.assertEquals(newTags,ticket.getTags());
+    }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateTicketWithNullAgent(){
+        TicketService ticketService = getTicketServiceInstance();
+        Set<String> tags = new HashSet<>(Arrays.asList("tag1","tag2","tag3"));
+        int id = ticketService.create("Test Subject","Agent1",tags);
+        ticketService.update(id, null ,null);
+    }
+
+    @Test(expected = TicketNotFoundException.class)
+    public void testUpdateTicketWithNullId(){
+        TicketService ticketService = getTicketServiceInstance();
+        Set<String> tags = new HashSet<>(Arrays.asList("tag1","tag2","tag3"));
+        ticketService.update(-1, "agent name",tags);
+    }
+
+    @Test
+    public void testUpdateTicketWithNullTags(){
+        TicketService ticketService = getTicketServiceInstance();
+        Set<String> tags = new HashSet<>(Arrays.asList("Tag1","Tag2"));
+        int id = ticketService.create("Test Subject","Agent1",tags);
+        Ticket ticket = ticketService.update(id, "AgentVinod",null);
+        Assert.assertEquals(ticket.getTags(), tags );
+    }
 
     @Test
     public void testDeleteTicketWithValidId(){
