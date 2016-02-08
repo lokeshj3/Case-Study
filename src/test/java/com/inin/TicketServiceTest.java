@@ -69,9 +69,10 @@ public class TicketServiceTest {
         Set<String> tags = new HashSet<>(Arrays.asList("tag1","tag2","tag3"));
         Set<String> newTags = new HashSet<>(Arrays.asList("NewTag1","NewTag2"));
         int id = ticketService.create("Test Subject","Agent1",tags);
-        Ticket ticket = ticketService.update(1, "AgentVinod", newTags);
-        Assert.assertEquals("AgentVinod",ticket.getAgent());
+        Ticket ticket = ticketService.update(1, "Agent Vinod", newTags);
+        Assert.assertEquals("Agent Vinod",ticket.getAgent());
         Assert.assertEquals(newTags,ticket.getTags());
+        ticketService.delete(id);
     }
 
 
@@ -81,6 +82,7 @@ public class TicketServiceTest {
         Set<String> tags = new HashSet<>(Arrays.asList("tag1","tag2","tag3"));
         int id = ticketService.create("Test Subject","Agent1",tags);
         ticketService.update(id, null ,null);
+        ticketService.delete(id);
     }
 
     @Test(expected = TicketNotFoundException.class)
@@ -97,6 +99,7 @@ public class TicketServiceTest {
         int id = ticketService.create("Test Subject","Agent1",tags);
         Ticket ticket = ticketService.update(id, "AgentVinod",null);
         Assert.assertEquals(ticket.getTags(), tags );
+        ticketService.delete(id);
     }
 
     @Test
