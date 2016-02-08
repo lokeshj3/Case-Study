@@ -2,3 +2,4 @@
 Case-Study.iml
 target/
 src/main/resources/files/*.ser
+com.iml
