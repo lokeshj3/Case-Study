@@ -5,6 +5,7 @@ import com.inin.factory.TicketFactory;
 import com.inin.model.Ticket;
 import com.inin.util.TicketUtil;
 
+import java.security.InvalidParameterException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -22,8 +23,20 @@ public class TicketServiceImpl implements TicketService {
         return ticket.getId();
     }
 
-    public Ticket update(int id, String agent, Set<String> tags) {
-        return null;
+    public Ticket update(int id, String agent, Set<String> tags) throws IllegalArgumentException,TicketNotFoundException{
+        if(!TicketUtil.isValidString(agent))
+            throw new IllegalArgumentException();
+
+        Ticket ticket = ticketMap.get(id);
+        if (ticket == null)
+            throw new TicketNotFoundException("Not Found");
+
+        if (TicketUtil.isValidString(agent))
+            ticket.setAgent(agent);
+        if (TicketUtil.isValidCollection(tags)) {
+            ticket.setTags(tags);
+        }
+        return TicketFactory.newInstance(ticket);
     }
 
     /**
