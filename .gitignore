@@ -1,0 +1,10 @@
+# Ignore everything in this directory
+team1/TicketMaster/.idea/*
+team1/TicketMaster/out/*
+*.class
+*.jar
+*.iml
+# Except this file
+!.gitignore
+!team1/TicketMaster/pom.xml
+
