@@ -1,6 +1,7 @@
 package com.inin.model;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -13,6 +14,23 @@ public class Ticket {
     private Set<String> tags;
     private LocalDateTime created;
     private LocalDateTime modified;
+
+    public Ticket(int id, String subject,String agent, Set tags){
+        this.id = id;
+        this.agent = agent;
+        this.subject = subject;
+        this.tags = tags;
+        this.created = this.modified = LocalDateTime.now();
+    }
+
+    public Ticket(Ticket ticket){
+        this.id = ticket.getId();
+        this.agent = ticket.getAgent();
+        this.subject = ticket.getSubject();
+        this.tags = ticket.getTags();
+        this.created = ticket.getCreated();
+        this.modified = ticket.getModified();
+    }
 
     public int getId() {
         return id;
@@ -43,6 +61,8 @@ public class Ticket {
     }
 
     public void setTags(Set<String> tags) {
-        this.tags = tags;
+            tags.clear();
+            tags.addAll(tags);
     }
+
 }
