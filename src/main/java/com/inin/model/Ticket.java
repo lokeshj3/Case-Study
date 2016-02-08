@@ -19,7 +19,7 @@ public class Ticket {
         this.id = id;
         this.agent = agent;
         this.subject = subject;
-        this.tags = tags;
+        this.tags = tags != null ? new HashSet<>(tags) : null;
         this.created = this.modified = LocalDateTime.now();
     }
 
@@ -27,42 +27,59 @@ public class Ticket {
         this.id = ticket.getId();
         this.agent = ticket.getAgent();
         this.subject = ticket.getSubject();
-        this.tags = ticket.getTags();
+        this.tags = ticket.getTags() != null ? new HashSet<>(ticket.getTags()) : null;
         this.created = ticket.getCreated();
         this.modified = ticket.getModified();
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public String getSubject() {
-        return subject;
+        return this.subject;
     }
 
     public String getAgent() {
-        return agent;
+        return this.agent;
     }
 
     public LocalDateTime getCreated() {
-        return created;
+        return this.created;
     }
 
     public LocalDateTime getModified() {
-        return modified;
+        return this.modified;
     }
 
     public Set<String> getTags() {
-        return tags;
+        return this.tags;
     }
 
     public void setAgent(String agent) {
         this.agent = agent;
+        setModified();
     }
 
     public void setTags(Set<String> tags) {
-            tags.clear();
-            tags.addAll(tags);
+        this.tags.clear();
+        this.tags.addAll(tags);
+        setModified();
+    }
+    private void setModified()
+    {
+        this.modified = LocalDateTime.now();
     }
 
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + id +
+                ", subject='" + subject + '\'' +
+                ", agent='" + agent + '\'' +
+                ", tags=" + tags +
+                ", created=" + created +
+                ", modified=" + modified +
+                '}';
+    }
 }

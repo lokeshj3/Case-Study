@@ -9,11 +9,24 @@ import java.util.Set;
  */
 public class TicketFactory {
     public static int counter;
-    public static Ticket newInstance(String subject, String name, Set tags){
-        int ticketId = getTicketId();
-        return new Ticket(ticketId, subject, name, tags);
+
+    /**
+     * Create new Ticket with subject, name and tags
+     * @param subject
+     * @param agent
+     * @param tags
+     * @return Ticket
+     */
+    public static Ticket newInstance(String subject, String agent, Set<String> tags){
+        int id = getTicketId();
+        return new Ticket(id, subject, agent, tags);
     }
 
+    /**
+     * Create new copy of passed Ticket
+     * @param ticket
+     * @return Ticket
+     */
     public static Ticket newInstance(Ticket ticket){
         return new Ticket(ticket);
     }
