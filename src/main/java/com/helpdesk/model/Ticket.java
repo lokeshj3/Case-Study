@@ -47,6 +47,10 @@ public class Ticket implements Serializable{
             this.tags = new HashSet<>(tags);
             return this;
         }
+
+        Ticket build(){
+            return new Ticket(this);
+        }
     }
 
     public Ticket(Builder builder) {
