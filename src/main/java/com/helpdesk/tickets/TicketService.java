@@ -8,6 +8,9 @@ import java.util.HashSet;
 public class TicketService {
     //
     public TicketModel createTicket(int a) {
+
+        TicketModel ticketModel = new TicketModel.Builder(1,"sub","agent").build();
+
         //
         int id = 1;
         String subject = "subject";
