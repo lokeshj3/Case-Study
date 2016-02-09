@@ -1,19 +1,19 @@
 package com.helpdesk.tickets;
-
-import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
- * Created by root on 8/2/16.
+ * Created by root on 9/2/16.
  */
-public class TicketService {
-    //
-    public TicketModel createTicket(int a) {
-        //
-        int id = 1;
-        String subject = "subject";
-        String agent = "agent";
-        HashSet<String> tags = new HashSet<String>();
-        tags.add("a");
-        return null;
-    }
+
+ interface TicketService {
+    TicketModel createTicket(int ticketId, String subject, String agentName, Set<String> setOfTags);
+
+    TicketModel updateTicket(int ticketId);
+
+    boolean deleteTicket(int ticketId);
+
+    TicketModel getTicketDetail(int ticketId);
+
+    Map<Integer, TicketModel> getTicketList(int ticketId);
 }
