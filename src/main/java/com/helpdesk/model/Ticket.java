@@ -22,33 +22,33 @@ public class Ticket implements Serializable{
     private LocalDateTime created;
     private LocalDateTime updated;
 
-    static class Builder{
+    public static class Builder{
         private int id;
         private String subject;
         private String agent;
         private HashSet<String> tags;
 
-        Builder withId(int id){
+        public Builder withId(int id){
             this.id = id;
             return this;
         }
 
-        Builder withSubject(String subject){
+        public Builder withSubject(String subject){
             this.subject = subject;
             return this;
         }
 
-        Builder withAgent(String agent){
+        public Builder withAgent(String agent){
             this.agent = agent;
             return this;
         }
 
-        Builder withTags(Set<String> tags) {
+        public Builder withTags(Set<String> tags) {
             this.tags = new HashSet<>(tags);
             return this;
         }
 
-        Ticket build(){
+        public Ticket build(){
             return new Ticket(this);
         }
     }
