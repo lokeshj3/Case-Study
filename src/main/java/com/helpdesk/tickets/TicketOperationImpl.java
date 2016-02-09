@@ -30,7 +30,7 @@ public class TicketOperationImpl implements TicketOperation {
         return null;
     }
 
-    public List<TicketModel> findAllAgentWithTicketCount(String tag) {
+    public List<TicketModel> findAllAgentWithTicketCount() {
         return null;
     }
 }

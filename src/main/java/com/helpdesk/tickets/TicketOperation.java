@@ -18,5 +18,5 @@ public interface TicketOperation {
 
     List<TicketModel> findAllByTag(String tag);
 
-    List<TicketModel> findAllAgentWithTicketCount(String tag);
+    List<TicketModel> findAllAgentWithTicketCount();
 }
