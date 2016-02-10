@@ -18,7 +18,7 @@ public class TicketReportService {
         //code to return all tickets by tag
         //return new ArrayList<>();
     }
-    public Map<String , List<Ticket>> ticketCountsGroupByAgent(){
+    public Map<String , Integer> ticketCountsGroupByAgent(){
         //code to return ticket count group byb agent
         //return new HashMap<>();
     }
