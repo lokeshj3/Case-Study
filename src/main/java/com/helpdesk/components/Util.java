@@ -1,6 +1,7 @@
 package com.helpdesk.components;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -31,5 +32,18 @@ public class Util {
             ie.printStackTrace();
         }
         return userInput;
+    }
+
+
+    public static File createFile(String filePath, String fileName){
+        File file = null;
+        try {
+            file= new File(filePath + fileName);
+            file.createNewFile();
+        }catch(IOException ie){
+            ie.printStackTrace();
+        }
+
+        return file;
     }
 }
