@@ -17,6 +17,10 @@ public class TicketModel {
     private LocalDateTime created;
     private LocalDateTime modified;
 
+    public TicketModel(){
+    }
+
+
     public int getId() {
         return id;
     }
@@ -54,7 +58,6 @@ public class TicketModel {
         this.tags.addAll(tags);
         this.modified = LocalDateTime.now();
     }
-
 
     private TicketModel(Builder builder) {
         this.id = builder.id;
