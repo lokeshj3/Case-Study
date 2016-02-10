@@ -8,6 +8,7 @@ import java.util.*;
 
 public class TicketService {
     public Ticket createTicket(String subject, String agentName, HashSet<String> tagSet){
+        System.out.println("indide ticket service");
         Ticket ticket = new Ticket();
 
         if(ticket == null) throw new InvalidParameterException();

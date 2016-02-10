@@ -17,6 +17,7 @@ public class TicketController {
     }
 
     public void create(String subject, String agentName, HashSet<String> tagSet){
+        System.out.println("inside ticket controller");
         if(subject != null && !subject.isEmpty() && agentName != null && !agentName.isEmpty()) {
             try{
                 Ticket tickets = ticketService.createTicket(subject,agentName,tagSet);

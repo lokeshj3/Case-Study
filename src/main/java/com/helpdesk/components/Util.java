@@ -11,7 +11,7 @@ public class Util {
         try{
             BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
             userInput = Integer.parseInt(consoleReader.readLine());
-            consoleReader.close();
+            //consoleReader.close();
         }
         catch (NumberFormatException ne) {
             System.out.println("Invalid integer Number!!!");
@@ -27,7 +27,7 @@ public class Util {
         try{
             BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
             userInput = consoleReader.readLine();
-            consoleReader.close();
+            //consoleReader.close();
         }catch(IOException ie) {
             ie.printStackTrace();
         }
