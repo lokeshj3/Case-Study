@@ -4,6 +4,7 @@ team1/TicketMaster/out/*
 *.class
 *.jar
 *.iml
+team1/TicketMaster/target/*
 # Except this file
 !.gitignore
 !team1/TicketMaster/pom.xml

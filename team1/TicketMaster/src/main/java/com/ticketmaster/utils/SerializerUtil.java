@@ -29,7 +29,7 @@ public class SerializerUtil {
     ObjectInputStream fIn;
     final String base = "files";
     File file;
-    String fileName = SerializerUtil.getSerializedFileName(1);
+    String fileName = SerializerUtil.getSerializedFileName();
     String propertyFile = "conf.properties";
 
     public SerializerUtil(){
@@ -191,7 +191,7 @@ public class SerializerUtil {
     }
 
 
-    public static String getSerializedFileName(int ch){
+    public static String getSerializedFileName(){
         return "tickets.ser";
     }
 }

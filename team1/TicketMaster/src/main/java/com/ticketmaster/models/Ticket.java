@@ -19,24 +19,18 @@ import java.util.Set;
  */
 public class Ticket {
 
+    public Ticket(){
+
+    }
     public Ticket(TicketBuilder object){
-        this.setSubject(object.getSubject());
-        this.setAgent(object.getAgent());
+        this.subject=   object.getSubject();
+        this.agent  =   object.getAgent();
         this.setTags(object.getTags());
 
     }
     //setter methods
     private void setId(int id){
         this.id = id;
-    }
-    private void setCreated(long created){
-        this.created = created;
-    }
-    private void setModified(long modified){
-        this.modified = modified;
-    }
-    public void setSubject(String subject){
-        this.subject = subject;
     }
     public void setAgent(String agent){
         this.agent = agent;
@@ -72,9 +66,8 @@ public class Ticket {
 
     private boolean beforeSave(){
         long time =  LocalDateTime.now(ZoneId.of("UTC")).toInstant(ZoneOffset.UTC).toEpochMilli();
-        if (this.created == 0)
-            setCreated(time);
-        setModified(time);
+        if (this.created == 0) this.created = time;
+        this.modified = time;
         return true;
     }
 
@@ -133,7 +126,6 @@ public class Ticket {
     public static final long serialVersionUID = 881811645564116084L;
     private String subject;
     private String agent;
-
     private Set<String> tags;
 
     /**

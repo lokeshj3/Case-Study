@@ -1,6 +1,7 @@
 package com.ticketmaster.service;
 
 import com.ticketmaster.exceptions.IncompleteDataException;
+import com.ticketmaster.exceptions.NoUpdateException;
 import com.ticketmaster.models.Ticket;
 import org.junit.After;
 import org.junit.Before;
@@ -23,7 +24,11 @@ import static junit.framework.TestCase.assertTrue;
  */
 public class TestTicketService {
 
-    TicketService service;
+    protected String subject    =   "test-subject";
+    protected String agent      =   "agent1";
+    protected Set tags          =   new HashSet<>(Arrays.asList("tag1","tag2"));
+
+    protected TicketService service;
 
     /**
      * method that runs before every test case in this class
@@ -41,16 +46,12 @@ public class TestTicketService {
         service.clearTickets();
     }
 
-
+    /* ====================== Create Ticket test cases ====================== */
     /**
      * scenario : all relevant data is supplied to create ticket
      */
     @Test
     public void testCreateTicket(){
-
-        final String subject    =   "test-subject";
-        final String agent      =   "agent1";
-        final Set tags          =   new HashSet<>(Arrays.asList("tag1","tag2"));
 
         Ticket ticket = null;
 
@@ -65,20 +66,18 @@ public class TestTicketService {
         assertEquals(tags, ticket.getTags());
 
     }
-
     /**
      * scenario : tags are not supplied
      */
     @Test
     public void testCreateTicketWithNoTags(){
 
-        final String subject    =   "test-subject";
-        final String agent      =   "agent1";
+        tags = null;
 
         Ticket ticket = null;
 
         try{
-            ticket = service.createTicket(subject, agent, null);
+            ticket = service.createTicket(subject, agent, tags);
         }catch (IOException | IncompleteDataException e){
             fail("Exception occurred :\n"+e.getMessage());
         }
@@ -88,43 +87,91 @@ public class TestTicketService {
         assertTrue(ticket.getTags().isEmpty());
 
     }
-
     /**
      * scenario : agent is not supplied
      */
     @Test
     public void testCreateTicketWithNoAgent(){
 
-        final String subject    =   "test-subject";
+        agent = null;
 
         Ticket ticket = null;
 
         try{
-            ticket = service.createTicket(subject, null, null);
+            ticket = service.createTicket(subject, agent, tags);
         }catch (IOException | IncompleteDataException e){
             assertTrue(e.getMessage().equalsIgnoreCase("agent is required"));
         }
         assertFalse(ticket instanceof Ticket);
     }
-
-
     /**
      * scenario : agent is not supplied
      */
     @Test
     public void testCreateTicketWithNoSubject(){
 
-        final String agent      =   "agent1";
-        final Set tags          =   new HashSet<>(Arrays.asList("tag1","tag2"));
+        subject = null;
 
         Ticket ticket = null;
 
         try{
-            ticket = service.createTicket(null, agent, tags);
+            ticket = service.createTicket(subject, agent, tags);
         }catch (IOException | IncompleteDataException e){
             assertTrue(e.getMessage().equalsIgnoreCase("subject is required"));
         }
         assertFalse(ticket instanceof Ticket);
+    }
+
+    /* ====================== Update Ticket test cases ====================== */
+    @Test
+    public void updateTicketWithAgent(){
+        Ticket ticket = null, result = null;
+
+        Integer id = 0;
+        String newAgent = "agent2";
+        Set<String> newTag = null;//Arrays.asList();
+
+        try{
+            ticket = service.createTicket(subject, agent, tags);
+            //update agent
+            id = ticket.getId();
+
+            result = service.updateTicket(id, newAgent, newTag);
+        }catch (IOException | IncompleteDataException | NoUpdateException e){
+            fail("Exception occurred :\n"+e.getMessage());
+        }
+
+        //check updates
+        assertEquals(newAgent.toLowerCase(), result.getAgent().toLowerCase());
+
+    }
+
+    @Test
+    public void updateTicketWithTag(){
+
+        Ticket ticket = null, result = null;
+        Integer id = 0;
+        String newAgent = null;
+        Set<String> newTag = new HashSet<>(Arrays.asList("new tag"));
+
+        try{
+            ticket = service.createTicket(subject, agent, tags);
+            //update agent
+            id = ticket.getId();
+            result = service.updateTicket(id, newAgent, newTag);
+
+        }catch (IOException | IncompleteDataException | NoUpdateException e){
+            fail("Exception occurred :\n"+e.getMessage());
+        }
+
+        //check updates
+        assertEquals(newAgent.toLowerCase(), result.getAgent().toLowerCase());
+
+    }
+
+    @Test
+    public void updateTicketWithNoData(){
+
     }
 
 
