@@ -1,6 +1,6 @@
 package com.helpdesk.tickets;
 
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -27,7 +27,7 @@ public class TicketServiceImpl implements TicketService {
         return null;
     }
 
-    public final Map<Integer, TicketModel> getTicketList(int ticketId) {
+    public final List<TicketModel> getTicketList() {
         //logic for get list of tickets
         return null;
     }

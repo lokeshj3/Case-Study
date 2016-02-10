@@ -1,5 +1,5 @@
 package com.helpdesk.tickets;
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -15,5 +15,5 @@ import java.util.Set;
 
     TicketModel getTicketDetail(int ticketId);
 
-    Map<Integer, TicketModel> getTicketList(int ticketId);
+    List<TicketModel> getTicketList();
 }
