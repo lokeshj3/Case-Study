@@ -1,6 +1,7 @@
 package com.helpdesk.tickets;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +16,10 @@ public class TicketModel {
     private Set<String> tags;
     private LocalDateTime created;
     private LocalDateTime modified;
+
+    public TicketModel(){
+    }
+
 
     public int getId() {
         return id;
@@ -32,7 +37,7 @@ public class TicketModel {
         if (tags == null) {
             tags = new HashSet<String>();
         }
-        return tags;
+        return Collections.unmodifiableSet(tags);
     }
 
     public LocalDateTime getCreated() {
@@ -49,10 +54,10 @@ public class TicketModel {
     }
 
     public void setTags(Set<String> tags) {
-        this.tags = new HashSet<String>(tags);
+        this.tags.clear();
+        this.tags.addAll(tags);
         this.modified = LocalDateTime.now();
     }
-
 
     private TicketModel(Builder builder) {
         this.id = builder.id;
@@ -74,8 +79,8 @@ public class TicketModel {
             this.agentName = agentName;
         }
 
-        public Builder withTags(final Set tags) {
-            this.tags = tags;
+        public Builder withTags(Set tags) {
+            this.tags = new HashSet<String>(tags);
             return this;
         }
 
