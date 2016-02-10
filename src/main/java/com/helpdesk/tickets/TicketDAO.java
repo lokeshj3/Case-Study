@@ -1,11 +1,13 @@
 package com.helpdesk.tickets;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by root on 8/2/16.
  */
-public interface TicketOperation {
+public interface TicketDAO {
+    //for create & update
     TicketModel save(TicketModel ticketModel);
 
     boolean delete(int ticketId);
@@ -18,5 +20,13 @@ public interface TicketOperation {
 
     List<TicketModel> findAllByTag(String tag);
 
-    List<TicketModel> findAllAgentWithTicketCount();
+    Map<String, Integer> findAllAgentWithTicketCount();
+
+    int getTotalTicketInSystem();
+
+    TicketModel findOldestTicketInSystem();
+
+    Map<String, Integer> findAllTagsWithTicketCount();
+
+    List<TicketModel> findAllOlderThanNDays(int noofdays);
 }
