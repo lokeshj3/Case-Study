@@ -23,7 +23,7 @@ public class TicketService {
         //return ticket;
         //handle throw exception here InvalidParameterException
     }
-
+gi
     public boolean delete(int id) {
        // code to delete a ticket
         //return true;
