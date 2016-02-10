@@ -3,64 +3,40 @@ package com.helpdesk.services;
 import com.helpdesk.model.Ticket;
 import com.sun.istack.internal.NotNull;
 
-import java.security.InvalidParameterException;
 import java.util.*;
 
+//only CRUD
 public class TicketService {
-    public Ticket createTicket(String subject, String agentName, HashSet<String> tagSet){
-        System.out.println("indide ticket service");
-        Ticket ticket = new Ticket();
-
-        if(ticket == null) throw new InvalidParameterException();
-
-        return ticket;
+    public Ticket createTicket(String subject, String agentName, HashSet<String> tagSet){//add more required parameters
+        // code to create ticket & adding into a file
+        //handle throw exception here IncompleteDataException
+        //return ticket;
     }
 
     public boolean isTicketExist(int id){
-        return true;
+        //code to check given ticket id is present on not in the system.
+        //return true;
     }
 
-    public Ticket update(int id, @NotNull String agentName, HashSet<String> tags, String action) {
-        Ticket ticket = new Ticket();
-
-        return ticket;
+    public Ticket update(int id, @NotNull String agentName, HashSet<String> tags, String action) {//add more required parameters
+        //code to update the ticket into file as well as map
+        //handle throw exception here InvalidParameterException
+        //return ticket;
     }
 
     public boolean delete(int id) {
-       return true;
+       // code to delete a ticket
+        //return true;
     }
 
     public Ticket ticketDetails(int id) {
-        Ticket ticket = new Ticket();
-
-        return ticket;
+       // code to return ticket details by id
+        //handle throw exception here
+       // return ticket;
     }
+
     public Map<Integer, Ticket> tickets(){
-        return new HashMap<>();
-    }
-
-    public List<Ticket> ticketsByAgentName(String agentName){
-        return new ArrayList<>();
-    }
-
-    public List<Ticket> ticketsByTag(String tag){
-        return new ArrayList<>();
-    }
-
-    public Map<String , List<Ticket>> ticketCountsGroupByAgent(){
-        return new HashMap<>();
-    }
-
-    public int getTotalTicketCounts() {
-        return 0;
-    }
-
-    public Ticket oldestTicket() {
-        Ticket ticket = new Ticket();
-
-        return ticket;
-    }
-    public List<Ticket> ticketsOlderByDays(int day){
-        return new ArrayList<>();
+       //code to return all tickets
+        // return new HashMap<>();
     }
 }
