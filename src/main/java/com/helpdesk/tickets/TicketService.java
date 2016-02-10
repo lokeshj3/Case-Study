@@ -1,19 +1,35 @@
 package com.helpdesk.tickets;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 /**
- * Created by root on 9/2/16.
+ * Created by root on 8/2/16.
  */
+public class TicketService {
+    public final TicketModel createTicket(int ticketId, String subject, String agentName, Set<String> setOfTags) {
+        //logic for creation of ticket
+        return new TicketModel();
+    }
 
- interface TicketService {
-    TicketModel createTicket(int ticketId, String subject, String agentName, Set<String> setOfTags);
+    public final TicketModel updateTicket(int ticketId) {
+        //logic for updation of ticket
+        return new TicketModel();
+    }
 
-    TicketModel updateTicket(int ticketId);
+    public final boolean deleteTicket(int ticketId) {
+        //logic for deletion of ticket
+        return false;
+    }
 
-    boolean deleteTicket(int ticketId);
+    public final TicketModel getTicketDetail(int ticketId) {
+        //logic for get details of a ticket
+        return new TicketModel();
+    }
 
-    TicketModel getTicketDetail(int ticketId);
-
-    List<TicketModel> getTicketList();
+    public final List<TicketModel> getTicketList() {
+        //logic for get list of tickets
+        return new ArrayList<TicketModel>();
+    }
 }
