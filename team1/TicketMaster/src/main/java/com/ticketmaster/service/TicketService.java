@@ -26,10 +26,12 @@ public class TicketService {
             throw new IncompleteDataException("agent is required");
         }
 
-        ticket = new Ticket.TicketBuilder().withSubject(subject).withAgent(agent).withTags(tags).build();
 
 
-        ticket.save();
+        ticket = new Ticket.TicketBuilder(subject, agent).withTags(tags).build();
+
+        // writing in the file.
+        repository.save(ticket);
 
         return ticket;
 
