@@ -14,7 +14,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
     private final Map<Integer, Ticket> ticketMap  = new HashMap<>();
 
     /**
-     * Create Ticket in map.
+     * Create Ticket in Map.
      * @param ticket
      * @return int
      */
@@ -134,6 +134,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
         return new ArrayList<>();
     }
 
+
     /**
      * Function to fetch the oldest Ticket
      * @return Ticket
@@ -149,6 +150,8 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
                 .findFirst()
                 .get();
     }
+
+
 
     /**
      * Function to fetch Tickets Older than the Date entered
@@ -177,6 +180,10 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
                 .collect(Collectors.groupingBy(Ticket::getAgent,Collectors.counting()));
     }
 
+    /**
+     * Return ticket count by tag
+     * @return
+     */
     @Override
     public Map<String, Long> ticketsCountByTag() {
         Map<String,Long> ticketByTag = new HashMap<>();
