@@ -1,7 +1,9 @@
 package com.inin.dao;
 
+import com.inin.constant.TicketAttribute;
 import com.inin.exception.TicketNotFoundException;
 import com.inin.model.Ticket;
+import com.inin.util.TicketUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -79,7 +81,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
 
 
     @Override
-    public Ticket find(int id) {
+    public Ticket findById(int id) {
         if(isExist(id))
             throw new TicketNotFoundException("No Ticket found with id"+id);
         return ticketMap.get(id);
@@ -96,8 +98,24 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
     }
 
     @Override
-    public List<Ticket> findByAttribute() {
-        return null;
+    public List<Ticket> findAllByAgent(String agent) {
+        return ticketMap.values()
+                .stream()
+                .filter(ticket -> ticket.getAgent().toLowerCase().equals(agent.toLowerCase()))
+                .collect(Collectors.toList());
+
     }
+
+    @Override
+    public List<Ticket> findAllByTag(String tag) {
+
+        return ticketMap.values()
+                .stream()
+                .filter(ticket -> ticket.getAgent().toLowerCase().equals(tag.toLowerCase()))
+                .collect(Collectors.toList());
+
+    }
+
+
 
 }

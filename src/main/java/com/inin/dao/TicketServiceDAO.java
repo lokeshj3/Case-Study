@@ -11,6 +11,6 @@ public interface TicketServiceDAO {
     int create(Ticket ticket);
     Ticket update(int id,Ticket ticket);
     boolean delete(int id);
-    Ticket find(int id);
+    Ticket findById(int id);
     List<Ticket> findAll();
 }
