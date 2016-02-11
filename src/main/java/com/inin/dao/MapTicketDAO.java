@@ -1,10 +1,13 @@
 package com.inin.dao;
 
 import com.inin.exception.TicketNotFoundException;
+import com.inin.logger.TLogger;
 import com.inin.model.Ticket;
+import com.inin.util.TicketUtil;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
 
 /**
@@ -38,7 +41,10 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
 
         Ticket ticket = ticketMap.get(id);
         ticket.setAgent(agent);
-        ticket.setTags(tags);
+        if (TicketUtil.isValidCollection(tags)){
+            ticket.setTags(tags);
+        }
+
         return ticket;
     }
 
@@ -75,7 +81,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
 
 
     /**
-     * Function to get Ticket By Id
+     * Returns Ticket By Id
      * @param id
      * @return int
      */
@@ -87,7 +93,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
     }
 
     /**
-     * Function to return List of Tickets
+     * Returns List of Tickets
      * @return List<Ticket>
      */
     @Override
@@ -101,7 +107,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
     }
 
     /**
-     * f
+     * Report
      * @param agent
      * @return List<Ticket>
      */

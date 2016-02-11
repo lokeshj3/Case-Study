@@ -43,7 +43,7 @@ public class TicketServiceImpl implements TicketService {
      * @throws TicketNotFoundException
      */
     public Ticket update(int id, String agent, Set<String> tags) throws IllegalArgumentException,TicketNotFoundException{
-        if (!TicketUtil.isValidString(agent) || !TicketUtil.isValidCollection(tags))
+        if (!TicketUtil.isValidString(agent))
             throw new IllegalArgumentException();
         return TicketFactory.newTicketInstance(ticketServiceDAO.update(id, agent, tags));
 
