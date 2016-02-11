@@ -1,6 +1,11 @@
 package com.ticketmaster.models;
 
+import com.ticketmaster.exceptions.NotFoundException;
+import com.ticketmaster.utils.SerializerUtil;
+
+import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -32,9 +37,9 @@ public class TicketRepository {
      * @param id Integer
      * @return Ticket object
      */
-    public Ticket getTicket(Integer id){
+    public Ticket getTicket(Integer id) throws NotFoundException{
         if (!ticketList.containsKey(id)){
-            return null;
+            throw new NotFoundException("details for id: "+id+" not found");
         }
         return ticketList.get(id);
     }
@@ -60,6 +65,51 @@ public class TicketRepository {
         return ticketList.remove(id);
 
     }
+
+
+    public boolean saveTicket(Ticket ticket)
+            throws IOException, ClassNotFoundException, NotFoundException {
+
+
+        SerializerUtil util = new SerializerUtil();
+
+        ticket.save(util);
+
+        Map<Integer, Ticket> tempMap = new HashMap<>();
+        tempMap.put(ticket.getId(), ticket);
+
+        //add ticket in file
+        util.writeToFile(tempMap);
+        //read new entries
+        updatePool();
+        addAgent(ticket.getAgent());
+        addTags(ticket.getTags());
+        //update id in file
+        util.writeProperty("id",new Integer(ticket.getMasterId()).toString());
+        return getTicket(ticket.getId()) != null;
+
+    }
+
+    private void updatePool()
+            throws ClassNotFoundException, IOException{
+        SerializerUtil util = new SerializerUtil();
+        Map<Integer,Ticket> temp = (Map<Integer,Ticket>) util.readFromFile();
+        this.updateList(temp);
+    }
+    public void addAgent(String agent){
+        agentList.add(agent);
+    }
+
+    public void updateList(Map<Integer, Ticket> object) {
+        ticketList.putAll(object);
+
+    }
+
+
+    public void addTags(Set<String> tag){
+        tagList.addAll(tag);
+    }
+
 
 
     //properties

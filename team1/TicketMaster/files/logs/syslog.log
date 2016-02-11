@@ -1,4 +1,2 @@
-[10-02-2016 19:20:34.560][ERROR ][com.ticketmaster.service.TicketService:27   ]:: Info Message
-[10-02-2016 19:20:34.562][DEBUG ][com.ticketmaster.exampleclass.LoggerTest:33   ]:: Info Message
-[10-02-2016 19:20:34.563][INFO  ][com.ticketmaster.exampleclass.LoggerTest:30   ]:: Info Message
-[10-02-2016 19:20:34.563][ERROR ][com.ticketmaster.utils.CustomLogger:27   ]:: New Message
+[11-02-2016 12:53:52.681][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: agent1
+[11-02-2016 12:53:52.694][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 1

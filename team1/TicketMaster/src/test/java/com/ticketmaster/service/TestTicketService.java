@@ -2,7 +2,9 @@ package com.ticketmaster.service;
 
 import com.ticketmaster.exceptions.IncompleteDataException;
 import com.ticketmaster.exceptions.NoUpdateException;
+import com.ticketmaster.exceptions.NotFoundException;
 import com.ticketmaster.models.Ticket;
+import com.ticketmaster.utils.CustomLogger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +17,7 @@ import java.util.Set;
 import static junit.framework.Assert.fail;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
 
 /**
@@ -57,7 +60,7 @@ public class TestTicketService {
 
         try{
             ticket = service.createTicket(subject, agent, tags);
-        }catch (IOException | IncompleteDataException e){
+        }catch (IOException | IncompleteDataException | ClassNotFoundException e){
             fail("Exception occurred :\n"+e.getMessage());
         }
 
@@ -78,7 +81,7 @@ public class TestTicketService {
 
         try{
             ticket = service.createTicket(subject, agent, tags);
-        }catch (IOException | IncompleteDataException e){
+        }catch (IOException | IncompleteDataException | ClassNotFoundException e){
             fail("Exception occurred :\n"+e.getMessage());
         }
 
@@ -99,7 +102,7 @@ public class TestTicketService {
 
         try{
             ticket = service.createTicket(subject, agent, tags);
-        }catch (IOException | IncompleteDataException e){
+        }catch (IOException | IncompleteDataException | ClassNotFoundException e){
             assertTrue(e.getMessage().equalsIgnoreCase("agent is required"));
         }
         assertFalse(ticket instanceof Ticket);
@@ -116,7 +119,7 @@ public class TestTicketService {
 
         try{
             ticket = service.createTicket(subject, agent, tags);
-        }catch (IOException | IncompleteDataException e){
+        }catch (IOException | IncompleteDataException | ClassNotFoundException e){
             assertTrue(e.getMessage().equalsIgnoreCase("subject is required"));
         }
         assertFalse(ticket instanceof Ticket);
@@ -125,19 +128,21 @@ public class TestTicketService {
     /* ====================== Update Ticket test cases ====================== */
     @Test
     public void updateTicketWithAgent(){
-        Ticket ticket = null, result = null;
 
         Integer id = 0;
         String newAgent = "agent2";
-        Set<String> newTag = null;//Arrays.asList();
+        Set<String> newTag = null;
+        Ticket ticket = null, result = null;
+
 
         try{
+
             ticket = service.createTicket(subject, agent, tags);
             //update agent
             id = ticket.getId();
-
             result = service.updateTicket(id, newAgent, newTag);
-        }catch (IOException | IncompleteDataException | NoUpdateException e){
+
+        }catch (IOException | IncompleteDataException | NoUpdateException | ClassNotFoundException e){
             fail("Exception occurred :\n"+e.getMessage());
         }
 
@@ -149,30 +154,89 @@ public class TestTicketService {
     @Test
     public void updateTicketWithTag(){
 
-        Ticket ticket = null, result = null;
         Integer id = 0;
         String newAgent = null;
-        Set<String> newTag = new HashSet<>(Arrays.asList("new tag"));
+        String tagString = "new tag";
+        Set<String> newTag = new HashSet<>(Arrays.asList(tagString));
+        Ticket ticket = null, result = null;
 
         try{
             ticket = service.createTicket(subject, agent, tags);
-            //update agent
+
             id = ticket.getId();
             result = service.updateTicket(id, newAgent, newTag);
 
-        }catch (IOException | IncompleteDataException | NoUpdateException e){
+        }catch (IOException | IncompleteDataException | NoUpdateException | ClassNotFoundException e){
             fail("Exception occurred :\n"+e.getMessage());
         }
 
         //check updates
-        assertEquals(newAgent.toLowerCase(), result.getAgent().toLowerCase());
+        assertTrue(result.getTags().contains(tagString));
 
     }
 
     @Test
     public void updateTicketWithNoData(){
 
+        Integer id = 0;
+        String newAgent = null;
+        Set<String> newTag = null;
+        Ticket ticket = null, result = null;
+
+        try{
+            ticket = service.createTicket(subject, agent, tags);
+
+            id = ticket.getId();
+            result = service.updateTicket(id, newAgent, newTag);
+
+        }catch ( NoUpdateException  e){
+
+            assertEquals("Nothing to update",e.getMessage().toLowerCase());
+            assertNull(result);
+
+        }catch(IOException | IncompleteDataException | ClassNotFoundException e){
+            fail("Exception occurred :\n"+e.getMessage());
+        }
+
+
     }
+
+    @Test
+    public void updateTicketWithInvalidId(){
+
+        Integer invalidId = -1;
+        String newAgent = "new agent";
+        String tagString = "new tag";
+        Set<String> newTag = new HashSet<>(Arrays.asList(tagString));
+        Ticket ticket = null, result = null;
+
+        try{
+            ticket = service.createTicket(subject, agent, tags);
+
+            result = service.updateTicket(invalidId, newAgent, newTag);
+
+        }catch ( NoUpdateException  e){
+
+            assertEquals("Nothing to update",e.getMessage().toLowerCase());
+            assertNull(result);
+
+        }catch (NotFoundException e){
+
+            e.printStackTrace();
+
+        }catch(IOException | IncompleteDataException | ClassNotFoundException e){
+            fail("Exception occurred :\n"+e.getMessage());
+        }
+
+
+    }
+
+    /* ====================== get Ticket test cases ====================== */
+    @Test
+    public void testGetTicket(){
+
+    }
+
 
 
 

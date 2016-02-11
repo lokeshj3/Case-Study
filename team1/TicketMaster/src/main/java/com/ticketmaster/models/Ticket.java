@@ -29,7 +29,7 @@ public class Ticket {
 
     }
     //setter methods
-    private void setId(int id){
+    private void setId(Integer id){
         this.id = id;
     }
     public void setAgent(String agent){
@@ -43,7 +43,7 @@ public class Ticket {
 
 
     //getter methods
-    public int getId(){
+    public Integer getId(){
         return this.id;
     }
     public String getSubject(){
@@ -63,6 +63,9 @@ public class Ticket {
             this.tags = new HashSet<>();
         return this.tags;
     }
+    public Integer getMasterId(){
+        return masterId;
+    }
 
     private boolean beforeSave(){
         long time =  LocalDateTime.now(ZoneId.of("UTC")).toInstant(ZoneOffset.UTC).toEpochMilli();
@@ -71,34 +74,14 @@ public class Ticket {
         return true;
     }
 
-    public boolean save()
+    public boolean save(SerializerUtil util)
             throws IOException {
-
         this.beforeSave();
-
         //fetch id from properties file
-        SerializerUtil util = new SerializerUtil();
-        String masterId = util.readProperty("id");
-
-        k = Integer.parseInt(masterId);
-
-        this.setId(k++);
+        String tmpId = util.readProperty("id");
+        masterId = Integer.parseInt(tmpId);
+        this.setId(masterId);
         return true;
-
-        /*Map<Integer, Ticket> tempMap = new HashMap<>();
-        tempMap.put(getId(), this);
-
-        //add ticket in file
-        util.writeToFile(tempMap);
-        //read new entries
-        repository.updatePool();
-        repository.addAgent(this.getAgent());
-        repository.addTags(this.getTags());
-        //update id in file
-        util.writeProperty("id",new Integer(Ticket.k).toString());
-        return repository.getTicket(this.getId()) != null;*/
-
-
     }
 
     /**
@@ -119,7 +102,7 @@ public class Ticket {
     }
 
     //attributes
-    private static int k = 0;
+    private static Integer masterId = 0;
     private int id;
     private long created;
     private long modified;

@@ -2,8 +2,10 @@ package com.ticketmaster.service;
 
 import com.ticketmaster.exceptions.IncompleteDataException;
 import com.ticketmaster.exceptions.NoUpdateException;
+import com.ticketmaster.exceptions.NotFoundException;
 import com.ticketmaster.models.Ticket;
 import com.ticketmaster.models.TicketRepository;
+import com.ticketmaster.utils.CustomLogger;
 
 import java.io.IOException;
 import java.util.Set;
@@ -18,7 +20,9 @@ public class TicketService {
     }
 
     public Ticket createTicket(String subject, String agent, Set tags)
-            throws IOException, IncompleteDataException {
+            throws IOException, IncompleteDataException, ClassNotFoundException, NotFoundException {
+
+        CustomLogger.init(classz).info("start ticket creation with subject: "+subject+" agent: "+agent);
 
         if (subject == null){
             throw new IncompleteDataException("subject is required");
@@ -28,8 +32,9 @@ public class TicketService {
 
         ticket = new Ticket.TicketBuilder().withSubject(subject).withAgent(agent).withTags(tags).build();
 
+        repository.saveTicket(ticket);
 
-        ticket.save();
+        CustomLogger.init(classz).info("ticket created. Id: "+ticket.getId());
 
         return ticket;
 
@@ -39,7 +44,8 @@ public class TicketService {
 
     }
 
-    public Ticket updateTicket(Integer id, String newAgent, Set<String> newTag) throws NoUpdateException {
+    public Ticket updateTicket(Integer id, String newAgent, Set<String> newTag)
+            throws NoUpdateException, NotFoundException {
 
         boolean flag = false;
         if (newAgent != null && newAgent.length() >0){
@@ -60,13 +66,13 @@ public class TicketService {
 
     }
 
-    public Ticket getTicket(Integer id) {
-        return ticket;
-
+    public Ticket getTicket(Integer id) throws NotFoundException{
+        return repository.getTicket(id);
     }
 
     //properties
     TicketRepository repository;
     Ticket ticket ;
+    Class classz = TicketService.class;
 
 }
