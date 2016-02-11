@@ -33,10 +33,7 @@ public class TicketFactory {
         return new Ticket(ticket);
     }
 
-    public static TicketService newTicketServiceInstance(){
-        TicketService ticketService = new TicketServiceImpl();
-        return ticketService;
-    }
+    public static TicketService newTicketServiceInstance(){  return new TicketServiceImpl(); }
 
     private static int getTicketId(){
         return ++counter;

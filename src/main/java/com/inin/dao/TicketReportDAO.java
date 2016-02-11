@@ -1,4 +1,4 @@
-package com.inin.dto;
+package com.inin.dao;
 
 import com.inin.model.Ticket;
 
