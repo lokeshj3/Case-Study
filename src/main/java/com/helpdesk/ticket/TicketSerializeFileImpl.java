@@ -1,5 +1,6 @@
 package com.helpdesk.ticket;
 
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,6 +11,7 @@ import java.util.Set;
  * Created by root on 10/2/16.
  */
 public class TicketSerializeFileImpl implements TicketSerialize{
+
     public boolean serializeSingleTicket(Ticket ticketModel) throws IOException{
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("ticket.txt"));
 
@@ -53,4 +55,5 @@ public class TicketSerializeFileImpl implements TicketSerialize{
 
         return tickets;
     }
+
 }

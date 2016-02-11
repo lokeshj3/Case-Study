@@ -21,7 +21,16 @@ public class Ticket implements Serializable{
     private LocalDateTime created;
     private LocalDateTime modified;
 
-    public Ticket(){
+    public Ticket() {
+    }
+
+    public Ticket(Ticket ticket) {
+        this.id = ticket.id;
+        this.subject = ticket.subject;
+        this.agentName = ticket.agentName;
+        this.tags = ticket.tags;
+        this.modified = ticket.modified;
+        this.created = ticket.created;
     }
 
 

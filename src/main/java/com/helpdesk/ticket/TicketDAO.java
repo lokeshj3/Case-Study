@@ -1,5 +1,8 @@
 package com.helpdesk.ticket;
 
+import com.helpdesk.exception.DuplicateTicketIdException;
+import com.helpdesk.exception.TicketNotFoundException;
+
 import java.util.List;
 import java.util.Map;
 
@@ -9,20 +12,22 @@ import java.util.Map;
 public interface TicketDAO {
     //for create & update
 
-    Ticket save(Ticket ticket);
+    Ticket create(Ticket ticket) throws DuplicateTicketIdException;
 
-    boolean delete(int ticketId);
+    Ticket update(Ticket ticket) throws TicketNotFoundException;
 
-    Ticket find(int ticketId);
+    boolean delete(int ticketId) throws TicketNotFoundException;
 
-    List<Ticket> findAll();
+    Ticket find(int ticketId) throws TicketNotFoundException;
 
-    List<Ticket> findAllByAgentName(String agentName);
+    List<Ticket> findAll() throws TicketNotFoundException;
 
-    List<Ticket> findAllByTag(String tag);
+    List<Ticket> findAllByAgentName(String agentName) throws TicketNotFoundException;
+
+    List<Ticket> findAllByTag(String tag) throws TicketNotFoundException;
 
 
-    Map<String, Integer> findAllAgentWithTicketCount();
+    Map<String, Integer> findAllAgentWithTicketCount() throws TicketNotFoundException;
 
     int getTotalTicketInSystem();
 
@@ -32,5 +37,7 @@ public interface TicketDAO {
     Map<String, Integer> findAllTagsWithTicketCount();
 
     List<Ticket> findAllOlderThanNDays(int noofdays);
+
+    boolean isExist(int ticketId);
 
 }
