@@ -51,7 +51,6 @@ public class CustomLogger {
         logger.trace(name);
     }
 
-
     //property
     private static Logger logger;
 }
