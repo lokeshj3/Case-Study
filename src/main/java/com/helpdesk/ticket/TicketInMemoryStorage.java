@@ -17,7 +17,7 @@ public class TicketInMemoryStorage {
     }
 
     public void writeData(int id, Ticket ticket) {
-        ticketData.put(id, ticket);
+        ticketData.put(id, new Ticket(ticket));
     }
 
     public Map<Integer, Ticket> getTicketData() {

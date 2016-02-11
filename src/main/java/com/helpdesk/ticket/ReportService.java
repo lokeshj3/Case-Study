@@ -10,22 +10,22 @@ import java.util.Map;
  */
 public class ReportService {
 
-    public long getTicketsCountInSystem(){
+    public long getTicketsCountInSystem() {
         //logic for calculating ticket count in system
         return 0L;
     }
 
-    public Map<String, Integer> getTagsWithTicketCount(){
+    public Map<String, Integer> getTagsWithTicketCount() {
         //logic for calculating tags count in ticket
         return new HashMap<String, Integer>();
     }
 
-    public List<Ticket> getTicketsOlderThanNDays(int days){
+    public List<Ticket> getTicketsOlderThanNDays(int days) {
         //logic for calculating ticket older than x days
         return new ArrayList<Ticket>();
     }
 
-    public Ticket getOldestTicketInSystem(){
+    public Ticket getOldestTicketInSystem() {
         //logic for oldest ticket in the system
         return new Ticket();
     }

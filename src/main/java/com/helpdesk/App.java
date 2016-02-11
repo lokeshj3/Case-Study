@@ -1,5 +1,6 @@
 package com.helpdesk;
 
+import com.helpdesk.exception.TicketNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +19,6 @@ public class App {
 
         logger.warn("Hello World");
 
-        logger.error("Hello World");
+        logger.error("Hello World",new TicketNotFoundException("Ticket not Fount"));
     }
 }
