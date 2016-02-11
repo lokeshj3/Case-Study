@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * Created by root on 11/2/16.
  */
 public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
-    private final Map<Integer, Ticket> ticketMap  = new HashMap<>();
+    private static final Map<Integer, Ticket> ticketMap  = new HashMap<>();
 
     /**
      * Create Ticket in Map.
@@ -65,7 +65,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
     }
 
     /**
-     * Check ticket exist
+     * Check ticket existence
      * @param id
      * @return boolean
      */
@@ -97,11 +97,12 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
                     .stream()
                     .sorted((ticket1,ticket2)->ticket1.getCreated().compareTo(ticket2.getCreated()))
                     .collect(Collectors.toList());
+
         return new ArrayList<>();
     }
 
     /**
-     * f
+     * Return the list of Ticket specified by agent
      * @param agent
      * @return List<Ticket>
      */
@@ -110,16 +111,16 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
         String tempAgent = agent.toLowerCase();
         if (ticketMap.size() > 0)
             return ticketMap.values()
-                .stream()
-                .filter(ticket -> ticket.getAgent().toLowerCase().equals(tempAgent))
-                .collect(Collectors.toList());
+                    .stream()
+                    .filter(ticket -> ticket.getAgent().toLowerCase().equals(tempAgent))
+                    .sorted((ticket1,ticket2)->ticket1.getCreated().compareTo(ticket2.getCreated()))
+                    .collect(Collectors.toList());
 
         return new ArrayList<>();
-
     }
 
     /**
-     * Function to fetch all Tickets by Tag
+     * Return the list of Ticket specified by Tag
      * @param tag
      * @return List<Ticket>
      */
@@ -128,16 +129,17 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
         String tempTag = tag.toLowerCase();
         if (ticketMap.size() > 0)
             return ticketMap.values()
-                .stream()
-                .filter(ticket -> ticket.getTags().contains(tempTag))
-                .collect(Collectors.toList());
+                    .stream()
+                    .filter(ticket -> ticket.getTags().contains(tempTag))
+                    .sorted((ticket1,ticket2)->ticket1.getCreated().compareTo(ticket2.getCreated()))
+                    .collect(Collectors.toList());
 
         return new ArrayList<>();
     }
 
 
     /**
-     * Function to fetch the oldest Ticket
+     * Return oldest Ticket in the system
      * @return Ticket
      */
     @Override
@@ -162,45 +164,51 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
     @Override
     public List<Ticket> findTicketsFromDate(LocalDateTime date){
         if (ticketMap.isEmpty())
-            throw new TicketNotFoundException("No Ticket found.");
-
+            return new ArrayList<>();
         return ticketMap.values()
                 .stream()
                 .filter(ticket -> date.compareTo(ticket.getCreated()) >=0 )
                 .collect(Collectors.toList());
     }
 
+
     /**
-     * Return the agent ticket count
+     * Return the agent's ticket count
      * @return
      */
     @Override
     public Map<String ,Long> ticketsCountByAgent(){
+        if(ticketMap.size() > 0)
         return ticketMap.values()
                 .stream()
                 .collect(Collectors.groupingBy(Ticket::getAgent,Collectors.counting()));
+
+        return new HashMap<>();
     }
 
+
     /**
-     * Return ticket count by tag
+     * Return the tag's Ticket count
      * @return
      */
     @Override
     public Map<String, Long> ticketsCountByTag() {
         Map<String,Long> ticketByTag = new HashMap<>();
-        ticketMap.values()
-                .stream()
-                .forEach(ticket -> {
-                    ticket.getTags().forEach( tag -> {
-                        if(ticketByTag.containsKey(tag))
-                            ticketByTag.put(tag,ticketByTag.get(tag)+1L);
-                        else {
-                            List<Ticket> list = new ArrayList<>();
-                            list.add(ticket);
-                            ticketByTag.put(tag, 1L);
-                        }
+        if(ticketByTag.size() > 0)
+            ticketMap.values()
+                    .stream()
+                    .forEach(ticket -> {
+                        ticket.getTags().forEach( tag -> {
+                            if(ticketByTag.containsKey(tag))
+                                ticketByTag.put(tag,ticketByTag.get(tag)+1L);
+                            else {
+                                List<Ticket> list = new ArrayList<>();
+                                list.add(ticket);
+                                ticketByTag.put(tag, 1L);
+                            }
+                        });
                     });
-                });
+
         return ticketByTag;
     }
 

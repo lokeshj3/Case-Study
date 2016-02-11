@@ -11,6 +11,10 @@ import java.util.Map;
  */
 public interface TicketReportService {
 
+    List<Ticket> getAllTickets();
+
+    Ticket getTicket(int id);
+
     List<Ticket> ticketsByTag(String tag);
 
     List<Ticket> ticketsByAgent(String agent);
