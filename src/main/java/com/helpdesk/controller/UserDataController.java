@@ -107,7 +107,7 @@ public class UserDataController extends  TicketController{
     }
 
     public void Tickets() {
-        Map<Integer, Ticket> tickets = this.getTickets();
+        List<Ticket> tickets = this.getTickets();
         if(tickets.size() >0 ){
             //tickets.values().stream().sorted((Ticket t1, Ticket t2) -> -t1.getModified().compareTo(t2.getModified())).forEach(ticket -> System.out.println(ticket.toString()));
         }
@@ -115,7 +115,6 @@ public class UserDataController extends  TicketController{
     }
 
     public void AllAgentsTicketCount(){
-
         Map<String, Integer> ticketCountList = this.getAllAgentsTicketCount();
         if(ticketCountList.size()>0){
             //display logic

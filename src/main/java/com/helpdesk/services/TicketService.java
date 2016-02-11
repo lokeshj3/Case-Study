@@ -23,7 +23,7 @@ public class TicketService {
         //return ticket;
         //handle throw exception here InvalidParameterException
     }
-gi
+
     public boolean delete(int id) {
        // code to delete a ticket
         //return true;
@@ -35,9 +35,9 @@ gi
         //handle throw exception here
     }
 
-    public Map<Integer, Ticket> tickets(){
+    public List<Ticket> tickets(){
        //code to return all tickets
-        // return new HashMap<>();
+        // return new ArrayList<>();
         // no data the returns empty map
     }
 }
