@@ -251,10 +251,11 @@ public class TestTicketService {
     }
 
     /* ====================== get Ticket test cases ====================== */
-   /* @Test
+    @Test
     public void testGetTicket(){
+        
 
-    }*/
+    }
 
 
 
