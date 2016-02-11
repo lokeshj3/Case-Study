@@ -1,6 +1,6 @@
 package com.inin.logger;
 
-import java.io.File;
+import com.inin.util.TicketUtil;
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -13,7 +13,7 @@ import java.util.logging.SimpleFormatter;
 public class TLogger {
     private static FileHandler fileHandler;
     private static Logger logger;
-    private static String file = "resources/logs/ticket_logs.log";
+    private static String file = TicketUtil.getProperty("logFile");
 
     /**
      * initialize the logger and handler*/
@@ -21,7 +21,7 @@ public class TLogger {
 
         logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-        fileHandler = new FileHandler(file, true);
+        fileHandler = new FileHandler("src/main/resources/"+file, true);
         SimpleFormatter simpleFormatter = new SimpleFormatter();
         fileHandler.setFormatter(simpleFormatter);
 
@@ -62,4 +62,5 @@ public class TLogger {
         }
 
     }
+
 }

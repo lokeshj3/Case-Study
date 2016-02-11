@@ -43,8 +43,16 @@ public class TicketFactory {
      */
     public static TicketService newTicketServiceInstance(){  return new TicketServiceImpl(); }
 
+    /**
+     * provides new TicketReportServiceImpl object for TicketReportService
+     * @return Object
+     */
     public static TicketReportService newTicketReportServiceInstance(){ return new TicketReportServiceImpl();}
 
+    /**
+     * provides new TicketSerializeServiceImpl object for TicketSerializeService
+     * @return Object
+     */
     public static TicketSerializeService newTicketSerializeServiceInstance(){  return new TicketSerializeServiceImpl(); }
 
     private static int getTicketId(){

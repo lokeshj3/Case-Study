@@ -125,10 +125,11 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
      */
     @Override
     public List<Ticket> findAllByTag(String tag) {
+        String tempTag = tag.toLowerCase();
         if (ticketMap.size() > 0)
             return ticketMap.values()
                 .stream()
-                .filter(ticket -> ticket.getAgent().toLowerCase().equals(tag))
+                .filter(ticket -> ticket.getTags().contains(tempTag))
                 .collect(Collectors.toList());
 
         return new ArrayList<>();

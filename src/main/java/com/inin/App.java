@@ -1,12 +1,15 @@
 package com.inin;
 
 import com.inin.factory.TicketFactory;
+import com.inin.logger.TLogger;
 import com.inin.model.Ticket;
 import com.inin.service.serialize.TicketSerializeService;
+import com.inin.util.TicketUtil;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,8 +19,11 @@ import java.util.stream.Collectors;
  */
 public class App 
 {
+
     public static void main( String[] args )
     {
+        TLogger.writeLog(Level.INFO,"asdfsdfs");
+
         System.out.println( "Hello World!" );
 
 //        //Serialization test
