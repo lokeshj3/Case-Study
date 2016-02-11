@@ -67,7 +67,7 @@ public class TicketController {
         return ticketReportService.ticketsByTag(tag);
     }
 
-    public Map<Integer, Ticket> getTickets(){
+    public List<Ticket> getTickets(){
         return ticketService.tickets();
     }
 

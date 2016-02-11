@@ -5,11 +5,8 @@ import com.helpdesk.exception.InvalidParamsException;
 import com.helpdesk.logger.TicketLogger;
 import com.helpdesk.model.Ticket;
 
-import java.security.InvalidParameterException;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 
 public class UserDataController extends  TicketController{
@@ -113,15 +110,15 @@ public class UserDataController extends  TicketController{
     }
 
     public void Tickets() {
-        Map<Integer, Ticket> tickets = this.getTickets();
+        List<Ticket> tickets = this.getTickets();
         if(tickets.size() >0 ){
             //tickets.values().stream().sorted((Ticket t1, Ticket t2) -> -t1.getModified().compareTo(t2.getModified())).forEach(ticket -> System.out.println(ticket.toString()));
         }
         else System.out.println("No tickets found!!!");
     }
 
-    public void allAgentsTicketCount(){
 
+    public void allAgentsTicketCount(){
         Map<String, Integer> ticketCountList = this.getAllAgentsTicketCount();
         if(ticketCountList.size()>0){
             //display logic
