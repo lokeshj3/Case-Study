@@ -12,14 +12,14 @@ import java.util.Set;
  * Created by root on 8/2/16.
  */
 public class TicketService {
-    public final TicketModel createTicket(int ticketId, String subject, String agentName, Set<String> setOfTags) throws InvalidParamsException, DuplicateTicketKeyException {
+    public final Ticket createTicket(int ticketId, String subject, String agentName, Set<String> setOfTags) throws InvalidParamsException, DuplicateTicketKeyException {
         //logic for creation of ticket
-        return new TicketModel();
+        return new Ticket();
     }
 
-    public final TicketModel updateTicket(int ticketId) throws InvalidParamsException, TicketNotFoundException {
+    public final Ticket updateTicket(int ticketId) throws InvalidParamsException, TicketNotFoundException {
         //logic for updation of ticket
-        return new TicketModel();
+        return new Ticket();
     }
 
     public final boolean deleteTicket(int ticketId) throws InvalidParamsException, TicketNotFoundException {
@@ -27,13 +27,13 @@ public class TicketService {
         return false;
     }
 
-    public final TicketModel getTicketDetail(int ticketId) throws InvalidParamsException, TicketNotFoundException {
+    public final Ticket getTicketDetail(int ticketId) throws InvalidParamsException, TicketNotFoundException {
         //logic for get details of a ticket
-        return new TicketModel();
+        return new Ticket();
     }
 
-    public final List<TicketModel> getTicketList() {
+    public final List<Ticket> getTicketList() {
         //logic for get list of ticket
-        return new ArrayList<TicketModel>();
+        return new ArrayList<Ticket>();
     }
 }

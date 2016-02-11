@@ -7,11 +7,11 @@ import java.util.List;
  * Created by root on 10/2/16.
  */
 public interface TicketSerialize {
-    boolean serializeSingleTicket(TicketModel ticketModel) throws IOException;
+    boolean serializeSingleTicket(Ticket ticketModel) throws IOException;
 
-    TicketModel deSerializeSingleTicket() throws IOException, ClassNotFoundException;
+    Ticket deSerializeSingleTicket() throws IOException, ClassNotFoundException;
 
-    boolean serializeMultiTicket(List<TicketModel> ticketModelList) throws IOException;
+    boolean serializeMultiTicket(List<Ticket> ticketModelList) throws IOException;
 
-    List<TicketModel> deSerializeMultiTicket() throws IOException, ClassNotFoundException;
+    List<Ticket> deSerializeMultiTicket() throws IOException, ClassNotFoundException;
 }
