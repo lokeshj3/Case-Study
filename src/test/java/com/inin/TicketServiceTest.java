@@ -14,6 +14,9 @@ import java.util.*;
  */
 public class TicketServiceTest {
 
+    public TicketServiceTest(){
+        System.out.println("test");
+    }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateTicketWithNullSubject(){
@@ -60,7 +63,7 @@ public class TicketServiceTest {
         Assert.assertEquals("Test Subject",ticket.getSubject());
         Assert.assertEquals("Agent1",ticket.getAgent());
         Assert.assertEquals(tags,ticket.getTags());
-        ticketService.delete(ticket.getId());
+        ticketService.delete(id);
     }
 
     @Test
@@ -69,7 +72,7 @@ public class TicketServiceTest {
         Set<String> tags = new HashSet<>(Arrays.asList("tag1","tag2","tag3"));
         Set<String> newTags = new HashSet<>(Arrays.asList("NewTag1","NewTag2"));
         int id = ticketService.create("Test Subject","Agent1",tags);
-        Ticket ticket = ticketService.update(1, "Agent Vinod", newTags);
+        Ticket ticket = ticketService.update(id, "Agent Vinod", newTags);
         Assert.assertEquals("Agent Vinod",ticket.getAgent());
         Assert.assertEquals(newTags,ticket.getTags());
         ticketService.delete(id);
@@ -85,6 +88,7 @@ public class TicketServiceTest {
         {
             ticketService.update(id, null ,null);
         }finally {
+
             ticketService.delete(id);
         }
     }
@@ -132,7 +136,7 @@ public class TicketServiceTest {
         Assert.assertEquals("Test Subject for Get Ticket",ticket.getSubject());
         Assert.assertEquals("Agent1",ticket.getAgent());
         Assert.assertEquals(tags,ticket.getTags());
-        ticketService.delete(ticket.getId());
+        ticketService.delete(id);
     }
 
     @Test(expected = TicketNotFoundException.class)
@@ -163,7 +167,7 @@ public class TicketServiceTest {
      * @param ticketService
      * @return List<Integer>
      */
-    private  List<Integer> generateDummyTicket(TicketService ticketService){
+    private List<Integer> generateDummyTicket(TicketService ticketService){
         List<Integer> ticketIdList = new ArrayList<>();
         ticketIdList.add(ticketService.create("Test Subject1","Agent1",new HashSet<>(Arrays.asList("tag1","tag2","tag3"))));
         ticketIdList.add(ticketService.create("Test Subject2","Agent2",new HashSet<>(Arrays.asList("tag4","tag1","tag2"))));

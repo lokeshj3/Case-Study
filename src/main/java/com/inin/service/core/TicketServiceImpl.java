@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * Created by root on 8/2/16.
  */
 public class TicketServiceImpl implements TicketService {
-    private final static Map<Integer, Ticket> ticketMap = new HashMap<>();
+    private final Map<Integer, Ticket> ticketMap = new HashMap<>();
 
     /**
      * Function to Create New Ticket
