@@ -1,6 +1,8 @@
 package com.inin.factory;
 
 import com.inin.model.Ticket;
+import com.inin.service.core.TicketService;
+import com.inin.service.core.TicketServiceImpl;
 
 import java.util.Set;
 
@@ -30,7 +32,13 @@ public class TicketFactory {
     public static Ticket newInstance(Ticket ticket){
         return new Ticket(ticket);
     }
-    public static int getTicketId(){
+
+    public static TicketService newTicketServiceInstance(){
+        TicketService ticketService = new TicketServiceImpl();
+        return ticketService;
+    }
+
+    private static int getTicketId(){
         return ++counter;
     }
 }

@@ -2,8 +2,8 @@ package com.inin;
 
 import com.inin.exception.TicketNotFoundException;
 import com.inin.model.Ticket;
-import com.inin.service.TicketService;
-import com.inin.service.TicketServiceImpl;
+import com.inin.service.core.TicketService;
+import com.inin.service.core.TicketServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -81,8 +81,12 @@ public class TicketServiceTest {
         TicketService ticketService = getTicketServiceInstance();
         Set<String> tags = new HashSet<>(Arrays.asList("tag1","tag2","tag3"));
         int id = ticketService.create("Test Subject","Agent1",tags);
-        ticketService.update(id, null ,null);
-        ticketService.delete(id);
+        try
+        {
+            ticketService.update(id, null ,null);
+        }finally {
+            ticketService.delete(id);
+        }
     }
 
     @Test(expected = TicketNotFoundException.class)
@@ -102,6 +106,11 @@ public class TicketServiceTest {
         ticketService.delete(id);
     }
 
+    @Test
+    public void testGetTicketsByTag(){
+        TicketService ticketService = getTicketServiceInstance();
+        List<Integer> ticketsList = generateDummyTicket(ticketService);
+    }
     @Test
     public void testDeleteTicketWithValidId(){
         TicketService ticketService = getTicketServiceInstance();

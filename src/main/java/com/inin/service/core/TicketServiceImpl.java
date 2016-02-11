@@ -1,11 +1,10 @@
-package com.inin.service;
+package com.inin.service.core;
 
 import com.inin.exception.TicketNotFoundException;
 import com.inin.factory.TicketFactory;
 import com.inin.model.Ticket;
 import com.inin.util.TicketUtil;
 
-import java.security.InvalidParameterException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -15,6 +14,14 @@ import java.util.stream.Collectors;
 public class TicketServiceImpl implements TicketService {
     private final static Map<Integer, Ticket> ticketMap = new HashMap<>();
 
+    /**
+     * Function to Create New Ticket
+     * @param subject
+     * @param agent
+     * @param tags
+     * @return
+     * @throws IllegalArgumentException
+     */
     public int create(String subject, String agent, Set<String> tags) throws IllegalArgumentException{
         if(!TicketUtil.isValidString(subject) || !TicketUtil.isValidString(agent))
             throw new IllegalArgumentException();
@@ -23,9 +30,19 @@ public class TicketServiceImpl implements TicketService {
         return ticket.getId();
     }
 
+    /**
+     * Function to Update a single ticket
+     * @param id
+     * @param agent
+     * @param tags
+     * @return
+     * @throws IllegalArgumentException
+     * @throws TicketNotFoundException
+     */
     public Ticket update(int id, String agent, Set<String> tags) throws IllegalArgumentException,TicketNotFoundException{
         if(!TicketUtil.isValidString(agent))
             throw new IllegalArgumentException();
+
 
         Ticket ticket = ticketMap.get(id);
         if (ticket == null)
@@ -40,7 +57,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     /**
-     * Remove Ticket from ticketMap
+     * Function to remove a Ticket
      * @param id
      */
     public boolean delete(int id) {
@@ -48,7 +65,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     /**
-     * Return Ticket associated with this Id
+     * Function to return a Ticket with Id
      * @param id
      * @return Ticket
      * @throws TicketNotFoundException
@@ -62,7 +79,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     /**
-     * Return the Ticket list
+     * Function to return Ticket list
      * @return
      */
     public List<Ticket> tickets() {
@@ -71,4 +88,31 @@ public class TicketServiceImpl implements TicketService {
                 .sorted((ticket1,ticket2) -> ticket1.getModified().compareTo(ticket2.getModified()))
                 .collect(Collectors.toList()));
     }
+
+    /**
+     * Get Tickets w.r.t Tag passed
+     * @param tag
+     * @return
+     *//*
+    public List<Ticket> ticketsByTags(String tag){
+        return Collections.unmodifiableList(ticketMap.values()
+        .stream()
+        .filter(ticket -> ticket.getTags().contains(tag))
+        .sorted((Ticket t1, Ticket t2) -> t2.getModified().compareTo(t1.getModified()))
+        .collect(Collectors.toList()));
+    }
+
+    *//**
+     * Get Tickets w.r.t Agent passed
+     * @param agent
+     * @return
+     *//*
+    public List<Ticket> ticketsByAgent(String agent){
+        return Collections.unmodifiableList(ticketMap.values()
+        .stream()
+        .filter(ticket -> ticket.getAgent().contains(agent))
+        .sorted((Ticket t1, Ticket t2) -> t2.getModified().compareTo(t1.getModified()))
+        .collect(Collectors.toList()));
+    }*/
+
 }
