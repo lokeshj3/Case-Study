@@ -3,6 +3,10 @@ package com.inin.factory;
 import com.inin.model.Ticket;
 import com.inin.service.core.TicketService;
 import com.inin.service.core.TicketServiceImpl;
+import com.inin.service.report.TicketReportService;
+import com.inin.service.report.TicketReportServiceImpl;
+import com.inin.service.serialize.TicketSerializeServiceImpl;
+import com.inin.service.serialize.TicketSerializeService;
 
 import java.util.Set;
 
@@ -19,7 +23,7 @@ public class TicketFactory {
      * @param tags
      * @return Ticket
      */
-    public static Ticket newInstance(String subject, String agent, Set<String> tags){
+    public static Ticket newTicketInstance(String subject, String agent, Set<String> tags){
         int id = getTicketId();
         return new Ticket(id, subject, agent, tags);
     }
@@ -29,11 +33,15 @@ public class TicketFactory {
      * @param ticket
      * @return Ticket
      */
-    public static Ticket newInstance(Ticket ticket){
+    public static Ticket newTicketInstance(Ticket ticket){
         return new Ticket(ticket);
     }
 
     public static TicketService newTicketServiceInstance(){  return new TicketServiceImpl(); }
+
+    public static TicketReportService newTicketReportServiceInstance(){ return new TicketReportServiceImpl();}
+
+    public static TicketSerializeService newTicketSerializeServiceInstance(){  return new TicketSerializeServiceImpl(); }
 
     private static int getTicketId(){
         return ++counter;

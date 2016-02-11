@@ -25,7 +25,7 @@ public class TicketServiceImpl implements TicketService {
     public int create(String subject, String agent, Set<String> tags) throws IllegalArgumentException{
         if(!TicketUtil.isValidString(subject) || !TicketUtil.isValidString(agent))
             throw new IllegalArgumentException();
-        Ticket ticket = TicketFactory.newInstance(subject, agent, tags);
+        Ticket ticket = TicketFactory.newTicketInstance(subject, agent, tags);
         ticketMap.put(ticket.getId(),ticket );
         return ticket.getId();
     }
@@ -53,7 +53,7 @@ public class TicketServiceImpl implements TicketService {
         if (TicketUtil.isValidCollection(tags)) {
             ticket.setTags(tags);
         }
-        return TicketFactory.newInstance(ticket);
+        return TicketFactory.newTicketInstance(ticket);
     }
 
     /**
@@ -75,7 +75,7 @@ public class TicketServiceImpl implements TicketService {
         if(ticket == null)
             throw new TicketNotFoundException("No Ticket found with this id: "+id);
 
-        return TicketFactory.newInstance(ticket);
+        return TicketFactory.newTicketInstance(ticket);
     }
 
     /**
