@@ -1,27 +1,44 @@
 package com.helpdesk.repository;
 
+import com.helpdesk.exception.InvalidParamsException;
 import com.helpdesk.model.Ticket;
 import com.helpdesk.serialization.TicketSerialization;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
+
+import static com.helpdesk.logger.TicketLogger.writeLog;
+
 /**
  * Created by root on 9/2/16.
  */
 public class TicketRepository {
 
-    private static Map<Integer, Ticket> ticketMap;
+    private Map<Integer, Ticket> ticketMap;
+    private TicketSerialization ticketSerialization;
 
-    static {
-        ticketMap = TicketSerialization.getTicketsFromFile();
+    public TicketRepository() {
+        ticketSerialization = new TicketSerialization("src/main/resources/files/", "tickets.ser");
+        ticketMap = ticketSerialization.getTicketsFromFile();
     }
 
     /**
      * add ticket to repository
      * @param ticket */
-    public void addTicket(Ticket ticket){
-        ticketMap.put(ticket.getId(), ticket);
+    public boolean addTicket(Ticket ticket){
+        if(ticketSerialization.saveSingelTicket(ticket)){
+            ticketMap.put(ticket.getId(), ticket);
+            writeLog(Level.INFO, "Ticket save in file");
+            return true;
+        }
+        else{
+            writeLog(Level.INFO, "Ticket failed to save in file");
+            return false;
+        }
     }
+
 
     /**
      * update ticket to repository
@@ -40,8 +57,24 @@ public class TicketRepository {
     /**
      * return repository
      * */
-    public Map<Integer, Ticket> getTicketsMap(){
+    public Map<Integer, Ticket> getAllTickets(){
         return new ConcurrentHashMap<>(ticketMap);
+    }
+
+    /**
+     * add all the tickets in map
+     * @param tickets
+     * */
+    public void addAll(Map<Integer, Ticket> tickets){
+        ticketMap.putAll(tickets);
+    }
+
+    public int getMaxId(){
+        int maxId = 0;
+        if(ticketMap.size() > 0)
+            maxId = Collections.max(ticketMap.keySet());
+
+        return maxId;
     }
 
 }

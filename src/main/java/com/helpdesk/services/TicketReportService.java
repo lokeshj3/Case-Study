@@ -11,7 +11,7 @@ import java.util.Map;
  * Created by root on 10/2/16.
  */
 public class TicketReportService {
-    public List<Ticket> ticketsByAgentName(String agentName){
+/*    public List<Ticket> ticketsByAgentName(String agentName){
         //code to return all tickets assigned to agent
         return new ArrayList<>();
     }
@@ -48,5 +48,5 @@ public class TicketReportService {
         // code to return all tickets older than given day(s)
         return new ArrayList<>();
 
-    }
+    }*/
 }

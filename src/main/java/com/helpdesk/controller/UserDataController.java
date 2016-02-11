@@ -2,6 +2,7 @@ package com.helpdesk.controller;
 
 import com.helpdesk.components.Util;
 import com.helpdesk.exception.InvalidParamsException;
+import com.helpdesk.exception.TicketFailure;
 import com.helpdesk.logger.TicketLogger;
 import com.helpdesk.model.Ticket;
 
@@ -27,6 +28,8 @@ public class UserDataController extends  TicketController{
             System.out.println("Ticket Has been created successfully." + tickets.toString());
         } catch (InvalidParamsException e) {
             System.out.println(e.getMessage());
+        } catch (TicketFailure ticketFailure) {
+            System.out.println(ticketFailure.getMessage());
         }
    }
 

@@ -11,9 +11,9 @@ import java.util.concurrent.ConcurrentHashMap;
  * Class used for serialize and deserialize data*/
 public class TicketSerialization {
 
-    static File file = null;
+    File file = null;
 
-    TicketSerialization(String path, String fileName){
+    public TicketSerialization(String path, String fileName){
        file = Util.createFile(path, fileName);
     }
 
@@ -22,7 +22,7 @@ public class TicketSerialization {
      * serialize tickets
      * @param ticketMap
      * */
-    public static boolean saveTicketsInFile(Map<Integer, Ticket> ticketMap){
+    public boolean saveTicketsInFile(Map<Integer, Ticket> ticketMap){
         try(FileOutputStream fos = new FileOutputStream(file, true); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 
             for (Ticket ticket : ticketMap.values()){
@@ -42,10 +42,32 @@ public class TicketSerialization {
 
 
     /**
+     * Save single ticket in file
+     * */
+    public boolean saveSingelTicket(Ticket ticket){
+        try(FileOutputStream fos = new FileOutputStream(file, true); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            oos.writeObject(ticket);
+            return true;
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+
+    /**
      * return Ticket list from file
      * @return concurrentTicketMap */
-    public static Map<Integer, Ticket> getTicketsFromFile(){
-        ConcurrentHashMap<Integer, Ticket> concurrentTicketMap = null;
+    public Map<Integer, Ticket> getTicketsFromFile(){
+        ConcurrentHashMap<Integer, Ticket> concurrentTicketMap = new ConcurrentHashMap<>();
+
+        if(file.length() == 0){
+            return concurrentTicketMap;
+        }
 
         try(FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis)) {

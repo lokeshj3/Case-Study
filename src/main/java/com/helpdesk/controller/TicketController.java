@@ -1,7 +1,9 @@
 package com.helpdesk.controller;
 
 import com.helpdesk.exception.InvalidParamsException;
+import com.helpdesk.exception.TicketFailure;
 import com.helpdesk.model.Ticket;
+import com.helpdesk.serialization.TicketSerialization;
 import com.helpdesk.services.TicketReportService;
 import com.helpdesk.services.TicketService;
 import com.helpdesk.logger.TicketLogger;
@@ -21,6 +23,7 @@ public class TicketController {
      * Initialize objects
      * */
     public TicketController(){
+
         ticketService = new TicketService();
         ticketReportService = new TicketReportService();
     }
@@ -29,7 +32,7 @@ public class TicketController {
     /**
      * controller to get data for create ticket
      * */
-    public Ticket create(String subject, String agentName, HashSet<String> tagSet) throws InvalidParamsException{
+    public Ticket create(String subject, String agentName, HashSet<String> tagSet) throws InvalidParamsException, TicketFailure {
         TicketLogger.writeLog(Level.INFO, "create controller start");
 
         if(subject != null && !subject.trim().isEmpty() && agentName != null && !agentName.trim().isEmpty() && tagSet != null) {
@@ -39,7 +42,7 @@ public class TicketController {
         else throw new InvalidParamsException("Please give proper input!");
     }
 
-
+/*
     public Ticket update(int id, @NotNull String agentName, HashSet<String> tags, String action)  throws InvalidParameterException {
         if(ticketService.isTicketExist(id)){
             Ticket ticket = ticketService.update(id, agentName, tags, action);
@@ -90,5 +93,5 @@ public class TicketController {
 
     public boolean isTicketExist(int id){
         return true;
-    }
+    }*/
 }

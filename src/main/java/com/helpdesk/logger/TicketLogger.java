@@ -16,7 +16,7 @@ public class TicketLogger {
      * initialize the logger and handler*/
     static {
         logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-
+        logger.setUseParentHandlers(false);
         try {
             fileHandler = new FileHandler("target/generated-sources/logs/logs.log", true);
         } catch (IOException e) {

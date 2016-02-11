@@ -2,7 +2,6 @@ import com.helpdesk.components.Util;
 import com.helpdesk.controller.UserDataController;
 import com.helpdesk.logger.TicketLogger;
 
-import java.io.IOException;
 import java.util.logging.Level;
 
 /**
