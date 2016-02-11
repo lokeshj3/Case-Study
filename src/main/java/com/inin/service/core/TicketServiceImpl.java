@@ -22,13 +22,13 @@ public class TicketServiceImpl implements TicketService {
      * @param subject
      * @param agent
      * @param tags
-     * @return TickcetId
+     * @return int
      * @throws IllegalArgumentException
      */
     public int create(String subject, String agent, Set<String> tags) throws IllegalArgumentException{
         if(!TicketUtil.isValidString(subject) || !TicketUtil.isValidString(agent))
             throw new IllegalArgumentException();
-
+        tags = tags != null ? new HashSet<>(tags) : new HashSet<>();
         Ticket ticket   = TicketFactory.newTicketInstance(subject, agent, tags);
         return ticketServiceDAO.create(ticket);
     }
@@ -38,14 +38,14 @@ public class TicketServiceImpl implements TicketService {
      * @param id
      * @param agent
      * @param tags
-     * @return
+     * @return Ticket
      * @throws IllegalArgumentException
      * @throws TicketNotFoundException
      */
     public Ticket update(int id, String agent, Set<String> tags) throws IllegalArgumentException,TicketNotFoundException{
         if (!TicketUtil.isValidString(agent) || !TicketUtil.isValidCollection(tags))
             throw new IllegalArgumentException();
-        return ticketServiceDAO.update(id, agent, tags);
+        return TicketFactory.newTicketInstance(ticketServiceDAO.update(id, agent, tags));
 
     }
 

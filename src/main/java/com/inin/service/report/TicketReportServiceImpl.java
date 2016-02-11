@@ -9,6 +9,7 @@ import java.security.InvalidParameterException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by root on 11/2/16.
@@ -34,13 +35,13 @@ public class TicketReportServiceImpl implements TicketReportService{
     }
 
     @Override
-    public Map<String, Integer> ticketsCountByAgent() {
-        return null;
+    public Map<String, Long> ticketsCountByAgent() {
+        return ticketReportDAO.ticketsCountByAgent();
     }
 
     @Override
-    public Map<String, Integer> ticketsCountByTag() {
-        return null;
+    public Map<String, Long> ticketsCountByTag() {
+        return ticketReportDAO.ticketsCountByTag();
     }
 
     @Override

@@ -38,8 +38,8 @@ public class TicketFactory {
     }
 
     /**
-     * provides new TicketServiceImpl object for TicketService
-     * @return Object
+     * Create and return TicketServiceInstance
+     * @return
      */
     public static TicketService newTicketServiceInstance(){  return new TicketServiceImpl(); }
 

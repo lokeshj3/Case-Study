@@ -5,6 +5,7 @@ import com.inin.model.Ticket;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -18,4 +19,6 @@ public interface TicketReportDAO {
     Ticket findOldestRecord();
     List<Ticket> findTicketsFromDate(LocalDateTime date);
     int count();
+    Map<String,Long> ticketsCountByAgent();
+    Map<String,Long> ticketsCountByTag();
 }

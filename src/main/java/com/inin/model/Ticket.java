@@ -22,7 +22,7 @@ public class Ticket implements Serializable{
         this.id = id;
         this.agent = agent;
         this.subject = subject;
-        this.tags = tags != null ? new HashSet<>(tags) : null;
+        this.tags = new HashSet<>(tags);
         this.created = this.modified = LocalDateTime.now();
     }
 

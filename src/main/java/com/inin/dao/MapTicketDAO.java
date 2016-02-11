@@ -1,9 +1,7 @@
 package com.inin.dao;
 
-import com.inin.constant.TicketAttribute;
 import com.inin.exception.TicketNotFoundException;
 import com.inin.model.Ticket;
-import com.inin.util.TicketUtil;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -109,10 +107,11 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
      */
     @Override
     public List<Ticket> findAllByAgent(String agent) {
+        String tempAgent = agent.toLowerCase();
         if (ticketMap.size() > 0)
             return ticketMap.values()
                 .stream()
-                .filter(ticket -> ticket.getAgent().toLowerCase().equals(agent.toLowerCase()))
+                .filter(ticket -> ticket.getAgent().toLowerCase().equals(tempAgent))
                 .collect(Collectors.toList());
 
         return new ArrayList<>();
@@ -166,6 +165,36 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
                 .stream()
                 .filter(ticket -> date.compareTo(ticket.getCreated()) >=0 )
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Return the agent ticket count
+     * @return
+     */
+    @Override
+    public Map<String ,Long> ticketsCountByAgent(){
+        return ticketMap.values()
+                .stream()
+                .collect(Collectors.groupingBy(Ticket::getAgent,Collectors.counting()));
+    }
+
+    @Override
+    public Map<String, Long> ticketsCountByTag() {
+        Map<String,Long> ticketByTag = new HashMap<>();
+        ticketMap.values()
+                .stream()
+                .forEach(ticket -> {
+                    ticket.getTags().forEach( tag -> {
+                        if(ticketByTag.containsKey(tag))
+                            ticketByTag.put(tag,ticketByTag.get(tag)+1L);
+                        else {
+                            List<Ticket> list = new ArrayList<>();
+                            list.add(ticket);
+                            ticketByTag.put(tag, 1L);
+                        }
+                    });
+                });
+        return ticketByTag;
     }
 
 }

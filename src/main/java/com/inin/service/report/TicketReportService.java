@@ -15,9 +15,9 @@ public interface TicketReportService {
 
     List<Ticket> ticketsByAgent(String agent);
 
-    Map<String, Integer> ticketsCountByAgent();
+    Map<String, Long> ticketsCountByAgent();
 
-    Map<String, Integer> ticketsCountByTag();
+    Map<String, Long> ticketsCountByTag();
 
     int totalTicketCount();
 
