@@ -38,27 +38,41 @@ public class UserDataController extends  TicketController{
         System.out.println("Enter ticket Id to update : ");
         int id = Util.readInteger();
         if(this.isTicketExist(id)) {
-            System.out.println("Enter Agent Name : ");
-            String agentName = Util.readString();
-            System.out.println("Enter A-adding new tags / R-remove existing tag / N-no");
-            String action = Util.readString();
-            HashSet<String> tags = null;
-            if (!action.isEmpty() && (action.equals("A") || action.equals("R"))) {
-                System.out.println("Enter tags separated by comma(,) : ");
-                String tag = Util.readString();
-                tags = new HashSet<>(Arrays.asList(tag.split(",")));
-            }
-            this.update(id, agentName, tags, action);
+            String agentName = null;
+            HashSet<String> tagSet = null;
+            String action = null;
 
-            try{
-                Ticket ticket = this.update(id, agentName, tags, action);System.out.println("Ticket id " + id + " is updated successfully");
-                System.out.println(ticket.toString());
+            String choice = Util.readString("Do you want to update Agent? Enter y-Yes | n-No");
+            if(choice.equals('y')){
+                agentName = Util.readString("Enter Agent Name : ");
             }
-            catch (InvalidParameterException ie){
-                System.out.println("Invalid param");
+
+            choice = Util.readString("Do you want to update Tags? Enter y-Yes | n-No");
+
+            if(choice.equals('y')){
+                action = Util.readString("Enter A-adding new tags / R-remove existing tag / N-no");
+
+                if (!action.isEmpty() && (action.equals("A") || action.equals("R"))) {
+                    String tag = Util.readString("Enter tags separated by comma(,) : ");
+                    tagSet = new HashSet<>(Arrays.asList(tag.split(",")));
+                }
             }
+
+            if(!agentName.isEmpty() || !tagSet.isEmpty()) {
+                try{
+                    Ticket ticket = this.update(id, agentName, tagSet, action);
+                    System.out.println("Ticket id " + id + " is updated successfully");
+                    System.out.println(ticket.toString());
+                }
+                catch (InvalidParameterException ie){
+                    System.out.println("Invalid params!!!");
+                }
+            }
+            else
+            System.out.println("Update Operation Skipped");
         }
-        else    System.out.println("Entered Ticket id " + id + " is not present in the system.");
+        else
+            System.out.println("Entered Ticket id " + id + " is not present in the system.");
     }
 
     public void delete() {

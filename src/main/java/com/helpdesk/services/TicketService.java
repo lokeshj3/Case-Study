@@ -44,13 +44,49 @@ public class TicketService {
         //code to check given ticket id is present on not in the system.
         return true;
     }
+
 /*
     public Ticket update(int id, @NotNull String agentName, HashSet<String> tags, String action) {//add more required parameters
         //code to update the ticket into file as well as map
         //return ticket;
         return null;
         //handle throw exception here InvalidParameterException
-    }
+
+    public Ticket update(int id, @NotNull String agentName, Set<String> tags, String action) {
+
+ 
+        // incomplete --- need to handle serialization part only,  waiting for deepak's service
+        // 10 & logic will be changed
+
+        //Map<Integer, Ticket> masterTicketsData = TicketSerialization.deserialize();
+
+        boolean modifiedFlag = false;
+        Ticket ticket = masterTicketsData.get(id);
+        if (!agentName.isEmpty()){
+            ticket.setAgentName(agentName);
+            modifiedFlag = true;
+        }
+
+        if(action.equals("A")){  // Adding new  tags
+            tags.addAll(ticket.getTags());
+            ticket.setTags(tags);
+            modifiedFlag = true;
+        }
+        else if(action.equals("R")){  // remove tags
+            HashSet<String> oldTags = new HashSet<>();
+            oldTags.addAll(ticket.getTags());
+            ticket.getTags().forEach((tag)->{
+                if(tags.contains(tag)){
+                    oldTags.remove(tag);
+                }
+            });
+            ticket.setTags(oldTags);
+            modifiedFlag = true;
+        }
+
+       /* if(modifiedFlag)
+            TicketSerialization.serialize(masterTicketsData, false);*/
+
 
     public boolean delete(int id) {
        // code to delete a ticket
@@ -66,7 +102,7 @@ public class TicketService {
 
     public List<Ticket> tickets(){
        //code to return all tickets
-         return new HashMap<>();
+         return new ArrayList<>();
         // no data the returns empty map
-    }*/
+    }
 }

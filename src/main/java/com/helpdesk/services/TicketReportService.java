@@ -18,6 +18,8 @@ public class TicketReportService {
 
     public List<Ticket> ticketsByTag(String tag){
         //code to return all tickets by tag
+
+        //return new ArrayList<>();
         return new ArrayList<>();
     }
     public Map<String , Integer> ticketCountsGroupByAgent(){
@@ -30,15 +32,6 @@ public class TicketReportService {
         return 0;
         //return new ArrayList<>(); if no tickets found in the system
     }
-    public Map<String , Integer> ticketCountsGroupByAgent(){
-        //code to return ticket count group byb agent
-        //return new HashMap<>() if no tickets found in the system;
-    }
-
-    public int getTotalTicketCounts() {
-        // code to return total number in the system
-        //return 0; if no tickets found in the system
-    }
 
     public Ticket oldestTicket() {
         // code to return oldest ticket in the system by created
@@ -46,7 +39,9 @@ public class TicketReportService {
     }
     public List<Ticket> ticketsOlderByDays(int day){
         // code to return all tickets older than given day(s)
+        //return new ArrayList<>();
         return new ArrayList<>();
 
     }*/
+
 }
