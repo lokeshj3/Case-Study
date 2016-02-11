@@ -14,16 +14,20 @@ public class TicketLogger {
 
     /**
      * initialize the logger and handler*/
-    public static void setLogger() throws IOException {
-
+    static {
         logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-        fileHandler = new FileHandler("target/generated-sources/logs/logs.log", true);
+        try {
+            fileHandler = new FileHandler("target/generated-sources/logs/logs.log", true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         SimpleFormatter simpleFormatter = new SimpleFormatter();
         fileHandler.setFormatter(simpleFormatter);
 
         logger.addHandler(fileHandler);
     }
+
 
     /**
      * write into the log file
@@ -31,8 +35,8 @@ public class TicketLogger {
      * @param message
      * */
     public static void writeLog(Level level, String message){
-        try {
-            setLogger();
+
+            message = getClassMethodLine() + message;
             logger.setLevel(level);
 
             if(level == Level.INFO)
@@ -49,14 +53,18 @@ public class TicketLogger {
 
             if(level == Level.CONFIG)
                 logger.config(message);
+    }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        finally {
-            logger.removeHandler(fileHandler);
-            fileHandler.close();
-        }
 
+    /**
+     * Get the class name method name and line number from which Log is written
+     * @return string
+     * */
+    public static String getClassMethodLine(){
+        String className = Thread.currentThread().getStackTrace()[3].getClassName();
+        String methodName = Thread.currentThread().getStackTrace()[3].getMethodName();
+        int lineNumber = Thread.currentThread().getStackTrace()[3].getLineNumber();
+
+        return "[ "+className+" : "+ methodName + " : "+ lineNumber+ " ] :: ";
     }
 }

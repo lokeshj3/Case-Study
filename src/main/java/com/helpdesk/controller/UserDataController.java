@@ -1,35 +1,37 @@
 package com.helpdesk.controller;
 
 import com.helpdesk.components.Util;
+import com.helpdesk.exception.InvalidParamsException;
+import com.helpdesk.logger.TicketLogger;
 import com.helpdesk.model.Ticket;
 
-import java.security.InvalidParameterException;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.logging.Level;
 
 public class UserDataController extends  TicketController{
+   /**
+    * controller function to get the input from user
+    * and call to create ticket */
    public void create(){
-        System.out.println("inside usercontroller");
-        System.out.println("Enter Ticket Subject : ");
-        String subject = Util.readString();
-        System.out.println("Enter Agent Name : ");
-        String agentName = Util.readString();
-        System.out.println("Enter Tags (separated by comma(,) : ");
-        String tags = Util.readString();
+        TicketLogger.writeLog(Level.INFO, "start");
+
+        String subject = Util.readString("Enter Ticket Subject : ");
+        String agentName = Util.readString("Enter Agent Name : ");
+        String tags = Util.readString("Enter Tags (separated by comma(,) : ");
+
         HashSet<String> tagSet = new HashSet<>(Arrays.asList(tags.toLowerCase().split(",")));
 
         try{
             Ticket tickets = this.create(subject,agentName,tagSet);
             System.out.println("Ticket Has been created successfully." + tickets.toString());
+        } catch (InvalidParamsException e) {
+            System.out.println(e.getMessage());
         }
-        catch (InvalidParameterException ie){
-            System.out.println("There is error while creating a ticket.");
-        }
-    }
+   }
 
-    public  void update() {
+
+/*    public  void update() {
         System.out.println("Enter ticket Id to update : ");
         int id = Util.readInteger();
         if(this.isTicketExist(id)) {
@@ -71,6 +73,7 @@ public class UserDataController extends  TicketController{
     }
 
     public void delete() {
+        TicketLogger.writeLog(Level.INFO, this.getClass().getMethods()+" inside-- ");
         System.out.println("Enter ticket Id for deletion : ");
         int id = Util.readInteger();
 
@@ -128,7 +131,8 @@ public class UserDataController extends  TicketController{
         else System.out.println("No tickets found!!!");
     }
 
-    public void AllAgentsTicketCount(){
+
+    public void allAgentsTicketCount(){
         Map<String, Integer> ticketCountList = this.getAllAgentsTicketCount();
         if(ticketCountList.size()>0){
             //display logic
@@ -157,5 +161,5 @@ public class UserDataController extends  TicketController{
         if(ticketList.size()>0)
             ticketList.forEach(ticket -> System.out.println(ticket.toString()));
         else System.out.println("No tickets found");
-    }
+    }   */
 }

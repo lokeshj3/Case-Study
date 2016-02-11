@@ -22,12 +22,13 @@ public class Util {
         return userInput;
     }
 
-    public static String readString(){
-        String userInput = null;
+    public static String readString(String message){
+        System.out.println(message);
+        String userInput = "";
         try{
             BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
             userInput = consoleReader.readLine();
-            //consoleReader.close();
+
         }catch(IOException ie) {
             ie.printStackTrace();
         }
