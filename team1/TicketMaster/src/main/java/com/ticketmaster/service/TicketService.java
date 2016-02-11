@@ -30,10 +30,10 @@ public class TicketService {
             throw new IncompleteDataException("agent is required");
         }
 
-        ticket = new Ticket.TicketBuilder().withSubject(subject).withAgent(agent).withTags(tags).build();
+
+        ticket = new Ticket.TicketBuilder(subject, agent).withTags(tags).build();
 
         repository.saveTicket(ticket);
-
         CustomLogger.init(classz).info("ticket created. Id: "+ticket.getId());
 
         return ticket;

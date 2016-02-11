@@ -6,10 +6,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
-
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -22,12 +19,14 @@ public class Ticket {
     public Ticket(){
 
     }
+
     public Ticket(TicketBuilder object){
         this.subject=   object.getSubject();
         this.agent  =   object.getAgent();
         this.setTags(object.getTags());
 
     }
+
     //setter methods
     private void setId(Integer id){
         this.id = id;
@@ -116,19 +115,11 @@ public class Ticket {
      */
     public static class TicketBuilder{
 
-        public TicketBuilder(){
-
-        }
-
-        public TicketBuilder withSubject(String subject){
+        public TicketBuilder(String subject, String agent){
             this.subject = subject;
-            return this;
+            this.agent = agent;
         }
 
-        public TicketBuilder withAgent(String agent){
-            this.agent = agent;
-            return this;
-        }
         public TicketBuilder withTags(Set<String> tags){
             this.tags = tags;
             return this;
@@ -146,7 +137,6 @@ public class Ticket {
             return this.subject;
         }
         public Set<String> getTags(){
-
             if (!(this.tags instanceof Set))
                 this.tags = new HashSet<>();
             return this.tags;
