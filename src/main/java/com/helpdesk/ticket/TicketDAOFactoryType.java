@@ -1,4 +1,4 @@
-package com.helpdesk.tickets;
+package com.helpdesk.ticket;
 
 /**
  * Created by root on 10/2/16.

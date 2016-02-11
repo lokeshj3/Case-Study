@@ -1,6 +1,6 @@
 package com.helpdesk.data;
 
-import com.helpdesk.tickets.TicketModel;
+import com.helpdesk.ticket.TicketModel;
 
 import java.util.HashMap;
 import java.util.Map;

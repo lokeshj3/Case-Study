@@ -1,6 +1,6 @@
-package com.helpdesk.exceptions;
+package com.helpdesk.exception;
 
-import com.helpdesk.tickets.TicketModel;
+import com.helpdesk.ticket.TicketModel;
 
 /**
  * Created by root on 8/2/16.

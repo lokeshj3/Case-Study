@@ -1,8 +1,8 @@
-package com.helpdesk.tickets;
+package com.helpdesk.ticket;
 
-import com.helpdesk.exceptions.DuplicateTicketKeyException;
-import com.helpdesk.exceptions.InvalidParamsException;
-import com.helpdesk.exceptions.TicketNotFoundException;
+import com.helpdesk.exception.DuplicateTicketKeyException;
+import com.helpdesk.exception.InvalidParamsException;
+import com.helpdesk.exception.TicketNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class TicketService {
     }
 
     public final List<TicketModel> getTicketList() {
-        //logic for get list of tickets
+        //logic for get list of ticket
         return new ArrayList<TicketModel>();
     }
 }

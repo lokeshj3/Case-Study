@@ -1,4 +1,4 @@
-package com.helpdesk.tickets;
+package com.helpdesk.ticket;
 
 import java.time.LocalDateTime;
 import java.util.Collections;

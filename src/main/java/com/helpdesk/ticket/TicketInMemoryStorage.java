@@ -1,4 +1,4 @@
-package com.helpdesk.tickets;
+package com.helpdesk.ticket;
 
 import java.util.Collections;
 import java.util.HashMap;
