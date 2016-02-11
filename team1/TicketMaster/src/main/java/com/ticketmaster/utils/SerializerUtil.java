@@ -25,13 +25,6 @@ import java.util.Properties;
 
 public class SerializerUtil {
 
-    ObjectOutputStream fOut;
-    ObjectInputStream fIn;
-    final String base = "files";
-    File file;
-    String fileName = SerializerUtil.getSerializedFileName();
-    String propertyFile = "conf.properties";
-
     public SerializerUtil(){
 
     }
@@ -194,4 +187,13 @@ public class SerializerUtil {
     public static String getSerializedFileName(){
         return "tickets.ser";
     }
+
+
+    //properties
+    final String base = "files";
+    String propertyFile = "conf.properties";
+    String fileName = SerializerUtil.getSerializedFileName();
+    File file;
+    ObjectOutputStream fOut;
+    ObjectInputStream fIn;
 }

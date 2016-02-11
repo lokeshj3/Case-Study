@@ -6,8 +6,12 @@ import com.ticketmaster.utils.SerializerUtil;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * TicketRepository class
@@ -21,6 +25,17 @@ public class TicketRepository {
      */
     private TicketRepository(){
 
+        ticketList = new ConcurrentHashMap<>();
+
+        if (agentList == null ){
+            agentList = new HashSet<>();
+        }
+        util = new SerializerUtil();
+
+        if (tagList == null){
+            tagList = new HashSet<>();
+
+        }
     }
     /**
      * init method is used to get the TicketRepository object
@@ -39,7 +54,7 @@ public class TicketRepository {
      */
     public Ticket getTicket(Integer id) throws NotFoundException{
         if (!ticketList.containsKey(id)){
-            throw new NotFoundException("details for id: "+id+" not found");
+            throw new NotFoundException("ticket not found");
         }
         return ticketList.get(id);
     }
@@ -57,12 +72,20 @@ public class TicketRepository {
      * @param id Integer object
      * @return Ticket object
      */
-    public Ticket deleteTicket(Integer id){
+    public Ticket deleteTicket(Integer id) throws IOException, NotFoundException{
 
         if (!ticketList.containsKey(id)){
-            return null;
+            throw new NotFoundException("ticket not found");
         }
-        return ticketList.remove(id);
+        Ticket ticket = ticketList.remove(id);
+
+        if (ticket != null){
+            //clean file contents
+            util.emptyObjectFile();
+            //write complete data again to file
+            util.writeToFile(getList());
+        }
+        return ticket;
 
     }
 
@@ -85,8 +108,8 @@ public class TicketRepository {
         addAgent(ticket.getAgent());
         addTags(ticket.getTags());
         //update id in file
-        util.writeProperty("id",new Integer(ticket.getMasterId()).toString());
-        return getTicket(ticket.getId()) != null;
+        util.writeProperty("id",ticket.getId().toString());
+        return ticket != null;
 
     }
 
@@ -110,6 +133,22 @@ public class TicketRepository {
         tagList.addAll(tag);
     }
 
+    public void initTagList(){
+
+        if (ticketList != null){
+            ticketList.values().stream().forEach(e-> tagList.addAll( e.getTags() ) );
+        }
+    }
+
+    public void initAgentList(){
+
+        if (ticketList != null){
+            ticketList.values().stream().forEach(e-> agentList.add(e.getAgent()) );
+        }
+
+    }
+
+
 
 
     //properties
@@ -117,5 +156,6 @@ public class TicketRepository {
     private Map<Integer, Ticket> ticketList ; //holds tickets. acts as temporary storage
     private Set<String> agentList; // holds unique agents data
     private Set<String> tagList; //holds unique tags data
+    private SerializerUtil util;
 
 }

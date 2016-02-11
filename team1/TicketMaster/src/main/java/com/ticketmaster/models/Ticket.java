@@ -3,6 +3,9 @@ package com.ticketmaster.models;
 import com.ticketmaster.utils.SerializerUtil;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -14,7 +17,7 @@ import java.util.Set;
  * This class is used to represent a ticket object.
  * Created by Virendra on 8/2/16.
  */
-public class Ticket {
+public class Ticket implements Serializable{
 
     public Ticket(){
 
@@ -39,6 +42,7 @@ public class Ticket {
             this.tags = new HashSet<>();
         this.tags.addAll(tags);
     }
+
 
 
     //getter methods
@@ -79,7 +83,7 @@ public class Ticket {
         //fetch id from properties file
         String tmpId = util.readProperty("id");
         masterId = Integer.parseInt(tmpId);
-        this.setId(masterId);
+        this.setId(masterId++);
         return true;
     }
 
@@ -100,8 +104,33 @@ public class Ticket {
         return this.getId()+this.getSubject().hashCode()+this.getAgent().hashCode();
     }
 
+
+    private void writeObject(ObjectOutputStream out)
+            throws IOException{
+        out.writeUTF(getSubject());
+        out.writeObject(this.tags);
+        out.writeLong(getCreated());
+        out.writeLong(getModified());
+
+        out.writeInt(getId());
+        out.writeUTF(getAgent());
+    }
+
+
+    private void readObject(ObjectInputStream in)
+            throws IOException, ClassNotFoundException {
+        this.subject = in.readUTF();
+        this.tags = (HashSet) (in.readObject());
+        this.created = in.readLong();
+        this.modified = in.readLong();
+
+        setId(in.readInt());
+        setAgent(in.readUTF());
+    }
+
+
     //attributes
-    private static Integer masterId = 0;
+    public static Integer masterId = 0;
     private int id;
     private long created;
     private long modified;

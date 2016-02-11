@@ -4,9 +4,11 @@ import com.ticketmaster.exceptions.IncompleteDataException;
 import com.ticketmaster.exceptions.NoUpdateException;
 import com.ticketmaster.exceptions.NotFoundException;
 import com.ticketmaster.models.Ticket;
+import com.ticketmaster.utils.AppUtil;
 import com.ticketmaster.utils.CustomLogger;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -33,6 +35,12 @@ public class TestTicketService {
 
     protected TicketService service;
 
+
+    @BeforeClass
+    public static void beforeAll() throws IOException, ClassNotFoundException {
+        AppUtil.initializeApp();
+    }
+
     /**
      * method that runs before every test case in this class
      */
@@ -44,10 +52,11 @@ public class TestTicketService {
     /**
      * method that runs after every test case in the class
      */
-    @After
-    public void afterTest(){
-        service.clearTickets();
-    }
+   /* @After
+    public void afterTest()
+            throws IOException, NotFoundException{
+        service.cleanTestData();
+    }*/
 
     /* ====================== Create Ticket test cases ====================== */
     /**
@@ -60,7 +69,7 @@ public class TestTicketService {
 
         try{
             ticket = service.createTicket(subject, agent, tags);
-        }catch (IOException | IncompleteDataException | ClassNotFoundException e){
+        }catch (IOException | IncompleteDataException | ClassNotFoundException | NotFoundException e){
             fail("Exception occurred :\n"+e.getMessage());
         }
 
@@ -83,6 +92,8 @@ public class TestTicketService {
             ticket = service.createTicket(subject, agent, tags);
         }catch (IOException | IncompleteDataException | ClassNotFoundException e){
             fail("Exception occurred :\n"+e.getMessage());
+        }catch (NotFoundException e){
+
         }
 
         assertEquals(subject,ticket.getSubject());
@@ -102,9 +113,12 @@ public class TestTicketService {
 
         try{
             ticket = service.createTicket(subject, agent, tags);
-        }catch (IOException | IncompleteDataException | ClassNotFoundException e){
+        }catch (IOException | NotFoundException | ClassNotFoundException e){
+
+        }catch (IncompleteDataException e){
             assertTrue(e.getMessage().equalsIgnoreCase("agent is required"));
         }
+
         assertFalse(ticket instanceof Ticket);
     }
     /**
@@ -119,7 +133,9 @@ public class TestTicketService {
 
         try{
             ticket = service.createTicket(subject, agent, tags);
-        }catch (IOException | IncompleteDataException | ClassNotFoundException e){
+        }catch (IOException | NotFoundException | ClassNotFoundException e){
+
+        }catch (IncompleteDataException e){
             assertTrue(e.getMessage().equalsIgnoreCase("subject is required"));
         }
         assertFalse(ticket instanceof Ticket);
@@ -134,7 +150,6 @@ public class TestTicketService {
         Set<String> newTag = null;
         Ticket ticket = null, result = null;
 
-
         try{
 
             ticket = service.createTicket(subject, agent, tags);
@@ -142,7 +157,8 @@ public class TestTicketService {
             id = ticket.getId();
             result = service.updateTicket(id, newAgent, newTag);
 
-        }catch (IOException | IncompleteDataException | NoUpdateException | ClassNotFoundException e){
+        }catch (IOException | IncompleteDataException | NoUpdateException |
+                ClassNotFoundException | NotFoundException e){
             fail("Exception occurred :\n"+e.getMessage());
         }
 
@@ -166,7 +182,8 @@ public class TestTicketService {
             id = ticket.getId();
             result = service.updateTicket(id, newAgent, newTag);
 
-        }catch (IOException | IncompleteDataException | NoUpdateException | ClassNotFoundException e){
+        }catch (IOException | IncompleteDataException | NoUpdateException
+                | ClassNotFoundException | NotFoundException e){
             fail("Exception occurred :\n"+e.getMessage());
         }
 
@@ -191,10 +208,11 @@ public class TestTicketService {
 
         }catch ( NoUpdateException  e){
 
-            assertEquals("Nothing to update",e.getMessage().toLowerCase());
+            String expected = "Nothing to update";
+            assertEquals(expected.toLowerCase(),e.getMessage().toLowerCase());
             assertNull(result);
 
-        }catch(IOException | IncompleteDataException | ClassNotFoundException e){
+        }catch(IOException | IncompleteDataException | ClassNotFoundException | NotFoundException e){
             fail("Exception occurred :\n"+e.getMessage());
         }
 
@@ -216,13 +234,14 @@ public class TestTicketService {
             result = service.updateTicket(invalidId, newAgent, newTag);
 
         }catch ( NoUpdateException  e){
-
-            assertEquals("Nothing to update",e.getMessage().toLowerCase());
+            String expected = "Nothing to update";
+            assertEquals(expected.toLowerCase(),e.getMessage().toLowerCase());
             assertNull(result);
 
         }catch (NotFoundException e){
-
-            e.printStackTrace();
+            String expected = "ticket not found";
+            assertEquals(expected.toLowerCase(),e.getMessage().toLowerCase());
+            assertNull(result);
 
         }catch(IOException | IncompleteDataException | ClassNotFoundException e){
             fail("Exception occurred :\n"+e.getMessage());
@@ -232,10 +251,10 @@ public class TestTicketService {
     }
 
     /* ====================== get Ticket test cases ====================== */
-    @Test
+   /* @Test
     public void testGetTicket(){
 
-    }
+    }*/
 
 
 
