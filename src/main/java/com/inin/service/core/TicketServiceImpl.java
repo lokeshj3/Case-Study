@@ -28,7 +28,8 @@ public class TicketServiceImpl implements TicketService {
     public int create(String subject, String agent, Set<String> tags) throws IllegalArgumentException{
         if(!TicketUtil.isValidString(subject) || !TicketUtil.isValidString(agent))
             throw new IllegalArgumentException();
-        Ticket ticket   = TicketFactory.newInstance(subject, agent, tags);
+
+        Ticket ticket   = TicketFactory.newTicketInstance(subject, agent, tags);
         return ticketServiceDAO.create(ticket);
     }
 
@@ -44,8 +45,8 @@ public class TicketServiceImpl implements TicketService {
     public Ticket update(int id, String agent, Set<String> tags) throws IllegalArgumentException,TicketNotFoundException{
         if (!TicketUtil.isValidString(agent) || !TicketUtil.isValidCollection(tags))
             throw new IllegalArgumentException();
-
         return ticketServiceDAO.update(id, agent, tags);
+
     }
 
     /**
@@ -71,31 +72,5 @@ public class TicketServiceImpl implements TicketService {
     public List<Ticket> tickets() {
         return ticketServiceDAO.findAll();
     }
-
-    /**
-     * Get Tickets w.r.t Tag passed
-     * @param tag
-     * @return
-     *//*
-    public List<Ticket> ticketsByTags(String tag){
-        return Collections.unmodifiableList(ticketMap.values()
-        .stream()
-        .filter(ticket -> ticket.getTags().contains(tag))
-        .sorted((Ticket t1, Ticket t2) -> t2.getModified().compareTo(t1.getModified()))
-        .collect(Collectors.toList()));
-    }
-
-    *//**
-     * Get Tickets w.r.t Agent passed
-     * @param agent
-     * @return
-     *//*
-    public List<Ticket> ticketsByAgent(String agent){
-        return Collections.unmodifiableList(ticketMap.values()
-        .stream()
-        .filter(ticket -> ticket.getAgent().contains(agent))
-        .sorted((Ticket t1, Ticket t2) -> t2.getModified().compareTo(t1.getModified()))
-        .collect(Collectors.toList()));
-    }*/
 
 }

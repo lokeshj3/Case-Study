@@ -9,11 +9,8 @@ import java.util.List;
  */
 public interface TicketSerializeService {
 
-    void serializeTicket(String fileName, Ticket ticket);
-
-    void serializeTickets(String fileName, List<Ticket> ticketList);
-
-    Ticket deSerializeTicket(String fileName);
-
-    List<Ticket> deSerializeTickets(String fileName);
+    void serializeTicket(Ticket ticket);
+    void serializeTickets(List<Ticket> ticketList);
+    Ticket deserializeTicket();
+    List<Ticket> deserializeTickets();
 }
