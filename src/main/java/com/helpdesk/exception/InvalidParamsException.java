@@ -1,4 +1,6 @@
-package com.helpdesk.exceptions;
+package com.helpdesk.exception;
+
+import com.helpdesk.ticket.Ticket;
 
 /**
  * Created by root on 8/2/16.
@@ -6,5 +8,6 @@ package com.helpdesk.exceptions;
 public class InvalidParamsException extends Exception {
     public InvalidParamsException(String message) {
         super(message);
+        new Ticket.Builder(1, "", "").build();
     }
 }

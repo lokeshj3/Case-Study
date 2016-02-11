@@ -1,4 +1,4 @@
-package com.helpdesk.tickets;
+package com.helpdesk.ticket;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Created by root on 8/2/16.
  */
-public class TicketModel {
+public class Ticket {
 
     private int id;
     private String subject;
@@ -17,7 +17,7 @@ public class TicketModel {
     private LocalDateTime created;
     private LocalDateTime modified;
 
-    public TicketModel(){
+    public Ticket(){
     }
 
 
@@ -59,7 +59,7 @@ public class TicketModel {
         this.modified = LocalDateTime.now();
     }
 
-    private TicketModel(Builder builder) {
+    private Ticket(Builder builder) {
         this.id = builder.id;
         this.subject = builder.subject;
         this.agentName = builder.agentName;
@@ -84,8 +84,8 @@ public class TicketModel {
             return this;
         }
 
-        public TicketModel build() {
-            return new TicketModel(this);
+        public Ticket build() {
+            return new Ticket(this);
         }
 
     }

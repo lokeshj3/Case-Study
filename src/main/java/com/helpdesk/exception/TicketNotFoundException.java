@@ -1,4 +1,4 @@
-package com.helpdesk.exceptions;
+package com.helpdesk.exception;
 
 /**
  * Created by root on 10/2/16.

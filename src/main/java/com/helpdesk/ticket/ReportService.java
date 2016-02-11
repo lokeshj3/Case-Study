@@ -1,4 +1,4 @@
-package com.helpdesk.tickets;
+package com.helpdesk.ticket;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,13 +20,13 @@ public class ReportService {
         return new HashMap<String, Integer>();
     }
 
-    public List<TicketModel> getTicketsOlderThanNDays(int days){
+    public List<Ticket> getTicketsOlderThanNDays(int days){
         //logic for calculating ticket older than x days
-        return new ArrayList<TicketModel>();
+        return new ArrayList<Ticket>();
     }
 
-    public TicketModel getOldestTicketInSystem(){
+    public Ticket getOldestTicketInSystem(){
         //logic for oldest ticket in the system
-        return new TicketModel();
+        return new Ticket();
     }
 }

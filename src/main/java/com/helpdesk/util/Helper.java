@@ -1,4 +1,4 @@
-package com.helpdesk.utils;
+package com.helpdesk.util;
 
 import java.util.Collection;
 import java.util.Map;
