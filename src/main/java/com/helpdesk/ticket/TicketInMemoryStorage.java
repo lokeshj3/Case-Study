@@ -8,6 +8,7 @@ import java.util.Map;
  * Created by root on 10/2/16.
  */
 public class TicketInMemoryStorage {
+
     private Map<Integer, Ticket> ticketData = new HashMap<Integer, Ticket>();
     private static TicketInMemoryStorage ticketInMemoryStorage = new TicketInMemoryStorage();
 
