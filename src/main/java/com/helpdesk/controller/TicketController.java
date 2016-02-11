@@ -1,33 +1,44 @@
 package com.helpdesk.controller;
 
+import com.helpdesk.exception.InvalidParamsException;
 import com.helpdesk.model.Ticket;
 import com.helpdesk.services.TicketReportService;
 import com.helpdesk.services.TicketService;
+import com.helpdesk.logger.TicketLogger;
 import com.sun.istack.internal.NotNull;
 
 import java.security.InvalidParameterException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 public class TicketController {
     private TicketService ticketService = null;
     private TicketReportService ticketReportService = null;
 
+    /**
+     * Initialize objects
+     * */
     public TicketController(){
         ticketService = new TicketService();
         ticketReportService = new TicketReportService();
     }
-    //you can add other exceptions like IncompleteDataException, custom exceptions
 
-    public Ticket create(String subject, String agentName, HashSet<String> tagSet) throws InvalidParameterException{
-        if(subject != null && !subject.isEmpty() && agentName != null && !agentName.isEmpty()) {
+
+    /**
+     * controller to get data for create ticket
+     * */
+    public Ticket create(String subject, String agentName, HashSet<String> tagSet) throws InvalidParamsException{
+        TicketLogger.writeLog(Level.INFO, "create controller start");
+
+        if(subject != null && !subject.trim().isEmpty() && agentName != null && !agentName.trim().isEmpty() && tagSet != null) {
             Ticket tickets = ticketService.createTicket(subject, agentName, tagSet);
             return tickets;
         }
-        else throw new InvalidParameterException();
-        //you can add other exceptions like IncompleteDataException
+        else throw new InvalidParamsException("Please give proper input!");
     }
+
 
     public Ticket update(int id, @NotNull String agentName, HashSet<String> tags, String action)  throws InvalidParameterException {
         if(ticketService.isTicketExist(id)){
