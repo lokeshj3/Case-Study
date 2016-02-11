@@ -5,7 +5,6 @@ import com.inin.factory.TicketFactory;
 import com.inin.model.Ticket;
 import com.inin.util.TicketUtil;
 
-import java.security.InvalidParameterException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -13,7 +12,7 @@ import java.util.stream.Collectors;
  * Created by root on 8/2/16.
  */
 public class TicketServiceImpl implements TicketService {
-    private final static Map<Integer, Ticket> ticketMap = new HashMap<>();
+    private final Map<Integer, Ticket> ticketMap = new HashMap<>();
 
     public int create(String subject, String agent, Set<String> tags) throws IllegalArgumentException{
         if(!TicketUtil.isValidString(subject) || !TicketUtil.isValidString(agent))

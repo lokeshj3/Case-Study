@@ -10,9 +10,9 @@ import java.util.Set;
  * Created by root on 8/2/16.
  */
 public interface TicketService {
-    public int create(String subject, String agent, Set<String> tags);
-    public Ticket update(int id, String agent, Set<String> tags) throws TicketNotFoundException;
-    public boolean delete(int id);
-    public Ticket ticket(int id) throws TicketNotFoundException;
-    public List<Ticket> tickets();
+    int create(String subject, String agent, Set<String> tags);
+    Ticket update(int id, String agent, Set<String> tags) throws TicketNotFoundException;
+    boolean delete(int id);
+    Ticket ticket(int id) throws TicketNotFoundException;
+    List<Ticket> tickets();
 }
