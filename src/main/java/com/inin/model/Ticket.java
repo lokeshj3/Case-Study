@@ -58,16 +58,12 @@ public class Ticket {
 
     public void setAgent(String agent) {
         this.agent = agent;
-        setModified();
+        this.modified = LocalDateTime.now();
     }
 
     public void setTags(Set<String> tags) {
         this.tags.clear();
         this.tags.addAll(tags);
-        setModified();
-    }
-    private void setModified()
-    {
         this.modified = LocalDateTime.now();
     }
 

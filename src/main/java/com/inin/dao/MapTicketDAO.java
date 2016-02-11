@@ -5,10 +5,8 @@ import com.inin.exception.TicketNotFoundException;
 import com.inin.model.Ticket;
 import com.inin.util.TicketUtil;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -32,20 +30,18 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
 
     /**
      * Update Ticket
-     * @param id
-     * @param ticket
+     * @param id , agent, tags
      * @return Ticket
      */
     @Override
-    public Ticket update(int id, Ticket ticket) throws IllegalArgumentException,TicketNotFoundException{
-        if(ticket == null)
-            throw new IllegalArgumentException("Ticket should not be null");
-        if(isExist(id))
+    public Ticket update(int id, String agent, Set<String> tags) throws TicketNotFoundException{
+        if(!isExist(id))
             throw new TicketNotFoundException("No Ticket found with id"+id);
-        Ticket ticket1 = ticketMap.get(id);
-        ticket1.setAgent(ticket.getAgent());
-        ticket1.setTags(ticket.getTags());
-        return ticket1;
+
+        Ticket ticket = ticketMap.get(id);
+        ticket.setAgent(agent);
+        ticket.setTags(tags);
+        return ticket;
     }
 
     /**
@@ -55,7 +51,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
      */
     @Override
     public boolean delete(int id) {
-        if(isExist(id))
+        if(!isExist(id))
             throw new TicketNotFoundException("No Ticket found with id"+id);
         return ticketMap.remove(id) != null ? true : false;
     }
@@ -80,13 +76,22 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
     }
 
 
+    /**
+     * Function to get Ticket By Id
+     * @param id
+     * @return int
+     */
     @Override
     public Ticket findById(int id) {
-        if(isExist(id))
+        if(!isExist(id))
             throw new TicketNotFoundException("No Ticket found with id"+id);
         return ticketMap.get(id);
     }
 
+    /**
+     * Function to return List of Tickets
+     * @return List<Ticket>
+     */
     @Override
     public List<Ticket> findAll() {
         if(ticketMap.size() > 0)
@@ -97,25 +102,69 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
         return new ArrayList<>();
     }
 
+    /**
+     * f
+     * @param agent
+     * @return List<Ticket>
+     */
     @Override
     public List<Ticket> findAllByAgent(String agent) {
-        return ticketMap.values()
+        if (ticketMap.size() > 0)
+            return ticketMap.values()
                 .stream()
                 .filter(ticket -> ticket.getAgent().toLowerCase().equals(agent.toLowerCase()))
                 .collect(Collectors.toList());
 
+        return new ArrayList<>();
+
     }
 
+    /**
+     * Function to fetch all Tickets by Tag
+     * @param tag
+     * @return List<Ticket>
+     */
     @Override
     public List<Ticket> findAllByTag(String tag) {
-
-        return ticketMap.values()
+        if (ticketMap.size() > 0)
+            return ticketMap.values()
                 .stream()
                 .filter(ticket -> ticket.getAgent().toLowerCase().equals(tag.toLowerCase()))
                 .collect(Collectors.toList());
 
+        return new ArrayList<>();
     }
 
+    /**
+     * Function to fetch the oldest Ticket
+     * @return Ticket
+     */
+    @Override
+    public Ticket findOldestRecord() {
+        if (ticketMap.isEmpty())
+            throw new TicketNotFoundException("No Ticket found.");
 
+        return ticketMap.values()
+                .stream()
+                .sorted((Ticket t1, Ticket t2) -> t1.getCreated().compareTo(t2.getCreated()))
+                .findFirst()
+                .get();
+    }
+
+    /**
+     * Function to fetch Tickets Older than the Date entered
+     * @param date
+     * @return List<Ticket>
+     */
+    @Override
+    public List<Ticket> findTicketsFromDate(LocalDateTime date){
+        if (ticketMap.isEmpty())
+            throw new TicketNotFoundException("No Ticket found.");
+
+        return ticketMap.values()
+                .stream()
+                .filter(ticket -> date.compareTo(ticket.getCreated()) >=0 )
+                .collect(Collectors.toList());
+    }
 
 }

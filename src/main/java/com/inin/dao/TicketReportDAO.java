@@ -3,6 +3,7 @@ package com.inin.dao;
 import com.inin.constant.TicketAttribute;
 import com.inin.model.Ticket;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -14,5 +15,7 @@ public interface TicketReportDAO {
     List<Ticket> findAll();
     List<Ticket> findAllByAgent(String agent);
     List<Ticket> findAllByTag(String tag);
+    Ticket findOldestRecord();
+    List<Ticket> findTicketsFromDate(LocalDateTime date);
     int count();
 }

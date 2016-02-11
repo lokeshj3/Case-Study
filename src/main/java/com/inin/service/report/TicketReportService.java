@@ -17,9 +17,11 @@ public interface TicketReportService {
 
     Map<String, Integer> ticketsCountByAgent();
 
+    Map<String, Integer> ticketsCountByTag();
+
     int totalTicketCount();
 
-    List<Ticket> oldestTicket();
+    Ticket oldestTicket();
 
     List<Ticket> ticketOlderByDate(LocalDateTime date);
 }
