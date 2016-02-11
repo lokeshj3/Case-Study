@@ -37,6 +37,10 @@ public class TicketFactory {
         return new Ticket(ticket);
     }
 
+    /**
+     * Create and return TicketServiceInstance
+     * @return
+     */
     public static TicketService newTicketServiceInstance(){  return new TicketServiceImpl(); }
 
     public static TicketReportService newTicketReportServiceInstance(){ return new TicketReportServiceImpl();}

@@ -7,6 +7,8 @@ import com.inin.service.serialize.TicketSerializeService;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Hello world!
@@ -21,12 +23,22 @@ public class App
 //        //Serialization test
 //        TicketSerializeService ticketSerializeService = TicketFactory.newTicketSerializeServiceInstance();
 //
-//        Ticket ticket = TicketFactory.newTicketInstance("test","agent1",new HashSet<>(Arrays.asList("wewew","wewew")));
-//        ticketSerializeService.serializeTicket(ticket);
-//        System.out.println(ticketSerializeService.deserializeTicket());
+//        Ticket ticket1 = TicketFactory.newTicketInstance("test","agent1",new HashSet<>(Arrays.asList("wewew1","wewew2")));
+//        ticketSerializeService.serializeTicket(ticket1);
+////        System.out.println(ticketSerializeService.deserializeTicket());
 //        List<Ticket> ticketList = ticketSerializeService.deserializeTickets();
-//        ticketSerializeService.serializeTickets(ticketList);
+//        System.out.println(ticketList.size());
+//        List<Set<String>> collect = ticketList.stream()
+//                .map(ticket -> ticket.getTags())
+//                .collect(Collectors.toList());
+//        System.out.println(
+//                ticketList.stream()
+//                .map(ticket -> ticket.getTags())
+//                .collect(Collectors.groupingBy(o -> o.toString()))
 //
+//        );
+//        ticketSerializeService.serializeTickets(ticketList);
+
 //        System.out.println(ticketSerializeService.deserializeTickets());
 
 
