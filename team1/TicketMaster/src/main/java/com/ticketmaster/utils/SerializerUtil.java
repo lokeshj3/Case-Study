@@ -25,13 +25,6 @@ import java.util.Properties;
 
 public class SerializerUtil {
 
-    static ObjectOutputStream fOut;
-    static ObjectInputStream fIn;
-    static final String base = "files";
-    static File file;
-    static String fileName = SerializerUtil.getSerializedFileName();
-    String propertyFile = "conf.properties";
-
     public SerializerUtil(){
 
     }
@@ -41,7 +34,7 @@ public class SerializerUtil {
     }
 
 
-    private static void checkFiles(String filename) throws IOException {
+    private void checkFiles(String filename) throws IOException {
         File directory = new File (base);
         if (!directory.exists() && !directory.isDirectory()){
             directory.mkdirs();
@@ -52,7 +45,7 @@ public class SerializerUtil {
         }
     }
 
-    private static void connectWriter()
+    private void connectWriter()
             throws IOException{
 
         if (file.length() <= 0){
@@ -66,22 +59,22 @@ public class SerializerUtil {
         }
     }
 
-    private static void disconnectWriter()
+    private void disconnectWriter()
             throws IOException{
         fOut.close();
     }
 
-    private static void connectReader()
+    private void connectReader()
             throws IOException{
         fIn = new ObjectInputStream(new FileInputStream(file));
     }
 
-    private static void disconnectReader()
+    private void disconnectReader()
             throws IOException{
         fIn.close();
     }
 
-    public static void emptyObjectFile()
+    public void emptyObjectFile()
             throws IOException{
         new ObjectOutputStream(new FileOutputStream(file)).close();
         new ObjectOutputStream(new FileOutputStream(file)).close();
@@ -92,7 +85,7 @@ public class SerializerUtil {
      * @param objects
      * @throws IOException
      */
-    public static void writeToFile(Map<?, ?> objects) throws IOException{
+    public void writeToFile(Map<?, ?> objects) throws IOException{
 
         //check and setup file
         if (file == null) {
@@ -122,7 +115,7 @@ public class SerializerUtil {
         disconnectWriter();
     }
 
-    public static Map<?,?> readFromFile()
+    public Map<?,?> readFromFile()
             throws IOException, ClassNotFoundException{
 
         checkFiles(fileName); // EB: Good practice to use 'this' keyword.
@@ -194,4 +187,13 @@ public class SerializerUtil {
     public static String getSerializedFileName(){
         return "tickets.ser";
     }
+
+
+    //properties
+    final String base = "files";
+    String propertyFile = "conf.properties";
+    String fileName = SerializerUtil.getSerializedFileName();
+    File file;
+    ObjectOutputStream fOut;
+    ObjectInputStream fIn;
 }

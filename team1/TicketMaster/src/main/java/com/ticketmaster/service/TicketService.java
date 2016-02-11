@@ -19,9 +19,9 @@ import java.util.stream.Collectors;
  */
 public class TicketService {
 
-	public TicketService() {
-
-	}
+//	public TicketService() {
+//
+//	}
 
 	// create ticket
 	public Ticket createTicket(String subject, String agent, Set tags)
@@ -145,9 +145,29 @@ public class TicketService {
 				.collect(Collectors.toList());
 	}
 
-	//properties
-	TicketRepository repository;
-	Ticket ticket;
-	Class classz = TicketService.class;
+    public TicketService(){
+        repository = TicketRepository.init();
+    }
+
+    public void setTicketList(Map<Integer, Ticket> values){
+        TicketRepository.init().updateList(values);
+    }
+
+    public void initTags(){
+        repository.initTagList();
+    }
+    public void initAgents(){
+        repository.initAgentList();
+    }
+
+    public void cleanTestData()
+            throws IOException, NotFoundException{
+        repository.delete(--Ticket.masterId);
+    }
+
+    //properties
+    TicketRepository repository;
+    Ticket ticket ;
+    Class classz = TicketService.class;
 
 }
