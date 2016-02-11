@@ -1,5 +1,9 @@
 package com.helpdesk.ticket;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
@@ -8,7 +12,7 @@ import java.util.Set;
 /**
  * Created by root on 8/2/16.
  */
-public class Ticket {
+public class Ticket implements Serializable{
 
     private int id;
     private String subject;
@@ -88,5 +92,23 @@ public class Ticket {
             return new Ticket(this);
         }
 
+    }
+
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.writeInt(this.id);
+        out.writeUTF(this.subject);
+        out.writeUTF(this.agentName);
+        out.writeObject(this.tags);
+        out.writeObject(this.created);
+        out.writeObject(this.modified);
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException{
+        this.id         = in.readInt();
+        this.subject    = in.readUTF();
+        this.agentName  = in.readUTF();
+        this.tags       = (HashSet) in.readObject();
+        this.created    = (LocalDateTime) in.readObject();
+        this.modified   = (LocalDateTime) in.readObject();
     }
 }

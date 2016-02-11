@@ -1,7 +1,9 @@
 package com.helpdesk.ticket;
 
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by root on 9/2/16.
@@ -39,20 +41,31 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
     }
 
     public int getTotalTicketInSystem() {
-        //TODO:logic
+        return ticketInMemoryStorage.getTicketData().size();
     }
 
-
     public Ticket findOldestTicketInSystem() {
-        //TODO:logic
+        return ticketInMemoryStorage.getTicketData().values().stream().max( (ticket1, ticket2) -> ticket2.getCreated().compareTo(ticket1.getCreated())).get();
     }
 
     public Map<String, Integer> findAllTagsWithTicketCount() {
-        //TODO:logic
+        Map<String, Integer> hashMap = new HashMap<>();
+        ticketInMemoryStorage.getTicketData().values().forEach( ticket -> {
+                for (String tags : ticket.getTags()){
+                    if(hashMap.containsKey(tags)){
+                        hashMap.put(tags, hashMap.get(tags) +1);
+                    }else {
+                        hashMap.put(tags, 1);
+                    }
+                }
+
+             }
+        );
+        return hashMap;
     }
 
-
     public List<Ticket> findAllOlderThanNDays(int noofdays) {
-        //TODO:logic
+        LocalDateTime olderDays = LocalDateTime.now().minus(noofdays, ChronoUnit.DAYS);
+        return ticketInMemoryStorage.getTicketData().values().stream().filter(ticket -> ticket.getCreated().isBefore(olderDays)).collect(Collectors.toList());
     }
 }
