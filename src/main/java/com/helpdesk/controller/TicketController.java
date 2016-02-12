@@ -54,11 +54,18 @@ public class TicketController {
         else
              return false;
     }
-
-    public Ticket getTicket(int id) throws InvalidParameterException{
-        return ticketService.ticketDetails(id);
+*/
+    public Ticket getDetails(int id) throws TicketExceptions{
+        TicketLogger.writeLog(Level.INFO, "getDetails start");
+        if(id == (int) id || id > 0){
+            return ticketService.ticketDetails(id);
+        }
+        else {
+            throw new InvalidParamsException("Enter proper Ticket id!");
+        }
     }
 
+    /*
     public  List<Ticket> getTicketsByAgent(String agentName){
         return ticketReportService.ticketsByAgentName(agentName);
     }

@@ -6,6 +6,7 @@ import com.helpdesk.exception.TicketExceptions;
 import com.helpdesk.logger.TicketLogger;
 import com.helpdesk.model.Ticket;
 
+import java.security.InvalidParameterException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -84,19 +85,22 @@ public class UserDataController extends  TicketController{
             System.out.println("Ticket id " + id + " is deleted successfully.");
         }
         else  System.out.println("Entered ticket id " + id + " is not present in the system." );
-    }
+    } */
 
     public void getTicket(){
-        System.out.println("Enter ticket Id for showing details : ");
-        int id = Util.readInteger();
+        TicketLogger.writeLog(Level.INFO, "getTicket start");
+        int id = Util.readInteger("Enter ticket Id for showing details : ");
         try {
-            Ticket ticket = this.getTicket(id);;
-            System.out.println("Details of ticket id : " + id + "\n\n" + ticket.toString());
+            Ticket ticket = this.getDetails(id);;
+            System.out.println("Details of ticket id : " + id + "\n" + ticket.toString());
         }catch (InvalidParameterException e){
-            System.out.println("Invalid ticket Id . Entered ticket id " + id + " is not present in the system.");
+            System.out.println(e.getMessage());
+        } catch (TicketExceptions ticketExceptions) {
+            System.out.println(ticketExceptions.getMessage());
         }
     }
 
+    /*
     public void getTicketsByAgent() {
         System.out.println("Please enter Agent Name : ");
         String agentName = Util.readString();

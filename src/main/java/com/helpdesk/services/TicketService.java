@@ -1,5 +1,6 @@
 package com.helpdesk.services;
 
+import com.helpdesk.exception.InvalidParamsException;
 import com.helpdesk.exception.TicketExceptions;
 import com.helpdesk.model.Ticket;
 import com.helpdesk.repository.TicketRepository;
@@ -84,14 +85,16 @@ public class TicketService {
        // code to delete a ticket
         return true;
     }
-
-    public Ticket ticketDetails(int id) {
-       // code to return ticket details by id
-        // return ticket;
-        return null;
-        //handle throw exception here
-    }
 */
+
+    public Ticket ticketDetails(int id) throws TicketExceptions{
+        writeLog(Level.INFO, "ticket details service start");
+        if(id > max_id)
+            throw new InvalidParamsException("Invalid ticket id!");
+
+        return objRepository.getTicket(id);
+    }
+
     public List<Ticket> getAlltickets(){
         writeLog(Level.INFO, "get all tickets service start");
         return objRepository.getAllTickets();

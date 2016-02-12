@@ -32,11 +32,11 @@ public class AppRunner {
                 case 3:
                     //Delete By ID
                     objUserDataController.delete();
-                    break;
+                    break; */
                 case 4:
                     //Get Ticket By ID
                     objUserDataController.getTicket();
-                    break;  */
+                    break;
                 case 5:
                     //Get All tickets sorted BY UPDATED TIME
                     objUserDataController.getAllTickets();

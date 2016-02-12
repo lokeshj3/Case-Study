@@ -28,30 +28,19 @@ public class TicketSerialization {
         ObjectOutputStream oos = null;
         try{
             fos = new FileOutputStream(file, true);
-            oos = new ObjectOutputStream(fos);
 
             for (Ticket ticket : ticketMap.values()){
+                oos = new ObjectOutputStream(fos);
                 oos.writeObject(ticket);
             }
-
+            oos.close();
+            fos.close();
             return true;
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        finally {
-            try {
-                if(oos != null)
-                    oos.close();
-
-                if(fos != null)
-                    fos.close();
-
-            }catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
         return false;
@@ -62,11 +51,11 @@ public class TicketSerialization {
      * Save single ticket in file
      * */
     public boolean saveSingelTicket(Ticket ticket){
-        FileOutputStream fos = null;
-        ObjectOutputStream oos = null;
-        try{
-            fos = new FileOutputStream(file, true);
-            oos = new ObjectOutputStream(fos);
+        /*FileOutputStream fos = null;
+        ObjectOutputStream oos = null;*/
+        try(FileOutputStream fos = new FileOutputStream(file, true);ObjectOutputStream oos =new ObjectOutputStream(fos);){
+            /*fos = new FileOutputStream(file, true);
+            oos = new ObjectOutputStream(fos);*/
             oos.writeObject(ticket);
             return true;
 
@@ -74,18 +63,6 @@ public class TicketSerialization {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        finally {
-            try {
-                if(oos != null)
-                    oos.close();
-
-                if(fos != null)
-                    fos.close();
-
-            }catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
         return false;
@@ -105,33 +82,20 @@ public class TicketSerialization {
         ObjectInputStream ois = null;
         try{
             fis = new FileInputStream(file);
-            ois = new ObjectInputStream(fis);
-
             while(fis.available() > 0){
-                try {
+                    ois = new ObjectInputStream(fis);
                     Ticket ticket = (Ticket) ois.readObject();
                     concurrentTicketMap.put(ticket.getId(), ticket);
-
-                }catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
             }
+            ois.close();
+            fis.close();
             return concurrentTicketMap;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        finally {
-            try {
-                if(ois != null)
-                    ois.close();
-                if(fis != null)
-                    fis.close();
-
-            }catch (IOException e) {
-                e.printStackTrace();
-            }
+        } catch (ClassNotFoundException e){
+            e.printStackTrace();
         }
 
         return new ConcurrentHashMap<>();
