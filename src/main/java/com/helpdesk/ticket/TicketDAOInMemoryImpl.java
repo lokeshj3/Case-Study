@@ -1,7 +1,6 @@
 package com.helpdesk.ticket;
 
 import com.helpdesk.exception.DuplicateTicketIdException;
-import com.helpdesk.exception.InvalidParamsException;
 import com.helpdesk.exception.TicketNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,18 +15,18 @@ import java.util.stream.Collectors;
  * Created by root on 9/2/16.
  */
 public class TicketDAOInMemoryImpl implements TicketDAO {
-    static Logger logger = LoggerFactory.getLogger(TicketService.class);
+    static Logger logger = LoggerFactory.getLogger(TicketDAOInMemoryImpl.class);
 
     TicketInMemoryStorage ticketInMemoryStorage = TicketInMemoryStorage.getInstance();
 
     public Ticket create(Ticket ticket) throws DuplicateTicketIdException {
         int ticketId = ticket.getId();
-        if (isExist(ticketId)) {
-            logger.error("Duplicate Ticket Id");
-            throw new DuplicateTicketIdException("Duplicate Ticket Id");
+        if (!isExist(ticketId)) {
+            ticketInMemoryStorage.writeData(ticketId, ticket);
+            return new Ticket(ticket);
         }
-        ticketInMemoryStorage.writeData(ticketId, ticket);
-        return new Ticket(ticket);
+        logger.error("Duplicate Ticket Id");
+        throw new DuplicateTicketIdException("Duplicate Ticket Id");
     }
 
 
@@ -47,7 +46,7 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
 
     public boolean delete(int ticketId) throws TicketNotFoundException {
         if (isExist(ticketId)) {
-            ticketInMemoryStorage.getTicketData().remove(ticketId);
+            ticketInMemoryStorage.deleteData(ticketId);
             return true;
         }
         logger.error("Ticket not found");
@@ -84,7 +83,7 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
         if (!arrList.isEmpty()) {
             return Collections.unmodifiableList(arrList);
         }
-        logger.error("", new InvalidParamsException("Ticket Not Found"));
+        logger.error("");
         throw new TicketNotFoundException("Ticket Not Found");
 
     }

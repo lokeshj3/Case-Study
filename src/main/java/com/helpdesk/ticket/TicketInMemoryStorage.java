@@ -20,7 +20,13 @@ public class TicketInMemoryStorage {
         ticketData.put(id, new Ticket(ticket));
     }
 
+    public void deleteData(int id) {
+        ticketData.remove(id);
+    }
+
     public Map<Integer, Ticket> getTicketData() {
         return Collections.unmodifiableMap(ticketData);
     }
+
+
 }
