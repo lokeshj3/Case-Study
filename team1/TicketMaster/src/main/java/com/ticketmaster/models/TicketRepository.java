@@ -4,12 +4,9 @@ import com.ticketmaster.exceptions.NotFoundException;
 import com.ticketmaster.utils.SerializerUtil;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Stream;
 
 /**
  * TicketRepository class
@@ -71,11 +68,8 @@ public class TicketRepository {
      * @param id Integer object
      * @return Ticket object
      */
-    public Ticket delete(Integer id) throws IOException, NotFoundException{
+    public boolean delete(Integer id) throws IOException, NotFoundException{
 
-        if (!ticketList.containsKey(id)){
-            throw new NotFoundException("ticket not found");
-        }
         Ticket ticket = ticketList.remove(id);
 
         if (ticket != null){
@@ -83,15 +77,14 @@ public class TicketRepository {
             util.emptyObjectFile();
             //write complete data again to file
             util.writeToFile(getList());
+            return true;
         }
-        return ticket;
-
+        return false;
     }
 
 
     public boolean saveTicket(Ticket ticket)
             throws IOException, ClassNotFoundException, NotFoundException {
-
 
         SerializerUtil util = new SerializerUtil();
 
@@ -124,9 +117,7 @@ public class TicketRepository {
 
     public void updateList(Map<Integer, Ticket> object) {
         ticketList.putAll(object);
-
     }
-
 
     public void addTags(Set<String> tag){
         tagList.addAll(tag);
@@ -147,7 +138,9 @@ public class TicketRepository {
 
     }
 
-
+    public Stream<Ticket> getStreamValues(){
+        return getList().values().stream();
+    }
 
     //properties
     private static TicketRepository _instance; //holds the instance of TicketRepository class

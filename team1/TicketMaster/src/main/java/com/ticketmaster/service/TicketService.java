@@ -8,10 +8,11 @@ import com.ticketmaster.models.TicketRepository;
 import com.ticketmaster.utils.CustomLogger;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -29,10 +30,10 @@ public class TicketService {
 
 		CustomLogger.init(classz).info("start ticket creation with subject: " + subject + " agent: " + agent);
 
-		if (subject == null) {
+		if (subject == null || subject.isEmpty()) {
 			throw new IncompleteDataException("subject is required");
 		}
-		if (agent == null) {
+		if (agent == null || agent.isEmpty()) {
 			throw new IncompleteDataException("agent is required");
 		}
 
@@ -75,7 +76,7 @@ public class TicketService {
 	public boolean deleteTicket(int id) throws NotFoundException, IOException, ClassNotFoundException {
 		ticket = this.getTicket(id);
 		if (ticket != null) {
-			repository.delete(id);
+			if(repository.delete(id));
 			return true;
 		}
 		else {
@@ -86,11 +87,13 @@ public class TicketService {
 	// get ticket list
 	public List<Ticket> getTicketList() throws IOException, ClassNotFoundException {
 		repository.updatePool();
-		List<Ticket> list = repository.getList().values().stream().sorted((obj1, obj2) -> (obj1.getModified() < obj2.getModified()) ? 1 : -1).collect(Collectors.toList());
+		List<Ticket> list = repository.getStreamValues()
+				.sorted((obj1, obj2) -> (obj1.getModified() < obj2.getModified()) ? 1 : -1)
+				.collect(Collectors.toList());
 		if (!list.isEmpty()) {
 			return list;
 		}
-		else return new LinkedList<>();
+		return new LinkedList<>();
 	}
 
 	// search ticket count by agent / tags
@@ -99,46 +102,12 @@ public class TicketService {
 		repository.updatePool();
 		if (value.length == 1) {
 			String val = value[0];
-			result = repository.getList().values()
-					.stream()
+			result = repository.getStreamValues()
 					.filter(obj -> (key.equals("agent")) ? obj.getAgent().toLowerCase().equals(val.toLowerCase()) : obj.getTags().contains(val.toLowerCase()))
 					.sorted((obj1, obj2) -> (obj1.getModified() < obj2.getModified()) ? 1 : -1)
 					.collect(Collectors.toList());
 		}
-
 		return result;
-	}
-
-	/**
-	 * 	REPORTS
-	 */
-
-	//get count of total tickets.
-	public int getTicketCount() {
-		return repository.getList().size();
-	}
-
-	//get oldest ticket from the system
-	public Ticket getOldestTicket() {
-		return repository.getList().values().stream()
-				.min((Ticket obj1, Ticket obj2) -> (obj1.getModified() < (obj2.getModified())) ? 1 : -1).get();
-	}
-
-	//tag wise ticket count
-	public Map<String, Integer> tagTicketCount() {
-		List<Set> tagList = repository.getList().values().stream().map(Ticket::getTags).collect(Collectors.toList());
-		HashMap tagCountMap = new HashMap();
-		int i = 1;
-		for (Set<String> s : tagList) {
-			for (String st : s) {
-				if (tagCountMap.containsKey(st)) {
-					tagCountMap.put(st, i++);
-				}
-				else
-					tagCountMap.put(st, 1);
-			}
-		}
-		return tagCountMap;
 	}
 
 	//tag wise ticket count
@@ -160,13 +129,8 @@ public class TicketService {
 		return agentCountMap;
 	}
 
-	public List<Ticket> ticketOlderThanXdays(int days)
-	{
-		long time = LocalDateTime.now(ZoneId.of("UTC")).minusDays(days).toInstant(ZoneOffset.UTC).toEpochMilli();
-		return repository.getList().values().stream().filter(ticket -> (ticket.getModified() <= time))
-				.sorted((Ticket obj1, Ticket obj2) -> (obj1.getModified() < (obj2.getModified())) ? 1 : -1)
-				.collect(Collectors.toList());
-	}
+
+
 
     public TicketService(){
         repository = TicketRepository.init();
@@ -179,6 +143,7 @@ public class TicketService {
     public void initTags(){
         repository.initTagList();
     }
+
     public void initAgents(){
         repository.initAgentList();
     }
