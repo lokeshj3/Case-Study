@@ -7,10 +7,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -72,7 +70,7 @@ public class TicketRepository {
      * @param id Integer object
      * @return Ticket object
      */
-    public Ticket deleteTicket(Integer id) throws IOException, NotFoundException{
+    public Ticket delete(Integer id) throws IOException, NotFoundException{
 
         if (!ticketList.containsKey(id)){
             throw new NotFoundException("ticket not found");
@@ -113,7 +111,7 @@ public class TicketRepository {
 
     }
 
-    private void updatePool()
+    public void updatePool()
             throws ClassNotFoundException, IOException{
         SerializerUtil util = new SerializerUtil();
         Map<Integer,Ticket> temp = (Map<Integer,Ticket>) util.readFromFile();

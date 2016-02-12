@@ -89,7 +89,7 @@ public class SerializerUtil {
 
         //check and setup file
         if (file == null) {
-            this.checkFiles(fileName);
+            checkFiles(fileName);
         }
 
         //connect write to file
@@ -118,7 +118,7 @@ public class SerializerUtil {
     public Map<?,?> readFromFile()
             throws IOException, ClassNotFoundException{
 
-        this.checkFiles(fileName); // EB: Good practice to use 'this' keyword.
+        checkFiles(fileName); // EB: Good practice to use 'this' keyword.
         boolean flag = true;
 
 

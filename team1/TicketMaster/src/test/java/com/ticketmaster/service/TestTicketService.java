@@ -5,8 +5,6 @@ import com.ticketmaster.exceptions.NoUpdateException;
 import com.ticketmaster.exceptions.NotFoundException;
 import com.ticketmaster.models.Ticket;
 import com.ticketmaster.utils.AppUtil;
-import com.ticketmaster.utils.CustomLogger;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,11 +14,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static junit.framework.Assert.fail;
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertFalse;
-import static junit.framework.TestCase.assertNull;
-import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.*;
 
 /**
  * TestTicketService class
@@ -90,10 +84,8 @@ public class TestTicketService {
 
         try{
             ticket = service.createTicket(subject, agent, tags);
-        }catch (IOException | IncompleteDataException | ClassNotFoundException e){
+        }catch (IOException | IncompleteDataException | ClassNotFoundException | NotFoundException e){
             fail("Exception occurred :\n"+e.getMessage());
-        }catch (NotFoundException e){
-
         }
 
         assertEquals(subject,ticket.getSubject());

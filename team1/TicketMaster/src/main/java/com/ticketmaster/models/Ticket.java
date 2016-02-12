@@ -27,7 +27,6 @@ public class Ticket implements Serializable{
         this.subject=   object.getSubject();
         this.agent  =   object.getAgent();
         this.setTags(object.getTags());
-
     }
 
     //setter methods
@@ -42,8 +41,6 @@ public class Ticket implements Serializable{
             this.tags = new HashSet<>();
         this.tags.addAll(tags);
     }
-
-
 
     //getter methods
     public Integer getId(){
