@@ -101,6 +101,8 @@ public class Ticket implements Serializable{
     }
 
     public String toString(){
-        return "{Id: " + this.id + ",Subject: " + this.subject + ",Agent: " + this.agent + ",Tags: " + this.tags.toString() + ",Created: " + this.created + ",Updated: " + this.updated + "}";
+        return "{Id: " + this.id + " | Subject: " + this.subject + " | Agent: " + this.agent +
+                " | Tags: " + this.tags.toString() + " | Created: " + this.created +
+                " | Updated: " + this.updated + "}";
     }
 }

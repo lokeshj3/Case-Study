@@ -23,7 +23,12 @@ public class TicketSerialization {
      * @param ticketMap
      * */
     public boolean saveTicketsInFile(Map<Integer, Ticket> ticketMap, boolean append){
-        try(FileOutputStream fos = new FileOutputStream(file, append); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+        //try(FileOutputStream fos = new FileOutputStream(file, append); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+        FileOutputStream fos = null;
+        ObjectOutputStream oos = null;
+        try{
+            fos = new FileOutputStream(file, true);
+            oos = new ObjectOutputStream(fos);
 
             for (Ticket ticket : ticketMap.values()){
                 oos.writeObject(ticket);
@@ -36,6 +41,18 @@ public class TicketSerialization {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                if(oos != null)
+                    oos.close();
+
+                if(fos != null)
+                    fos.close();
+
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         return false;
     }
@@ -45,7 +62,11 @@ public class TicketSerialization {
      * Save single ticket in file
      * */
     public boolean saveSingelTicket(Ticket ticket){
-        try(FileOutputStream fos = new FileOutputStream(file, true); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+        FileOutputStream fos = null;
+        ObjectOutputStream oos = null;
+        try{
+            fos = new FileOutputStream(file, true);
+            oos = new ObjectOutputStream(fos);
             oos.writeObject(ticket);
             return true;
 
@@ -53,6 +74,18 @@ public class TicketSerialization {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        finally {
+            try {
+                if(oos != null)
+                    oos.close();
+
+                if(fos != null)
+                    fos.close();
+
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return false;
@@ -68,9 +101,11 @@ public class TicketSerialization {
         if(file.length() == 0){
             return concurrentTicketMap;
         }
-
-        try(FileInputStream fis = new FileInputStream(file);
-            ObjectInputStream ois = new ObjectInputStream(fis)) {
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+        try{
+            fis = new FileInputStream(file);
+            ois = new ObjectInputStream(fis);
 
             while(fis.available() > 0){
                 try {
@@ -86,6 +121,17 @@ public class TicketSerialization {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        finally {
+            try {
+                if(ois != null)
+                    ois.close();
+                if(fis != null)
+                    fis.close();
+
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return new ConcurrentHashMap<>();
