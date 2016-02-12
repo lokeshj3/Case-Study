@@ -26,11 +26,13 @@ public class UserDataController extends  TicketController{
 
         try{
             Ticket tickets = this.create(subject,agentName,tagSet);
-            System.out.println("Ticket Has been created successfully." + tickets.toString());
+            this.displaySingleTicket(tickets);
         } catch (InvalidParamsException e) {
+            TicketLogger.writeLog(Level.WARNING, "error occurred: "+e.getMessage());
             System.out.println(e.getMessage());
-        } catch (TicketExceptions ticketFailure) {
-            System.out.println(ticketFailure.getMessage());
+        } catch (TicketExceptions e) {
+            TicketLogger.writeLog(Level.WARNING, "error occurred: "+e.getMessage());
+            System.out.println(e.getMessage());
         }
    }
 
@@ -87,6 +89,9 @@ public class UserDataController extends  TicketController{
         }
     }
 
+    /**
+     * get ticket by id
+     *  */
     public void getTicket(){
         TicketLogger.writeLog(Level.INFO, "getTicket start");
         int id = Util.readInteger("Enter ticket Id for showing details : ");
@@ -94,9 +99,11 @@ public class UserDataController extends  TicketController{
             Ticket ticket = this.getDetails(id);;
             displaySingleTicket(ticket);
         }catch (InvalidParameterException e){
+            TicketLogger.writeLog(Level.WARNING, "error occurred: "+e.getMessage());
             System.out.println(e.getMessage());
-        } catch (TicketExceptions ticketExceptions) {
-            System.out.println(ticketExceptions.getMessage());
+        } catch (TicketExceptions e) {
+            TicketLogger.writeLog(Level.WARNING, "error occurred: "+e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -114,7 +121,11 @@ public class UserDataController extends  TicketController{
          else    System.out.println("Invalid agent Name!!!");
     }
 
+    /**
+     * get ticket by tags
+     *  */
     public void getTicketsByTag() {
+        TicketLogger.writeLog(Level.INFO, "getTickets by tag start");
         String tags = Util.readString("Enter Tags (separated by comma(,) : ");
         HashSet<String> tagSet = new HashSet<>(Arrays.asList(tags.toLowerCase().split(",")));
         if(!tagSet.isEmpty()){
@@ -125,10 +136,10 @@ public class UserDataController extends  TicketController{
                  this.displayTickets(ticketList);
              }
              else System.out.println("No tickets match with criteria!");
-
          }
-         catch (TicketExceptions te){
-             System.out.println(te.getMessage());
+         catch (TicketExceptions e){
+             TicketLogger.writeLog(Level.WARNING, "error occurred: "+e.getMessage());
+             System.out.println(e.getMessage());
          }
      }
      else
@@ -136,6 +147,9 @@ public class UserDataController extends  TicketController{
     }
 
 
+    /**
+     * get all tickets
+     *  */
     public void getAllTickets() {
         TicketLogger.writeLog(Level.INFO, "getAllTickets start");
         List<Ticket> ticketList = this.getAll();
@@ -143,6 +157,9 @@ public class UserDataController extends  TicketController{
     }
 
 
+    /**
+     * get ticket count by agent name
+     *  */
     public void allAgentsTicketCount(){
         TicketLogger.writeLog(Level.INFO, "allAgentsTicketCount start");
 
@@ -153,20 +170,32 @@ public class UserDataController extends  TicketController{
         else     System.out.println("No Records Found!!!");
     }
 
+    /**
+     * total ticket counts
+     *  */
     public void TotalTicketCount() {
         System.out.println("Total number of tickets present in the system : " + this.getTotalTicketCount());
     }
 
+    /**
+     * get oldest ticket
+     * */
     public void oldestTicket(){
+        TicketLogger.writeLog(Level.INFO, "oldest ticket start");
         try {
             Ticket ticket = this.getOldestTicket();
-            System.out.println("Oldest ticket in the system is : \n" + ticket.toString());
+            this.displaySingleTicket(ticket);
         }catch (TicketExceptions e){
+            TicketLogger.writeLog(Level.WARNING, "error occurred: "+e.getMessage());
             System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * get older ticket than no of days
+     * */
     public void getOlderTicketsThanDays() {
+        TicketLogger.writeLog(Level.INFO, "older than days ticket start");
         System.out.println("Enter day to get tickets older than a entered number of days");
         int days = Util.readInteger("Enter no of days before tickets required ");
 
@@ -174,6 +203,7 @@ public class UserDataController extends  TicketController{
         try {
             ticketList = this.olderTicketsThanDays(days);
         } catch (InvalidParamsException e) {
+            TicketLogger.writeLog(Level.WARNING, "error occurred: "+e.getMessage());
             System.out.println(e.getMessage());
         }
 
@@ -182,27 +212,19 @@ public class UserDataController extends  TicketController{
         else System.out.println("No tickets found");
     }
 
-    /*public void displayTickets(List ticketList){
-        TicketLogger.writeLog(Level.INFO, "Display ticket list start");
-        if(ticketList.size() > 0){
-            ticketList
-                    .stream()
-                    .sorted((Ticket t1, Ticket t2) -> t2.getUpdated()
-                    .compareTo(t1.getUpdated()));
-
-
-
-            *//*ticketList.stream()
-                    .forEach(System.out::println);*//*
-        }
-        else {
-            TicketLogger.writeLog(Level.INFO, "No tickets in system");
-            System.out.println("No tickets found!");
-        }
-    }*/
-
-
+    /**
+     * get display single ticket
+     * */
     public void displaySingleTicket(Ticket ticket){
+        TicketLogger.writeLog(Level.INFO, "display single ticket start");
         System.out.println(ticket.toString());
+    }
+
+    /**
+     * get ticket count by tag
+     * */
+    public void ticketsReportForTag(){
+        TicketLogger.writeLog(Level.INFO, "ticket count by tag starts");
+        this.getTicketCountByTag();
     }
 }

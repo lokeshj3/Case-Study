@@ -55,4 +55,23 @@ public class TicketReportService {
         return objRepository.getAllTickets().stream().filter(ticket -> ticket.getCreated().compareTo(localDateTime) < 0).sorted(Comparator.comparing(Ticket::getCreated)).collect(Collectors.toList());
     }
 
+
+    public Map<String, List<Ticket>> getTicketCountByTag(){
+        Map<String, List<Ticket>> tagCountMap = new HashMap<>();
+        objRepository.getAllTickets().stream()
+                .forEach(ticket -> {
+                    ticket.getTags().forEach(tag ->{
+                        if(tagCountMap.containsKey(tag))
+                            tagCountMap.get(tag).add(ticket);
+                        else{
+                            List<Ticket> list = new ArrayList<>();
+                            list.add(ticket);
+                            tagCountMap.put(tag, list);
+                        }
+                    });
+                });
+
+        return tagCountMap;
+    }
+
 }

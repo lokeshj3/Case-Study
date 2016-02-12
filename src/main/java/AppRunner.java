@@ -65,9 +65,9 @@ public class AppRunner {
                     //Ticket Older than entered Days
                     objUserDataController.getOlderTicketsThanDays();
                     break;
-                /*case 12:
+                case 12:
                     //Number of Tickets with entered tag
-                    //objUserDataController.ticketsReportForTag();*/
+                    objUserDataController.ticketsReportForTag();
                 case 13:
                     System.out.println("Good Bye!!");
                     break;

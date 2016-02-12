@@ -76,6 +76,7 @@ public class TicketController {
     }
 
     public List<Ticket> getTicketsByTag(Set<String> tagSet) throws TicketExceptions{
+        TicketLogger.writeLog(Level.INFO, "get ticket by tags starts");
         if(tagSet != null || !tagSet.isEmpty()) {
             return ticketReportService.ticketsByTag(tagSet);
         }
@@ -100,11 +101,13 @@ public class TicketController {
     }
 
     public Ticket getOldestTicket() throws TicketExceptions{
+        TicketLogger.writeLog(Level.INFO, "getOldestTicket count starts");
         Ticket ticket = ticketReportService.oldestTicket();
         return ticket;
     }
 
     public List<Ticket> olderTicketsThanDays(int days) throws InvalidParamsException {
+        TicketLogger.writeLog(Level.INFO, "older tickets than days starts");
         if(days == (int)days && days >= 0){
             return ticketReportService.ticketsOlderByDays(days);
         }
@@ -126,5 +129,12 @@ public class TicketController {
             TicketLogger.writeLog(Level.INFO, "No tickets in system");
             System.out.println("No tickets found!");
         }
+    }
+
+
+    public void getTicketCountByTag(){
+        TicketLogger.writeLog(Level.INFO, "get ticket count by tag starts");
+        ticketReportService.getTicketCountByTag()
+                .forEach((String tagName,List<Ticket> ticketList)-> System.out.println(tagName+"   :   "+ticketList.size()));
     }
 }

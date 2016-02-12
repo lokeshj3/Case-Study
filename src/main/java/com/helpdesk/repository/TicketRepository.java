@@ -32,6 +32,7 @@ public class TicketRepository {
      * add ticket to repository
      * @param ticket */
     public boolean addTicket(Ticket ticket){
+        writeLog(Level.INFO, "add ticket repository start");
         if(ticketSerialization.saveSingelTicket(ticket)){
             ticketMap.put(ticket.getId(), ticket);
             writeLog(Level.INFO, "Ticket save in file");
@@ -76,6 +77,7 @@ public class TicketRepository {
      * return all tickets sorted by updated time.
      * */
     public List<Ticket> getAllTickets(){
+        writeLog(Level.INFO, "get all tickets repository start");
        return ticketMap.values().stream().collect(Collectors.toList());
     }
 
@@ -84,22 +86,34 @@ public class TicketRepository {
      * @param tickets
      * */
     public void addAll(Map<Integer, Ticket> tickets){
+        writeLog(Level.INFO, "add all ticket repository start");
         ticketMap.putAll(tickets);
     }
 
+    /**
+     * get the max id in repository from file
+     * @return maxId*/
     public int getMaxId(){
+        writeLog(Level.INFO, "get max id repository start");
         int maxId = 0;
         if(ticketMap.size() > 0)
             maxId = Collections.max(ticketMap.keySet());
 
+        writeLog(Level.INFO, "enc get max id repository max id :"+maxId);
         return maxId;
     }
 
+    /**
+     * get ticket from repository by id
+     * @return  ticket
+     * */
     public Ticket getTicket(int id) throws TicketExceptions {
+        writeLog(Level.INFO, "get Ticket repository start");
         if(ticketMap.containsKey(id)){
             return ticketMap.get(id);
         }
         else {
+            writeLog(Level.INFO, "ticket not found in repository id: "+id);
             throw new TicketExceptions("Ticket not found");
         }
     }

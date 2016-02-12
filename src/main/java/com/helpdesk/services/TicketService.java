@@ -4,7 +4,6 @@ import com.helpdesk.exception.InvalidParamsException;
 import com.helpdesk.exception.TicketExceptions;
 import com.helpdesk.model.Ticket;
 import com.helpdesk.repository.TicketRepository;
-import com.sun.istack.internal.NotNull;
 
 import java.util.*;
 import java.util.logging.Level;
@@ -36,7 +35,7 @@ public class TicketService {
             return ticket;
         }
         else{
-            writeLog(Level.INFO, "Ticket create failed");
+            writeLog(Level.WARNING, "Ticket create failed");
             throw new TicketExceptions("Somthing went worng! Ticket not created");
         }
     }
