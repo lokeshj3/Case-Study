@@ -9,13 +9,15 @@
 
 package com.helpdesk;
 
+import com.helpdesk.controller.TicketController;
+/*import com.helpdesk.exception.InvalidParamsException;
 import com.helpdesk.model.Ticket;
 import com.helpdesk.services.TicketReportService;
 import com.helpdesk.services.TicketService;
 import org.junit.*;
 
 import java.security.InvalidParameterException;
-import java.time.LocalDateTime;
+import java.time.LocalDateTime;*/
 import java.util.*;
 
 public class TestTicketService {
@@ -30,11 +32,11 @@ public class TestTicketService {
     private static String updateAgent;
     private static String agent;
     private static String tags;
-    private static Set<String> tagSet;
-    private static Set<String> emptyTagSet;
-    private static Set<String> duplicateTagSet;
+    private static HashSet<String> tagSet;
+    private static HashSet<String> emptyTagSet;
+    private static HashSet<String> duplicateTagSet;
     private static String updatetags;
-    private static Set<String> updateTagSet;
+    private static HashSet<String> updateTagSet;
     private static String UpdateChoiceAgent;
     private static String UpdateChoiceTags;
     private static String UpdateChoiceNone;
@@ -43,6 +45,7 @@ public class TestTicketService {
     private static String emptyTag;
     private static int day;
 
+    private TicketController ticketController;
     private static void initialize(){
         ticketId = 100;
         invalidTicketId = 000;
@@ -69,8 +72,8 @@ public class TestTicketService {
         emptyTag = "";
         day = 5;
     }
-
-    private static List<Ticket> createDummyTickets(TicketService ticketService){
+/*
+    private static List<Ticket> createDummyTickets(TicketService ticketService) throws InvalidParamsException, TicketFailure{
         List<Ticket> ticketList = new ArrayList<>();
         ticketList.add(ticketService.createTicket(subject,agent,tagSet);
         ticketList.add(ticketService.createTicket(subject,agent,tagSet);
@@ -89,16 +92,21 @@ public class TestTicketService {
         // create file to add records
     }
 
-    @Test(expected = InvalidParameterException.class)
-    public void testCreateTicketWithNullSubject(){
-        TicketService ticketService = new TicketService();
-        Ticket ticket = ticketService.createTicket(nullSubject,agent,tagSet);
+    @Before
+    public void beforeTest(){
+        ticketController = new TicketController();
     }
 
-    @Test(expected = InvalidParameterException.class)
-    public void testCreateTicketWithEmptySubject(){
+    @Test
+    public void testCreateTicketWithNullSubject() throws InvalidParamsException, TicketFailure{
+        ticketController = new TicketController();
+        Ticket ticket = ticketController.create(nullSubject, agent, tagSet);
+    }
+
+    @Test
+    public void testCreateTicketWithEmptySubject() throws InvalidParamsException, TicketFailure{
         TicketService ticketService = new TicketService();
-        Ticket ticket = ticketService.createTicket(emptySubject,agent,tagSet);
+        Ticket ticket = ticketService.createTicket(emptySubject, agent, tagSet);
     }
 
     @Test(expected = InvalidParameterException.class)
@@ -341,7 +349,7 @@ public class TestTicketService {
         List<Ticket> ticketList = ticketReportService.ticketsOlderByDays(day);
         ticketList.forEach(ticket -> Assert.assertTrue(ticket.getCreated().compareTo(LocalDateTime.now()) <= 0));
         deleteDummyTicket(dummyTicketTicketList,ticketService);
-    }
+    }*/
 
     //
    /* @Before

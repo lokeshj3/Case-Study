@@ -1,5 +1,8 @@
 package com.helpdesk.logger;
 
+import com.helpdesk.components.Util;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.*;
 
@@ -17,6 +20,7 @@ public class TicketLogger {
     static {
         logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
         logger.setUseParentHandlers(false);
+        //File file = Util.createFile("target/generated-sources/logs/","logs.log");
         try {
             fileHandler = new FileHandler("target/generated-sources/logs/logs.log", true);
         } catch (IOException e) {
