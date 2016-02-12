@@ -25,14 +25,14 @@ public class AppRunner {
                     //Create New Ticket
                     objUserDataController.create();
                     break;
-                /*case 2:
+                case 2:
                     //Update Ticket By ID
                     objUserDataController.update();
                     break;
                 case 3:
                     //Delete By ID
                     objUserDataController.delete();
-                    break; */
+                    break;
                 case 4:
                     //Get Ticket By ID
                     objUserDataController.getTicket();

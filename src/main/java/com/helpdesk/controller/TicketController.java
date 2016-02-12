@@ -9,6 +9,7 @@ import com.helpdesk.logger.TicketLogger;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 
 public class TicketController {
@@ -39,22 +40,23 @@ public class TicketController {
     }
 
 
-/*    public Ticket update(int id, String agentName, HashSet<String> tagSet, String action)  throws TicketExceptions{
+    public Ticket update(int id, String agentName, Set<String> tagSet, String action)  throws TicketExceptions{
         TicketLogger.writeLog(Level.INFO, "update controller start");
-        if(agentName != null && !agentName.trim().isEmpty() && tagSet != null && action != null && action.trim().isEmpty()) {
+
+        if(id>0 && ((agentName != null && !agentName.trim().isEmpty()) || (tagSet != null && action != null && !action.trim().isEmpty()))) {
             Ticket ticket = ticketService.update(id, agentName, tagSet, action);
             return ticket;
         }
-        else   throw new TicketExceptions("Please give proper input!");
+        else   throw new TicketExceptions("Invalid Params!!! Base controller");
     }
 
-    public Boolean delete(int id) {
+    public Boolean delete(int id) throws TicketExceptions {
         if(ticketService.delete(id))
             return  true;
         else
              return false;
     }
-*/
+
     public Ticket getDetails(int id) throws TicketExceptions{
         TicketLogger.writeLog(Level.INFO, "getDetails start");
         if(id == (int) id || id > 0){
@@ -70,10 +72,10 @@ public class TicketController {
         return ticketReportService.ticketsByAgentName(agentName);
     }
 
-    public List<Ticket> getTicketsByTag(String tag){
-        return ticketReportService.ticketsByTag(tag);
-    }
-*/
+      public List<Ticket> getTicketsByTag(String tag){
+           return ticketReportService.ticketsByTag(tag);
+       }
+   */
     public List<Ticket> getAll(){
         TicketLogger.writeLog(Level.INFO, "getAll controller start");
         return ticketService.getAlltickets();

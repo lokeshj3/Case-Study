@@ -46,15 +46,29 @@ public class TicketRepository {
     /**
      * update ticket to repository
      * @param id, ticket */
-    public void updateTicket(int id, Ticket ticket){
+    public boolean updateTicket(int id, Ticket ticket){
+        Ticket tempTicket = ticketMap.get(id);
         ticketMap.put(id, ticket);
+        if(ticketSerialization.saveTicketsInFile(ticketMap, false)){
+           return true;
+        }
+        else {
+            ticketMap.put(id, tempTicket);
+            return false;
+        }
+        //ser
     }
 
     /**
      * delete ticket from repository
      * @param id */
-    public void deleteTicket(int id){
-        ticketMap.remove(id);
+    public boolean deleteTicket(int id) {
+        if (ticketMap.containsKey(id)){
+            ticketMap.remove(id);
+            return true;
+        }
+        else
+            return false;
     }
 
     /**

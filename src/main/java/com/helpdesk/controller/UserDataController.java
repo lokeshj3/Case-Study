@@ -10,6 +10,7 @@ import java.security.InvalidParameterException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 
 public class UserDataController extends  TicketController{
@@ -36,56 +37,53 @@ public class UserDataController extends  TicketController{
    }
 
 
-/*    public  void update() {
+    public  void update() {
         int id = Util.readInteger("Enter ticket Id to update : ");
-        if(this.isTicketExist(id)) {
-            String agentName = null;
-            HashSet<String> tagSet = null;
-            String action = null;
+        // need to check ticket is exist or not
+        String agentName = null;
+        HashSet<String> tagSet = null;
+        String action = null;
 
-            String choice = Util.readString("Do you want to update Agent? Enter y-Yes | n-No");
-            if(choice.equals('y')){
-                agentName = Util.readString("Enter Agent Name : ");
+        String agentChoice = Util.readString("Do you want to update Agent? Enter y-Yes | n-No");
+        if(agentChoice.trim().equals("y")){
+            agentName = Util.readString("Enter Agent Name : ");
+        }
+
+        String tagsChoice = Util.readString("Do you want to update Tags? Enter y-Yes | n-No");
+        if(tagsChoice.trim().equals("y")){
+            action = Util.readString("Enter a-adding new tag(s) / r-remove existing tag(s) / n-no");
+
+            if (!action.trim().isEmpty() && (action.trim().equals("a") || action.trim().equals("r"))) {
+                String tag = Util.readString("Enter tags separated by comma(,) : ");
+                tagSet = new HashSet<>(Arrays.asList(tag.trim().split(",")));
             }
+        }
 
-            choice = Util.readString("Do you want to update Tags? Enter y-Yes | n-No");
-
-            if(choice.equals('y')){
-                action = Util.readString("Enter A-adding new tags / R-remove existing tag / N-no");
-
-                if (!action.isEmpty() && (action.equals("A") || action.equals("R"))) {
-                    String tag = Util.readString("Enter tags separated by comma(,) : ");
-                    tagSet = new HashSet<>(Arrays.asList(tag.split(",")));
-                }
+        if(agentChoice.trim().toLowerCase().equals("y") || (tagsChoice.trim().toLowerCase().equals("y") && !action.trim().toLowerCase().equals("n")))
+        {
+            try{
+                Ticket ticket = this.update(id, agentName, tagSet, action);
+                System.out.println("Ticket id " + id + " is updated successfully."+"\n Ticket Details are : \n"+ticket.toString());
             }
-
-            if(!agentName.isEmpty() || !tagSet.isEmpty()) {
-                try{
-                    Ticket ticket = this.update(id, agentName, tagSet, action);
-                    System.out.println("Ticket id " + id + " is updated successfully");
-                    System.out.println(ticket.toString());
-                }
-                catch (InvalidParamsException ie){
-                    System.out.println("Invalid params!!!");
-                }
+            catch (InvalidParamsException ie){
+                System.out.println("Invalid params!!!");
             }
-            else
-            System.out.println("Update Operation Skipped");
+            catch(TicketExceptions ticketFailure){
+                System.out.println(ticketFailure.getMessage());
+            }
         }
         else
-            System.out.println("Entered Ticket id " + id + " is not present in the system.");
+            System.out.println("Update ticket skipped");
     }
 
-    public void delete() {
-        TicketLogger.writeLog(Level.INFO, this.getClass().getMethods()+" inside-- ");
-        System.out.println("Enter ticket Id for deletion : ");
-        int id = Util.readInteger();
-
+    public void delete() throws TicketExceptions {
+        int id = Util.readInteger("Enter ticket Id for deletion : ");
         if(this.delete(id)) {
             System.out.println("Ticket id " + id + " is deleted successfully.");
         }
         else  System.out.println("Entered ticket id " + id + " is not present in the system." );
-    } */
+    }
+
 
     public void getTicket(){
         TicketLogger.writeLog(Level.INFO, "getTicket start");
@@ -130,11 +128,13 @@ public class UserDataController extends  TicketController{
         else    System.out.println("Invalid Tag!!!. Tag Name should not be empty!!!");
     }
 */
+
     public void getAllTickets() {
         TicketLogger.writeLog(Level.INFO, "getAllTickets start");
         List<Ticket> ticketList = this.getAll();
         this.displayTickets(ticketList);
     }
+
 
 /*
     public void allAgentsTicketCount(){
