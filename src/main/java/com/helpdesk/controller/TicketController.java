@@ -52,10 +52,11 @@ public class TicketController {
     }
 
     public Boolean delete(int id) throws TicketExceptions {
+        TicketLogger.writeLog(Level.INFO, "delete controller start");
         if(ticketService.delete(id))
             return  true;
         else
-             return false;
+             throw  new TicketExceptions("Ticket Deletion Failed!");
     }
 
     public Ticket getDetails(int id) throws TicketExceptions{

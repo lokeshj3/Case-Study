@@ -37,7 +37,6 @@ public class UserDataController extends  TicketController{
 
     public  void update() {
         int id = Util.readInteger("Enter ticket Id to update : ");
-        // need to check ticket is exist or not
         String agentName = null;
         HashSet<String> tagSet = null;
         String action = null;
