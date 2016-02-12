@@ -1,7 +1,8 @@
 package com.helpdesk.ticket;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.helpdesk.exception.InvalidParamsException;
+import com.helpdesk.exception.InvalidTicketDAOFactoryTypeException;
+
 import java.util.List;
 import java.util.Map;
 
@@ -10,23 +11,29 @@ import java.util.Map;
  */
 public class ReportService {
 
-    public long getTicketsCountInSystem() {
-        //logic for calculating ticket count in system
-        return 0L;
+    TicketDAO ticketDAO;
+
+    ReportService() throws InvalidTicketDAOFactoryTypeException{
+        ticketDAO = TicketDAOFactory.get(TicketDAOFactoryType.INMEMORY);
+    }
+
+    public int getTicketsCountInSystem() {
+        return ticketDAO.getTotalTicketInSystem();
     }
 
     public Map<String, Integer> getTagsWithTicketCount() {
-        //logic for calculating tags count in ticket
-        return new HashMap<String, Integer>();
+        return ticketDAO.findAllTagsWithTicketCount();
     }
 
-    public List<Ticket> getTicketsOlderThanNDays(int days) {
-        //logic for calculating ticket older than x days
-        return new ArrayList<Ticket>();
+    public List<Ticket> getTicketsOlderThanNDays(int noOfDays) throws InvalidParamsException{
+        if (noOfDays < 0) {
+            throw new InvalidParamsException("Number of days cannot be less than zero");
+        } else {
+            return ticketDAO.findAllOlderThanNDays(noOfDays);
+        }
     }
 
     public Ticket getOldestTicketInSystem() {
-        //logic for oldest ticket in the system
-        return new Ticket();
+        return ticketDAO.findOldestTicketInSystem();
     }
 }

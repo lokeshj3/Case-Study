@@ -1,5 +1,10 @@
 package com.helpdesk.ticket;
 
+
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+
 import com.helpdesk.exception.DuplicateTicketIdException;
 import com.helpdesk.exception.TicketNotFoundException;
 import org.slf4j.Logger;
@@ -9,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
 import java.util.stream.Collectors;
 
 /**
@@ -74,6 +80,35 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
         throw new TicketNotFoundException("Ticket Not Found");
     }
 
+    public int getTotalTicketInSystem() {
+        return ticketInMemoryStorage.getTicketData().size();
+    }
+
+    public Ticket findOldestTicketInSystem() {
+        return ticketInMemoryStorage.getTicketData().values().stream().max( (ticket1, ticket2) -> ticket2.getCreated().compareTo(ticket1.getCreated())).get();
+    }
+
+    public Map<String, Integer> findAllTagsWithTicketCount() {
+        Map<String, Integer> hashMap = new HashMap<>();
+        ticketInMemoryStorage.getTicketData().values().forEach( ticket -> {
+                for (String tags : ticket.getTags()){
+                    if(hashMap.containsKey(tags)){
+                        hashMap.put(tags, hashMap.get(tags) +1);
+                    }else {
+                        hashMap.put(tags, 1);
+                    }
+                }
+
+             }
+        );
+        return hashMap;
+    }
+
+    public List<Ticket> findAllOlderThanNDays(int noofdays) {
+        LocalDateTime olderDays = LocalDateTime.now().minus(noofdays, ChronoUnit.DAYS);
+        return ticketInMemoryStorage.getTicketData().values().stream().filter(ticket -> ticket.getCreated().isBefore(olderDays)).collect(Collectors.toList());
+
+    }
     public List<Ticket> findAllByAgentName(String agentName) throws TicketNotFoundException {
 
         List<Ticket> arrList = ticketInMemoryStorage.getTicketData().values().stream()
@@ -119,23 +154,4 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
         logger.error("Ticket not found");
         throw new TicketNotFoundException("Ticket Not Found");
     }
-
-//
-//    public int getTotalTicketInSystem() {
-//        //TODO:logic
-//    }
-//
-//
-//    public Ticket findOldestTicketInSystem() {
-//        //TODO:logic
-//    }
-//
-//    public Map<String, Integer> findAllTagsWithTicketCount() {
-//        //TODO:logic
-//    }
-//
-//
-//    public List<Ticket> findAllOlderThanNDays(int noofdays) {
-//        //TODO:logic
-//    }
 }

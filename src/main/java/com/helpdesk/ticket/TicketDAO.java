@@ -29,14 +29,14 @@ public interface TicketDAO {
 
     Map<String, Integer> findAllAgentWithTicketCount() throws TicketNotFoundException;
 
-//    int getTotalTicketInSystem();
-//
-//
-//    Ticket findOldestTicketInSystem();
-//
-//    Map<String, Integer> findAllTagsWithTicketCount();
-//
-//    List<Ticket> findAllOlderThanNDays(int noofdays);
+    int getTotalTicketInSystem();
+
+
+    Ticket findOldestTicketInSystem();
+
+    Map<String, Integer> findAllTagsWithTicketCount();
+
+    List<Ticket> findAllOlderThanNDays(int noofdays);
 
     boolean isExist(int ticketId);
 
