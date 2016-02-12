@@ -3,10 +3,7 @@ package com.helpdesk.services;
 import com.helpdesk.model.Ticket;
 import com.helpdesk.repository.TicketRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -33,18 +30,8 @@ public class TicketReportService {
         return new ArrayList<>();
     }*/
 
-    public Map<String , Integer> ticketCountsGroupByAgent(){
-       /* return objRepository.getAllTickets()
-                .stream().collect(Collectors.groupingBy(Ticket::getAgent));
-*/
-        //code to return ticket count group byb agent
-
-            /*    Map<Integer, Ticket> masterTicketsData = TicketSerialization.deserialize();
-        if(masterTicketsData.isEmpty())    return new HashMap<>();
-        return Collections.unmodifiableMap(masterTicketsData.values().stream().collect(Collectors.groupingBy(Ticket::getAgentName)));
-
-        */
-        return new HashMap<>();
+    public Map<String , List<Ticket>> ticketCountsGroupByAgent(){
+        return Collections.unmodifiableMap(objRepository.getAllTickets().stream().collect(Collectors.groupingBy(Ticket::getAgent)));
     }
 
     public int getTotalTicketCounts() {

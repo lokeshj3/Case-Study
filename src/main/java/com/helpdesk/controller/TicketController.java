@@ -82,9 +82,10 @@ public class TicketController {
         return ticketService.getAlltickets();
     }
 
-    public Map<String, Integer> getAllAgentsTicketCount(){
+    public Map<String , List<Ticket>> getAllAgentsTicketCount(){
         return ticketReportService.ticketCountsGroupByAgent();
     }
+
     public int getTotalTicketCount(){
        return ticketReportService.getTotalTicketCounts();
     }

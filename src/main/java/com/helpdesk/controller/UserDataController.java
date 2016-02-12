@@ -81,7 +81,7 @@ public class UserDataController extends  TicketController{
                 this.delete(id);
                 System.out.println("Ticket id " + id + " is deleted successfully.");
             }catch (TicketExceptions te){
-                System.out.println("Entered ticket id " + id + " is not present in the system.");
+                System.out.println(te.getMessage());
             }
         }
     }
@@ -105,7 +105,7 @@ public class UserDataController extends  TicketController{
          if(!agentName.isEmpty()){
              List<Ticket> agentTicketList = this.getTicketsByAgent(agentName);
              if(agentTicketList.size()>0){
-                 agentTicketList.forEach(ticket -> System.out.println(ticket.toString()));
+                 this.displayTickets(agentTicketList);
              }
              else  System.out.println("No records found for entered agent " + agentName);
          }
@@ -137,11 +137,11 @@ public class UserDataController extends  TicketController{
 
 
     public void allAgentsTicketCount(){
-        //Map<String, Integer> ticketCountList = this.getAllAgentsTicketCount();
-        /*if(ticketCountList.size()>0){
-            //display logic
+        Map<String, List<Ticket>> ticketCountList = this.getAllAgentsTicketCount();
+        if(ticketCountList.size()>0){
+            ticketCountList.forEach((String agentName, List<Ticket> ticketList) -> System.out.println(agentName + " :  " + ticketList.size()));
         }
-        else     System.out.println("No Records Found!!!");*/
+        else     System.out.println("No Records Found!!!");
     }
 
     public void TotalTicketCount() {

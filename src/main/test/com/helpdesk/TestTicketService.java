@@ -10,6 +10,13 @@
 package com.helpdesk;
 
 import com.helpdesk.controller.TicketController;
+import com.helpdesk.exception.InvalidParamsException;
+import com.helpdesk.exception.TicketExceptions;
+import com.helpdesk.model.Ticket;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 /*import com.helpdesk.exception.InvalidParamsException;
 import com.helpdesk.model.Ticket;
 import com.helpdesk.services.TicketReportService;
@@ -85,11 +92,10 @@ public class TestTicketService {
     private static void deleteDummyTicket(List<Ticket> ticketList,TicketService ticketService){
         ticketList.forEach(ticket -> ticketService.delete(ticket.getId()));
     }
-
+*/
     @BeforeClass
     public static void initializeClassResources(){
         initialize();
-        // create file to add records
     }
 
     @Before
@@ -98,61 +104,53 @@ public class TestTicketService {
     }
 
     @Test
-    public void testCreateTicketWithNullSubject() throws InvalidParamsException, TicketFailure{
-        ticketController = new TicketController();
+    public void testCreateTicketWithNullSubject() throws TicketExceptions{
         Ticket ticket = ticketController.create(nullSubject, agent, tagSet);
     }
 
     @Test
-    public void testCreateTicketWithEmptySubject() throws InvalidParamsException, TicketFailure{
-        TicketService ticketService = new TicketService();
-        Ticket ticket = ticketService.createTicket(emptySubject, agent, tagSet);
+    public void testCreateTicketWithEmptySubject() throws TicketExceptions{
+        Ticket ticket = ticketController.create(emptySubject, agent, tagSet);
     }
 
-    @Test(expected = InvalidParameterException.class)
-    public void testCreateTicketWithNullAgent(){
-        TicketService ticketService = new TicketService();
-        Ticket ticket = ticketService.createTicket(subject,nullAgent,tagSet);
+    @Test
+    public void testCreateTicketWithNullAgent() throws TicketExceptions{
+        Ticket ticket = ticketController.create(subject,nullAgent,tagSet);
     }
 
-    @Test(expected = InvalidParameterException.class)
-    public void testCreateTicketWithEmptyAgent(){
-        TicketService ticketService = new TicketService();
-        Ticket ticket = ticketService.createTicket(subject,emptyAgent,tagSet);
+    @Test
+    public void testCreateTicketWithEmptyAgent() throws TicketExceptions{
+        Ticket ticket = ticketController.create(subject,emptyAgent,tagSet);
     }
 
-    @Test(expected = InvalidParameterException.class)
-    public void testCreateTicketWithNullSubjectAndAgent(){
-        TicketService ticketService = new TicketService();
-        Ticket ticket = ticketService.createTicket(nullSubject,nullAgent,tagSet);
+    @Test
+    public void testCreateTicketWithNullSubjectAndAgent() throws TicketExceptions{
+        Ticket ticket = ticketController.create(nullSubject,nullAgent,tagSet);
     }
 
-    @Test(expected = InvalidParameterException.class)
-    public void testCreateTicketWithEmptySubjectAndAgent(){
-        TicketService ticketService = new TicketService();
-        Ticket ticket = ticketService.createTicket(emptySubject,emptyAgent,tagSet);
+    @Test
+    public void testCreateTicketWithEmptySubjectAndAgent() throws TicketExceptions{
+        Ticket ticket = ticketController.create(emptySubject,emptyAgent,tagSet);
     }
 
-    @Test(expected = InvalidParameterException.class)
-    public void testCreateTicketWithSubjectAndAgentAndEmptyTagSet(){
-        TicketService ticketService = new TicketService();
-        Ticket ticket = ticketService.createTicket(subject,agent,emptyTagSet);
+    @Test
+    public void testCreateTicketWithSubjectAndAgentAndEmptyTagSet() throws TicketExceptions{
+        Ticket ticket = ticketController.create(subject,agent,emptyTagSet);
         Assert.assertEquals(subject,ticket.getSubject());
         Assert.assertEquals(agent,ticket.getAgent());
         Assert.assertEquals(emptyTagSet.size(),ticket.getTags().size());
-        ticketService.delete(ticket.getId());
+        ticketController.delete(ticket.getId());
     }
 
-    @Test(expected = InvalidParameterException.class)
-    public void testCreateTicketWithSubjectAndAgentAndTagset(){
-        TicketService ticketService = new TicketService();
-        Ticket ticket = ticketService.createTicket(subject,agent,tagSet);
+    @Test
+    public void testCreateTicketWithSubjectAndAgentAndTagset() throws TicketExceptions{
+        Ticket ticket = ticketController.create(subject,agent,tagSet);
         Assert.assertEquals(subject,ticket.getSubject());
         Assert.assertEquals(agent,ticket.getAgent());
         Assert.assertTrue(tagSet.equals(ticket.getTags()));
-        ticketService.delete(ticket.getId());
+        ticketController.delete(ticket.getId());
     }
-
+/*
     //update ticket
 
     @Test(expected = InvalidParameterException.class)
