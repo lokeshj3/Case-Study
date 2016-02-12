@@ -242,8 +242,8 @@ public class TestTicketService {
         deleteDummyTicket(dummyTicketList,ticketController);
     }
 
-/*
-    //tickets by tag
+
+/*    //tickets by tag
     @Test
     public void testGetTicketsByNullTag(){
         TicketService ticketService = new TicketService();
