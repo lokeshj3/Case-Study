@@ -8,6 +8,7 @@ import com.helpdesk.model.Ticket;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.logging.Level;
 
 public class UserDataController extends  TicketController{
@@ -34,7 +35,7 @@ public class UserDataController extends  TicketController{
    }
 
 
-    public  void update() {
+/*    public  void update() {
         int id = Util.readInteger("Enter ticket Id to update : ");
         if(this.isTicketExist(id)) {
             String agentName = null;
@@ -74,7 +75,7 @@ public class UserDataController extends  TicketController{
             System.out.println("Entered Ticket id " + id + " is not present in the system.");
     }
 
-/*    public void delete() {
+    public void delete() {
         TicketLogger.writeLog(Level.INFO, this.getClass().getMethods()+" inside-- ");
         System.out.println("Enter ticket Id for deletion : ");
         int id = Util.readInteger();
@@ -125,12 +126,10 @@ public class UserDataController extends  TicketController{
         else    System.out.println("Invalid Tag!!!. Tag Name should not be empty!!!");
     }
 */
-    public void Tickets() {
-        List<Ticket> tickets = this.getTickets();
-        if(tickets.size() >0 ){
-            //tickets.values().stream().sorted((Ticket t1, Ticket t2) -> -t1.getModified().compareTo(t2.getModified())).forEach(ticket -> System.out.println(ticket.toString()));
-        }
-        else System.out.println("No tickets found!!!");
+    public void getAllTickets() {
+        TicketLogger.writeLog(Level.INFO, "getAllTickets start");
+        List<Ticket> ticketList = this.getAll();
+        displayTickets(ticketList);
     }
 
 /*
@@ -164,4 +163,16 @@ public class UserDataController extends  TicketController{
             ticketList.forEach(ticket -> System.out.println(ticket.toString()));
         else System.out.println("No tickets found");
     }   */
+
+    public void displayTickets(List ticketList){
+        TicketLogger.writeLog(Level.INFO, "Display ticket list start");
+        if(ticketList.size() > 0){
+            ticketList.stream()
+                    .forEach(System.out::println);
+        }
+        else {
+            TicketLogger.writeLog(Level.INFO, "No tickets in system");
+            System.out.println("No tickets found!");
+        }
+    }
 }

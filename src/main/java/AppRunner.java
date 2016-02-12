@@ -12,7 +12,7 @@ public class AppRunner {
     final static String[] menuItems = {"1) Create Ticket","2) Update Ticket","3) Delete Ticket","4) Get Ticket","5) Get all Ticket","6) Find Ticket assigned to Agent", "7) Get all Agent with Ticket Counts","8) Search Ticket By Tag","9) Total Ticket Count","10) Oldest Tickets Report", "11) Tickets older than n Days", "12) Count of Tickets with specific Tag", "13) Exit"};
 
     public static void main(String[] args) {
-        TicketLogger.writeLog(Level.INFO, "Application start ");
+        TicketLogger.writeLog(Level.INFO, "Application start");
         UserDataController objUserDataController = new UserDataController();
 
         int choice;
@@ -25,11 +25,11 @@ public class AppRunner {
                     //Create New Ticket
                     objUserDataController.create();
                     break;
-                case 2:
+                /*case 2:
                     //Update Ticket By ID
                     objUserDataController.update();
                     break;
-                /*case 3:
+                case 3:
                     //Delete By ID
                     objUserDataController.delete();
                     break;
@@ -39,7 +39,7 @@ public class AppRunner {
                     break;  */
                 case 5:
                     //Get All tickets sorted BY UPDATED TIME
-                    objUserDataController.getTickets();
+                    objUserDataController.getAllTickets();
                     break;
                 /*case 6:
                     //Find Ticket assigned to Agent

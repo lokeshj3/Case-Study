@@ -6,6 +6,7 @@ import com.helpdesk.model.Ticket;
 import com.helpdesk.serialization.TicketSerialization;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -56,10 +57,10 @@ public class TicketRepository {
     }
 
     /**
-     * return repository
+     * return all tickets sorted by updated time.
      * */
-    public Map<Integer, Ticket> getAllTickets(){
-        return new ConcurrentHashMap<>(ticketMap);
+    public List<Ticket> getAllTickets(){
+        return (List<Ticket>) ticketMap.values().stream().sorted((Ticket t1, Ticket t2)-> t2.getUpdated().compareTo(t1.getUpdated()));
     }
 
     /**

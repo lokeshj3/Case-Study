@@ -39,7 +39,7 @@ public class TicketService {
         }
     }
 
-    public boolean isTicketExist(int id){
+/*    public boolean isTicketExist(int id){
         //code to check given ticket id is present on not in the system.
         return true;
     }
@@ -76,8 +76,8 @@ public class TicketService {
             modifiedFlag = true;
         }
 
-       /* if(modifiedFlag)
-            TicketSerialization.serialize(masterTicketsData, false);*/
+       *//* if(modifiedFlag)
+            TicketSerialization.serialize(masterTicketsData, false);*//*
     }
 
     public boolean delete(int id) {
@@ -91,10 +91,9 @@ public class TicketService {
         return null;
         //handle throw exception here
     }
-
-    public List<Ticket> tickets(){
-       //code to return all tickets
-         return new ArrayList<>();
-        // no data the returns empty map
+*/
+    public List<Ticket> getAlltickets(){
+        writeLog(Level.INFO, "get all tickets service start");
+        return objRepository.getAllTickets();
     }
 }

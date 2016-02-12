@@ -8,6 +8,7 @@ import com.helpdesk.services.TicketService;
 import com.helpdesk.logger.TicketLogger;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.logging.Level;
 
 public class TicketController {
@@ -38,7 +39,7 @@ public class TicketController {
     }
 
 
-    public Ticket update(int id, String agentName, HashSet<String> tagSet, String action)  throws TicketExceptions{
+/*    public Ticket update(int id, String agentName, HashSet<String> tagSet, String action)  throws TicketExceptions{
         TicketLogger.writeLog(Level.INFO, "update controller start");
         if(agentName != null && !agentName.trim().isEmpty() && tagSet != null && action != null && action.trim().isEmpty()) {
             Ticket ticket = ticketService.update(id, agentName, tagSet, action);
@@ -47,7 +48,7 @@ public class TicketController {
         else   throw new TicketExceptions("Please give proper input!");
     }
 
-/*    public Boolean delete(int id) {
+    public Boolean delete(int id) {
         if(ticketService.delete(id))
             return  true;
         else
@@ -65,11 +66,12 @@ public class TicketController {
     public List<Ticket> getTicketsByTag(String tag){
         return ticketReportService.ticketsByTag(tag);
     }
-
-    public List<Ticket> getTickets(){
-        return ticketService.tickets();
+*/
+    public List<Ticket> getAll(){
+        TicketLogger.writeLog(Level.INFO, "getAll controller start");
+        return ticketService.getAlltickets();
     }
-
+/*
     public Map<String, Integer> getAllAgentsTicketCount(){
         return ticketReportService.ticketCountsGroupByAgent();
     }
@@ -86,9 +88,10 @@ public class TicketController {
     public List<Ticket> getOlderTicketsThanDays(int days) {
        return ticketReportService.ticketsOlderByDays(days);
     }
-*/
+
     public boolean isTicketExist(int id){
 
         return true;
-    }
+    }*/
+
 }
