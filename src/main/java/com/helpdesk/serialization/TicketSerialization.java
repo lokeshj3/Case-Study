@@ -22,8 +22,8 @@ public class TicketSerialization {
      * serialize tickets
      * @param ticketMap
      * */
-    public boolean saveTicketsInFile(Map<Integer, Ticket> ticketMap){
-        try(FileOutputStream fos = new FileOutputStream(file, true); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+    public boolean saveTicketsInFile(Map<Integer, Ticket> ticketMap, boolean append){
+        try(FileOutputStream fos = new FileOutputStream(file, append); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 
             for (Ticket ticket : ticketMap.values()){
                 oos.writeObject(ticket);

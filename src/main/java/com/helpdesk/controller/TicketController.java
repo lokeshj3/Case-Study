@@ -1,18 +1,13 @@
 package com.helpdesk.controller;
 
 import com.helpdesk.exception.InvalidParamsException;
-import com.helpdesk.exception.TicketFailure;
+import com.helpdesk.exception.TicketExceptions;
 import com.helpdesk.model.Ticket;
-import com.helpdesk.serialization.TicketSerialization;
 import com.helpdesk.services.TicketReportService;
 import com.helpdesk.services.TicketService;
 import com.helpdesk.logger.TicketLogger;
-import com.sun.istack.internal.NotNull;
 
-import java.security.InvalidParameterException;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 
 public class TicketController {
@@ -32,7 +27,7 @@ public class TicketController {
     /**
      * controller to get data for create ticket
      * */
-    public Ticket create(String subject, String agentName, HashSet<String> tagSet) throws InvalidParamsException, TicketFailure {
+    public Ticket create(String subject, String agentName, HashSet<String> tagSet) throws TicketExceptions {
         TicketLogger.writeLog(Level.INFO, "create controller start");
 
         if(subject != null && !subject.trim().isEmpty() && agentName != null && !agentName.trim().isEmpty() && tagSet != null) {
@@ -42,16 +37,17 @@ public class TicketController {
         else throw new InvalidParamsException("Please give proper input!");
     }
 
-/*
-    public Ticket update(int id, @NotNull String agentName, HashSet<String> tags, String action)  throws InvalidParameterException {
-        if(ticketService.isTicketExist(id)){
-            Ticket ticket = ticketService.update(id, agentName, tags, action);
+
+    public Ticket update(int id, String agentName, HashSet<String> tagSet, String action)  throws TicketExceptions{
+        TicketLogger.writeLog(Level.INFO, "update controller start");
+        if(agentName != null && !agentName.trim().isEmpty() && tagSet != null && action != null && action.trim().isEmpty()) {
+            Ticket ticket = ticketService.update(id, agentName, tagSet, action);
             return ticket;
         }
-        else   throw new InvalidParameterException();
+        else   throw new TicketExceptions("Please give proper input!");
     }
 
-    public Boolean delete(int id) {
+/*    public Boolean delete(int id) {
         if(ticketService.delete(id))
             return  true;
         else
@@ -90,8 +86,9 @@ public class TicketController {
     public List<Ticket> getOlderTicketsThanDays(int days) {
        return ticketReportService.ticketsOlderByDays(days);
     }
-
+*/
     public boolean isTicketExist(int id){
+
         return true;
-    }*/
+    }
 }

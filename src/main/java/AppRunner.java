@@ -18,30 +18,30 @@ public class AppRunner {
         int choice;
         do{
             displayTicketMenu();
-            choice =  Util.readInteger();
+            choice =  Util.readInteger("Enter your choice :");
 
             switch (choice){
                 case 1:
                     //Create New Ticket
                     objUserDataController.create();
                     break;
-               /* case 2:
+                case 2:
                     //Update Ticket By ID
                     objUserDataController.update();
                     break;
-                case 3:
+                /*case 3:
                     //Delete By ID
                     objUserDataController.delete();
                     break;
                 case 4:
                     //Get Ticket By ID
                     objUserDataController.getTicket();
-                    break;
+                    break;  */
                 case 5:
                     //Get All tickets sorted BY UPDATED TIME
                     objUserDataController.getTickets();
                     break;
-                case 6:
+                /*case 6:
                     //Find Ticket assigned to Agent
                     objUserDataController.getTicketsByAgent();
                     break;

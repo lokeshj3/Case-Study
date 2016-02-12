@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Util {
-    public static int readInteger(){
+    public static int readInteger(String message){
+        System.out.println(message);
         int userInput = 0;
         try{
             BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));

@@ -2,7 +2,7 @@ package com.helpdesk.controller;
 
 import com.helpdesk.components.Util;
 import com.helpdesk.exception.InvalidParamsException;
-import com.helpdesk.exception.TicketFailure;
+import com.helpdesk.exception.TicketExceptions;
 import com.helpdesk.logger.TicketLogger;
 import com.helpdesk.model.Ticket;
 
@@ -28,15 +28,14 @@ public class UserDataController extends  TicketController{
             System.out.println("Ticket Has been created successfully." + tickets.toString());
         } catch (InvalidParamsException e) {
             System.out.println(e.getMessage());
-        } catch (TicketFailure ticketFailure) {
+        } catch (TicketExceptions ticketFailure) {
             System.out.println(ticketFailure.getMessage());
         }
    }
 
 
-/*    public  void update() {
-        System.out.println("Enter ticket Id to update : ");
-        int id = Util.readInteger();
+    public  void update() {
+        int id = Util.readInteger("Enter ticket Id to update : ");
         if(this.isTicketExist(id)) {
             String agentName = null;
             HashSet<String> tagSet = null;
@@ -64,7 +63,7 @@ public class UserDataController extends  TicketController{
                     System.out.println("Ticket id " + id + " is updated successfully");
                     System.out.println(ticket.toString());
                 }
-                catch (InvalidParameterException ie){
+                catch (InvalidParamsException ie){
                     System.out.println("Invalid params!!!");
                 }
             }
@@ -75,7 +74,7 @@ public class UserDataController extends  TicketController{
             System.out.println("Entered Ticket id " + id + " is not present in the system.");
     }
 
-    public void delete() {
+/*    public void delete() {
         TicketLogger.writeLog(Level.INFO, this.getClass().getMethods()+" inside-- ");
         System.out.println("Enter ticket Id for deletion : ");
         int id = Util.readInteger();
@@ -125,7 +124,7 @@ public class UserDataController extends  TicketController{
         }
         else    System.out.println("Invalid Tag!!!. Tag Name should not be empty!!!");
     }
-
+*/
     public void Tickets() {
         List<Ticket> tickets = this.getTickets();
         if(tickets.size() >0 ){
@@ -134,7 +133,7 @@ public class UserDataController extends  TicketController{
         else System.out.println("No tickets found!!!");
     }
 
-
+/*
     public void allAgentsTicketCount(){
         Map<String, Integer> ticketCountList = this.getAllAgentsTicketCount();
         if(ticketCountList.size()>0){

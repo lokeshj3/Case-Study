@@ -1,7 +1,6 @@
 package com.helpdesk.services;
 
-import com.helpdesk.exception.InvalidParamsException;
-import com.helpdesk.exception.TicketFailure;
+import com.helpdesk.exception.TicketExceptions;
 import com.helpdesk.model.Ticket;
 import com.helpdesk.repository.TicketRepository;
 
@@ -25,7 +24,7 @@ public class TicketService {
    /**
     * Ticket create service
     * */
-    public Ticket createTicket(String subject, String agentName, HashSet<String> tagSet) throws InvalidParamsException, TicketFailure {
+    public Ticket createTicket(String subject, String agentName, HashSet<String> tagSet) throws TicketExceptions {
         writeLog(Level.INFO, "create service start");
 
         Ticket ticket = new Ticket.Builder().withId(++max_id).withAgent(agentName).withSubject(subject).withTags(tagSet).build();
@@ -36,7 +35,7 @@ public class TicketService {
         }
         else{
             writeLog(Level.INFO, "Ticket create failed");
-            throw new TicketFailure("Somthing went worng! Ticket not created");
+            throw new TicketExceptions("Somthing went worng! Ticket not created");
         }
     }
 
@@ -45,16 +44,10 @@ public class TicketService {
         return true;
     }
 
-/*
-    public Ticket update(int id, @NotNull String agentName, HashSet<String> tags, String action) {//add more required parameters
-        //code to update the ticket into file as well as map
-        //return ticket;
-        return null;
-        //handle throw exception here InvalidParameterException
 
     public Ticket update(int id, @NotNull String agentName, Set<String> tags, String action) {
 
- 
+
         // incomplete --- need to handle serialization part only,  waiting for deepak's service
         // 10 & logic will be changed
 
@@ -62,21 +55,20 @@ public class TicketService {
 
         boolean modifiedFlag = false;
         Ticket ticket = masterTicketsData.get(id);
-        if (!agentName.isEmpty()){
+        if (!agentName.isEmpty()) {
             ticket.setAgentName(agentName);
             modifiedFlag = true;
         }
 
-        if(action.equals("A")){  // Adding new  tags
+        if (action.equals("A")) {  // Adding new  tags
             tags.addAll(ticket.getTags());
             ticket.setTags(tags);
             modifiedFlag = true;
-        }
-        else if(action.equals("R")){  // remove tags
+        } else if (action.equals("R")) {  // remove tags
             HashSet<String> oldTags = new HashSet<>();
             oldTags.addAll(ticket.getTags());
-            ticket.getTags().forEach((tag)->{
-                if(tags.contains(tag)){
+            ticket.getTags().forEach((tag) -> {
+                if (tags.contains(tag)) {
                     oldTags.remove(tag);
                 }
             });
@@ -86,7 +78,7 @@ public class TicketService {
 
        /* if(modifiedFlag)
             TicketSerialization.serialize(masterTicketsData, false);*/
-
+    }
 
     public boolean delete(int id) {
        // code to delete a ticket

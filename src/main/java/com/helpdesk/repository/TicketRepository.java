@@ -1,6 +1,7 @@
 package com.helpdesk.repository;
 
 import com.helpdesk.exception.InvalidParamsException;
+import com.helpdesk.exception.TicketExceptions;
 import com.helpdesk.model.Ticket;
 import com.helpdesk.serialization.TicketSerialization;
 
@@ -75,6 +76,15 @@ public class TicketRepository {
             maxId = Collections.max(ticketMap.keySet());
 
         return maxId;
+    }
+
+    public Ticket getTicket(int id) throws TicketExceptions {
+        if(ticketMap.containsKey(id)){
+            return ticketMap.get(id);
+        }
+        else {
+            throw new TicketExceptions("Ticket not found");
+        }
     }
 
 }
