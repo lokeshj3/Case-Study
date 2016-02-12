@@ -63,9 +63,6 @@ public class Ticket implements Serializable{
             this.tags = new HashSet<>();
         return this.tags;
     }
-    public Integer getMasterId(){
-        return masterId;
-    }
 
     private boolean beforeSave(){
         long time =  LocalDateTime.now(ZoneId.of("UTC")).toInstant(ZoneOffset.UTC).toEpochMilli();
