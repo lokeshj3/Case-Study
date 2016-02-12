@@ -90,7 +90,7 @@ public class UserDataController extends  TicketController{
         int id = Util.readInteger("Enter ticket Id for showing details : ");
         try {
             Ticket ticket = this.getDetails(id);;
-            System.out.println("Details of ticket id : " + id + "\n" + ticket.toString());
+            displaySingleTicket(ticket);
         }catch (InvalidParameterException e){
             System.out.println(e.getMessage());
         } catch (TicketExceptions ticketExceptions) {
@@ -109,24 +109,29 @@ public class UserDataController extends  TicketController{
              else  System.out.println("No records found for entered agent " + agentName);
          }
          else    System.out.println("Invalid agent Name!!!");
-     }
+    }
 
-     /*public void getTicketsByTag() {
-         System.out.println("Enter tag to search ticket(s) : ");
-         String tag = Util.readString();
-
-         if(!tag.isEmpty()){
-             List<Ticket> ticketList = this.getTicketsByTag(tag);
-             if(ticketList.size()>0)
+    public void getTicketsByTag() {
+        String tags = Util.readString("Enter Tags (separated by comma(,) : ");
+        HashSet<String> tagSet = new HashSet<>(Arrays.asList(tags.toLowerCase().split(",")));
+        if(!tagSet.isEmpty()){
+         try {
+             List<Ticket> ticketList = this.getTicketsByTag(tagSet);
+             if(ticketList.size() > 0)
              {
-                 ticketList.forEach(ticket -> System.out.println(ticket.toString()));
+                 this.displayTickets(ticketList);
              }
-             else    System.out.println("No tickets are found for entered tag " + tag);
-         }
-         else    System.out.println("Invalid Tag!!!. Tag Name should not be empty!!!");
-     }
+             else System.out.println("No tickets match with criteria!");
 
- */
+         }
+         catch (TicketExceptions te){
+             System.out.println(te.getMessage());
+         }
+     }
+     else
+         System.out.println("Invalid Tag!!!. Tag Name should be proper!");
+    }
+
 
     public void getAllTickets() {
         TicketLogger.writeLog(Level.INFO, "getAllTickets start");
@@ -146,35 +151,53 @@ public class UserDataController extends  TicketController{
     public void TotalTicketCount() {
         System.out.println("Total number of tickets present in the system : " + this.getTotalTicketCount());
     }
-/*
-    public void OldestTicket(){
+
+    public void oldestTicket(){
         try {
             Ticket ticket = this.getOldestTicket();
             System.out.println("Oldest ticket in the system is : \n" + ticket.toString());
-        }catch (InvalidParameterException e){
-            System.out.println("No Ticket Found in the system");
+        }catch (TicketExceptions e){
+            System.out.println(e.getMessage());
         }
     }
 
     public void getOlderTicketsThanDays() {
         System.out.println("Enter day to get tickets older than a entered number of days");
-        int days = Util.readInteger();
+        int days = Util.readInteger("Enter no of days before tickets required ");
 
-        List<Ticket> ticketList = this.getOlderTicketsThanDays(days);
+        List<Ticket> ticketList = null;
+        try {
+            ticketList = this.olderTicketsThanDays(days);
+        } catch (InvalidParamsException e) {
+            System.out.println(e.getMessage());
+        }
+
         if(ticketList.size()>0)
-            ticketList.forEach(ticket -> System.out.println(ticket.toString()));
+            this.displayTickets(ticketList);
         else System.out.println("No tickets found");
-    }   */
+    }
 
-    public void displayTickets(List ticketList){
+    /*public void displayTickets(List ticketList){
         TicketLogger.writeLog(Level.INFO, "Display ticket list start");
         if(ticketList.size() > 0){
-            ticketList.stream()
-                    .forEach(System.out::println);
+            ticketList
+                    .stream()
+                    .sorted((Ticket t1, Ticket t2) -> t2.getUpdated()
+                    .compareTo(t1.getUpdated()));
+
+
+
+            *//*ticketList.stream()
+                    .forEach(System.out::println);*//*
         }
         else {
             TicketLogger.writeLog(Level.INFO, "No tickets in system");
             System.out.println("No tickets found!");
         }
+    }*/
+
+
+    public void displaySingleTicket(Ticket ticket){
+        System.out.println(ticket.toString());
     }
 }

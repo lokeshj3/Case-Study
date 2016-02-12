@@ -3,6 +3,7 @@ package com.helpdesk.services;
 import com.helpdesk.model.Ticket;
 import com.helpdesk.repository.TicketRepository;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -23,12 +24,15 @@ public class TicketReportService {
                 .collect(Collectors.toList());
     }
 
-  /*  public List<Ticket> ticketsByTag(String tag){
-        //code to return all tickets by tag
 
-        //return new ArrayList<>();
-        return new ArrayList<>();
-    }*/
+    public List<Ticket> ticketsByTag(Set<String> tagSet){
+        return objRepository.getAllTickets()
+                .stream()
+                .filter(ticket -> ticket.getTags()
+                        .stream()
+                        .anyMatch(tag -> tagSet.contains(tag)))
+                .collect(Collectors.toList());
+    }
 
     public Map<String , List<Ticket>> ticketCountsGroupByAgent(){
         return Collections.unmodifiableMap(objRepository.getAllTickets().stream().collect(Collectors.groupingBy(Ticket::getAgent)));
@@ -37,16 +41,18 @@ public class TicketReportService {
     public int getTotalTicketCounts() {
         return objRepository.getAllTickets().size();
     }
-/*
-    public Ticket oldestTicket() {
-        // code to return oldest ticket in the system by created
-        return null;
-    }
-    public List<Ticket> ticketsOlderByDays(int day){
-        // code to return all tickets older than given day(s)
-        //return new ArrayList<>();
-        return new ArrayList<>();
 
-    }*/
+    public Ticket oldestTicket() {
+        return objRepository.getAllTickets()
+                .stream()
+                .sorted((Ticket t1, Ticket t2) -> t1.getCreated()
+                        .compareTo(t2.getCreated()))
+                .findFirst().get();
+    }
+
+    public List<Ticket> ticketsOlderByDays(int days){
+        LocalDateTime localDateTime = LocalDateTime.now().minusDays(days);
+        return objRepository.getAllTickets().stream().filter(ticket -> ticket.getCreated().compareTo(localDateTime) < 0).sorted(Comparator.comparing(Ticket::getCreated)).collect(Collectors.toList());
+    }
 
 }
