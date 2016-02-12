@@ -14,15 +14,13 @@ import java.util.Set;
  */
 public class Ticket implements Serializable{
 
+    private static final long serialVersionUID = 42L;
     private int id;
     private String subject;
     private String agentName;
     private Set<String> tags;
     private LocalDateTime created;
     private LocalDateTime modified;
-
-    public Ticket() {
-    }
 
     public Ticket(Ticket ticket) {
         this.id = ticket.id;
@@ -119,5 +117,12 @@ public class Ticket implements Serializable{
         this.tags       = (HashSet) in.readObject();
         this.created    = (LocalDateTime) in.readObject();
         this.modified   = (LocalDateTime) in.readObject();
+    }
+
+    @Override
+    public String toString() {
+        return "id = " + this.id
+                + ", subject = " + this.subject
+                + "";
     }
 }

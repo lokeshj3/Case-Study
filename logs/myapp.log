@@ -22,3 +22,4 @@ com.helpdesk.exception.TicketNotFoundException: Ticket not Fount
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.lang.reflect.Method.invoke(Method.java:498)
 	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:144)
+12-02-2016 16:10:59 ERROR TicketService:32 - Duplicate Ticket Id
