@@ -1,31 +1,31 @@
 package com.helpdesk.ticket;
 
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
-
 import com.helpdesk.exception.DuplicateTicketIdException;
-import com.helpdesk.exception.InvalidParamsException;
 import com.helpdesk.exception.TicketNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * Created by root on 9/2/16.
  */
 public class TicketDAOInMemoryImpl implements TicketDAO {
-    static Logger logger = LoggerFactory.getLogger(TicketService.class);
+    static Logger logger = LoggerFactory.getLogger(TicketDAOInMemoryImpl.class);
 
     TicketInMemoryStorage ticketInMemoryStorage = TicketInMemoryStorage.getInstance();
 
+    /**
+     * create eticket
+     *
+     * @param ticket
+     * @return
+     * @throws DuplicateTicketIdException
+     */
     public Ticket create(Ticket ticket) throws DuplicateTicketIdException {
         int ticketId = ticket.getId();
         if (isExist(ticketId)) {
@@ -37,7 +37,13 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
         return new Ticket(ticket);
     }
 
-
+    /**
+     * update Ticket
+     *
+     * @param ticket
+     * @return
+     * @throws TicketNotFoundException
+     */
     public Ticket update(Ticket ticket) throws TicketNotFoundException {
         int ticketId = ticket.getId();
         if (isExist(ticketId)) {
@@ -48,19 +54,37 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
         throw new TicketNotFoundException("Ticket Not Found");
     }
 
+    /**
+     * @param ticketId
+     * @return
+     */
     public boolean isExist(int ticketId) {
         return ticketInMemoryStorage.getTicketData().containsKey(ticketId);
     }
 
+    /**
+     * delete ticket
+     *
+     * @param ticketId
+     * @return
+     * @throws TicketNotFoundException
+     */
     public boolean delete(int ticketId) throws TicketNotFoundException {
         if (isExist(ticketId)) {
-            ticketInMemoryStorage.getTicketData().remove(ticketId);
+            ticketInMemoryStorage.deleteData(ticketId);
             return true;
         }
         logger.error("Ticket not found");
         throw new TicketNotFoundException("Ticket not found");
     }
 
+    /**
+     * find Single ticket
+     *
+     * @param ticketId
+     * @return
+     * @throws TicketNotFoundException
+     */
     public Ticket find(int ticketId) throws TicketNotFoundException {
         if (isExist(ticketId)) {
             return new Ticket(ticketInMemoryStorage.getTicketData().get(ticketId));
@@ -69,6 +93,12 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
         throw new TicketNotFoundException("Ticket Not Found");
     }
 
+    /**
+     * FindAll
+     *
+     * @return
+     * @throws TicketNotFoundException
+     */
     public List<Ticket> findAll() throws TicketNotFoundException {
 
         List<Ticket> arrList = ticketInMemoryStorage.getTicketData().values()
@@ -107,16 +137,16 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
     public Map<String, Integer> findAllTagsWithTicketCount() {
         logger.info("Entered tags with ticket count function");
         Map<String, Integer> hashMap = new HashMap<>();
-        ticketInMemoryStorage.getTicketData().values().forEach( ticket -> {
-                for (String tags : ticket.getTags()){
-                    if(hashMap.containsKey(tags)){
-                        hashMap.put(tags, hashMap.get(tags) +1);
-                    }else {
-                        hashMap.put(tags, 1);
+        ticketInMemoryStorage.getTicketData().values().forEach(ticket -> {
+                    for (String tags : ticket.getTags()) {
+                        if (hashMap.containsKey(tags)) {
+                            hashMap.put(tags, hashMap.get(tags) + 1);
+                        } else {
+                            hashMap.put(tags, 1);
+                        }
                     }
-                }
 
-             }
+                }
         );
         return hashMap;
     }
@@ -132,6 +162,14 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
         return ticketInMemoryStorage.getTicketData().values().stream().filter(ticket -> ticket.getCreated().isBefore(olderDays)).collect(Collectors.toList());
 
     }
+
+    /**
+     * find ticket by AgentName
+     *
+     * @param agentName
+     * @return
+     * @throws TicketNotFoundException
+     */
     public List<Ticket> findAllByAgentName(String agentName) throws TicketNotFoundException {
 
         List<Ticket> arrList = ticketInMemoryStorage.getTicketData().values().stream()
@@ -141,11 +179,18 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
         if (!arrList.isEmpty()) {
             return Collections.unmodifiableList(arrList);
         }
-        logger.error("", new InvalidParamsException("Ticket Not Found"));
+        logger.error("");
         throw new TicketNotFoundException("Ticket Not Found");
 
     }
 
+    /**
+     * find ticket by tag
+     *
+     * @param tag
+     * @return
+     * @throws TicketNotFoundException
+     */
     public List<Ticket> findAllByTag(String tag) throws TicketNotFoundException {
 
         List<Ticket> arrList = ticketInMemoryStorage.getTicketData().values().stream()
@@ -159,6 +204,12 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
         throw new TicketNotFoundException("Ticket Not Found");
     }
 
+    /**
+     * agent with ticket count
+     *
+     * @return
+     * @throws TicketNotFoundException
+     */
     public Map<String, Integer> findAllAgentWithTicketCount() throws TicketNotFoundException {
 
         TreeMap<String, Integer> tmCount = new TreeMap<>();
