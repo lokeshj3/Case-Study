@@ -1,9 +1,11 @@
 package com.inin.dao;
 
 import com.inin.exception.TicketNotFoundException;
+import com.inin.factory.TicketFactory;
 import com.inin.logger.TLogger;
 import com.inin.model.Ticket;
 import com.inin.util.TicketUtil;
+import sun.management.resources.agent;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -16,15 +18,22 @@ import java.util.stream.Collectors;
  */
 public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
     MapRepository ticketMap = new MapRepository();
+
     /**
-     * Create Ticket in Map.
-     * @param ticket
+     * creates Ticket
+     * @param subject
+     * @param agent
+     * @param tags
      * @return int
+     * @throws IllegalArgumentException
      */
     @Override
-    public int create(Ticket ticket) throws IllegalArgumentException{
-        if(ticket == null)
-            throw new IllegalArgumentException("Ticket should not be null");
+    public int create(String subject,String agent, Set<String> tags) throws IllegalArgumentException{
+        if(!TicketUtil.isValidString(subject) || !TicketUtil.isValidString(agent))
+            throw new IllegalArgumentException();
+        tags = tags != null ? new HashSet<>(tags) : new HashSet<>();
+
+        Ticket ticket   = TicketFactory.newTicketInstance(subject, agent, tags);
         ticketMap.getTicketMap().put(ticket.getId(),ticket);
         return ticket.getId();
     }

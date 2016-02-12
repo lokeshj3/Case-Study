@@ -17,20 +17,17 @@ public class TicketServiceImpl implements TicketService {
 
 
     private TicketServiceDAO ticketServiceDAO = DAOFactory.newTicketServiceDAOInstance();
+
     /**
-     * Function to Create New Ticket
+     * Create Ticket
      * @param subject
      * @param agent
      * @param tags
      * @return int
-     * @throws IllegalArgumentException
      */
-    public int create(String subject, String agent, Set<String> tags) throws IllegalArgumentException{
-        if(!TicketUtil.isValidString(subject) || !TicketUtil.isValidString(agent))
-            throw new IllegalArgumentException();
-        tags = tags != null ? new HashSet<>(tags) : new HashSet<>();
-        Ticket ticket   = TicketFactory.newTicketInstance(subject, agent, tags);
-        return ticketServiceDAO.create(ticket);
+    public int create(String subject, String agent, Set<String> tags){
+
+        return ticketServiceDAO.create(subject, agent, tags);
     }
 
     /**
