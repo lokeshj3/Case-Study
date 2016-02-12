@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 import static com.helpdesk.logger.TicketLogger.writeLog;
 
@@ -60,7 +61,10 @@ public class TicketRepository {
      * return all tickets sorted by updated time.
      * */
     public List<Ticket> getAllTickets(){
-        return (List<Ticket>) ticketMap.values().stream().sorted((Ticket t1, Ticket t2)-> t2.getUpdated().compareTo(t1.getUpdated()));
+        return ticketMap.values().stream()
+                .sorted((Ticket t1, Ticket t2)-> t2.getUpdated()
+                        .compareTo(t1.getUpdated()))
+                .collect(Collectors.toList());
     }
 
     /**

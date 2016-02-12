@@ -129,7 +129,7 @@ public class UserDataController extends  TicketController{
     public void getAllTickets() {
         TicketLogger.writeLog(Level.INFO, "getAllTickets start");
         List<Ticket> ticketList = this.getAll();
-        displayTickets(ticketList);
+        this.displayTickets(ticketList);
     }
 
 /*
