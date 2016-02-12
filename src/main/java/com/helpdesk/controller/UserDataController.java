@@ -6,11 +6,9 @@ import com.helpdesk.exception.TicketExceptions;
 import com.helpdesk.logger.TicketLogger;
 import com.helpdesk.model.Ticket;
 
+
 import java.security.InvalidParameterException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
 
 public class UserDataController extends  TicketController{
@@ -76,14 +74,17 @@ public class UserDataController extends  TicketController{
             System.out.println("Update ticket skipped");
     }
 
-    public void delete() throws TicketExceptions {
+    public void delete(){
         int id = Util.readInteger("Enter ticket Id for deletion : ");
-        if(this.delete(id)) {
-            System.out.println("Ticket id " + id + " is deleted successfully.");
+        if(id>0){
+            try {
+                this.delete(id);
+                System.out.println("Ticket id " + id + " is deleted successfully.");
+            }catch (TicketExceptions te){
+                System.out.println("Entered ticket id " + id + " is not present in the system.");
+            }
         }
-        else  System.out.println("Entered ticket id " + id + " is not present in the system." );
     }
-
 
     public void getTicket(){
         TicketLogger.writeLog(Level.INFO, "getTicket start");
@@ -98,36 +99,35 @@ public class UserDataController extends  TicketController{
         }
     }
 
-    /*
-    public void getTicketsByAgent() {
-        System.out.println("Please enter Agent Name : ");
-        String agentName = Util.readString();
+    public void TicketsByAgent() {
+         String agentName = Util.readString("Please enter Agent Name : ");
 
-        if(!agentName.isEmpty()){
-            List<Ticket> agentTicketList = this.getTicketsByAgent(agentName);
-            if(agentTicketList.size()>0){
-                agentTicketList.forEach(ticket -> System.out.println(ticket.toString()));
-            }
-            else  System.out.println("No records found for entered agent " + agentName);
-        }
-        else    System.out.println("Invalid agent Name!!!");
-    }
+         if(!agentName.isEmpty()){
+             List<Ticket> agentTicketList = this.getTicketsByAgent(agentName);
+             if(agentTicketList.size()>0){
+                 agentTicketList.forEach(ticket -> System.out.println(ticket.toString()));
+             }
+             else  System.out.println("No records found for entered agent " + agentName);
+         }
+         else    System.out.println("Invalid agent Name!!!");
+     }
 
-    public void getTicketsByTag() {
-        System.out.println("Enter tag to search ticket(s) : ");
-        String tag = Util.readString();
+     /*public void getTicketsByTag() {
+         System.out.println("Enter tag to search ticket(s) : ");
+         String tag = Util.readString();
 
-        if(!tag.isEmpty()){
-            List<Ticket> ticketList = this.getTicketsByTag(tag);
-            if(ticketList.size()>0)
-            {
-                ticketList.forEach(ticket -> System.out.println(ticket.toString()));
-            }
-            else    System.out.println("No tickets are found for entered tag " + tag);
-        }
-        else    System.out.println("Invalid Tag!!!. Tag Name should not be empty!!!");
-    }
-*/
+         if(!tag.isEmpty()){
+             List<Ticket> ticketList = this.getTicketsByTag(tag);
+             if(ticketList.size()>0)
+             {
+                 ticketList.forEach(ticket -> System.out.println(ticket.toString()));
+             }
+             else    System.out.println("No tickets are found for entered tag " + tag);
+         }
+         else    System.out.println("Invalid Tag!!!. Tag Name should not be empty!!!");
+     }
+
+ */
 
     public void getAllTickets() {
         TicketLogger.writeLog(Level.INFO, "getAllTickets start");
@@ -136,19 +136,18 @@ public class UserDataController extends  TicketController{
     }
 
 
-/*
     public void allAgentsTicketCount(){
-        Map<String, Integer> ticketCountList = this.getAllAgentsTicketCount();
-        if(ticketCountList.size()>0){
+        //Map<String, Integer> ticketCountList = this.getAllAgentsTicketCount();
+        /*if(ticketCountList.size()>0){
             //display logic
         }
-        else     System.out.println("No Records Found!!!");
+        else     System.out.println("No Records Found!!!");*/
     }
 
     public void TotalTicketCount() {
         System.out.println("Total number of tickets present in the system : " + this.getTotalTicketCount());
     }
-
+/*
     public void OldestTicket(){
         try {
             Ticket ticket = this.getOldestTicket();

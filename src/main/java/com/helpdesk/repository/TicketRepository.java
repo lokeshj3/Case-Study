@@ -19,7 +19,7 @@ import static com.helpdesk.logger.TicketLogger.writeLog;
  */
 public class TicketRepository {
 
-    private Map<Integer, Ticket> ticketMap;
+    private static Map<Integer, Ticket> ticketMap;
     private TicketSerialization ticketSerialization;
 
     public TicketRepository() {
@@ -105,5 +105,7 @@ public class TicketRepository {
             throw new TicketExceptions("Ticket not found");
         }
     }
+
+
 
 }

@@ -41,23 +41,23 @@ public class AppRunner {
                     //Get All tickets sorted BY UPDATED TIME
                     objUserDataController.getAllTickets();
                     break;
-                /*case 6:
+               case 6:
                     //Find Ticket assigned to Agent
-                    objUserDataController.getTicketsByAgent();
+                    objUserDataController.TicketsByAgent();
                     break;
-                case 7:
+                 case 7:
                     //Get all Agent with Ticket Counts
                     objUserDataController.allAgentsTicketCount();
                     break;
-                case 8:
+                /*case 8:
                     //Search Ticket By Tag
                     objUserDataController.getTicketsByTag();
-                    break;
-                case 9:
+                    break; */
+                    case 9:
                     //Report on Number of Tickets in System
-                    objUserDataController.getTotalTicketCount();
+                    objUserDataController.TotalTicketCount();
                     break;
-                case 10:
+                /*case 10:
                     //Oldest Ticket(s) in System
                     objUserDataController.getOldestTicket();
                     break;

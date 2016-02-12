@@ -9,6 +9,7 @@ import com.helpdesk.logger.TicketLogger;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 
@@ -67,28 +68,27 @@ public class TicketController {
         }
     }
 
-    /*
     public  List<Ticket> getTicketsByAgent(String agentName){
         return ticketReportService.ticketsByAgentName(agentName);
     }
 
-      public List<Ticket> getTicketsByTag(String tag){
-           return ticketReportService.ticketsByTag(tag);
-       }
-   */
+    /*  public List<Ticket> getTicketsByTag(String tag){
+          return ticketReportService.ticketsByTag(tag);
+      }
+  */
+
     public List<Ticket> getAll(){
         TicketLogger.writeLog(Level.INFO, "getAll controller start");
         return ticketService.getAlltickets();
     }
-/*
+
     public Map<String, Integer> getAllAgentsTicketCount(){
         return ticketReportService.ticketCountsGroupByAgent();
     }
-
     public int getTotalTicketCount(){
        return ticketReportService.getTotalTicketCounts();
     }
-
+/*
     public Ticket getOldestTicket() throws InvalidParameterException{
         Ticket ticket = ticketReportService.oldestTicket();
         return ticket;
@@ -98,9 +98,6 @@ public class TicketController {
        return ticketReportService.ticketsOlderByDays(days);
     }
 
-    public boolean isTicketExist(int id){
-
-        return true;
-    }*/
+    */
 
 }
