@@ -85,7 +85,7 @@ public class TicketService {
 	public List<Ticket> getTicketList() throws IOException, ClassNotFoundException {
 		repository.updatePool();
 		List<Ticket> list = repository.getStreamValues()
-				.sorted((obj1, obj2) -> (obj1.getModified() < obj2.getModified()) ? 1 : -1)
+				.sorted((obj1, obj2) -> (obj1.getModified() > obj2.getModified()) ? 1 : -1)
 				.collect(Collectors.toList());
 		if (!list.isEmpty()) {
 			return list;

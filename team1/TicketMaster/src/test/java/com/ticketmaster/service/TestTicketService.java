@@ -11,7 +11,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.io.InvalidClassException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,7 +25,7 @@ import static junit.framework.TestCase.*;
 public class TestTicketService {
 
 
-    protected static class Data{
+    protected static class Data {
         protected static boolean isSet  =   false;
         protected static Integer INVALID_ID;
         protected static Integer ID;
@@ -47,6 +46,7 @@ public class TestTicketService {
         protected static Set NEW_NULL_TAGS      =   null;
 
         protected static TicketService service;
+        protected static ReportService reportService;
 
         protected static void initialize(){
 
@@ -59,6 +59,7 @@ public class TestTicketService {
             Data.TAGS       =   new HashSet<>(Arrays.asList("tag1","tag2"));
             Data.NEW_TAGS   =   new HashSet<>(Arrays.asList(TAG_STRING));
             Data.service    =   new TicketService();
+            Data.reportService = new ReportService();
 
             Data.isSet = true;
 

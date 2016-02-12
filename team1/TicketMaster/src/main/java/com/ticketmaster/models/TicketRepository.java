@@ -124,18 +124,14 @@ public class TicketRepository {
     }
 
     public void initTagList(){
-
         if (ticketList != null){
             ticketList.values().stream().forEach(e-> tagList.addAll( e.getTags() ) );
         }
     }
 
     public void initAgentList(){
-
-        if (ticketList != null){
+        if (ticketList != null)
             ticketList.values().stream().forEach(e-> agentList.add(e.getAgent()) );
-        }
-
     }
 
     public Stream<Ticket> getStreamValues(){

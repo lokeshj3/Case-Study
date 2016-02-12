@@ -18,10 +18,13 @@ import java.util.stream.Collectors;
 public class ReportService {
 
 	/**
-	 * 	REPORTS
+	 * REPORTS
 	 */
-
 	TicketRepository repository;
+
+	public ReportService() {
+		repository = TicketRepository.init();
+	}
 
 	//get count of total tickets.
 	public int getTicketCount() {
@@ -31,19 +34,20 @@ public class ReportService {
 	//get oldest ticket from the system
 	public Ticket getOldestTicket() {
 		return repository.getStreamValues()
-				.min((Ticket obj1, Ticket obj2) -> (obj1.getModified() < (obj2.getModified())) ? 1 : -1)
+				.min((Ticket obj1, Ticket obj2) -> (obj1.getModified() > (obj2.getModified())) ? 1 : -1)
 				.get();
 	}
 
 	//tag wise ticket count
 	public Map<String, Integer> tagTicketCount() {
 		List<Set> tagList = repository.getStreamValues().map(Ticket::getTags).collect(Collectors.toList());
-		HashMap tagCountMap = new HashMap();
-		int i = 1;
+		Map<String, Integer> tagCountMap = new HashMap();
+		int i;
 		for (Set<String> s : tagList) {
 			for (String st : s) {
 				if (tagCountMap.containsKey(st)) {
-					tagCountMap.put(st, i++);
+					i = tagCountMap.get(st) +1 ;
+					tagCountMap.put(st, i);
 				}
 				else
 					tagCountMap.put(st, 1);
@@ -52,8 +56,7 @@ public class ReportService {
 		return tagCountMap;
 	}
 
-	public List<Ticket> ticketOlderThanXdays(int days)
-	{
+	public List<Ticket> ticketOlderThanXdays(int days) {
 		long time = LocalDateTime.now(ZoneId.of("UTC")).minusDays(days).toInstant(ZoneOffset.UTC).toEpochMilli();
 		return repository.getStreamValues().filter(ticket -> (ticket.getModified() <= time))
 				.sorted((Ticket obj1, Ticket obj2) -> (obj1.getModified() < (obj2.getModified())) ? 1 : -1)
