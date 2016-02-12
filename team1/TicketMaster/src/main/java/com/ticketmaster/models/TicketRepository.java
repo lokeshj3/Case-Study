@@ -31,6 +31,7 @@ public class TicketRepository {
             tagList = new HashSet<>();
 
         }
+        util = new SerializerUtil();
     }
     /**
      * init method is used to get the TicketRepository object
@@ -99,7 +100,7 @@ public class TicketRepository {
         addAgent(ticket.getAgent());
         addTags(ticket.getTags());
         //update id in file
-        util.writeProperty("id",ticket.getId().toString());
+        util.writeProperty("id",Ticket.masterId.toString());
         return ticket != null;
 
     }

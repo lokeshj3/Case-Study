@@ -5,8 +5,8 @@ team1/TicketMaster/out/*
 *.jar
 *.iml
 team1/TicketMaster/target/*
-team1/TicketMaster/files/logs/syslog.log
 team1/TicketMaster/files/logs/*
+team1/TicketMaster/files/logs/syslog.log
 *.log
 # Except this file
 !.gitignore

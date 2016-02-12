@@ -25,8 +25,7 @@ import java.util.Properties;
 
 public class SerializerUtil {
 
-    public SerializerUtil(){
-
+    public SerializerUtil() {
     }
 
     public SerializerUtil(String filename){
@@ -76,6 +75,9 @@ public class SerializerUtil {
 
     public void emptyObjectFile()
             throws IOException{
+
+        if (file == null) checkFiles(SerializerUtil.getSerializedFileName());
+
         new ObjectOutputStream(new FileOutputStream(file)).close();
         new ObjectOutputStream(new FileOutputStream(file)).close();
     }
