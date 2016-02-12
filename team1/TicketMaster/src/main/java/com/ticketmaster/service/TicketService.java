@@ -8,6 +8,7 @@ import com.ticketmaster.models.TicketRepository;
 import com.ticketmaster.utils.CustomLogger;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -46,39 +47,37 @@ public class TicketService {
 	public Ticket updateTicket(Integer id, String newAgent, Set<String> newTag)
 			throws NoUpdateException, NotFoundException {
 
-		ticket = this.getSingleTicket(id);
-		if (ticket != null) {
-			boolean flag = false;
-			if (newAgent != null && newAgent.length() > 0) {
-				ticket.setAgent(newAgent);
-				flag = true;
-			}
-			if (newTag != null) {
-				ticket.setTags(newTag);
-				flag = true;
-			}
+		ticket = this.getTicket(id);
 
-			if (!flag) {
-				throw new NoUpdateException("Nothing to update");
-			}
-			return ticket;
+		boolean flag = false;
+
+		if (newAgent != null && newAgent.length() > 0) {
+			ticket.setAgent(newAgent);
+			flag = true;
 		}
-		else return new Ticket();
+		if (newTag != null) {
+			ticket.setTags(newTag);
+			flag = true;
+		}
+
+		if (!flag) {
+			throw new NoUpdateException("Nothing to update");
+		}
+		return ticket;
+
+
 	}
 
 	// get ticket details
-	public Ticket getSingleTicket(int id) throws NotFoundException {
+	public Ticket getTicket(Integer id) throws NotFoundException {
 		return repository.getTicket(id);
 	}
 
 	// delete ticket
 	public boolean deleteTicket(int id) throws NotFoundException, IOException, ClassNotFoundException {
-		ticket = this.getSingleTicket(id);
-		if (ticket != null) {
-			if(repository.delete(id));
-			return true;
-		}
-		return false;
+		ticket = this.getTicket(id);
+		repository.delete(id);
+		return true;
 	}
 
 	// get ticket list
@@ -87,69 +86,45 @@ public class TicketService {
 		List<Ticket> list = repository.getStreamValues()
 				.sorted((obj1, obj2) -> (obj1.getModified() > obj2.getModified()) ? 1 : -1)
 				.collect(Collectors.toList());
-		if (!list.isEmpty()) {
-			return list;
-		}
-		return new LinkedList<>();
+
+		return list;
 	}
 
 	// search ticket count by agent / tags
 	public List<Ticket> searchTicket(String key, String... value) throws IOException, ClassNotFoundException {
+		List<Ticket> result = new LinkedList<>();
 		repository.updatePool();
 		if (value.length == 1) {
 			String val = value[0];
-			return repository.getStreamValues()
+			result = repository.getStreamValues()
 					.filter(obj -> (key.equals("agent")) ? obj.getAgent().toLowerCase().equals(val.toLowerCase()) : obj.getTags().contains(val.toLowerCase()))
 					.sorted((obj1, obj2) -> (obj1.getModified() < obj2.getModified()) ? 1 : -1)
 					.collect(Collectors.toList());
 		}
-		return new LinkedList<>();
-	}
-/*
-
-	*/
-/**
-	 * 	REPORTS
-	 *//*
-
-
-	//get count of total tickets.
-	public int getTicketCount() {
-		return repository.getList().size();
-	}
-
-	//get oldest ticket from the system
-	public Ticket getOldestTicket() {
-		return repository.getStreamValues()
-				.min((Ticket obj1, Ticket obj2) -> (obj1.getModified() < (obj2.getModified())) ? 1 : -1)
-				.get();
+		return result;
 	}
 
 	//tag wise ticket count
-	public Map<String, Integer> tagTicketCount() {
-		List<Set> tagList = repository.getStreamValues().map(Ticket::getTags).collect(Collectors.toList());
-		HashMap tagCountMap = new HashMap();
-		int i = 1;
-		for (Set<String> s : tagList) {
-			for (String st : s) {
-				if (tagCountMap.containsKey(st)) {
-					tagCountMap.put(st, i++);
-				}
-				else
-					tagCountMap.put(st, 1);
+	public Map<String, Integer> agentTicketCount() {
+
+		List<String> agentList = repository.getList().values().stream().map(Ticket::getAgent).collect(Collectors.toList());
+		Map<String, Integer> agentCountMap = new HashMap<>();
+		int i;
+
+		for (String s : agentList) {
+			if (agentCountMap.containsKey(s)) {
+				i = agentCountMap.get(s)+1;
+				agentCountMap.put(s, i);
 			}
+			else
+				agentCountMap.put(s, 1);
 		}
-		return tagCountMap;
+
+		return agentCountMap;
 	}
 
-	public List<Ticket> ticketOlderThanXdays(int days)
-	{
-		long time = LocalDateTime.now(ZoneId.of("UTC")).minusDays(days).toInstant(ZoneOffset.UTC).toEpochMilli();
-		return repository.getStreamValues().filter(ticket -> (ticket.getModified() <= time))
-				.sorted((Ticket obj1, Ticket obj2) -> (obj1.getModified() < (obj2.getModified())) ? 1 : -1)
-				.collect(Collectors.toList());
-	}
-*/
+
+
 
     public TicketService(){
         repository = TicketRepository.init();
@@ -167,9 +142,9 @@ public class TicketService {
         repository.initAgentList();
     }
 
-    public void cleanTestData()
+    public void cleanTestData(Integer id )
             throws IOException, NotFoundException{
-        repository.delete(--Ticket.masterId);
+        repository.delete(id);
     }
 
     //properties
