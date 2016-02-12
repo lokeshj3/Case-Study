@@ -111,7 +111,7 @@ public class TicketReportServiceTest {
     public void testTicketsCountByTag()
     {
         Map<String, Long> agentTicketCount = ticketReportService.ticketsCountByTag();
-        agentTicketCount.forEach((tag,count)-> Assert.assertEquals(count.toString(),Integer.toString(ticketReportService.ticketsByAgent(tag).size())));
+        agentTicketCount.forEach((tag,count)-> Assert.assertEquals(count.toString(),Integer.toString(ticketReportService.ticketsByTag(tag).size())));
     }
 
     //Test Cases for totalTicketCount
