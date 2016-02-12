@@ -49,23 +49,23 @@ public class AppRunner {
                     //Get all Agent with Ticket Counts
                     objUserDataController.allAgentsTicketCount();
                     break;
-                /*case 8:
+                case 8:
                     //Search Ticket By Tag
                     objUserDataController.getTicketsByTag();
-                    break; */
+                    break;
                     case 9:
                     //Report on Number of Tickets in System
                     objUserDataController.TotalTicketCount();
                     break;
-                /*case 10:
+                case 10:
                     //Oldest Ticket(s) in System
-                    objUserDataController.getOldestTicket();
+                    objUserDataController.oldestTicket();
                     break;
                 case 11:
                     //Ticket Older than entered Days
                     objUserDataController.getOlderTicketsThanDays();
                     break;
-                case 12:
+                /*case 12:
                     //Number of Tickets with entered tag
                     //objUserDataController.ticketsReportForTag();*/
                 case 13:

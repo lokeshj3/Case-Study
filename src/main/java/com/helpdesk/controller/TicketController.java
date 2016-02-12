@@ -75,10 +75,14 @@ public class TicketController {
         return ticketReportService.ticketsByAgentName(agentName);
     }
 
-    /*  public List<Ticket> getTicketsByTag(String tag){
-          return ticketReportService.ticketsByTag(tag);
+    public List<Ticket> getTicketsByTag(Set<String> tagSet) throws TicketExceptions{
+        if(tagSet != null || !tagSet.isEmpty()) {
+            return ticketReportService.ticketsByTag(tagSet);
+        }
+        else
+            throw new InvalidParamsException("Please enter proper tag names!");
       }
-  */
+
 
     public List<Ticket> getAll(){
         TicketLogger.writeLog(Level.INFO, "getAll controller start");
@@ -94,16 +98,33 @@ public class TicketController {
         TicketLogger.writeLog(Level.INFO, "getTotalTicketCount controller start");
        return ticketReportService.getTotalTicketCounts();
     }
-/*
-    public Ticket getOldestTicket() throws InvalidParameterException{
+
+    public Ticket getOldestTicket() throws TicketExceptions{
         Ticket ticket = ticketReportService.oldestTicket();
         return ticket;
     }
 
-    public List<Ticket> getOlderTicketsThanDays(int days) {
-       return ticketReportService.ticketsOlderByDays(days);
+    public List<Ticket> olderTicketsThanDays(int days) throws InvalidParamsException {
+        if(days == (int)days && days >= 0){
+            return ticketReportService.ticketsOlderByDays(days);
+        }
+        else {
+            throw new InvalidParamsException("Please enter proper no of days!");
+        }
     }
 
-    */
 
+    public void displayTickets(List<Ticket> ticketList){
+        TicketLogger.writeLog(Level.INFO, "Display ticket list start");
+        if(ticketList.size() > 0){
+            ticketList
+                    .stream()
+                    .sorted((Ticket t1, Ticket t2) -> t2.getUpdated()
+                    .compareTo(t1.getUpdated())).forEach(System.out::println);
+        }
+        else {
+            TicketLogger.writeLog(Level.INFO, "No tickets in system");
+            System.out.println("No tickets found!");
+        }
+    }
 }

@@ -96,33 +96,32 @@ public class TestTicketService {
     public void beforeTest(){
         ticketController = new TicketController();
     }
-
-    @Test
+    @Test(expected = TicketExceptions.class)
     public void testCreateTicketWithNullSubject() throws TicketExceptions{
         Ticket ticket = ticketController.create(nullSubject, agent, tagSet);
     }
 
-    @Test
+    @Test(expected = TicketExceptions.class)
     public void testCreateTicketWithEmptySubject() throws TicketExceptions{
         Ticket ticket = ticketController.create(emptySubject, agent, tagSet);
     }
 
-    @Test
+    @Test(expected = TicketExceptions.class)
     public void testCreateTicketWithNullAgent() throws TicketExceptions{
         Ticket ticket = ticketController.create(subject,nullAgent,tagSet);
     }
 
-    @Test
+    @Test(expected = TicketExceptions.class)
     public void testCreateTicketWithEmptyAgent() throws TicketExceptions{
         Ticket ticket = ticketController.create(subject,emptyAgent,tagSet);
     }
 
-    @Test
+    @Test(expected = TicketExceptions.class)
     public void testCreateTicketWithNullSubjectAndAgent() throws TicketExceptions{
         Ticket ticket = ticketController.create(nullSubject,nullAgent,tagSet);
     }
 
-    @Test
+    @Test(expected = TicketExceptions.class)
     public void testCreateTicketWithEmptySubjectAndAgent() throws TicketExceptions{
         Ticket ticket = ticketController.create(emptySubject,emptyAgent,tagSet);
     }
@@ -146,19 +145,18 @@ public class TestTicketService {
     }
 
     //update ticket
-
-    @Test
+    @Test(expected = TicketExceptions.class)
     public void testUpdateTicketWithInvalidTicketId() throws TicketExceptions{
         Ticket ticket = ticketController.update(invalidTicketId,agent,emptyTagSet,UpdateChoiceAgent);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testUpdateTicketWithNullAgent() throws TicketExceptions{
         Ticket ticket = ticketController.create(subject,agent,tagSet);
         Ticket updateTicket = ticketController.update(ticket.getId(),nullAgent,tagSet,UpdateChoiceAgent);
     }
-    // need to delete file after class using @After
-    @Test
+
+    @Test(expected = NullPointerException.class)
     public void testUpdateTicketWithEmptyAgent() throws TicketExceptions{
         Ticket ticket = ticketController.create(subject,agent,tagSet);
         Ticket updateTicket = ticketController.update(ticket.getId(),nullAgent,tagSet,UpdateChoiceAgent);
@@ -186,7 +184,7 @@ public class TestTicketService {
 
     // Delete
 
-    @Test
+    @Test(expected = TicketExceptions.class)
     public void testDeleteTicketWithInvalidTicketId() throws TicketExceptions{
         Ticket ticket = ticketController.create(subject,agent,tagSet);
         Boolean result = ticketController.delete(invalidTicketId);
@@ -201,7 +199,7 @@ public class TestTicketService {
     }
 
     //Get Ticket Details By Id
-    @Test
+    @Test(expected = TicketExceptions.class)
     public void testTicketDetailsByInvalidId()  throws TicketExceptions{
         Ticket ticket = ticketController.create(subject,agent,tagSet);
         Ticket ticketDetails = ticketController.getDetails(invalidTicketId);
@@ -235,11 +233,11 @@ public class TestTicketService {
         deleteDummyTicket(dummyTicketList,ticketController);
     }
 
-    @Test()
+    @Test
     public void testGetTicketsByAgentName()  throws TicketExceptions{
         List<Ticket> dummyTicketList = createDummyTickets(ticketController);
         List<Ticket> agentTickets = ticketController.getTicketsByAgent(agent);
-        Assert.assertEquals(2,agentTickets.size());
+        Assert.assertEquals(3,agentTickets.size());
         agentTickets.forEach(tickets -> Assert.assertEquals(agent,tickets.getAgent()));
         deleteDummyTicket(dummyTicketList,ticketController);
     }

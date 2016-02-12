@@ -5,6 +5,7 @@ import com.helpdesk.exception.TicketExceptions;
 import com.helpdesk.model.Ticket;
 import com.helpdesk.serialization.TicketSerialization;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -75,10 +76,7 @@ public class TicketRepository {
      * return all tickets sorted by updated time.
      * */
     public List<Ticket> getAllTickets(){
-        return ticketMap.values().stream()
-                .sorted((Ticket t1, Ticket t2)-> t2.getUpdated()
-                        .compareTo(t1.getUpdated()))
-                .collect(Collectors.toList());
+       return ticketMap.values().stream().collect(Collectors.toList());
     }
 
     /**
