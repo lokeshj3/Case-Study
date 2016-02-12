@@ -48,23 +48,24 @@ public class TicketService {
 			throws NoUpdateException, NotFoundException {
 
 		ticket = this.getTicket(id);
-		if (ticket != null) {
-			boolean flag = false;
-			if (newAgent != null && newAgent.length() > 0) {
-				ticket.setAgent(newAgent);
-				flag = true;
-			}
-			if (newTag != null) {
-				ticket.setTags(newTag);
-				flag = true;
-			}
 
-			if (!flag) {
-				throw new NoUpdateException("Nothing to update");
-			}
-			return ticket;
+		boolean flag = false;
+
+		if (newAgent != null && newAgent.length() > 0) {
+			ticket.setAgent(newAgent);
+			flag = true;
 		}
-		else return new Ticket();
+		if (newTag != null) {
+			ticket.setTags(newTag);
+			flag = true;
+		}
+
+		if (!flag) {
+			throw new NoUpdateException("Nothing to update");
+		}
+		return ticket;
+
+
 	}
 
 	// get ticket details
@@ -75,25 +76,21 @@ public class TicketService {
 	// delete ticket
 	public boolean deleteTicket(int id) throws NotFoundException, IOException, ClassNotFoundException {
 		ticket = this.getTicket(id);
-		if (ticket != null) {
-			if(repository.delete(id));
-			return true;
-		}
-		else {
-			throw new NotFoundException("Record with id:"+id +" does not exists");
-		}
+		repository.delete(id);
+		return true;
 	}
 
 	// get ticket list
 	public List<Ticket> getTicketList() throws IOException, ClassNotFoundException {
+		List<Ticket> list;
+
 		repository.updatePool();
-		List<Ticket> list = repository.getStreamValues()
+
+		list = repository.getStreamValues()
 				.sorted((obj1, obj2) -> (obj1.getModified() < obj2.getModified()) ? 1 : -1)
 				.collect(Collectors.toList());
-		if (!list.isEmpty()) {
-			return list;
-		}
-		return new LinkedList<>();
+
+		return list;
 	}
 
 	// search ticket count by agent / tags

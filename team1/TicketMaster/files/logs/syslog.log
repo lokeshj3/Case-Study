@@ -1,0 +1,136 @@
+[12-02-2016 18:54:28.101][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 18:54:28.115][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 1
+[12-02-2016 18:54:28.116][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 18:54:28.119][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 2
+[12-02-2016 18:54:28.120][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 18:54:28.121][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 3
+[12-02-2016 18:54:28.122][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 18:54:28.123][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 4
+[12-02-2016 18:54:28.132][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 18:54:28.134][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 5
+[12-02-2016 18:54:28.136][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 18:54:28.138][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 6
+[12-02-2016 18:54:28.138][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: null
+[12-02-2016 18:54:28.139][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 18:54:28.140][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 7
+[12-02-2016 18:54:28.143][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: null agent: test-agent1
+[12-02-2016 18:54:28.144][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 18:54:28.146][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 8
+[12-02-2016 18:54:28.147][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 18:54:28.148][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 9
+[12-02-2016 18:54:28.150][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 18:54:28.152][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 10
+[12-02-2016 18:54:28.153][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 18:54:28.154][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 11
+[12-02-2016 18:54:28.155][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 18:54:28.156][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 12
+[12-02-2016 18:54:28.156][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 18:54:28.157][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 13
+[12-02-2016 18:54:28.159][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 18:54:28.160][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 14
+[12-02-2016 18:54:28.161][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 18:54:28.162][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 15
+[12-02-2016 18:54:28.164][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 18:54:28.165][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 16
+[12-02-2016 19:01:46.921][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:46.935][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 17
+[12-02-2016 19:01:46.937][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:46.939][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 18
+[12-02-2016 19:01:46.943][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:46.946][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 19
+[12-02-2016 19:01:46.946][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:46.950][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 20
+[12-02-2016 19:01:46.961][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:46.964][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 21
+[12-02-2016 19:01:46.967][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:46.969][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 22
+[12-02-2016 19:01:46.970][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: null
+[12-02-2016 19:01:46.971][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:46.973][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 23
+[12-02-2016 19:01:46.978][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: null agent: test-agent1
+[12-02-2016 19:01:46.979][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:46.983][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 24
+[12-02-2016 19:01:46.984][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:46.986][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 25
+[12-02-2016 19:01:46.989][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:46.990][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 26
+[12-02-2016 19:01:46.992][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:46.993][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 27
+[12-02-2016 19:01:46.995][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:46.998][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 28
+[12-02-2016 19:01:46.999][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:47.001][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 29
+[12-02-2016 19:01:47.003][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:47.005][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 30
+[12-02-2016 19:01:47.007][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:47.009][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 31
+[12-02-2016 19:01:47.012][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:47.015][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 32
+[12-02-2016 19:01:51.708][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:51.723][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 33
+[12-02-2016 19:01:51.725][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:51.726][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 34
+[12-02-2016 19:01:51.730][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:51.732][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 35
+[12-02-2016 19:01:51.733][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:51.735][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 36
+[12-02-2016 19:01:51.744][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:51.748][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 37
+[12-02-2016 19:01:51.750][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:51.752][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 38
+[12-02-2016 19:01:51.752][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: null
+[12-02-2016 19:01:51.753][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:51.755][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 39
+[12-02-2016 19:01:51.758][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: null agent: test-agent1
+[12-02-2016 19:01:51.759][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:51.761][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 40
+[12-02-2016 19:01:51.766][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:51.768][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 41
+[12-02-2016 19:01:51.770][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:51.771][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 42
+[12-02-2016 19:01:51.773][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:51.775][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 43
+[12-02-2016 19:01:51.776][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:51.778][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 44
+[12-02-2016 19:01:51.779][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:51.781][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 45
+[12-02-2016 19:01:51.784][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:51.786][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 46
+[12-02-2016 19:01:51.789][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:51.791][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 47
+[12-02-2016 19:01:51.794][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:01:51.796][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 48
+[12-02-2016 19:03:18.400][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:03:18.416][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 49
+[12-02-2016 19:03:18.418][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:03:18.422][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 50
+[12-02-2016 19:03:18.426][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:03:18.431][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 51
+[12-02-2016 19:03:18.432][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:03:18.434][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 52
+[12-02-2016 19:03:18.449][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:03:18.450][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 53
+[12-02-2016 19:03:18.452][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:03:18.455][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 54
+[12-02-2016 19:03:18.456][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: null
+[12-02-2016 19:03:18.457][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:03:18.459][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 55
+[12-02-2016 19:03:18.466][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: null agent: test-agent1
+[12-02-2016 19:03:18.467][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:03:18.469][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 56
+[12-02-2016 19:03:18.472][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:03:18.473][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 57
+[12-02-2016 19:03:18.476][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:03:18.478][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 58
+[12-02-2016 19:03:18.479][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:03:18.481][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 59
+[12-02-2016 19:03:18.483][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:03:18.485][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 60
+[12-02-2016 19:03:18.485][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:03:18.487][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 61
+[12-02-2016 19:03:18.489][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:03:18.491][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 62
+[12-02-2016 19:03:18.494][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:03:18.496][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 63
+[12-02-2016 19:03:18.499][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[12-02-2016 19:03:18.500][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 64

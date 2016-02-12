@@ -3,13 +3,15 @@ package com.ticketmaster.service;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+
 /**
  * Created by root on 12/2/16.
  */
 public class ReportServiceTest {
 
 	@Before
-	public void dataGen(){
+	public void dataGen() throws IOException, ClassNotFoundException {
 		TestTicketService.beforeAll();
 	}
 
