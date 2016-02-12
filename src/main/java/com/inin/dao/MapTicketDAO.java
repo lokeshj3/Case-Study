@@ -7,6 +7,7 @@ import com.inin.util.TicketUtil;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 
@@ -14,8 +15,7 @@ import java.util.stream.Collectors;
  * Created by root on 11/2/16.
  */
 public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
-    private static final Map<Integer, Ticket> ticketMap  = new HashMap<>();
-
+    MapRepository ticketMap = new MapRepository();
     /**
      * Create Ticket in Map.
      * @param ticket
@@ -25,7 +25,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
     public int create(Ticket ticket) throws IllegalArgumentException{
         if(ticket == null)
             throw new IllegalArgumentException("Ticket should not be null");
-        ticketMap.put(ticket.getId(),ticket);
+        ticketMap.getTicketMap().put(ticket.getId(),ticket);
         return ticket.getId();
     }
 
@@ -39,7 +39,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
         if(!isExist(id))
             throw new TicketNotFoundException("No Ticket found with id"+id);
 
-        Ticket ticket = ticketMap.get(id);
+        Ticket ticket = ticketMap.getTicketMap().get(id);
         ticket.setAgent(agent);
         if (TicketUtil.isValidCollection(tags)){
             ticket.setTags(tags);
@@ -57,7 +57,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
     public boolean delete(int id) {
         if(!isExist(id))
             throw new TicketNotFoundException("No Ticket found with id"+id);
-        return ticketMap.remove(id) != null ? true : false;
+        return ticketMap.getTicketMap().remove(id) != null ? true : false;
     }
 
 
@@ -67,7 +67,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
      */
     @Override
     public int count() {
-        return ticketMap.size();
+        return ticketMap.getTicketMap().size();
     }
 
     /**
@@ -76,7 +76,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
      * @return boolean
      */
     private boolean isExist(int id){
-        return ticketMap.containsKey(id);
+        return ticketMap.getTicketMap().containsKey(id);
     }
 
 
@@ -89,7 +89,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
     public Ticket findById(int id) {
         if(!isExist(id))
             throw new TicketNotFoundException("No Ticket found with id"+id);
-        return ticketMap.get(id);
+        return ticketMap.getTicketMap().get(id);
     }
 
     /**
@@ -98,8 +98,8 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
      */
     @Override
     public List<Ticket> findAll() {
-        if(ticketMap.size() > 0)
-            return ticketMap.values()
+        if(ticketMap.getTicketMap().size() > 0)
+            return ticketMap.getTicketMap().values()
                     .stream()
                     .sorted((ticket1,ticket2)->ticket1.getCreated().compareTo(ticket2.getCreated()))
                     .collect(Collectors.toList());
@@ -115,8 +115,8 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
     @Override
     public List<Ticket> findAllByAgent(String agent) {
         String tempAgent = agent.toLowerCase();
-        if (ticketMap.size() > 0)
-            return ticketMap.values()
+        if (ticketMap.getTicketMap().size() > 0)
+            return ticketMap.getTicketMap().values()
                     .stream()
                     .filter(ticket -> ticket.getAgent().toLowerCase().equals(tempAgent))
                     .sorted((ticket1,ticket2)->ticket1.getCreated().compareTo(ticket2.getCreated()))
@@ -133,8 +133,8 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
     @Override
     public List<Ticket> findAllByTag(String tag) {
         String tempTag = tag.toLowerCase();
-        if (ticketMap.size() > 0)
-            return ticketMap.values()
+        if (ticketMap.getTicketMap().size() > 0)
+            return ticketMap.getTicketMap().values()
                     .stream()
                     .filter(ticket -> ticket.getTags().contains(tempTag))
                     .sorted((ticket1,ticket2)->ticket1.getCreated().compareTo(ticket2.getCreated()))
@@ -150,10 +150,10 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
      */
     @Override
     public Ticket findOldestRecord() {
-        if (ticketMap.isEmpty())
+        if (ticketMap.getTicketMap().isEmpty())
             throw new TicketNotFoundException("No Ticket found.");
 
-        return ticketMap.values()
+        return ticketMap.getTicketMap().values()
                 .stream()
                 .sorted((Ticket t1, Ticket t2) -> t1.getCreated().compareTo(t2.getCreated()))
                 .findFirst()
@@ -163,15 +163,15 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
 
 
     /**
-     * Function to fetch Tickets Older than the Date entered
+     * Returns Tickets Older than the Date entered
      * @param date
      * @return List<Ticket>
      */
     @Override
     public List<Ticket> findTicketsFromDate(LocalDateTime date){
-        if (ticketMap.isEmpty())
+        if (ticketMap.getTicketMap().isEmpty())
             return new ArrayList<>();
-        return ticketMap.values()
+        return ticketMap.getTicketMap().values()
                 .stream()
                 .filter(ticket -> date.compareTo(ticket.getCreated()) >=0 )
                 .collect(Collectors.toList());
@@ -184,8 +184,8 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
      */
     @Override
     public Map<String ,Long> ticketsCountByAgent(){
-        if(ticketMap.size() > 0)
-        return ticketMap.values()
+        if(ticketMap.getTicketMap().size() > 0)
+        return ticketMap.getTicketMap().values()
                 .stream()
                 .collect(Collectors.groupingBy(Ticket::getAgent,Collectors.counting()));
 
@@ -201,7 +201,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
     public Map<String, Long> ticketsCountByTag() {
         Map<String,Long> ticketByTag = new HashMap<>();
         if(ticketByTag.size() > 0)
-            ticketMap.values()
+            ticketMap.getTicketMap().values()
                     .stream()
                     .forEach(ticket -> {
                         ticket.getTags().forEach( tag -> {
