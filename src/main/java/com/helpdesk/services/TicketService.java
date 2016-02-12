@@ -45,7 +45,8 @@ public class TicketService {
         writeLog(Level.INFO, "Update ticket service start");
         Ticket ticket = objRepository.getTicket(id);
 
-        ticket.updateAgent(agentName);
+        if(!agentName.isEmpty() && agentName != null)
+            ticket.updateAgent(agentName);
 
         if (action.equals("a")) {  // Adding new  tags
             tagSet.addAll(ticket.getTags());
@@ -85,7 +86,6 @@ public class TicketService {
 
     public boolean delete(int id) throws TicketExceptions {
         writeLog(Level.INFO, "Update ticket service start");
-        objRepository.getTicket(id);
 
         if(objRepository.deleteTicket(id))
             return true;

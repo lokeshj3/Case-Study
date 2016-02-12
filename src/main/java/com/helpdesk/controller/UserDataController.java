@@ -36,6 +36,7 @@ public class UserDataController extends  TicketController{
 
 
     public  void update() {
+        TicketLogger.writeLog(Level.INFO, "update start");
         int id = Util.readInteger("Enter ticket Id to update : ");
         String agentName = null;
         HashSet<String> tagSet = null;
@@ -74,6 +75,7 @@ public class UserDataController extends  TicketController{
     }
 
     public void delete(){
+        TicketLogger.writeLog(Level.INFO, "delete start");
         int id = Util.readInteger("Enter ticket Id for deletion : ");
         if(id>0){
             try {
@@ -99,6 +101,7 @@ public class UserDataController extends  TicketController{
     }
 
     public void TicketsByAgent() {
+        TicketLogger.writeLog(Level.INFO, "TicketsByAgent start");
          String agentName = Util.readString("Please enter Agent Name : ");
 
          if(!agentName.isEmpty()){
@@ -136,6 +139,8 @@ public class UserDataController extends  TicketController{
 
 
     public void allAgentsTicketCount(){
+        TicketLogger.writeLog(Level.INFO, "allAgentsTicketCount start");
+
         Map<String, List<Ticket>> ticketCountList = this.getAllAgentsTicketCount();
         if(ticketCountList.size()>0){
             ticketCountList.forEach((String agentName, List<Ticket> ticketList) -> System.out.println(agentName + " :  " + ticketList.size()));

@@ -23,11 +23,10 @@ public class TicketSerialization {
      * @param ticketMap
      * */
     public boolean saveTicketsInFile(Map<Integer, Ticket> ticketMap, boolean append){
-        //try(FileOutputStream fos = new FileOutputStream(file, append); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         try{
-            fos = new FileOutputStream(file, true);
+            fos = new FileOutputStream(file, append);
 
             for (Ticket ticket : ticketMap.values()){
                 oos = new ObjectOutputStream(fos);

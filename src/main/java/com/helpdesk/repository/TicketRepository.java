@@ -49,14 +49,13 @@ public class TicketRepository {
     public boolean updateTicket(int id, Ticket ticket){
         Ticket tempTicket = ticketMap.get(id);
         ticketMap.put(id, ticket);
-        if(ticketSerialization.saveTicketsInFile(ticketMap, false)){
+        if(ticketSerialization.saveSingelTicket(ticket)){
            return true;
         }
         else {
             ticketMap.put(id, tempTicket);
             return false;
         }
-        //ser
     }
 
     /**
@@ -65,6 +64,7 @@ public class TicketRepository {
     public boolean deleteTicket(int id) {
         if (ticketMap.containsKey(id)){
             ticketMap.remove(id);
+            ticketSerialization.saveTicketsInFile(ticketMap, false);
             return true;
         }
         else
@@ -105,7 +105,4 @@ public class TicketRepository {
             throw new TicketExceptions("Ticket not found");
         }
     }
-
-
-
 }

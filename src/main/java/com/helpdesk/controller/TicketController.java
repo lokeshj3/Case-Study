@@ -53,6 +53,7 @@ public class TicketController {
 
     public Boolean delete(int id) throws TicketExceptions {
         TicketLogger.writeLog(Level.INFO, "delete controller start");
+
         if(ticketService.delete(id))
             return  true;
         else
@@ -61,7 +62,7 @@ public class TicketController {
 
     public Ticket getDetails(int id) throws TicketExceptions{
         TicketLogger.writeLog(Level.INFO, "getDetails start");
-        if(id == (int) id || id > 0){
+        if(id > 0){
             return ticketService.ticketDetails(id);
         }
         else {
@@ -70,6 +71,7 @@ public class TicketController {
     }
 
     public  List<Ticket> getTicketsByAgent(String agentName){
+        TicketLogger.writeLog(Level.INFO, "getTicketsByAgent start");
         return ticketReportService.ticketsByAgentName(agentName);
     }
 
@@ -84,10 +86,12 @@ public class TicketController {
     }
 
     public Map<String , List<Ticket>> getAllAgentsTicketCount(){
+        TicketLogger.writeLog(Level.INFO, "getAllAgentsTicketCount controller start");
         return ticketReportService.ticketCountsGroupByAgent();
     }
 
     public int getTotalTicketCount(){
+        TicketLogger.writeLog(Level.INFO, "getTotalTicketCount controller start");
        return ticketReportService.getTotalTicketCounts();
     }
 /*
