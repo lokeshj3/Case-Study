@@ -1,5 +1,6 @@
 package com.ticketmaster.models;
 
+import com.ticketmaster.utils.CustomLogger;
 import com.ticketmaster.utils.SerializerUtil;
 
 import java.io.IOException;
@@ -18,10 +19,6 @@ import java.util.Set;
  * Created by Virendra on 8/2/16.
  */
 public class Ticket implements Serializable{
-
-    public Ticket(){
-
-    }
 
     public Ticket(TicketBuilder object){
         this.subject=   object.getSubject();
@@ -59,8 +56,8 @@ public class Ticket implements Serializable{
         return this.modified;
     }
     public Set<String> getTags(){
-        if (!(this.tags instanceof Set))
-            this.tags = new HashSet<>();
+//        if (!(this.tags instanceof Set))
+//            this.tags = new HashSet<>();
         return this.tags;
     }
 
@@ -87,7 +84,7 @@ public class Ticket implements Serializable{
      */
     @Override
     public String toString(){
-        return "Ticket: id"+this.getId()+"|subject:"+this.getSubject()+"|agent:"+this.getAgent();
+        return "Ticket: id:"+this.getId()+"|subject:"+this.getSubject()+"|agent:"+this.getAgent();
     }
     /**
      * overridden method

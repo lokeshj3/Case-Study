@@ -70,16 +70,13 @@ public class TicketRepository {
      */
     public boolean delete(Integer id) throws IOException, NotFoundException{
 
-        Ticket ticket = ticketList.remove(id);
+        ticketList.remove(id);
 
-        if (ticket != null){
-            //clean file contents
-            util.emptyObjectFile();
-            //write complete data again to file
-            util.writeToFile(getList());
-            return true;
-        }
-        return false;
+        //clean file contents
+        util.emptyObjectFile();
+        //write complete data again to file
+        util.writeToFile(getList());
+        return true;
     }
 
 

@@ -5,9 +5,14 @@ import com.ticketmaster.exceptions.NoUpdateException;
 import com.ticketmaster.exceptions.NotFoundException;
 import com.ticketmaster.models.Ticket;
 import com.ticketmaster.models.TicketRepository;
+import com.ticketmaster.utils.AppUtil;
 import com.ticketmaster.utils.CustomLogger;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,13 +21,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Created by root on 8/2/16.
+ * TicketService class
+ * This class is used for CRUD and basic ticket operations
+ * Created by Virendra on 8/2/16.
  */
 public class TicketService {
-
-//	public TicketService() {
-//
-//	}
 
 	// create ticket
 	public Ticket createTicket(String subject, String agent, Set tags)
@@ -47,6 +50,9 @@ public class TicketService {
 	public Ticket updateTicket(Integer id, String newAgent, Set<String> newTag)
 			throws NoUpdateException, NotFoundException {
 
+
+		CustomLogger.init(classz).debug("updating ticket. Id:"+id+", to update: agent->"+newAgent+", tags->"+newTag);
+
 		ticket = this.getTicket(id);
 
 		boolean flag = false;
@@ -61,6 +67,7 @@ public class TicketService {
 		}
 
 		if (!flag) {
+			CustomLogger.init(classz).error("throwing NoUpdateException from update");
 			throw new NoUpdateException("Nothing to update");
 		}
 		return ticket;
@@ -77,6 +84,8 @@ public class TicketService {
 	public boolean deleteTicket(int id) throws NotFoundException, IOException, ClassNotFoundException {
 		ticket = this.getTicket(id);
 		repository.delete(id);
+		String time = LocalDateTime.now(ZoneId.of("UTC")).toInstant(ZoneOffset.UTC).now().toString();
+		CustomLogger.init().debug("ticket with id:"+id+" deleted from system on "+time);
 		return true;
 	}
 
@@ -101,6 +110,7 @@ public class TicketService {
 					.sorted((obj1, obj2) -> (obj1.getModified() < obj2.getModified()) ? 1 : -1)
 					.collect(Collectors.toList());
 		}
+		CustomLogger.init().debug("result of "+key+" search:"+result);
 		return result;
 	}
 
@@ -111,15 +121,12 @@ public class TicketService {
 		Map<String, Integer> agentCountMap = new HashMap<>();
 		int i;
 
-		for (String s : agentList) {
-			if (agentCountMap.containsKey(s)) {
-				i = agentCountMap.get(s)+1;
-				agentCountMap.put(s, i);
-			}
-			else
-				agentCountMap.put(s, 1);
+		for (String agent : agentList) {
+			i = AppUtil.prepareCount(Collections.unmodifiableMap(agentCountMap), agent);
+			agentCountMap.put(agent, i);
 		}
 
+		CustomLogger.init().debug("result of agent ticket count:"+agentCountMap);
 		return agentCountMap;
 	}
 

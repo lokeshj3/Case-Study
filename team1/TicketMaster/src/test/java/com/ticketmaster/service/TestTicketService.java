@@ -5,14 +5,23 @@ import com.ticketmaster.exceptions.NoUpdateException;
 import com.ticketmaster.exceptions.NotFoundException;
 import com.ticketmaster.models.Ticket;
 import com.ticketmaster.utils.AppUtil;
-import org.junit.*;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Set;
+import java.util.Map;
+import java.util.HashSet;
+import java.util.Arrays;
+import java.util.List;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 import static junit.framework.TestCase.assertFalse;
+
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Before;
+import org.junit.After;
+import org.junit.Test;
 
 /**
  * TestTicketService class
@@ -249,7 +258,6 @@ public class TestTicketService {
             throws NotFoundException, IOException, NoUpdateException,
             ClassNotFoundException, IncompleteDataException{
 
-
         Ticket ticket = null;
 
         try{
@@ -260,6 +268,19 @@ public class TestTicketService {
             //clean data
             Data.service.cleanTestData(ticket.getId());
         }
+
+    }
+    @Test(expected = NotFoundException.class)
+    public void testDeleteTicketTwice()
+            throws NoUpdateException, IOException ,
+            IncompleteDataException , ClassNotFoundException , NotFoundException{
+
+        Ticket ticket=Data.service.createTicket(Data.SUBJECT, Data.AGENT, Data.TAGS);
+        Data.ID = ticket.getId();
+        boolean result = Data.service.deleteTicket(Data.ID);
+        assertTrue(result);
+        //delete once more
+        Data.service.deleteTicket(Data.ID);
 
     }
 

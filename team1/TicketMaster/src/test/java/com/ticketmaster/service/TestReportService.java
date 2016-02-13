@@ -3,18 +3,24 @@ package com.ticketmaster.service;
 import com.ticketmaster.exceptions.IncompleteDataException;
 import com.ticketmaster.exceptions.NotFoundException;
 import com.ticketmaster.models.Ticket;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
- * Created by root on 12/2/16.
+ * TestReportService class
+ * This class is used to test reporting section of tickets
+ * Created by Evans on 12/2/16.
  */
 public class TestReportService {
 
