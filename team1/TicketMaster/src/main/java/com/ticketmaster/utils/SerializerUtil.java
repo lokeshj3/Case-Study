@@ -136,6 +136,7 @@ public class SerializerUtil {
                     tempMap.put(new Integer(temp.getId()), temp);
                 }
             }catch (EOFException e){
+                CustomLogger.init(SerializerUtil.class).warn("reached end of file while reading objects");
 
             }
             disconnectReader();

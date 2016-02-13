@@ -49,8 +49,6 @@ public class Ticket implements Serializable{
         return this.modified;
     }
     public Set<String> getTags(){
-        if (!(this.tags instanceof Set))
-            this.tags = new HashSet<>();
         return this.tags;
     }
 

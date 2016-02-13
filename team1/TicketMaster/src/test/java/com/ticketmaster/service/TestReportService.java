@@ -9,12 +9,20 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.fail;
 
 /**
- * Created by root on 12/2/16.
+ * TestReportService class
+ * This class is used to test reporting section of tickets
+ * Created by Evans on 12/2/16.
  */
 public class TestReportService {
 
@@ -23,6 +31,13 @@ public class TestReportService {
 		TestTicketService.beforeAll();
 		TestReportService testReportService = new TestReportService();
 		testReportService.dummyTicket(TestTicketService.Data.service);
+	}
+
+
+	@AfterClass
+	public static void close() throws ClassNotFoundException, IncompleteDataException, NotFoundException, IOException {
+		SerializerUtil serializerUtil = new SerializerUtil();
+		serializerUtil.emptyObjectFile();
 	}
 
 	@Test
@@ -72,12 +87,6 @@ public class TestReportService {
 	public void testTicketOlderThanXdays() throws Exception {
 		List<Ticket> olderTicketList = TestTicketService.Data.reportService.ticketOlderThanXdays(0);
 		assertEquals(olderTicketList.size(), TestTicketService.Data.service.getTicketList().size());
-	}
-
-	@AfterClass
-	public static void close() throws ClassNotFoundException, IncompleteDataException, NotFoundException, IOException {
-		SerializerUtil serializerUtil = new SerializerUtil();
-		serializerUtil.emptyObjectFile();
 	}
 
 	protected List<Ticket> dummyTicket(TicketService ticketService) throws ClassNotFoundException, IncompleteDataException, NotFoundException, IOException {
