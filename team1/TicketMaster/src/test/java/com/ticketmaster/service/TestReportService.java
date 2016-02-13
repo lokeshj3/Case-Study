@@ -70,8 +70,8 @@ public class TestReportService {
 
 	@Test
 	public void testTicketOlderThanXdays() throws Exception {
-		List<Ticket> olderTicketList = TestTicketService.Data.reportService.ticketOlderThanXdays(2);
-
+		List<Ticket> olderTicketList = TestTicketService.Data.reportService.ticketOlderThanXdays(0);
+		assertEquals(olderTicketList.size(), TestTicketService.Data.service.getTicketList().size());
 	}
 
 	protected List<Ticket> dummyTicket(TicketService ticketService) throws ClassNotFoundException, IncompleteDataException, NotFoundException, IOException {

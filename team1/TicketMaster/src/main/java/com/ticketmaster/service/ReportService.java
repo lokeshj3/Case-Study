@@ -59,7 +59,7 @@ public class ReportService {
 	public List<Ticket> ticketOlderThanXdays(int days) {
 		long time = LocalDateTime.now(ZoneId.of("UTC")).minusDays(days).toInstant(ZoneOffset.UTC).toEpochMilli();
 		return repository.getStreamValues().filter(ticket -> (ticket.getModified() <= time))
-				.sorted((Ticket obj1, Ticket obj2) -> (obj1.getModified() < (obj2.getModified())) ? 1 : -1)
+				.sorted((Ticket obj1, Ticket obj2) -> (obj1.getModified() > (obj2.getModified())) ? 1 : -1)
 				.collect(Collectors.toList());
 	}
 }
