@@ -1,5 +1,5 @@
 # Ignore everything in this directory
-tickets.ser
-conf.properties
+syslog.log
+*.log
 # Except this file
 !.gitignore
