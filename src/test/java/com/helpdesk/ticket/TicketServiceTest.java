@@ -177,7 +177,7 @@ public class TicketServiceTest {
     public void testUpdateTicketWithTagsandAgentName() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
         TicketService ticketService = new TicketService();
         ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
-        Ticket ticket = ticketService.updateAgentAndTags(Data.int_ticketId,Data.text_updateAgent , Data.updateTagSet);
+        Ticket ticket = ticketService.updateAgentAndTags(Data.int_ticketId, Data.text_updateAgent, Data.updateTagSet);
         Assert.assertEquals(Data.updateTagSet, ticket.getTags());
         Assert.assertEquals(Data.text_updateAgent, ticket.getAgentName());
         ticketService.deleteTicket(Data.int_ticketId);
@@ -223,25 +223,24 @@ public class TicketServiceTest {
     }
 
 
-
     // tickets by agent name
     @Test(expected = InvalidParamsException.class)
-    public void testGetTicketsByNullAgentName()  throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
+    public void testGetTicketsByNullAgentName() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
         TicketService ticketService = new TicketService();
         ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
-        ticketService.createTicket(Data.int_ticketId +1, Data.text_subject, Data.text_agent, Data.set_tagSet);
+        ticketService.createTicket(Data.int_ticketId + 1, Data.text_subject, Data.text_agent, Data.set_tagSet);
         ticketService.deleteTicket(Data.int_ticketId);
-        ticketService.deleteTicket(Data.int_ticketId+1);
-         ticketService.getTicketListDetailByAgentName(Data.text_nullAgent);
+        ticketService.deleteTicket(Data.int_ticketId + 1);
+        ticketService.getTicketListDetailByAgentName(Data.text_nullAgent);
     }
 
     @Test(expected = InvalidParamsException.class)
-    public void testGetTicketsByEmptyAgentName()   throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException  {
+    public void testGetTicketsByEmptyAgentName() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
         TicketService ticketService = new TicketService();
         ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
-        ticketService.createTicket(Data.int_ticketId +1, Data.text_subject, Data.text_agent, Data.set_tagSet);
+        ticketService.createTicket(Data.int_ticketId + 1, Data.text_subject, Data.text_agent, Data.set_tagSet);
         ticketService.deleteTicket(Data.int_ticketId);
-        ticketService.deleteTicket(Data.int_ticketId+1);
+        ticketService.deleteTicket(Data.int_ticketId + 1);
         ticketService.getTicketListDetailByAgentName(Data.text_emptyAgent);
     }
 
@@ -252,12 +251,12 @@ public class TicketServiceTest {
         ticketService.createTicket(Data.int_ticketId + 1, Data.text_subject, Data.text_agent, Data.set_tagSet);
         ticketService.deleteTicket(Data.int_ticketId);
         ticketService.deleteTicket(Data.int_ticketId + 1);
-         ticketService.getTicketListDetailByAgentName(Data.text_invalidAgent);
+        ticketService.getTicketListDetailByAgentName(Data.text_invalidAgent);
 
     }
 
     @Test
-    public void testGetTicketsByAgentName()throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
+    public void testGetTicketsByAgentName() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
         TicketService ticketService = new TicketService();
         ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
         ticketService.createTicket(Data.int_ticketId2, Data.text_subject2, Data.text_agent2, Data.set_tagSet);
@@ -273,7 +272,7 @@ public class TicketServiceTest {
     }
 
     @Test(expected = TicketNotFoundException.class)
-    public void testGetTicketsByInvalidTag()throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
+    public void testGetTicketsByInvalidTag() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
         TicketService ticketService = new TicketService();
         ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
         ticketService.createTicket(Data.int_ticketId + 1, Data.text_subject, Data.text_agent, Data.set_tagSet);
@@ -283,7 +282,7 @@ public class TicketServiceTest {
     }
 
     @Test()
-    public void testGetTicketsByValidTag()throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
+    public void testGetTicketsByValidTag() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
         TicketService ticketService = new TicketService();
         ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
         ticketService.createTicket(Data.int_ticketId + 1, Data.text_subject, Data.text_agent, Data.set_tagSet);
@@ -300,13 +299,13 @@ public class TicketServiceTest {
 
 
     @Test(expected = TicketNotFoundException.class)
-    public void testGetAllTicketswithNoRecord()throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
+    public void testGetAllTicketswithNoRecord() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
         TicketService ticketService = new TicketService();
-         ticketService.getTicketList();
+        ticketService.getTicketList();
     }
 
     @Test
-    public void testGetAllTickets()throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
+    public void testGetAllTickets() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
         TicketService ticketService = new TicketService();
         ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
         ticketService.createTicket(Data.int_ticketId2, Data.text_subject2, Data.text_agent2, Data.set_tagSet);
@@ -327,17 +326,17 @@ public class TicketServiceTest {
     }
 
 
-    @Test()
-    public void testGetAllAgentWithTicketCount()throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
+    @Test
+    public void testGetAllAgentWithTicketCount() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
         TicketService ticketService = new TicketService();
         ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
         ticketService.createTicket(Data.int_ticketId2, Data.text_subject2, Data.text_agent2, Data.set_tagSet);
-        Map<String,Integer> tmCounts = ticketService.getAllAgentWithTicketCount();
+        Map<String, Integer> tmCounts = ticketService.getAllAgentWithTicketCount();
 
         int agentCount = tmCounts.get(Data.text_agent);
-        Assert.assertEquals(1 ,agentCount);
+        Assert.assertEquals(1, agentCount);
         int agentCount2 = tmCounts.get(Data.text_agent2);
-        Assert.assertEquals(1 ,agentCount2);
+        Assert.assertEquals(1, agentCount2);
         ticketService.deleteTicket(Data.int_ticketId);
         ticketService.deleteTicket(Data.int_ticketId2);
     }

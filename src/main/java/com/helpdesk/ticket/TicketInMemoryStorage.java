@@ -1,19 +1,18 @@
 package com.helpdesk.ticket;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by root on 10/2/16.
  */
 public class TicketInMemoryStorage {
 
-    private Map<Integer, Ticket> ticketData = new HashMap<Integer, Ticket>();
-    private static TicketInMemoryStorage ticketInMemoryStorage = new TicketInMemoryStorage();
+    private Map<Integer, Ticket> ticketData = new ConcurrentHashMap<>();
 
-    public static TicketInMemoryStorage getInstance() {
-        return ticketInMemoryStorage;
+    public static TicketInMemoryStorage newInstance() {
+        return new TicketInMemoryStorage();
     }
 
     public void writeData(int id, Ticket ticket) {

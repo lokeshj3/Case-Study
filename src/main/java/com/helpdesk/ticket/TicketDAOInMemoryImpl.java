@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class TicketDAOInMemoryImpl implements TicketDAO {
     static Logger logger = LoggerFactory.getLogger(TicketDAOInMemoryImpl.class);
 
-    TicketInMemoryStorage ticketInMemoryStorage = TicketInMemoryStorage.getInstance();
+    TicketInMemoryStorage ticketInMemoryStorage = TicketInMemoryStorage.newInstance();
 
     /**
      * create eticket
