@@ -44,22 +44,29 @@ public class TicketService {
         writeLog(Level.INFO, "Update ticket service start");
         Ticket ticket = objRepository.getTicket(id);
 
-        if(!agentName.isEmpty() && agentName != null)
+        if(!agentName.isEmpty())
             ticket.updateAgent(agentName);
 
-        if (action.equals("a")) {  // Adding new  tags
+        if (action.trim().equals("a")) {  // Adding new  tags
             tagSet.addAll(ticket.getTags());
             ticket.addTags(tagSet);
         }
-        else if (action.equals("r")) {  // remove tags
-            HashSet<String> oldTags = new HashSet<>();
-            oldTags.addAll(ticket.getTags());
-            ticket.getTags().forEach((tag) -> {
-                if (tagSet.contains(tag)) {
-                oldTags.remove(tag);
-                }
-            });
-            ticket.addTags(oldTags);
+        else if (action.trim().equals("r")) {  // remove tags
+            if(tagSet.contains("all")){
+                ticket.removeTags(ticket.getTags());
+            }
+            else {
+
+                HashSet<String> oldTags = new HashSet<>();
+                oldTags.addAll(ticket.getTags());
+                ticket.getTags().forEach((tag) -> {
+                    if (tagSet.contains(tag)) {
+                        oldTags.remove(tag);
+                    }
+                });
+                ticket.removeTags(ticket.getTags());
+                ticket.addTags(oldTags);
+            }
         }
 
         if(objRepository.updateTicket(id, ticket)){
@@ -73,7 +80,6 @@ public class TicketService {
 
     }
 
-
     public Ticket ticketDetails(int id) throws TicketExceptions{
         writeLog(Level.INFO, "ticket details service start");
         if(id > max_id)
@@ -82,10 +88,8 @@ public class TicketService {
         return objRepository.getTicket(id);
     }
 
-
     public boolean delete(int id) throws TicketExceptions {
         writeLog(Level.INFO, "Update ticket service start");
-
         if(objRepository.deleteTicket(id))
             return true;
         else
@@ -97,4 +101,8 @@ public class TicketService {
         return objRepository.getAllTickets();
     }
 
+    public Boolean deleteAllTickets(){
+        writeLog(Level.INFO, "delete all tickets service start");
+        return objRepository.removeAllTickets();
+    }
 }

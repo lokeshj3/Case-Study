@@ -5,7 +5,10 @@ import com.helpdesk.repository.TicketRepository;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
+
+import static com.helpdesk.logger.TicketLogger.writeLog;
 
 /**
  * Created by root on 10/2/16.
@@ -18,6 +21,7 @@ public class TicketReportService {
         objRepository = new TicketRepository();
     }
     public List<Ticket> ticketsByAgentName(String agentName){
+        writeLog(Level.INFO, "ticketsByAgentName service start");
         return  objRepository.getAllTickets()
                 .stream()
                 .filter(ticket -> ticket.getAgent().toLowerCase().equals(agentName.toLowerCase()))
@@ -26,6 +30,7 @@ public class TicketReportService {
 
 
     public List<Ticket> ticketsByTag(Set<String> tagSet){
+        writeLog(Level.INFO, "ticketsByTag service start");
         return objRepository.getAllTickets()
                 .stream()
                 .filter(ticket -> ticket.getTags()
@@ -35,14 +40,17 @@ public class TicketReportService {
     }
 
     public Map<String , List<Ticket>> ticketCountsGroupByAgent(){
+        writeLog(Level.INFO, "ticketCountsGroupByAgent start");
         return Collections.unmodifiableMap(objRepository.getAllTickets().stream().collect(Collectors.groupingBy(Ticket::getAgent)));
     }
 
     public int getTotalTicketCounts() {
+        writeLog(Level.INFO, "getTotalTicketCounts service start");
         return objRepository.getAllTickets().size();
     }
 
     public Ticket oldestTicket() {
+        writeLog(Level.INFO, "oldestTicket service start");
         return objRepository.getAllTickets()
                 .stream()
                 .sorted((Ticket t1, Ticket t2) -> t1.getCreated()
@@ -51,12 +59,14 @@ public class TicketReportService {
     }
 
     public List<Ticket> ticketsOlderByDays(int days){
+        writeLog(Level.INFO, "ticketsOlderByDays service start");
         LocalDateTime localDateTime = LocalDateTime.now().minusDays(days);
         return objRepository.getAllTickets().stream().filter(ticket -> ticket.getCreated().compareTo(localDateTime) < 0).sorted(Comparator.comparing(Ticket::getCreated)).collect(Collectors.toList());
     }
 
 
     public Map<String, List<Ticket>> getTicketCountByTag(){
+        writeLog(Level.INFO, "getTicketCountByTag service start");
         Map<String, List<Ticket>> tagCountMap = new HashMap<>();
         objRepository.getAllTickets().stream()
                 .forEach(ticket -> {
@@ -73,5 +83,4 @@ public class TicketReportService {
 
         return tagCountMap;
     }
-
 }

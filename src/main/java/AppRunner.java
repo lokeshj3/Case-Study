@@ -71,13 +71,16 @@ public class AppRunner {
                 case 13:
                     System.out.println("Good Bye!!");
                     break;
+                case 14 :
+                    objUserDataController.deleteAllTickets();
+                    break;
                 default:
                     //Exit Case
                     System.out.println("Please enter correct option.");
                     break;
             }
         }
-        while (choice != 13);
+        while (choice != 14);
 
         TicketLogger.writeLog(Level.INFO, "End Application");
     }

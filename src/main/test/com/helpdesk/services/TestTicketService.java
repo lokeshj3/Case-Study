@@ -1,17 +1,14 @@
-package com.helpdesk;
+package com.helpdesk.services;
 
 import com.helpdesk.controller.TicketController;
 import com.helpdesk.exception.TicketExceptions;
 import com.helpdesk.model.Ticket;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class TestTicketService {
-    private static int ticketId;
     private static int invalidTicketId;
     private static String subject;
     private static String nullSubject;
@@ -24,24 +21,17 @@ public class TestTicketService {
     private static String tags;
     private static HashSet<String> tagSet;
     private static HashSet<String> emptyTagSet;
-    private static HashSet<String> duplicateTagSet;
-    private static String updatetags;
     private static HashSet<String> updateTagSet;
     private static String UpdateChoiceAgent;
-    private static String UpdateChoiceTags;
-    private static String UpdateChoiceNone;
-    private static String UpdateChoiceBoth;
     private static String nullTag;
-    private static String emptyTag;
+    private static String updateTags;
     private static int day;
     private static String tagsActionAdd;
     private static String tagsActionRemove;
     private static String tagsActionNone;
+    private static TicketController ticketController;
 
-
-    private TicketController ticketController;
     private static void initialize(){
-        ticketId = 100;
         invalidTicketId = 000;
         subject = "First Ticket";
         nullSubject = null;
@@ -55,20 +45,15 @@ public class TestTicketService {
         tagSet =  new HashSet<>(Arrays.asList(tags.toLowerCase().split(",")));
         emptyTagSet = new HashSet<>();
         tags = tags +", mumbai";
-        duplicateTagSet = new HashSet<>(Arrays.asList(tags.toLowerCase().split(",")));
-        updatetags = "goa, surat,mumbai";
-        updateTagSet = new HashSet<>(Arrays.asList(updatetags.toLowerCase().split(",")));
+        updateTags = "goa,surat,mumbai";
+        updateTagSet = new HashSet<>(Arrays.asList(updateTags.toLowerCase().split(",")));
         UpdateChoiceAgent = "a";
-        UpdateChoiceTags = "t";
-        UpdateChoiceNone = "n";
         tagsActionAdd = "a";
         tagsActionRemove = "r";
         tagsActionNone = "n";
-        nullTag = null;
-        emptyTag = "";
         day = 5;
     }
-    private static List<Ticket> createDummyTickets(TicketController ticketController) throws TicketExceptions{
+    private static List<Ticket> createDummyTickets() throws TicketExceptions{
         List<Ticket> ticketList = new ArrayList<>();
         ticketList.add(ticketController.create(subject,agent,tagSet));
         ticketList.add(ticketController.create(subject,agent,tagSet));
@@ -77,7 +62,7 @@ public class TestTicketService {
         return ticketList;
     }
 
-    private static void deleteDummyTicket(List<Ticket> ticketList, TicketController ticketController){
+    private static void deleteDummyTicket(List<Ticket> ticketList){
         ticketList.forEach(ticket -> {
             try {
                 ticketController.delete(ticket.getId());
@@ -86,6 +71,8 @@ public class TestTicketService {
             }
         });
     }
+
+
 
     @BeforeClass
     public static void initializeClassResources(){
@@ -96,6 +83,11 @@ public class TestTicketService {
     public void beforeTest(){
         ticketController = new TicketController();
     }
+
+    private static void deleteAllTickets(){
+        ticketController.removeAllTickets();
+    }
+
     @Test(expected = TicketExceptions.class)
     public void testCreateTicketWithNullSubject() throws TicketExceptions{
         Ticket ticket = ticketController.create(nullSubject, agent, tagSet);
@@ -219,102 +211,77 @@ public class TestTicketService {
 
     @Test
     public void testGetTicketsByEmptyAgentName()  throws TicketExceptions{
-        List<Ticket> dummyTicketList = createDummyTickets(ticketController);
+        List<Ticket> dummyTicketList = createDummyTickets();
         List<Ticket> agentTickets = ticketController.getTicketsByAgent(emptyAgent);
         Assert.assertEquals(0,agentTickets.size());
-        deleteDummyTicket(dummyTicketList,ticketController);
+        deleteDummyTicket(dummyTicketList);
     }
 
     @Test
     public void testGetTicketsByInvalidAgentName()  throws TicketExceptions{
-        List<Ticket> dummyTicketList = createDummyTickets(ticketController);
+        List<Ticket> dummyTicketList = createDummyTickets();
         List<Ticket> agentTickets = ticketController.getTicketsByAgent(invalidAgent);
         Assert.assertEquals(0,agentTickets.size());
-        deleteDummyTicket(dummyTicketList,ticketController);
+        deleteDummyTicket(dummyTicketList);
     }
 
     @Test
     public void testGetTicketsByAgentName()  throws TicketExceptions{
-        List<Ticket> dummyTicketList = createDummyTickets(ticketController);
+        List<Ticket> dummyTicketList = createDummyTickets();
         List<Ticket> agentTickets = ticketController.getTicketsByAgent(agent);
         Assert.assertEquals(3,agentTickets.size());
         agentTickets.forEach(tickets -> Assert.assertEquals(agent,tickets.getAgent()));
-        deleteDummyTicket(dummyTicketList,ticketController);
+        deleteDummyTicket(dummyTicketList);
     }
 
-
-/*    //tickets by tag
+    //tickets by tag
     @Test
-    public void testGetTicketsByNullTag(){
-        TicketService ticketService = new TicketService();
-        List<Ticket> dummyTicketList = createDummyTickets(ticketService);
-        TicketReportService ticketReportService = new TicketReportService();
-        List<Ticket> ticketList = ticketReportService.ticketsByTag(nullTag);
+    public void testGetTicketsByEmptyTag() throws  TicketExceptions{
+        List<Ticket> dummyTicketList = createDummyTickets();
+        List<Ticket> ticketList = ticketController.getTicketsByTag(emptyTagSet);
         Assert.assertEquals(0,ticketList.size());
-        deleteDummyTicket(dummyTicketList,ticketService); // need to delete file
+        deleteDummyTicket(dummyTicketList);
     }
 
     @Test
-    public void testGetTicketsByEmptyTag(){
-        TicketService ticketService = new TicketService();
-        List<Ticket> dummyTicketList = createDummyTickets(ticketService);
-        TicketReportService ticketReportService = new TicketReportService();
-        List<Ticket> ticketList = ticketReportService.ticketsByTag(emptyTag);
-        Assert.assertEquals(0,ticketList.size());
-        deleteDummyTicket(dummyTicketList,ticketService); // need to delete file
-    }
-
-    @Test
-    public void testGetTicketsByInvalidTag(){
-        TicketService ticketService = new TicketService();
-        List<Ticket> dummyTicketList = createDummyTickets(ticketService);
-        TicketReportService ticketReportService = new TicketReportService();
-        List<Ticket> ticketList = ticketReportService.ticketsByTag(agent);
-        Assert.assertEquals(0,ticketList.size());
-        deleteDummyTicket(dummyTicketList,ticketService); // need to delete file
-    }
-
-    @Test()
-    public void testGetTicketsByValidTag(){
-        TicketService ticketService = new TicketService();
-        List<Ticket> dummyTicketList = createDummyTickets(ticketService);
-        TicketReportService ticketReportService = new TicketReportService();
-        List<Ticket> ticketList = ticketReportService.ticketsByAgentName(agent);
+    public void testGetTicketsByValidTagSet() throws TicketExceptions{
+        List<Ticket> dummyTicketList = createDummyTickets();
+        List<Ticket> ticketList = ticketController.getTicketsByTag(tagSet);
         ticketList.forEach(tickets -> Assert.assertTrue(tickets.getTags().contains("mumbai")));
-        deleteDummyTicket(dummyTicketList,ticketService); // need to delete file
+        deleteDummyTicket(dummyTicketList);
     }
 
     @Test()
-    public void testGetTotalTicketCount(){
-        TicketService ticketService = new TicketService();
-        List<Ticket> dummyTicketList = createDummyTickets(ticketService);
-       // List<Ticket> dummyTicketList = createDummyTickets(ticketService);
-        TicketReportService ticketReportService = new TicketReportService();
-        Assert.assertEquals(4,ticketReportService.getTotalTicketCounts()); // dummyTicketList.size()
-        deleteDummyTicket(dummyTicketList,ticketService);// need to delete file
-    }
+    public void testGetTotalTicketCount() throws TicketExceptions{
+        List<Ticket> dummyTicketList = createDummyTickets();
+        List<Ticket> getAllTickets = ticketController.getAll();
+        Assert.assertEquals(getAllTickets.size(),ticketController.getTotalTicketCount());
+        deleteDummyTicket(dummyTicketList);
+    }  //till done
 
-    @Test(expected = InvalidParameterException.class)
-    public void testGetOldestTicket(){
-        TicketService ticketService = new TicketService();
-        List<Ticket> dummyTicketList = createDummyTickets(ticketService);
-        TicketReportService ticketReportService = new TicketReportService();
-        Ticket oldestTicket = ticketReportService.oldestTicket();
-        List<Ticket> ticketList = ticketService.tickets();
+    @Test
+    public void testGetOldestTicketWithEmptyTicketList() throws TicketExceptions{  // no tickets in the system
+        Ticket oldestTicket = ticketController.getOldestTicket();
+        List<Ticket> ticketList = ticketController.getAll();
         ticketList.forEach(ticket -> Assert.assertTrue(oldestTicket.getCreated().compareTo(ticket.getCreated()) <= 0 ));
-        deleteDummyTicket(dummyTicketList,ticketService);
     }
 
     @Test
-    public void testTicketOlderByDay()
-    {
-        TicketService ticketService = new TicketService();
-        List<Ticket> dummyTicketTicketList = createDummyTickets(ticketService);
-        TicketReportService ticketReportService = new TicketReportService();
-        List<Ticket> ticketList = ticketReportService.ticketsOlderByDays(day);
+    public void testGetOldestTicket() throws TicketExceptions{
+        List<Ticket> dummyTicketList = createDummyTickets();
+        Ticket oldestTicket = ticketController.getOldestTicket();
+        List<Ticket> ticketList = ticketController.getAll();
+        ticketList.forEach(ticket -> Assert.assertTrue(oldestTicket.getCreated().compareTo(ticket.getCreated()) <= 0 ));
+        deleteDummyTicket(dummyTicketList);
+    }
+
+    @Test
+    public void testTicketOlderByDay() throws TicketExceptions{
+        List<Ticket> dummyTicketTicketList = createDummyTickets();
+        List<Ticket> ticketList = ticketController.olderTicketsThanDays(day);
         ticketList.forEach(ticket -> Assert.assertTrue(ticket.getCreated().compareTo(LocalDateTime.now()) <= 0));
-        deleteDummyTicket(dummyTicketTicketList,ticketService);
-    }*/
+        deleteDummyTicket(dummyTicketTicketList);
+    }
 
     //
    /* @Before
@@ -332,9 +299,10 @@ public class TestTicketService {
     private void doThisAfterEveryTest(){
 
     }
-
+*/
     @AfterClass
-    public void doThisAfterUnloadingClass(){
+    public static void doThisAfterUnloadingClass(){
         //release all resources like file deletion
-    }*/
+        deleteAllTickets();
+    }
 }

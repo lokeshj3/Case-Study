@@ -40,9 +40,9 @@ public class UserDataController extends  TicketController{
     public  void update() {
         TicketLogger.writeLog(Level.INFO, "update start");
         int id = Util.readInteger("Enter ticket Id to update : ");
-        String agentName = null;
+        String agentName = "";
         HashSet<String> tagSet = null;
-        String action = null;
+        String action = "";
 
         String agentChoice = Util.readString("Do you want to update Agent? Enter y-Yes | n-No");
         if(agentChoice.trim().equals("y")){
@@ -54,7 +54,7 @@ public class UserDataController extends  TicketController{
             action = Util.readString("Enter a-adding new tag(s) / r-remove existing tag(s) / n-no");
 
             if (!action.trim().isEmpty() && (action.trim().equals("a") || action.trim().equals("r"))) {
-                String tag = Util.readString("Enter tags separated by comma(,) : ");
+                String tag = Util.readString("Enter tags separated by comma(,) (Enter 'all' to remove all tags) : ");
                 tagSet = new HashSet<>(Arrays.asList(tag.trim().split(",")));
             }
         }
@@ -196,8 +196,7 @@ public class UserDataController extends  TicketController{
      * */
     public void getOlderTicketsThanDays() {
         TicketLogger.writeLog(Level.INFO, "older than days ticket start");
-        System.out.println("Enter day to get tickets older than a entered number of days");
-        int days = Util.readInteger("Enter no of days before tickets required ");
+        int days = Util.readInteger("Enter day(s) to get tickets older than a entered number of days");
 
         List<Ticket> ticketList = null;
         try {
@@ -226,5 +225,13 @@ public class UserDataController extends  TicketController{
     public void ticketsReportForTag(){
         TicketLogger.writeLog(Level.INFO, "ticket count by tag starts");
         this.getTicketCountByTag();
+    }
+
+    public void deleteAllTickets(){
+        TicketLogger.writeLog(Level.INFO, "delete all tickets controller starts");
+        if(this.removeAllTickets())
+            System.out.println("Deleted all tickets Successfully!");
+        else
+            System.out.println("Operation failed!");
     }
 }

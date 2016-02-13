@@ -50,11 +50,7 @@ public class TicketSerialization {
      * Save single ticket in file
      * */
     public boolean saveSingelTicket(Ticket ticket){
-        /*FileOutputStream fos = null;
-        ObjectOutputStream oos = null;*/
-        try(FileOutputStream fos = new FileOutputStream(file, true);ObjectOutputStream oos =new ObjectOutputStream(fos);){
-            /*fos = new FileOutputStream(file, true);
-            oos = new ObjectOutputStream(fos);*/
+        try(FileOutputStream fos = new FileOutputStream(file, true);ObjectOutputStream oos =new ObjectOutputStream(fos)){
             oos.writeObject(ticket);
             return true;
 
@@ -66,7 +62,6 @@ public class TicketSerialization {
 
         return false;
     }
-
 
     /**
      * return Ticket list from file
@@ -100,4 +95,17 @@ public class TicketSerialization {
         return new ConcurrentHashMap<>();
     }
 
+    /**
+     * To remove all tickest from the file
+     * @return
+     */
+    public boolean removeAllTickets(){
+        try(FileOutputStream fos = new FileOutputStream(file)){
+            fos.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

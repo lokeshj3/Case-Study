@@ -44,7 +44,7 @@ public class TicketController {
     public Ticket update(int id, String agentName, Set<String> tagSet, String action)  throws TicketExceptions{
         TicketLogger.writeLog(Level.INFO, "update controller start");
 
-        if(id>0 && ((agentName != null && !agentName.trim().isEmpty()) || (tagSet != null && action != null && !action.trim().isEmpty()))) {
+        if(id>0 && ((agentName != null && !agentName.trim().isEmpty()) || (tagSet != null && !action.trim().isEmpty()))) {
             Ticket ticket = ticketService.update(id, agentName, tagSet, action);
             return ticket;
         }
@@ -71,12 +71,12 @@ public class TicketController {
     }
 
     public  List<Ticket> getTicketsByAgent(String agentName){
-        TicketLogger.writeLog(Level.INFO, "getTicketsByAgent start");
+        TicketLogger.writeLog(Level.INFO, "getTicketsByAgent controller start");
         return ticketReportService.ticketsByAgentName(agentName);
     }
 
     public List<Ticket> getTicketsByTag(Set<String> tagSet) throws TicketExceptions{
-        TicketLogger.writeLog(Level.INFO, "get ticket by tags starts");
+        TicketLogger.writeLog(Level.INFO, "get ticket by tags controller starts");
         if(tagSet != null || !tagSet.isEmpty()) {
             return ticketReportService.ticketsByTag(tagSet);
         }
@@ -101,13 +101,13 @@ public class TicketController {
     }
 
     public Ticket getOldestTicket() throws TicketExceptions{
-        TicketLogger.writeLog(Level.INFO, "getOldestTicket count starts");
+        TicketLogger.writeLog(Level.INFO, "getOldestTicket count controller starts");
         Ticket ticket = ticketReportService.oldestTicket();
         return ticket;
     }
 
     public List<Ticket> olderTicketsThanDays(int days) throws InvalidParamsException {
-        TicketLogger.writeLog(Level.INFO, "older tickets than days starts");
+        TicketLogger.writeLog(Level.INFO, "older tickets than days controller starts");
         if(days == (int)days && days >= 0){
             return ticketReportService.ticketsOlderByDays(days);
         }
@@ -118,7 +118,7 @@ public class TicketController {
 
 
     public void displayTickets(List<Ticket> ticketList){
-        TicketLogger.writeLog(Level.INFO, "Display ticket list start");
+        TicketLogger.writeLog(Level.INFO, "Display ticket list controller start");
         if(ticketList.size() > 0){
             ticketList
                     .stream()
@@ -133,8 +133,13 @@ public class TicketController {
 
 
     public void getTicketCountByTag(){
-        TicketLogger.writeLog(Level.INFO, "get ticket count by tag starts");
+        TicketLogger.writeLog(Level.INFO, "get ticket count by tag controller starts");
         ticketReportService.getTicketCountByTag()
                 .forEach((String tagName,List<Ticket> ticketList)-> System.out.println(tagName+"   :   "+ticketList.size()));
+    }
+
+    public boolean removeAllTickets(){
+        TicketLogger.writeLog(Level.INFO, "delete all tickets controller starts");
+        return ticketService.deleteAllTickets();
     }
 }

@@ -52,7 +52,7 @@ public class TicketRepository {
         Ticket tempTicket = ticketMap.get(id);
         ticketMap.put(id, ticket);
         if(ticketSerialization.saveSingelTicket(ticket)){
-           return true;
+            return true;
         }
         else {
             ticketMap.put(id, tempTicket);
@@ -116,5 +116,13 @@ public class TicketRepository {
             writeLog(Level.INFO, "ticket not found in repository id: "+id);
             throw new TicketExceptions("Ticket not found");
         }
+    }
+
+    public boolean removeAllTickets(){
+        if(ticketSerialization.removeAllTickets()){
+            ticketMap.clear();
+            return true;
+        }
+        else return false;
     }
 }
