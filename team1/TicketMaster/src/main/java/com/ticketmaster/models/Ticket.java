@@ -19,16 +19,6 @@ import java.util.Set;
  */
 public class Ticket implements Serializable{
 
-    public Ticket(){
-
-    }
-
-    public Ticket(TicketBuilder object){
-        this.subject=   object.getSubject();
-        this.agent  =   object.getAgent();
-        this.setTags(object.getTags());
-    }
-
     //setter methods
     private void setId(Integer id){
         this.id = id;
@@ -81,35 +71,15 @@ public class Ticket implements Serializable{
         return true;
     }
 
-    /**
-     * toString method. returns the string representation of ticket object
-     * @return String
-     */
-    @Override
-    public String toString(){
-        return "Ticket: id"+this.getId()+"|subject:"+this.getSubject()+"|agent:"+this.getAgent();
-    }
-    /**
-     * overridden method
-     * @return hash of instance <p>int</p>
-     */
-    @Override
-    public int hashCode(){
-        return this.getId()+this.getSubject().hashCode()+this.getAgent().hashCode();
-    }
-
-
     private void writeObject(ObjectOutputStream out)
             throws IOException{
         out.writeUTF(getSubject());
         out.writeObject(this.tags);
         out.writeLong(getCreated());
         out.writeLong(getModified());
-
         out.writeInt(getId());
         out.writeUTF(getAgent());
     }
-
 
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
@@ -122,16 +92,11 @@ public class Ticket implements Serializable{
         setAgent(in.readUTF());
     }
 
-
-    //attributes
-    public static Integer masterId = 0;
-    private int id;
-    private long created;
-    private long modified;
-    public static final long serialVersionUID = 881811645564116084L;
-    private String subject;
-    private String agent;
-    private Set<String> tags;
+    public Ticket(TicketBuilder object){
+        this.subject=   object.getSubject();
+        this.agent  =   object.getAgent();
+        this.setTags(object.getTags());
+    }
 
     /**
      * Inner Builder class (director) to setup fields of class
@@ -171,4 +136,31 @@ public class Ticket implements Serializable{
 
     }
 
+    /**
+     * toString method. returns the string representation of ticket object
+     * @return String
+     */
+    @Override
+    public String toString(){
+        return "Ticket: id"+this.getId()+"|subject:"+this.getSubject()+"|agent:"+this.getAgent();
+    }
+
+    /**
+     * overridden method
+     * @return hash of instance <p>int</p>
+     */
+    @Override
+    public int hashCode(){
+        return this.getId()+this.getSubject().hashCode()+this.getAgent().hashCode();
+    }
+
+    //attributes
+    private int id;
+    private long created;
+    private long modified;
+    private String subject;
+    private String agent;
+    private Set<String> tags;
+    public static Integer masterId = 0;
+    public static final long serialVersionUID = 881811645564116084L;
 }
