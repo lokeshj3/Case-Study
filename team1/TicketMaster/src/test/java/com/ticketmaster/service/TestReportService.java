@@ -3,19 +3,21 @@ package com.ticketmaster.service;
 import com.ticketmaster.exceptions.IncompleteDataException;
 import com.ticketmaster.exceptions.NotFoundException;
 import com.ticketmaster.models.Ticket;
+import com.ticketmaster.utils.SerializerUtil;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 /**
  * TestReportService class
@@ -29,6 +31,13 @@ public class TestReportService {
 		TestTicketService.beforeAll();
 		TestReportService testReportService = new TestReportService();
 		testReportService.dummyTicket(TestTicketService.Data.service);
+	}
+
+
+	@AfterClass
+	public static void close() throws ClassNotFoundException, IncompleteDataException, NotFoundException, IOException {
+		SerializerUtil serializerUtil = new SerializerUtil();
+		serializerUtil.emptyObjectFile();
 	}
 
 	@Test
