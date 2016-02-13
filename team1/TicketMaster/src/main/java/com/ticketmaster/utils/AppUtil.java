@@ -24,7 +24,6 @@ public class AppUtil {
         service.setTicketList((Map<Integer, Ticket>) util.readFromFile());
         service.initTags();
         service.initAgents();
-
     }
 
     public static int prepareCount(Map<String, Integer> map, String str){

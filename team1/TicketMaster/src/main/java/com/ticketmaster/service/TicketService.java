@@ -21,9 +21,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
+ * Created by Evans/Virendra on 8/2/16.
+ * Methods distributed internally
  * TicketService class
  * This class is used for CRUD and basic ticket operations
- * Created by Virendra on 8/2/16.
  */
 public class TicketService {
 
@@ -50,13 +51,11 @@ public class TicketService {
 	public Ticket updateTicket(Integer id, String newAgent, Set<String> newTag)
 			throws NoUpdateException, NotFoundException {
 
-
 		CustomLogger.init(classz).debug("updating ticket. Id:"+id+", to update: agent->"+newAgent+", tags->"+newTag);
 
 		ticket = this.getTicket(id);
 
 		boolean flag = false;
-
 		if (newAgent != null && newAgent.length() > 0) {
 			ticket.setAgent(newAgent);
 			flag = true;
@@ -71,8 +70,6 @@ public class TicketService {
 			throw new NoUpdateException("Nothing to update");
 		}
 		return ticket;
-
-
 	}
 
 	// get ticket details
@@ -95,7 +92,6 @@ public class TicketService {
 		List<Ticket> list = repository.getStreamValues()
 				.sorted((obj1, obj2) -> (obj1.getModified() > obj2.getModified()) ? 1 : -1)
 				.collect(Collectors.toList());
-
 		return list;
 	}
 
@@ -107,7 +103,7 @@ public class TicketService {
 			String val = value[0];
 			result = repository.getStreamValues()
 					.filter(obj -> (key.equals("agent")) ? obj.getAgent().toLowerCase().equals(val.toLowerCase()) : obj.getTags().contains(val.toLowerCase()))
-					.sorted((obj1, obj2) -> (obj1.getModified() < obj2.getModified()) ? 1 : -1)
+					.sorted((obj1, obj2) -> (obj1.getModified() > obj2.getModified()) ? 1 : -1)
 					.collect(Collectors.toList());
 		}
 		CustomLogger.init().debug("result of "+key+" search:"+result);
@@ -117,7 +113,7 @@ public class TicketService {
 	//tag wise ticket count
 	public Map<String, Integer> agentTicketCount() {
 
-		List<String> agentList = repository.getList().values().stream().map(Ticket::getAgent).collect(Collectors.toList());
+		List<String> agentList = repository.getStreamValues().map(Ticket::getAgent).collect(Collectors.toList());
 		Map<String, Integer> agentCountMap = new HashMap<>();
 		int i;
 
@@ -129,9 +125,6 @@ public class TicketService {
 		CustomLogger.init().debug("result of agent ticket count:"+agentCountMap);
 		return agentCountMap;
 	}
-
-
-
 
     public TicketService(){
         repository = TicketRepository.init();
@@ -158,5 +151,4 @@ public class TicketService {
     TicketRepository repository;
     Ticket ticket ;
     Class classz = TicketService.class;
-
 }
