@@ -74,7 +74,7 @@ public class TicketService {
             return ticket;
         }
         else {
-            writeLog(Level.INFO, "Ticket updation failed");
+            writeLog(Level.INFO, "Ticket update failed");
             throw new TicketExceptions("Error!!! ticket is not updated");
         }
 
@@ -90,12 +90,10 @@ public class TicketService {
 
     public boolean delete(int id) throws TicketExceptions {
         writeLog(Level.INFO, "Update ticket service start");
-        if(objRepository.deleteTicket(id))
-            return true;
-        else
-            return false;
+        return objRepository.deleteTicket(id);
     }
 
+    // Use camelcase for method names.
     public List<Ticket> getAlltickets(){
         writeLog(Level.INFO, "get all tickets service start");
         return objRepository.getAllTickets();

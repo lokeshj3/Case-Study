@@ -15,6 +15,9 @@ public class UserDataController extends  TicketController{
    /**
     * controller function to get the input from user
     * and call to create ticket */
+
+   // Static import can be used for TicketLogger
+
    public void create(){
         TicketLogger.writeLog(Level.INFO, "start");
 

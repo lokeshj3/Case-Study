@@ -14,6 +14,7 @@ public class TicketSerialization {
     File file = null;
 
     public TicketSerialization(String path, String fileName){
+        // Directory and File check should be there. Should not be manual process to create directories.
        file = Util.createFile(path, fileName);
     }
 

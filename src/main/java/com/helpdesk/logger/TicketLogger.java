@@ -22,6 +22,7 @@ public class TicketLogger {
         logger.setUseParentHandlers(false);
         //File file = Util.createFile("target/generated-sources/logs/","logs.log");
         try {
+            // Why Not creating Directory and file by code? This will force to create directory and file manually first.
             fileHandler = new FileHandler("target/generated-sources/logs/logs.log", true);
         } catch (IOException e) {
             e.printStackTrace();

@@ -7,9 +7,6 @@ package com.helpdesk.model;
 
 import com.sun.istack.internal.NotNull;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;

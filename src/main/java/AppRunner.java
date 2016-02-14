@@ -80,7 +80,8 @@ public class AppRunner {
                     break;
             }
         }
-        while (choice != 14);
+        // Option 13 for Exit, but condition says 14?
+        while (choice != 13);
 
         TicketLogger.writeLog(Level.INFO, "End Application");
     }
