@@ -78,7 +78,7 @@ public class TicketServiceTest {
         }
     }
 
-
+    // EB: Since you are creating a new TicketService object every time, it would be better if you include it in @Before to avoid code duplication.
     @Test(expected = InvalidParamsException.class)
     public void testCreateTicketWithNullSubject() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException {
         new TicketService().createTicket(Data.int_ticketId, Data.text_nullSubject, Data.text_agent, Data.set_tagSet);

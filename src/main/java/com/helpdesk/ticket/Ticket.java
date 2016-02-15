@@ -44,6 +44,7 @@ public class Ticket implements Serializable{
         return agentName;
     }
 
+    // EB: Test case for null tags is missing.
     public Set<String> getTags() {
         if (tags == null) {
             tags = new HashSet<String>();
