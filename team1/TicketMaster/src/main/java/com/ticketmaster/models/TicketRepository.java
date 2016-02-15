@@ -79,7 +79,7 @@ public class TicketRepository {
         return true;
     }
 
-
+// LB comment : doc Comments are missing on the functions below.
     public boolean saveTicket(Ticket ticket)
             throws IOException, ClassNotFoundException, NotFoundException {
 
@@ -135,6 +135,7 @@ public class TicketRepository {
         return getList().values().stream();
     }
 
+    // LB comment : Class instance variables should be declared at the start of the Class.
     //properties
     private static TicketRepository _instance; //holds the instance of TicketRepository class
     private Map<Integer, Ticket> ticketList ; //holds tickets. acts as temporary storage

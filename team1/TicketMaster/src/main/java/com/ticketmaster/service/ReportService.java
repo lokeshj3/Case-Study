@@ -1,5 +1,5 @@
 package com.ticketmaster.service;
-
+// LB comment : Please provide Doc Level Comment on each functions
 import com.ticketmaster.models.Ticket;
 import com.ticketmaster.models.TicketRepository;
 import com.ticketmaster.utils.AppUtil;
@@ -44,6 +44,7 @@ public class ReportService {
 		int i;
 		for (Set<String> set : tagList) {
 			for (String tag : set) {
+				// LB comment : please check AppUtil class for my comments.
 				i = AppUtil.prepareCount(Collections.unmodifiableMap(tagCountMap), tag);
 				tagCountMap.put(tag, i);
 			}

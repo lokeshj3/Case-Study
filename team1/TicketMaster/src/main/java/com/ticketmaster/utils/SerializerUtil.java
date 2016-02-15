@@ -1,5 +1,5 @@
 package com.ticketmaster.utils;
-
+// LB comment : use Doc Level comment above all methods.
 import com.ticketmaster.models.Ticket;
 
 import java.io.ObjectInputStream;
@@ -117,7 +117,7 @@ public class SerializerUtil {
         disconnectWriter();
     }
 
-    public Map<?,?> readFromFile()
+    public Map<?, ?> readFromFile()
             throws IOException, ClassNotFoundException{
 
         checkFiles(fileName); // EB: Good practice to use 'this' keyword.
@@ -191,7 +191,7 @@ public class SerializerUtil {
         return "tickets.ser";
     }
 
-
+    // LB comment : Class instance variables should be declared at the start of the Class.
     //properties
     final String base = "files";
     String propertyFile = "conf.properties";

@@ -26,6 +26,8 @@ public class Ticket implements Serializable{
         this.agent = agent;
     }
     public void setTags(Set<String> tags){
+        // LB comment : Is this check required as you have already declared 'tags' variable to be Set instance in instance variable.
+        // Instead you should have checked Tags that are passed for Null.
         if (!(this.tags instanceof Set))
             this.tags = new HashSet<>();
         this.tags.addAll(tags);
@@ -81,6 +83,9 @@ public class Ticket implements Serializable{
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
         this.subject = in.readUTF();
+        // LB comment : This is just a suggestion on Type casting, where you have declared 'this.tags' of Set Type and
+        // while type casting you are using its Child Class Collection that is Hash Set
+        // there is no problem in using Hash Set below. Just suggesting that it should be 'Set' as you have declared 'Set' type for tags.
         this.tags = (HashSet) (in.readObject());
         this.created = in.readLong();
         this.modified = in.readLong();
@@ -122,11 +127,13 @@ public class Ticket implements Serializable{
             return this.subject;
         }
         public Set<String> getTags(){
+            // LB comment : Is this check required as you have already declared 'tags' variable to be Set instance in instance variable.
             if (!(this.tags instanceof Set))
                 this.tags = new HashSet<>();
             return this.tags;
         }
 
+        // LB comment : Class instance variables should be declared at the start of the Class before your Accessors methods.
         private String subject = null;
         private String agent = null;
         private Set tags = new HashSet<>();
@@ -151,6 +158,7 @@ public class Ticket implements Serializable{
         return this.getId()+this.getSubject().hashCode()+this.getAgent().hashCode();
     }
 
+    // LB comment : Class instance variables should be declared at the start of the Class before your Accessors methods.
     //attributes
     private int id;
     private long created;

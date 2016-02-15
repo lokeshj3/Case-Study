@@ -1,0 +1,261 @@
+[15-02-2016 11:59:36.024][INFO  ][com.ticketmaster.utils.CustomLogger:42   ]:: master id set to 1 during initialization
+[15-02-2016 11:59:36.072][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: Test Subject 1 agent: Evans
+[15-02-2016 11:59:36.081][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.084][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 1
+[15-02-2016 11:59:36.084][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: Test Subject 2 agent: Leroy
+[15-02-2016 11:59:36.085][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.086][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 2
+[15-02-2016 11:59:36.086][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: Test Subject 3 agent: Evans
+[15-02-2016 11:59:36.087][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.087][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 3
+[15-02-2016 11:59:36.088][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: Test Subject 4 agent: Virendra
+[15-02-2016 11:59:36.089][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.089][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 4
+[15-02-2016 11:59:36.093][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.099][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.102][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.105][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.106][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id1|subject:Test Subject 1|agent:Evans, Ticket: id3|subject:Test Subject 3|agent:Evans, Ticket: id4|subject:Test Subject 4|agent:Virendra]
+[15-02-2016 11:59:36.106][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.107][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id1|subject:Test Subject 1|agent:Evans, Ticket: id3|subject:Test Subject 3|agent:Evans]
+[15-02-2016 11:59:36.107][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.108][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id1|subject:Test Subject 1|agent:Evans, Ticket: id2|subject:Test Subject 2|agent:Leroy, Ticket: id3|subject:Test Subject 3|agent:Evans]
+[15-02-2016 11:59:36.108][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.108][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id1|subject:Test Subject 1|agent:Evans]
+[15-02-2016 11:59:36.109][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.110][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id2|subject:Test Subject 2|agent:Leroy]
+[15-02-2016 11:59:36.110][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.110][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id2|subject:Test Subject 2|agent:Leroy, Ticket: id3|subject:Test Subject 3|agent:Evans, Ticket: id4|subject:Test Subject 4|agent:Virendra]
+[15-02-2016 11:59:36.111][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.111][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id2|subject:Test Subject 2|agent:Leroy]
+[15-02-2016 11:59:36.112][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.112][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id4|subject:Test Subject 4|agent:Virendra]
+[15-02-2016 11:59:36.117][INFO  ][com.ticketmaster.utils.CustomLogger:42   ]:: master id set to 5 during initialization
+[15-02-2016 11:59:36.118][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.118][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 11:59:36.119][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.119][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 5
+[15-02-2016 11:59:36.127][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: ticket with id:5 deleted from system on 2016-02-15T06:29:36.120Z
+[15-02-2016 11:59:36.128][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 11:59:36.129][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.129][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 6
+[15-02-2016 11:59:36.130][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 11:59:36.131][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.131][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 7
+[15-02-2016 11:59:36.132][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 11:59:36.133][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.134][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 8
+[15-02-2016 11:59:36.134][DEBUG ][com.ticketmaster.service.TicketService:45   ]:: updating ticket. Id:8, to update: agent->null, tags->null
+[15-02-2016 11:59:36.134][ERROR ][com.ticketmaster.service.TicketService:39   ]:: throwing NoUpdateException from update
+[15-02-2016 11:59:36.134][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 11:59:36.135][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.136][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 9
+[15-02-2016 11:59:36.136][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.136][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of agent search:[]
+[15-02-2016 11:59:36.137][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 11:59:36.138][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.138][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 10
+[15-02-2016 11:59:36.139][DEBUG ][com.ticketmaster.service.TicketService:45   ]:: updating ticket. Id:10, to update: agent->null, tags->[new tag]
+[15-02-2016 11:59:36.139][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 11:59:36.140][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.141][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 11
+[15-02-2016 11:59:36.141][DEBUG ][com.ticketmaster.service.TicketService:45   ]:: updating ticket. Id:-1, to update: agent->test-agent2, tags->[new tag]
+[15-02-2016 11:59:36.141][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: null
+[15-02-2016 11:59:36.142][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 11:59:36.142][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.143][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 12
+[15-02-2016 11:59:36.143][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.144][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of agent search:[Ticket: id6|subject:test-subject|agent:test-agent1, Ticket: id8|subject:test-subject|agent:test-agent1, Ticket: id11|subject:test-subject|agent:test-agent1, Ticket: id12|subject:test-subject|agent:test-agent1]
+[15-02-2016 11:59:36.146][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: null agent: test-agent1
+[15-02-2016 11:59:36.146][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 11:59:36.147][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.147][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 13
+[15-02-2016 11:59:36.148][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: ticket with id:13 deleted from system on 2016-02-15T06:29:36.148Z
+[15-02-2016 11:59:36.148][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 11:59:36.149][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.149][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 14
+[15-02-2016 11:59:36.150][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.150][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id6|subject:test-subject|agent:test-agent1, Ticket: id8|subject:test-subject|agent:test-agent1, Ticket: id11|subject:test-subject|agent:test-agent1, Ticket: id14|subject:test-subject|agent:test-agent1]
+[15-02-2016 11:59:36.151][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 11:59:36.151][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.152][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 15
+[15-02-2016 11:59:36.152][DEBUG ][com.ticketmaster.service.TicketService:45   ]:: updating ticket. Id:15, to update: agent->test-agent2, tags->null
+[15-02-2016 11:59:36.153][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 11:59:36.153][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.154][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 16
+[15-02-2016 11:59:36.155][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 11:59:36.155][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.156][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 17
+[15-02-2016 11:59:36.156][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 11:59:36.157][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.158][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 18
+[15-02-2016 11:59:36.159][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 11:59:36.159][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.160][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 19
+[15-02-2016 11:59:36.160][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.160][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[]
+[15-02-2016 11:59:36.161][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 11:59:36.162][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.163][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 20
+[15-02-2016 11:59:36.163][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.164][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 11:59:36.165][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 11:59:36.165][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 21
+[15-02-2016 11:59:36.166][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of agent ticket count:{Virendra=1, Evans=2, Leroy=1, test-agent1=5}
+[15-02-2016 13:03:33.159][INFO  ][com.ticketmaster.utils.CustomLogger:43   ]:: master id set to 22 during initialization
+[15-02-2016 13:03:33.164][WARN  ][com.ticketmaster.utils.SerializerUtil:49   ]:: reached end of file while reading objects
+[15-02-2016 13:03:33.215][INFO  ][com.ticketmaster.service.TicketService:43   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 13:03:33.226][WARN  ][com.ticketmaster.utils.SerializerUtil:49   ]:: reached end of file while reading objects
+[15-02-2016 13:03:33.231][INFO  ][com.ticketmaster.service.TicketService:43   ]:: ticket created. Id: 22
+[15-02-2016 13:05:00.872][INFO  ][com.ticketmaster.utils.CustomLogger:43   ]:: master id set to 23 during initialization
+[15-02-2016 13:05:00.877][WARN  ][com.ticketmaster.utils.SerializerUtil:49   ]:: reached end of file while reading objects
+[15-02-2016 13:05:00.928][INFO  ][com.ticketmaster.service.TicketService:43   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 13:05:00.936][WARN  ][com.ticketmaster.utils.SerializerUtil:49   ]:: reached end of file while reading objects
+[15-02-2016 13:05:00.940][INFO  ][com.ticketmaster.service.TicketService:43   ]:: ticket created. Id: 23
+[15-02-2016 13:05:28.205][INFO  ][com.ticketmaster.utils.CustomLogger:43   ]:: master id set to 24 during initialization
+[15-02-2016 13:05:28.210][WARN  ][com.ticketmaster.utils.SerializerUtil:49   ]:: reached end of file while reading objects
+[15-02-2016 13:05:28.254][INFO  ][com.ticketmaster.service.TicketService:43   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 13:05:28.264][WARN  ][com.ticketmaster.utils.SerializerUtil:49   ]:: reached end of file while reading objects
+[15-02-2016 13:05:28.267][INFO  ][com.ticketmaster.service.TicketService:43   ]:: ticket created. Id: 24
+[15-02-2016 15:46:39.435][INFO  ][com.ticketmaster.utils.CustomLogger:42   ]:: master id set to 25 during initialization
+[15-02-2016 15:46:39.442][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:46:39.500][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: Test Subject 1 agent: Evans
+[15-02-2016 15:46:39.512][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:46:39.517][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 25
+[15-02-2016 15:46:39.518][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: Test Subject 2 agent: Leroy
+[15-02-2016 15:46:39.520][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:46:39.521][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 26
+[15-02-2016 15:46:39.521][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: Test Subject 3 agent: Evans
+[15-02-2016 15:46:39.523][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:46:39.524][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 27
+[15-02-2016 15:46:39.524][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: Test Subject 4 agent: Virendra
+[15-02-2016 15:46:39.526][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:46:39.527][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 28
+[15-02-2016 15:46:39.533][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:46:39.540][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:46:39.547][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:46:39.551][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:46:39.553][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id1|subject:Test Subject 1|agent:Evans, Ticket: id3|subject:Test Subject 3|agent:Evans, Ticket: id4|subject:Test Subject 4|agent:Virendra, Ticket: id25|subject:Test Subject 1|agent:Evans, Ticket: id27|subject:Test Subject 3|agent:Evans, Ticket: id28|subject:Test Subject 4|agent:Virendra]
+[15-02-2016 15:46:39.555][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:46:39.556][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id6|subject:test-subject|agent:test-agent1, Ticket: id8|subject:test-subject|agent:test-agent1, Ticket: id11|subject:test-subject|agent:test-agent1, Ticket: id17|subject:test-subject|agent:test-agent1]
+[15-02-2016 15:46:39.558][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:46:39.558][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id1|subject:Test Subject 1|agent:Evans, Ticket: id3|subject:Test Subject 3|agent:Evans, Ticket: id25|subject:Test Subject 1|agent:Evans, Ticket: id27|subject:Test Subject 3|agent:Evans]
+[15-02-2016 15:46:39.559][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:46:39.559][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id1|subject:Test Subject 1|agent:Evans, Ticket: id2|subject:Test Subject 2|agent:Leroy, Ticket: id3|subject:Test Subject 3|agent:Evans, Ticket: id25|subject:Test Subject 1|agent:Evans, Ticket: id26|subject:Test Subject 2|agent:Leroy, Ticket: id27|subject:Test Subject 3|agent:Evans]
+[15-02-2016 15:46:39.560][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:46:39.561][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id1|subject:Test Subject 1|agent:Evans, Ticket: id25|subject:Test Subject 1|agent:Evans]
+[15-02-2016 15:46:39.562][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:46:39.562][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id2|subject:Test Subject 2|agent:Leroy, Ticket: id26|subject:Test Subject 2|agent:Leroy]
+[15-02-2016 15:46:39.563][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:46:39.563][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id2|subject:Test Subject 2|agent:Leroy, Ticket: id3|subject:Test Subject 3|agent:Evans, Ticket: id4|subject:Test Subject 4|agent:Virendra, Ticket: id26|subject:Test Subject 2|agent:Leroy, Ticket: id27|subject:Test Subject 3|agent:Evans, Ticket: id28|subject:Test Subject 4|agent:Virendra]
+[15-02-2016 15:46:39.564][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:46:39.564][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id2|subject:Test Subject 2|agent:Leroy, Ticket: id26|subject:Test Subject 2|agent:Leroy]
+[15-02-2016 15:46:39.565][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:46:39.566][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id4|subject:Test Subject 4|agent:Virendra, Ticket: id28|subject:Test Subject 4|agent:Virendra]
+[15-02-2016 15:46:39.567][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:46:39.567][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id6|subject:test-subject|agent:test-agent1, Ticket: id8|subject:test-subject|agent:test-agent1, Ticket: id11|subject:test-subject|agent:test-agent1, Ticket: id17|subject:test-subject|agent:test-agent1]
+[15-02-2016 15:47:24.438][INFO  ][com.ticketmaster.utils.CustomLogger:42   ]:: master id set to 29 during initialization
+[15-02-2016 15:47:24.441][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.485][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: Test Subject 1 agent: Evans
+[15-02-2016 15:47:24.493][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.496][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 29
+[15-02-2016 15:47:24.496][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: Test Subject 2 agent: Leroy
+[15-02-2016 15:47:24.498][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.498][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 30
+[15-02-2016 15:47:24.498][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: Test Subject 3 agent: Evans
+[15-02-2016 15:47:24.499][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.500][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 31
+[15-02-2016 15:47:24.500][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: Test Subject 4 agent: Virendra
+[15-02-2016 15:47:24.501][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.501][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 32
+[15-02-2016 15:47:24.507][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.518][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.523][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.526][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.527][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id29|subject:Test Subject 1|agent:Evans, Ticket: id31|subject:Test Subject 3|agent:Evans, Ticket: id32|subject:Test Subject 4|agent:Virendra]
+[15-02-2016 15:47:24.529][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.529][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id29|subject:Test Subject 1|agent:Evans, Ticket: id31|subject:Test Subject 3|agent:Evans]
+[15-02-2016 15:47:24.530][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.531][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id29|subject:Test Subject 1|agent:Evans, Ticket: id30|subject:Test Subject 2|agent:Leroy, Ticket: id31|subject:Test Subject 3|agent:Evans]
+[15-02-2016 15:47:24.532][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.533][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id29|subject:Test Subject 1|agent:Evans]
+[15-02-2016 15:47:24.534][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.534][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id30|subject:Test Subject 2|agent:Leroy]
+[15-02-2016 15:47:24.535][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.535][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id30|subject:Test Subject 2|agent:Leroy, Ticket: id31|subject:Test Subject 3|agent:Evans, Ticket: id32|subject:Test Subject 4|agent:Virendra]
+[15-02-2016 15:47:24.536][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.536][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id30|subject:Test Subject 2|agent:Leroy]
+[15-02-2016 15:47:24.536][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.537][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id32|subject:Test Subject 4|agent:Virendra]
+[15-02-2016 15:47:24.538][INFO  ][com.ticketmaster.utils.CustomLogger:42   ]:: master id set to 33 during initialization
+[15-02-2016 15:47:24.538][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.539][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 15:47:24.540][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.540][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 33
+[15-02-2016 15:47:24.551][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: ticket with id:33 deleted from system on 2016-02-15T10:17:24.541Z
+[15-02-2016 15:47:24.552][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 15:47:24.554][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.554][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 34
+[15-02-2016 15:47:24.555][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 15:47:24.557][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.557][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 35
+[15-02-2016 15:47:24.559][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 15:47:24.561][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.561][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 36
+[15-02-2016 15:47:24.562][DEBUG ][com.ticketmaster.service.TicketService:45   ]:: updating ticket. Id:36, to update: agent->null, tags->null
+[15-02-2016 15:47:24.563][ERROR ][com.ticketmaster.service.TicketService:39   ]:: throwing NoUpdateException from update
+[15-02-2016 15:47:24.564][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 15:47:24.566][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.566][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 37
+[15-02-2016 15:47:24.568][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.568][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of agent search:[]
+[15-02-2016 15:47:24.570][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 15:47:24.571][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.572][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 38
+[15-02-2016 15:47:24.572][DEBUG ][com.ticketmaster.service.TicketService:45   ]:: updating ticket. Id:38, to update: agent->null, tags->[new tag]
+[15-02-2016 15:47:24.574][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 15:47:24.575][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.576][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 39
+[15-02-2016 15:47:24.576][DEBUG ][com.ticketmaster.service.TicketService:45   ]:: updating ticket. Id:-1, to update: agent->test-agent2, tags->[new tag]
+[15-02-2016 15:47:24.577][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: null
+[15-02-2016 15:47:24.577][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 15:47:24.579][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.579][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 40
+[15-02-2016 15:47:24.581][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.582][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of agent search:[Ticket: id34|subject:test-subject|agent:test-agent1, Ticket: id36|subject:test-subject|agent:test-agent1, Ticket: id39|subject:test-subject|agent:test-agent1, Ticket: id40|subject:test-subject|agent:test-agent1]
+[15-02-2016 15:47:24.585][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: null agent: test-agent1
+[15-02-2016 15:47:24.586][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 15:47:24.587][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.588][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 41
+[15-02-2016 15:47:24.589][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: ticket with id:41 deleted from system on 2016-02-15T10:17:24.589Z
+[15-02-2016 15:47:24.590][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 15:47:24.591][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.592][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 42
+[15-02-2016 15:47:24.593][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.593][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[Ticket: id34|subject:test-subject|agent:test-agent1, Ticket: id36|subject:test-subject|agent:test-agent1, Ticket: id39|subject:test-subject|agent:test-agent1, Ticket: id42|subject:test-subject|agent:test-agent1]
+[15-02-2016 15:47:24.595][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 15:47:24.597][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.598][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 43
+[15-02-2016 15:47:24.598][DEBUG ][com.ticketmaster.service.TicketService:45   ]:: updating ticket. Id:43, to update: agent->test-agent2, tags->null
+[15-02-2016 15:47:24.600][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 15:47:24.602][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.602][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 44
+[15-02-2016 15:47:24.603][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 15:47:24.610][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.611][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 45
+[15-02-2016 15:47:24.612][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 15:47:24.614][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.615][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 46
+[15-02-2016 15:47:24.617][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 15:47:24.619][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.619][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 47
+[15-02-2016 15:47:24.620][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.621][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of tag search:[]
+[15-02-2016 15:47:24.622][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 15:47:24.624][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.624][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 48
+[15-02-2016 15:47:24.625][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.627][INFO  ][com.ticketmaster.service.TicketService:42   ]:: start ticket creation with subject: test-subject agent: test-agent1
+[15-02-2016 15:47:24.630][WARN  ][com.ticketmaster.utils.SerializerUtil:48   ]:: reached end of file while reading objects
+[15-02-2016 15:47:24.631][INFO  ][com.ticketmaster.service.TicketService:42   ]:: ticket created. Id: 49
+[15-02-2016 15:47:24.632][DEBUG ][com.ticketmaster.utils.CustomLogger:45   ]:: result of agent ticket count:{Virendra=1, Evans=2, test-agent1=5, Leroy=1}

@@ -1,5 +1,5 @@
 package com.ticketmaster.utils;
-
+// LB comment : use doc type comment wherever possible.
 import com.ticketmaster.models.Ticket;
 import com.ticketmaster.service.TicketService;
 
@@ -26,6 +26,7 @@ public class AppUtil {
         service.initAgents();
     }
 
+    // LB comment : This could be moved in Repo instead . Kindly keep all this logic related to Map in one Place.
     public static int prepareCount(Map<String, Integer> map, String str){
         return map.containsKey(str) ? map.get(str) +1 : 1;
     }

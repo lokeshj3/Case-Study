@@ -1,3 +1,4 @@
+// LB comment : Kindly use Doc Type comments instead of single liner comment above each functions
 package com.ticketmaster.service;
 
 import com.ticketmaster.exceptions.IncompleteDataException;
@@ -34,6 +35,8 @@ public class TicketService {
 
 		CustomLogger.init(classz).info("start ticket creation with subject: " + subject + " agent: " + agent);
 
+		// LB comment : You could have clubbed the 2 checks below into 1 as you are throwing the same type of Exception using AND '&&' condition .
+		// If you are throwing different exception, only then I would break my Checks into 2.
 		if (subject == null || subject.isEmpty()) {
 			throw new IncompleteDataException("subject is required");
 		}
@@ -56,11 +59,14 @@ public class TicketService {
 		ticket = this.getTicket(id);
 
 		boolean flag = false;
+		// LB comment : there is no need to check length of a string here, instead isEmpty() check is more appropriate than length.
 		if (newAgent != null && newAgent.length() > 0) {
+			// LB comment : use either Repo or Service layer to interact with Model directly.
 			ticket.setAgent(newAgent);
 			flag = true;
 		}
 		if (newTag != null) {
+			// LB comment : use either Repo or Service layer to interact with Model directly.
 			ticket.setTags(newTag);
 			flag = true;
 		}
@@ -97,10 +103,13 @@ public class TicketService {
 
 	// search ticket count by agent / tags
 	public List<Ticket> searchTicket(String key, String... value) throws IOException, ClassNotFoundException {
+		// LB comment : avoid declaring unnecessary variables.
+		// this variable could be avoided as it takes unnecessary memory.
 		List<Ticket> result = new LinkedList<>();
 		repository.updatePool();
 		if (value.length == 1) {
 			String val = value[0];
+			// LB comment : You can move this logic to Repo as well to avoid coupling.
 			result = repository.getStreamValues()
 					.filter(obj -> (key.equals("agent")) ? obj.getAgent().toLowerCase().equals(val.toLowerCase()) : obj.getTags().contains(val.toLowerCase()))
 					.sorted((obj1, obj2) -> (obj1.getModified() > obj2.getModified()) ? 1 : -1)
@@ -112,12 +121,13 @@ public class TicketService {
 
 	//tag wise ticket count
 	public Map<String, Integer> agentTicketCount() {
-
+		// LB comment : You can move this logic to Repo as well to avoid coupling.
 		List<String> agentList = repository.getStreamValues().map(Ticket::getAgent).collect(Collectors.toList());
 		Map<String, Integer> agentCountMap = new HashMap<>();
 		int i;
 
 		for (String agent : agentList) {
+			// LB comment : please check AppUtil class for my comments.
 			i = AppUtil.prepareCount(Collections.unmodifiableMap(agentCountMap), agent);
 			agentCountMap.put(agent, i);
 		}
@@ -147,6 +157,7 @@ public class TicketService {
         repository.delete(id);
     }
 
+	// LB comment : Class instance variables should be declared at the start of the Class.
     //properties
     TicketRepository repository;
     Ticket ticket ;

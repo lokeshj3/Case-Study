@@ -12,4 +12,5 @@ team1/TicketMaster/files/logs/syslog.log
 # Except this file
 !.gitignore
 !team1/TicketMaster/pom.xml
-
+.idea
+target/
