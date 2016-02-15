@@ -1,5 +1,6 @@
 package com.helpdesk.ticket;
 
+
 import com.helpdesk.exception.DuplicateTicketIdException;
 import com.helpdesk.exception.InvalidParamsException;
 import com.helpdesk.exception.InvalidTicketDAOFactoryTypeException;
@@ -26,6 +27,12 @@ public class SerializeService {
         ticketSerialize = new TicketSerializeFileImpl();
     }
 
+    public static void main(String[] args) throws InvalidTicketDAOFactoryTypeException {
+        SerializeService serializeService = new SerializeService();
+        serializeService.singleTicketSerializeDeserialize();
+        serializeService.multiTicketSerializeDeserialize();
+    }
+
     /**
      * Serialize and deserialize single ticket
      */
@@ -41,9 +48,9 @@ public class SerializeService {
                 System.out.println("serialization successfull");
 
                 Ticket ticket1 = ticketSerialize.deSerializeSingleTicket();
-                if(ticket1 != null){
+                if (ticket1 != null) {
                     System.out.println("De - serialization done successfully " + ticket1);
-                }else {
+                } else {
                     System.out.println("De - serialization unsuccessfull");
                 }
 
@@ -69,25 +76,25 @@ public class SerializeService {
         try {
             List<Ticket> arrListTickets = new ArrayList<>();
 
-            for (int i = 1; i <= limit; i++) {
+            for (int i = 2; i <= limit; i++) {
                 Set<String> setOfTags = new HashSet<>();
                 setOfTags.add("issue" + i);
                 setOfTags.add("Hardware" + i);
-
                 arrListTickets.add(ticketService.createTicket(i, "subject" + i, "agent" + i, setOfTags));
             }
 
             if (ticketSerialize.serializeMultiTicket(arrListTickets)) {
-                System.out.println("serialization successfull for multiple tickets");
-
+                System.out.println("serialization successfully for multiple tickets");
+                arrListTickets.clear();
                 arrListTickets = ticketSerialize.deSerializeMultiTicket();
-                if(Helper.isCollectionValid(arrListTickets)){
+                if (Helper.isCollectionValid(arrListTickets)) {
                     System.out.println("De - serialization done successfully" + arrListTickets);
-                }else {
-                    System.out.println("De - serialization unsuccessfull");
+                    arrListTickets.forEach(ticket -> System.out.println(ticket));
+                } else {
+                    System.out.println("De - serialization unsuccessfully");
                 }
             } else {
-                System.out.println("serialization un-successfull for multiple tickets");
+                System.out.println("serialization un-successfully for multiple tickets");
             }
         } catch (IOException e) {
             e.printStackTrace();

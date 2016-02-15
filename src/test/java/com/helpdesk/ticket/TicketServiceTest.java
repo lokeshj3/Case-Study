@@ -295,7 +295,6 @@ public class TicketServiceTest {
         TicketService ticketService = new TicketService();
         ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
         ticketService.createTicket(Data.int_ticketId + 1, Data.text_subject, Data.text_agent, Data.set_tagSet);
-
         ticketService.getTicketListDetailByAgentName(Data.text_invalidAgent);
 
     }
@@ -325,7 +324,7 @@ public class TicketServiceTest {
 
         Data.ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
         Data.ticketService.createTicket(Data.int_ticketId + 1, Data.text_subject, Data.text_agent, Data.set_tagSet);
-        List<Ticket> agentTickets = Data.ticketService.getTicketListDetailByTag(Data.text_emptySubject);
+        Data.ticketService.getTicketListDetailByTag(Data.text_emptySubject);
 
     }
 

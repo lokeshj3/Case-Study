@@ -64,9 +64,9 @@ public class TicketSerializeFileImpl implements TicketSerialize {
     public boolean serializeMultiTicket(List<Ticket> ticketModelList) throws IOException {
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(getFileNameWithLocation()));
 
-        for (Ticket ticket : ticketModelList) {
-            out.writeObject(ticket);
-        }
+
+            out.writeObject(ticketModelList);
+
 
         out.flush();
 
@@ -84,15 +84,7 @@ public class TicketSerializeFileImpl implements TicketSerialize {
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(getFileNameWithLocation()));
 
         List<Ticket> arrListTickets = new ArrayList<>();
-        try {
-            for (; ; ) {
-                arrListTickets.add((Ticket) in.readObject());
-            }
-
-        } catch (EOFException eof) {
-
-        }
-
+        arrListTickets = (List<Ticket>) in.readObject();
         in.close();
 
         return arrListTickets;
