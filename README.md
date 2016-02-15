@@ -1,3 +1,3 @@
 # Case-Study
 Practice CaseStudy
-Case Study by Deepak, Mangesh and Lokesh
+Re-build Case Study: each team on seperate branch
