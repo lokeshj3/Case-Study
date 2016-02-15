@@ -6,6 +6,7 @@ import com.ticketmaster.utils.SerializerUtil;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -79,11 +80,16 @@ public class TicketRepository {
         return true;
     }
 
-// LB comment : doc Comments are missing on the functions below.
+    /**
+     * createTicket method used to create the new ticket in the systems
+     * @param ticket <p>Ticket</p>
+     * @return <p>boolean</p>
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws NotFoundException
+     */
     public boolean saveTicket(Ticket ticket)
             throws IOException, ClassNotFoundException, NotFoundException {
-
-        SerializerUtil util = new SerializerUtil();
 
         ticket.save(util);
 
@@ -102,40 +108,140 @@ public class TicketRepository {
 
     }
 
+    /**
+     * updatePool method is used to update the ticket List map
+     * @throws ClassNotFoundException
+     * @throws IOException
+     */
     public void updatePool()
             throws ClassNotFoundException, IOException{
         SerializerUtil util = new SerializerUtil();
         Map<Integer,Ticket> temp = (Map<Integer,Ticket>) util.readFromFile();
         this.updateList(temp);
     }
+
+    /**
+     * updatePool method
+     * @param agent <p>String</p>
+     */
     public void addAgent(String agent){
         agentList.add(agent);
     }
 
+    /**
+     * updateList method
+     * @param object <p>Map Collection</p>
+     */
     public void updateList(Map<Integer, Ticket> object) {
         ticketList.putAll(object);
     }
 
+    /**
+     * addTags method adds the tag in collection
+     * @param tag <p>String</p>
+     */
     public void addTags(Set<String> tag){
         tagList.addAll(tag);
     }
 
+    /**
+     * initTagList method is used to initialize the temporary set of tag
+     */
     public void initTagList(){
         if (ticketList != null){
             ticketList.values().stream().forEach(e-> tagList.addAll( e.getTags() ) );
         }
     }
 
+    /**
+     * initAgentList method is used to initialize the temporary set of agent
+     */
     public void initAgentList(){
         if (ticketList != null)
             ticketList.values().stream().forEach(e-> agentList.add(e.getAgent()) );
     }
 
+    /**
+     * getStreamValues method is used to get the stream of ticket list
+     * @return <p>Stream</p> Stream of ticket objects
+     */
     public Stream<Ticket> getStreamValues(){
         return getList().values().stream();
     }
 
-    // LB comment : Class instance variables should be declared at the start of the Class.
+    /**
+     * updateTicket method is used to update the ticket
+     * @param id <p>Integer</p> id of ticket
+     * @param agent <p>String</p> agent name
+     * @param tag <p>Set</p> Set of tags
+     * @return <p>Ticket object</p>
+     * @throws IOException
+     * @throws NotFoundException
+     * @throws ClassNotFoundException
+     */
+    public Ticket updateTicket(Integer id, String agent, Set<String> tag)
+            throws IOException, NotFoundException, ClassNotFoundException {
+
+        Ticket ticket = getTicket(id);
+
+        if (agent!= null) ticket.setAgent(agent);
+        ticket.setTags(tag);
+
+        ticket.update();
+
+        Map<Integer, Ticket> tempMap = new HashMap<>();
+        tempMap.put(ticket.getId(), ticket);
+
+        util.writeToFile(tempMap);
+        addAgent(ticket.getAgent());
+        addTags(ticket.getTags());
+
+        return ticket;
+    }
+
+    /**
+     * prepareCount method decided the count for the specified map object
+     * @param map <p>Map</p> Collection of String and Integer
+     * @param str <p>String</p>
+     * @return <p>int</p> count
+     */
+    public int prepareCount(Map<String, Integer> map, String str){
+        return map.containsKey(str) ? map.get(str) +1 : 1;
+    }
+
+    /**
+     * searchTicketByTags method is used to search the tickets by provided tag name
+     * @param value <p>String</p> tag name to be searched
+     * @return <p>List collection of ticket objects</p>
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public List<Ticket> searchTicketByTags(String value)
+            throws IOException, ClassNotFoundException {
+        return getStreamValues()
+                .filter(obj -> obj.getTags().contains(value.toLowerCase()) )
+                .sorted((obj1, obj2) -> (obj1.getModified() > obj2.getModified()) ? 1 : -1)
+                .collect(Collectors.toList());
+
+    }
+
+    /**
+     * searchTicketByAgent method is used to seach the tickets with provided agent name
+     * @param value <p>String</p> tag name to be searched
+     * @return <p>List collection of ticket objects</p>
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public List<Ticket> searchTicketByAgent(String value)
+            throws IOException, ClassNotFoundException {
+
+        return getStreamValues()
+                .filter(obj ->  obj.getAgent().toLowerCase().equals(value.toLowerCase()) )
+                .sorted((obj1, obj2) -> (obj1.getModified() > obj2.getModified()) ? 1 : -1)
+                .collect(Collectors.toList());
+
+    }
+
     //properties
     private static TicketRepository _instance; //holds the instance of TicketRepository class
     private Map<Integer, Ticket> ticketList ; //holds tickets. acts as temporary storage

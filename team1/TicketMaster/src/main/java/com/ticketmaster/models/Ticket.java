@@ -26,11 +26,11 @@ public class Ticket implements Serializable{
         this.agent = agent;
     }
     public void setTags(Set<String> tags){
-        // LB comment : Is this check required as you have already declared 'tags' variable to be Set instance in instance variable.
-        // Instead you should have checked Tags that are passed for Null.
-        if (!(this.tags instanceof Set))
+
+        if (this.tags == null)
             this.tags = new HashSet<>();
-        this.tags.addAll(tags);
+        if (tags!= null)
+            this.tags.addAll(tags);
     }
 
     //getter methods
@@ -53,6 +53,10 @@ public class Ticket implements Serializable{
         return this.tags;
     }
 
+    /**
+     * beforeSave method ensures created and modified values
+     * @return <p>boolean</p>
+     */
     private boolean beforeSave(){
         long time =  LocalDateTime.now(ZoneId.of("UTC")).toInstant(ZoneOffset.UTC).toEpochMilli();
         if (this.created == 0) this.created = time;
@@ -69,29 +73,47 @@ public class Ticket implements Serializable{
         this.setId(masterId++);
         return true;
     }
+    /**
+     * update method updates the details of ticket
+     * @return boolean <code></>true</code>
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
 
-    private void writeObject(ObjectOutputStream out)
-            throws IOException{
-        out.writeUTF(getSubject());
-        out.writeObject(this.tags);
-        out.writeLong(getCreated());
-        out.writeLong(getModified());
-        out.writeInt(getId());
-        out.writeUTF(getAgent());
+    public boolean update()  throws IOException, ClassNotFoundException{
+        beforeSave();
+        return true;
     }
 
+    /**
+     * writeObject method is used to serialize ticket object
+     * @param out <p>ObjectOutputStream</p>
+     * @throws IOException
+     */
+    private void writeObject(ObjectOutputStream out)
+            throws IOException{
+        out.writeUTF(this.getSubject());
+        out.writeObject(this.getTags());
+        out.writeLong(this.getCreated());
+        out.writeLong(this.getModified());
+        out.writeInt(this.getId());
+        out.writeUTF(this.getAgent());
+    }
+
+    /**
+     * readObject method is used to deserialize ticket object
+     * @param in <p>ObjectInputStream</p>
+     * @throws IOException
+     */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
         this.subject = in.readUTF();
-        // LB comment : This is just a suggestion on Type casting, where you have declared 'this.tags' of Set Type and
-        // while type casting you are using its Child Class Collection that is Hash Set
-        // there is no problem in using Hash Set below. Just suggesting that it should be 'Set' as you have declared 'Set' type for tags.
-        this.tags = (HashSet) (in.readObject());
+        this.tags = (Set<String>) (in.readObject());
         this.created = in.readLong();
         this.modified = in.readLong();
 
-        setId(in.readInt());
-        setAgent(in.readUTF());
+        this.setId(in.readInt());
+        this.setAgent(in.readUTF());
     }
 
     public Ticket(TicketBuilder object){
@@ -126,16 +148,10 @@ public class Ticket implements Serializable{
         public String getSubject(){
             return this.subject;
         }
-        public Set<String> getTags(){
-            // LB comment : Is this check required as you have already declared 'tags' variable to be Set instance in instance variable.
-            if (!(this.tags instanceof Set))
-                this.tags = new HashSet<>();
-            return this.tags;
-        }
+        public Set<String> getTags(){ return this.tags; }
 
-        // LB comment : Class instance variables should be declared at the start of the Class before your Accessors methods.
-        private String subject = null;
-        private String agent = null;
+        private String subject;
+        private String agent;
         private Set tags = new HashSet<>();
 
     }
@@ -158,7 +174,6 @@ public class Ticket implements Serializable{
         return this.getId()+this.getSubject().hashCode()+this.getAgent().hashCode();
     }
 
-    // LB comment : Class instance variables should be declared at the start of the Class before your Accessors methods.
     //attributes
     private int id;
     private long created;
