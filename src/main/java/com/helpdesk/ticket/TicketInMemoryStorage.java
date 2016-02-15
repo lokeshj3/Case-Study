@@ -27,5 +27,4 @@ public class TicketInMemoryStorage {
         return Collections.unmodifiableMap(ticketData);
     }
 
-
 }

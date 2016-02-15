@@ -36,7 +36,7 @@ public interface TicketDAO {
 
     Map<String, Integer> findAllTagsWithTicketCount();
 
-    List<Ticket> findAllOlderThanNDays(int noofdays);
+        List<Ticket> findAllOlderThanNDays(int noofdays);
 
     boolean isExist(int ticketId);
 
