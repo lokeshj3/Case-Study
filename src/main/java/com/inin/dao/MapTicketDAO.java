@@ -165,6 +165,8 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
         if (ticketMap.getTicketMap().isEmpty())
             throw new TicketNotFoundException("No Ticket found.");
 
+        //Ganesh D: instead of sorting all tickets by created & finding first element, it would be much better
+        // if you can compare & find the oldest element, as sorting is heaving operation, swapping/shifting is heavy
         return ticketMap.getTicketMap().values()
                 .stream()
                 .sorted((Ticket t1, Ticket t2) -> t1.getCreated().compareTo(t2.getCreated()))

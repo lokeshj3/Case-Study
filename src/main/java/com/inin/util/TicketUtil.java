@@ -63,6 +63,7 @@ public class TicketUtil {
      * @param ticketAttribute
      * @return
      */
+    //Ganesh D : You don't use this function
     public static String getAtributeNameValue(TicketAttribute ticketAttribute)
     {
         //VD: unused method

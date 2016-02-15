@@ -93,6 +93,7 @@ public class SerializeDAOImpl implements SerializeDAO{
         Ticket ticket = null;
         File file = FileHandler.createFile(TicketUtil.getProperty("serializeTicketFile"));
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            //Ganesh D: no need of loop when you are deserializing single ticket
             while (true) {
                  ticket = (Ticket)ois.readObject();
             }
