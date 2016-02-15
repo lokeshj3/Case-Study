@@ -122,8 +122,13 @@ public class Ticket implements Serializable{
 
     @Override
     public String toString() {
-        return "id = " + this.id
-                + ", subject = " + this.subject
-                + "";
+        return "Ticket{" +
+                "id=" + id +
+                ", subject='" + subject + '\'' +
+                ", agent='" + agentName + '\'' +
+                ", tags=" + tags +
+                ", created=" + created +
+                ", modified=" + modified +
+                '}';
     }
 }
