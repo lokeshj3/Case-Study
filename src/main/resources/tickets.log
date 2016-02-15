@@ -32,3 +32,17 @@ Feb 15, 2016 11:23:23 AM com.inin.logger.TLogger writeLog
 WARNING: Invalid Agent Name/Subject sent.
 Feb 15, 2016 11:23:23 AM com.inin.logger.TLogger writeLog
 WARNING: Invalid Agent Name/Subject sent.
+Feb 15, 2016 11:30:04 AM com.inin.logger.TLogger writeLog
+WARNING: Invalid Agent Name sent.
+Feb 15, 2016 11:30:04 AM com.inin.logger.TLogger writeLog
+WARNING: No Ticket found with id-1
+Feb 15, 2016 11:30:04 AM com.inin.logger.TLogger writeLog
+WARNING: Invalid Agent Name/Subject sent.
+Feb 15, 2016 11:30:04 AM com.inin.logger.TLogger writeLog
+WARNING: Invalid Agent Name/Subject sent.
+Feb 15, 2016 11:30:04 AM com.inin.logger.TLogger writeLog
+WARNING: Invalid Agent Name/Subject sent.
+Feb 15, 2016 11:30:04 AM com.inin.logger.TLogger writeLog
+WARNING: Invalid Agent Name/Subject sent.
+Feb 15, 2016 11:30:04 AM com.inin.logger.TLogger writeLog
+WARNING: Invalid Agent Name/Subject sent.
