@@ -22,6 +22,9 @@ com.helpdesk.exception.TicketNotFoundException: Ticket not Fount
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.lang.reflect.Method.invoke(Method.java:498)
 	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:144)
+<<<<<<< HEAD
+12-02-2016 16:10:59 ERROR TicketService:32 - Duplicate Ticket Id
+=======
 12-02-2016 13:07:31 ERROR TicketDAOInMemoryImpl:53 - Ticket not found
 12-02-2016 13:21:32 ERROR TicketService:33 - Invalid Param
 12-02-2016 13:22:00 ERROR TicketService:33 - Invalid Param
@@ -1152,6 +1155,7 @@ com.helpdesk.exception.InvalidParamsException: Ticket Not Found
 12-02-2016 17:30:19 ERROR TicketDAOInMemoryImpl:135 - Ticket not found
 12-02-2016 17:30:19 ERROR TicketService:32 - Invalid Param
 12-02-2016 17:30:19 ERROR TicketService:32 - Invalid Param
+<<<<<<< HEAD
 15-02-2016 11:00:06 ERROR TicketService:32 - Invalid Param
 15-02-2016 11:00:06 ERROR TicketService:32 - Invalid Param
 15-02-2016 11:00:06 ERROR TicketService:77 - Invalid Param
@@ -1167,3 +1171,83 @@ com.helpdesk.exception.InvalidParamsException: Ticket Not Found
 15-02-2016 11:00:06 ERROR TicketService:32 - Invalid Param
 15-02-2016 11:00:06 ERROR TicketService:32 - Invalid Param
 15-02-2016 11:00:06 ERROR TicketService:44 - Invalid Param
+=======
+>>>>>>> a3c238af7a8fc94b2cd7130df02ebae79cb17231
+13-02-2016 17:40:22 ERROR TicketService:32 - Invalid Param
+13-02-2016 17:40:22 ERROR TicketService:32 - Invalid Param
+13-02-2016 17:40:23 ERROR TicketService:44 - Invalid Param
+13-02-2016 17:40:23 ERROR TicketService:32 - Invalid Param
+13-02-2016 17:40:23 ERROR TicketService:32 - Invalid Param
+13-02-2016 17:40:23 ERROR TicketService:32 - Invalid Param
+13-02-2016 17:40:23 ERROR TicketService:32 - Invalid Param
+13-02-2016 17:40:23 ERROR TicketService:44 - Invalid Param
+13-02-2016 17:40:23 ERROR TicketService:77 - Invalid Param
+13-02-2016 17:40:23 ERROR TicketService:86 - Invalid Param
+13-02-2016 17:40:23 ERROR TicketService:100 - Invalid Param
+13-02-2016 17:40:23 ERROR TicketService:100 - Invalid Param
+13-02-2016 17:40:23 ERROR TicketDAOInMemoryImpl:182 - 
+13-02-2016 17:40:23 ERROR TicketDAOInMemoryImpl:203 - Ticket not found
+13-02-2016 17:40:23 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
+13-02-2016 17:41:26 ERROR TicketService:77 - Invalid Param
+13-02-2016 17:41:26 ERROR TicketService:86 - Invalid Param
+13-02-2016 17:41:26 ERROR TicketService:100 - Invalid Param
+13-02-2016 17:41:26 ERROR TicketService:100 - Invalid Param
+13-02-2016 17:41:26 ERROR TicketDAOInMemoryImpl:182 - 
+13-02-2016 17:41:26 ERROR TicketDAOInMemoryImpl:203 - Ticket not found
+13-02-2016 17:41:26 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
+13-02-2016 17:41:26 ERROR TicketService:44 - Invalid Param
+13-02-2016 17:41:26 ERROR TicketService:32 - Invalid Param
+13-02-2016 17:41:26 ERROR TicketService:32 - Invalid Param
+13-02-2016 17:41:26 ERROR TicketService:32 - Invalid Param
+13-02-2016 17:41:26 ERROR TicketService:32 - Invalid Param
+13-02-2016 17:41:26 ERROR TicketService:32 - Invalid Param
+13-02-2016 17:41:26 ERROR TicketService:44 - Invalid Param
+13-02-2016 17:41:26 ERROR TicketService:32 - Invalid Param
+13-02-2016 17:43:07 ERROR TicketService:32 - Invalid Param
+13-02-2016 17:43:33 ERROR TicketService:32 - Invalid Param
+13-02-2016 17:43:38 ERROR TicketService:32 - Invalid Param
+13-02-2016 17:43:38 ERROR TicketService:32 - Invalid Param
+13-02-2016 17:43:38 ERROR TicketService:44 - Invalid Param
+13-02-2016 17:43:38 ERROR TicketService:77 - Invalid Param
+13-02-2016 17:43:38 ERROR TicketService:86 - Invalid Param
+13-02-2016 17:43:38 ERROR TicketService:100 - Invalid Param
+13-02-2016 17:43:38 ERROR TicketService:100 - Invalid Param
+13-02-2016 17:43:38 ERROR TicketDAOInMemoryImpl:182 - 
+13-02-2016 17:43:38 ERROR TicketDAOInMemoryImpl:203 - Ticket not found
+13-02-2016 17:43:38 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
+13-02-2016 17:43:38 ERROR TicketService:32 - Invalid Param
+13-02-2016 17:43:38 ERROR TicketService:32 - Invalid Param
+13-02-2016 17:43:38 ERROR TicketService:32 - Invalid Param
+13-02-2016 17:43:38 ERROR TicketService:44 - Invalid Param
+13-02-2016 17:43:38 ERROR TicketService:32 - Invalid Param
+13-02-2016 23:53:50 ERROR TicketService:32 - Invalid Param
+13-02-2016 23:53:50 ERROR TicketService:32 - Invalid Param
+13-02-2016 23:53:50 ERROR TicketService:32 - Invalid Param
+13-02-2016 23:53:50 ERROR TicketService:32 - Invalid Param
+13-02-2016 23:53:50 ERROR TicketService:32 - Invalid Param
+13-02-2016 23:53:50 ERROR TicketService:44 - Invalid Param
+13-02-2016 23:53:50 ERROR TicketService:44 - Invalid Param
+13-02-2016 23:53:50 ERROR TicketService:77 - Invalid Param
+13-02-2016 23:53:50 ERROR TicketService:86 - Invalid Param
+13-02-2016 23:53:50 ERROR TicketService:100 - Invalid Param
+13-02-2016 23:53:50 ERROR TicketService:100 - Invalid Param
+13-02-2016 23:53:50 ERROR TicketDAOInMemoryImpl:182 - 
+13-02-2016 23:53:50 ERROR TicketDAOInMemoryImpl:203 - Ticket not found
+13-02-2016 23:53:50 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
+13-02-2016 23:53:50 ERROR TicketService:32 - Invalid Param
+>>>>>>> 33eda411ea70997104cc10c1f7e1f26d802fd5fb
+15-02-2016 11:07:26 ERROR TicketService:44 - Invalid Param
+15-02-2016 11:07:26 ERROR TicketService:44 - Invalid Param
+15-02-2016 11:07:26 ERROR TicketService:77 - Invalid Param
+15-02-2016 11:07:26 ERROR TicketService:86 - Invalid Param
+15-02-2016 11:07:26 ERROR TicketService:100 - Invalid Param
+15-02-2016 11:07:26 ERROR TicketService:100 - Invalid Param
+15-02-2016 11:07:26 ERROR TicketDAOInMemoryImpl:182 - 
+15-02-2016 11:07:26 ERROR TicketDAOInMemoryImpl:203 - Ticket not found
+15-02-2016 11:07:26 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
+15-02-2016 11:07:26 ERROR TicketService:32 - Invalid Param
+15-02-2016 11:07:26 ERROR TicketService:32 - Invalid Param
+15-02-2016 11:07:26 ERROR TicketService:32 - Invalid Param
+15-02-2016 11:07:26 ERROR TicketService:32 - Invalid Param
+15-02-2016 11:07:26 ERROR TicketService:32 - Invalid Param
+15-02-2016 11:07:26 ERROR TicketService:32 - Invalid Param

@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class TicketDAOInMemoryImpl implements TicketDAO {
     static Logger logger = LoggerFactory.getLogger(TicketDAOInMemoryImpl.class);
 
-    TicketInMemoryStorage ticketInMemoryStorage = TicketInMemoryStorage.getInstance();
+    TicketInMemoryStorage ticketInMemoryStorage = TicketInMemoryStorage.newInstance();
 
     /**
      * create eticket
@@ -33,6 +33,7 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
             throw new DuplicateTicketIdException("Duplicate Ticket Id");
         }
         ticketInMemoryStorage.writeData(ticketId, ticket);
+
         return new Ticket(ticket);
     }
 
@@ -111,18 +112,30 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
         throw new TicketNotFoundException("Ticket Not Found");
     }
 
+    /**
+     * Calculate total number of tickets present in the system
+     * @return count
+     */
     public int getTotalTicketInSystem() {
+        logger.info("Entered Calculate total number of tickets present in the system function");
         return ticketInMemoryStorage.getTicketData().size();
     }
 
+    /**
+     * Calculate oldest ticket present in the system
+     * @return oldest ticket
+     */
     public Ticket findOldestTicketInSystem() {
-        return ticketInMemoryStorage.getTicketData().values().stream().max((ticket1, ticket2) -> ticket2.getCreated().compareTo(ticket1.getCreated())).get();
+        logger.info("Entered find oldest ticket in system function");
+        return ticketInMemoryStorage.getTicketData().values().stream().max( (ticket1, ticket2) -> ticket2.getCreated().compareTo(ticket1.getCreated())).get();
     }
 
     /**
-     * @return
+     * Calculate ticket count for all tags
+     * @return tags with ticket count
      */
     public Map<String, Integer> findAllTagsWithTicketCount() {
+        logger.info("Entered tags with ticket count function");
         Map<String, Integer> hashMap = new HashMap<>();
         ticketInMemoryStorage.getTicketData().values().forEach(ticket -> {
                     for (String tags : ticket.getTags()) {
@@ -139,10 +152,12 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
     }
 
     /**
+     * Calculate tickets older than specified N number of days
      * @param noofdays
-     * @return
+     * @return list of tickets
      */
     public List<Ticket> findAllOlderThanNDays(int noofdays) {
+        logger.info("In find oldest ticket in system function");
         LocalDateTime olderDays = LocalDateTime.now().minus(noofdays, ChronoUnit.DAYS);
         return ticketInMemoryStorage.getTicketData().values().stream().filter(ticket -> ticket.getCreated().isBefore(olderDays)).collect(Collectors.toList());
 
