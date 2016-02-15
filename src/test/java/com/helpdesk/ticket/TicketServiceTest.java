@@ -58,11 +58,13 @@ public class TicketServiceTest {
             text_updateAgent = "Ganesh";
             text_tags = "tag1,tag2,tag3";
             //text_tags = "tag1,tag2,tag3,tag1 ,   tag2"; // if same tags added with space(s) then ticket tags set will update with duplicate values
+            text_tags.replaceAll("\\s+","");
             set_tagSet = new HashSet<>(Arrays.asList(text_tags.toLowerCase().split(",")));
             set_emptyTagSet = new HashSet<>();
             text_tags = text_tags + ", tag4";
-
+            text_tags.replaceAll("\\s+","");
             text_updatetags = "tag4, tag5";// if same tags added with space(s) then ticket tags set will update with duplicate values
+            text_updatetags.replaceAll("\\s+","");
             updateTagSet = new HashSet<>(Arrays.asList(text_updatetags.toLowerCase().split(",")));
             text_searchTag = "tag1";
             Data.initialized = true;
