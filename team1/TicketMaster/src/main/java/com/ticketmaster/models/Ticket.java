@@ -1,7 +1,6 @@
 package com.ticketmaster.models;
 
 import com.ticketmaster.utils.SerializerUtil;
-// LB: 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
