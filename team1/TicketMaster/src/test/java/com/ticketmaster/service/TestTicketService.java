@@ -1,5 +1,6 @@
 package com.ticketmaster.service;
 
+import com.ticketmaster.constants.SearchKeys;
 import com.ticketmaster.exceptions.IncompleteDataException;
 import com.ticketmaster.exceptions.NoUpdateException;
 import com.ticketmaster.exceptions.NotFoundException;
@@ -7,12 +8,13 @@ import com.ticketmaster.models.Ticket;
 import com.ticketmaster.utils.AppUtil;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Set;
 import java.util.Map;
 import java.util.HashSet;
-import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Arrays.*;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static junit.framework.TestCase.assertFalse;
@@ -48,40 +50,35 @@ public class TestTicketService {
         protected static final String NULL_AGENT      =   null;
         protected static final String NEW_NULL_AGENT  =   null;
 
-        protected static Set TAGS;
-        protected static Set NEW_TAGS;
+        protected static Set<String> TAGS;
+        protected static Set<String> NEW_TAGS;
 
-        protected static final Set NULL_TAGS          =   null;
-        protected static final Set NEW_NULL_TAGS      =   null;
+        protected static final Set<String> NULL_TAGS          =   null;
+        protected static final Set<String> NEW_NULL_TAGS      =   null;
 
         protected static TicketService service;
         protected static ReportService reportService;
 
         protected static void initialize(){
 
+            NEW_AGENT  =   "test-agent2";
+            Data.TAG_STRING1=   "tag1";
+            Data.TAG_STRING2=   "tag2";
+
             Data.ID         =   0;
             Data.INVALID_ID =   -1;
-            Data.SUBJECT    =   "test-Data.SUBJECT";
-            Data.AGENT      =   "test-Data.AGENT1";
-            Data.NEW_AGENT  =   "test-Data.AGENT2";
+            Data.SUBJECT    =   "test-subject";
+            Data.AGENT      =   "agent1";
+            Data.NEW_AGENT  =   "agent2";
             Data.TAG_STRING =   "new tag";
-            Data.TAGS       =   new HashSet<>(Arrays.asList("tag1","tag2"));
-            Data.NEW_TAGS   =   new HashSet<>(Arrays.asList(TAG_STRING));
+            Data.TAGS       =   new HashSet<>(asList(Data.TAG_STRING1,Data.TAG_STRING2));
+            Data.NEW_TAGS   =   new HashSet<>(Collections.singletonList(TAG_STRING));
             Data.service    =   new TicketService();
             Data.reportService = new ReportService();
 
-            ID         =   0;
-            INVALID_ID =   -1;
-            SUBJECT    =   "test-subject";
-            AGENT      =   "test-agent1";
-
-            NEW_AGENT  =   "test-agent2";
-            TAG_STRING1=   "tag1";
-            TAG_STRING2=   "tag2";
-
             NEW_TAG_STRING="new tag";
-            TAGS       =   new HashSet<>(Arrays.asList(Data.TAG_STRING1,Data.TAG_STRING2));
-            NEW_TAGS   =   new HashSet<>(Arrays.asList(Data.NEW_TAG_STRING));
+            TAGS       =   new HashSet<>(asList(Data.TAG_STRING1,Data.TAG_STRING2));
+            NEW_TAGS   =   new HashSet<>(asList(Data.NEW_TAG_STRING));
             service    =   new TicketService();
 
             isSet = true;
@@ -171,7 +168,7 @@ public class TestTicketService {
     public void testUpdateTicketWithAgent()
             throws IncompleteDataException, IOException,
             NotFoundException, ClassNotFoundException, NoUpdateException {
-        Ticket ticket, result = null;
+        Ticket ticket, result;
 
 
         ticket = Data.service.createTicket(Data.SUBJECT, Data.AGENT, Data.TAGS);
@@ -216,6 +213,7 @@ public class TestTicketService {
         }catch (IOException  | IncompleteDataException  |
                 ClassNotFoundException   e){
 
+            assert ticket != null;
             //clean data
             Data.service.cleanTestData(ticket.getId());
         }
@@ -235,6 +233,7 @@ public class TestTicketService {
             Data.service.updateTicket(Data.INVALID_ID, Data.NEW_AGENT, Data.NEW_TAGS);
         }catch (IOException  | IncompleteDataException  |
                 ClassNotFoundException e){
+            assert ticket != null;
             //clean data
             Data.service.cleanTestData(ticket.getId());
         }
@@ -265,6 +264,7 @@ public class TestTicketService {
             Data.service.deleteTicket(Data.INVALID_ID);
         }catch ( IOException  | IncompleteDataException  |
                 ClassNotFoundException e){
+            assert ticket != null;
             //clean data
             Data.service.cleanTestData(ticket.getId());
         }
@@ -278,9 +278,12 @@ public class TestTicketService {
         Ticket ticket=Data.service.createTicket(Data.SUBJECT, Data.AGENT, Data.TAGS);
         Data.ID = ticket.getId();
         boolean result = Data.service.deleteTicket(Data.ID);
-        assertTrue(result);
-        //delete once more
-        Data.service.deleteTicket(Data.ID);
+        try{
+            assertTrue(result);
+        }finally {
+            //delete once more
+            Data.service.deleteTicket(Data.ID);
+        }
 
     }
 
@@ -294,12 +297,14 @@ public class TestTicketService {
         Data.ID = ticket.getId();
 
         result = Data.service.getTicket(Data.ID);
-
-        assertEquals(Data.ID, result.getId());
-        assertEquals(ticket.hashCode(), result.hashCode());
-        assertEquals(ticket.toString().toLowerCase(), result.toString().toLowerCase());
-        //clean data
-        Data.service.cleanTestData(ticket.getId());
+        try{
+            assertEquals(Data.ID, result.getId());
+            assertEquals(ticket.hashCode(), result.hashCode());
+            assertEquals(ticket.toString().toLowerCase(), result.toString().toLowerCase());
+        }finally {
+            //clean data
+            Data.service.cleanTestData(ticket.getId());
+        }
     }
     @Test(expected = NotFoundException.class)
     public void testGetTicketWithInvalidId()
@@ -334,7 +339,7 @@ public class TestTicketService {
             ClassNotFoundException, IncompleteDataException{
         Ticket ticket1, ticket2 ;
         ticket1 = Data.service.createTicket(Data.SUBJECT, Data.AGENT, Data.TAGS);
-        List<Ticket> result = Data.service.searchTicket("agent",Data.AGENT);
+        List<Ticket> result = Data.service.searchTicket(SearchKeys.AGENT,Data.AGENT);
 
         assertFalse(result.isEmpty());
 
@@ -351,7 +356,7 @@ public class TestTicketService {
             ClassNotFoundException, IncompleteDataException{
 
         Ticket ticket = Data.service.createTicket(Data.SUBJECT, Data.AGENT, Data.TAGS);
-        List<Ticket> result = Data.service.searchTicket("agent",Data.NEW_AGENT);
+        List<Ticket> result = Data.service.searchTicket(SearchKeys.AGENT,Data.NEW_AGENT);
         assertTrue(result.isEmpty());
         //clean data
         Data.service.cleanTestData(ticket.getId());
@@ -364,7 +369,7 @@ public class TestTicketService {
             ClassNotFoundException, IncompleteDataException{
         Ticket ticket1, ticket2 ;
         ticket1 = Data.service.createTicket(Data.SUBJECT, Data.AGENT, Data.TAGS);
-        List<Ticket> result = Data.service.searchTicket("tag",Data.TAG_STRING1);
+        List<Ticket> result = Data.service.searchTicket(SearchKeys.TAGS,Data.TAG_STRING1);
 
         assertFalse(result.isEmpty());
 
@@ -379,7 +384,7 @@ public class TestTicketService {
             ClassNotFoundException, IncompleteDataException{
 
         Ticket ticket = Data.service.createTicket(Data.SUBJECT, Data.AGENT, Data.TAGS);
-        List<Ticket> result = Data.service.searchTicket("tag",Data.NEW_TAG_STRING);
+        List<Ticket> result = Data.service.searchTicket(SearchKeys.TAGS,Data.NEW_TAG_STRING);
         assertTrue(result.isEmpty());
         //clean data
         Data.service.cleanTestData(ticket.getId());

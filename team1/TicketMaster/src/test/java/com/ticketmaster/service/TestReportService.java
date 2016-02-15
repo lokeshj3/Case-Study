@@ -1,5 +1,6 @@
 package com.ticketmaster.service;
 
+import com.ticketmaster.constants.SearchKeys;
 import com.ticketmaster.exceptions.IncompleteDataException;
 import com.ticketmaster.exceptions.NotFoundException;
 import com.ticketmaster.models.Ticket;
@@ -73,7 +74,7 @@ public class TestReportService {
 		tagCount.forEach((tag, count) -> {
 			try {
 				assertEquals(count.toString(), Integer.toString(
-						TestTicketService.Data.service.searchTicket("tag", tag).size()));
+						TestTicketService.Data.service.searchTicket(SearchKeys.TAGS, tag).size()));
 			}
 			catch (ClassNotFoundException | IOException e)
 			{

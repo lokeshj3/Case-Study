@@ -1,7 +1,6 @@
 package com.ticketmaster.models;
 
 import com.ticketmaster.utils.SerializerUtil;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -27,9 +26,11 @@ public class Ticket implements Serializable{
         this.agent = agent;
     }
     public void setTags(Set<String> tags){
-        if (!(this.tags instanceof Set))
+
+        if (this.tags == null)
             this.tags = new HashSet<>();
-        this.tags.addAll(tags);
+        if (tags!= null)
+            this.tags.addAll(tags);
     }
 
     //getter methods
@@ -52,6 +53,10 @@ public class Ticket implements Serializable{
         return this.tags;
     }
 
+    /**
+     * beforeSave method ensures created and modified values
+     * @return <p>boolean</p>
+     */
     private boolean beforeSave(){
         long time =  LocalDateTime.now(ZoneId.of("UTC")).toInstant(ZoneOffset.UTC).toEpochMilli();
         if (this.created == 0) this.created = time;
@@ -68,26 +73,47 @@ public class Ticket implements Serializable{
         this.setId(masterId++);
         return true;
     }
+    /**
+     * update method updates the details of ticket
+     * @return boolean <code></>true</code>
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
 
-    private void writeObject(ObjectOutputStream out)
-            throws IOException{
-        out.writeUTF(getSubject());
-        out.writeObject(this.tags);
-        out.writeLong(getCreated());
-        out.writeLong(getModified());
-        out.writeInt(getId());
-        out.writeUTF(getAgent());
+    public boolean update()  throws IOException, ClassNotFoundException{
+        beforeSave();
+        return true;
     }
 
+    /**
+     * writeObject method is used to serialize ticket object
+     * @param out <p>ObjectOutputStream</p>
+     * @throws IOException
+     */
+    private void writeObject(ObjectOutputStream out)
+            throws IOException{
+        out.writeUTF(this.getSubject());
+        out.writeObject(this.getTags());
+        out.writeLong(this.getCreated());
+        out.writeLong(this.getModified());
+        out.writeInt(this.getId());
+        out.writeUTF(this.getAgent());
+    }
+
+    /**
+     * readObject method is used to deserialize ticket object
+     * @param in <p>ObjectInputStream</p>
+     * @throws IOException
+     */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
         this.subject = in.readUTF();
-        this.tags = (HashSet) (in.readObject());
+        this.tags = (Set<String>) (in.readObject());
         this.created = in.readLong();
         this.modified = in.readLong();
 
-        setId(in.readInt());
-        setAgent(in.readUTF());
+        this.setId(in.readInt());
+        this.setAgent(in.readUTF());
     }
 
     public Ticket(TicketBuilder object){
@@ -122,14 +148,10 @@ public class Ticket implements Serializable{
         public String getSubject(){
             return this.subject;
         }
-        public Set<String> getTags(){
-            if (!(this.tags instanceof Set))
-                this.tags = new HashSet<>();
-            return this.tags;
-        }
+        public Set<String> getTags(){ return this.tags; }
 
-        private String subject = null;
-        private String agent = null;
+        private String subject;
+        private String agent;
         private Set tags = new HashSet<>();
 
     }

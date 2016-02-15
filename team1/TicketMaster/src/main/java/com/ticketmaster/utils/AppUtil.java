@@ -13,6 +13,11 @@ import java.util.Map;
  */
 public class AppUtil {
 
+    /**
+     * initializeApp method is used to initialize the system at system start
+     * @throws ClassNotFoundException
+     * @throws IOException
+     */
     public static void initializeApp()
             throws ClassNotFoundException, IOException {
 
@@ -24,9 +29,5 @@ public class AppUtil {
         service.setTicketList((Map<Integer, Ticket>) util.readFromFile());
         service.initTags();
         service.initAgents();
-    }
-
-    public static int prepareCount(Map<String, Integer> map, String str){
-        return map.containsKey(str) ? map.get(str) +1 : 1;
     }
 }

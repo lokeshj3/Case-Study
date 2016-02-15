@@ -33,6 +33,11 @@ public class SerializerUtil {
     }
 
 
+    /**
+     * checkFiles method is used to ensure files presence in system
+     * @param filename <p>String</p>
+     * @throws IOException
+     */
     private void checkFiles(String filename) throws IOException {
         File directory = new File (base);
         if (!directory.exists() && !directory.isDirectory()){
@@ -44,6 +49,10 @@ public class SerializerUtil {
         }
     }
 
+    /**
+     * connectWriter method is used to connect the output stream to file for writing
+     * @throws IOException
+     */
     private void connectWriter()
             throws IOException{
 
@@ -58,21 +67,37 @@ public class SerializerUtil {
         }
     }
 
+    /**
+     * disconnectWriter method is used to disconnect the output stream from file
+     * @throws IOException
+     */
     private void disconnectWriter()
             throws IOException{
         fOut.close();
     }
 
+    /**
+     * connectReader method is used to connect the input stream to file for reading
+     * @throws IOException
+     */
     private void connectReader()
             throws IOException{
         fIn = new ObjectInputStream(new FileInputStream(file));
     }
 
+    /**
+     * disconnectReader method is used to disconnect the input stream from file
+     * @throws IOException
+     */
     private void disconnectReader()
             throws IOException{
         fIn.close();
     }
 
+    /**
+     * emptyObjectFile method is used to empty the file storing ticket objects
+     * @throws IOException
+     */
     public void emptyObjectFile()
             throws IOException{
 
@@ -117,10 +142,16 @@ public class SerializerUtil {
         disconnectWriter();
     }
 
-    public Map<?,?> readFromFile()
+    /**
+     * readFromFile method is used to read serialized ticket objects from file
+     * @return <p>Map collection</p>
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public Map<?, ?> readFromFile()
             throws IOException, ClassNotFoundException{
 
-        checkFiles(fileName); // EB: Good practice to use 'this' keyword.
+        this.checkFiles(fileName);
         boolean flag = true;
 
 
@@ -144,6 +175,12 @@ public class SerializerUtil {
         return tempMap;
     }
 
+    /**
+     * writeProperty method is used to write the specified property in the properties file
+     * @param key <p>String</p>
+     * @param value <p>String</p>
+     * @throws IOException
+     */
     public void writeProperty(String key , String value)
             throws IOException {
 
@@ -156,6 +193,11 @@ public class SerializerUtil {
 
     }
 
+    /**
+     * loadPropertiesFile method is used to load the porperties file
+     * @return <p>Properties</p>
+     * @throws IOException
+     */
     public Properties loadPropertiesFile()
             throws IOException {
         Properties prop = new Properties();
@@ -170,6 +212,13 @@ public class SerializerUtil {
 
         return prop;
     }
+
+    /**
+     * readProperty method reads the property specified
+     * @param key <p>String</p>
+     * @return <p>String</p>
+     * @throws IOException
+     */
 
     public String readProperty(String key)
             throws IOException{
@@ -186,11 +235,13 @@ public class SerializerUtil {
 
     }
 
-
+    /**
+     * getSerializedFileName method
+     * @return <p>String</p>
+     */
     public static String getSerializedFileName(){
         return "tickets.ser";
     }
-
 
     //properties
     final String base = "files";
