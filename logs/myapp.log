@@ -1152,3 +1152,18 @@ com.helpdesk.exception.InvalidParamsException: Ticket Not Found
 12-02-2016 17:30:19 ERROR TicketDAOInMemoryImpl:135 - Ticket not found
 12-02-2016 17:30:19 ERROR TicketService:32 - Invalid Param
 12-02-2016 17:30:19 ERROR TicketService:32 - Invalid Param
+15-02-2016 11:00:06 ERROR TicketService:32 - Invalid Param
+15-02-2016 11:00:06 ERROR TicketService:32 - Invalid Param
+15-02-2016 11:00:06 ERROR TicketService:77 - Invalid Param
+15-02-2016 11:00:06 ERROR TicketService:86 - Invalid Param
+15-02-2016 11:00:06 ERROR TicketService:100 - Invalid Param
+15-02-2016 11:00:06 ERROR TicketService:100 - Invalid Param
+15-02-2016 11:00:06 ERROR TicketDAOInMemoryImpl:167 - 
+15-02-2016 11:00:06 ERROR TicketDAOInMemoryImpl:188 - Ticket not found
+15-02-2016 11:00:06 ERROR TicketDAOInMemoryImpl:110 - Ticket not found
+15-02-2016 11:00:06 ERROR TicketService:44 - Invalid Param
+15-02-2016 11:00:06 ERROR TicketService:32 - Invalid Param
+15-02-2016 11:00:06 ERROR TicketService:32 - Invalid Param
+15-02-2016 11:00:06 ERROR TicketService:32 - Invalid Param
+15-02-2016 11:00:06 ERROR TicketService:32 - Invalid Param
+15-02-2016 11:00:06 ERROR TicketService:44 - Invalid Param
