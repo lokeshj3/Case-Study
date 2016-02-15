@@ -66,6 +66,10 @@ public class Ticket implements Serializable{
         return agent;
     }
 
+    public String getSubject() {
+        return subject;
+    }
+
     public LocalDateTime getCreated() {
         return created;
     }
