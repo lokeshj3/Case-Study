@@ -39,16 +39,15 @@ public class TicketService {
     public final Ticket createTicket(int ticketId, String subject, String agentName, Set<String> setOfTags) throws DuplicateTicketIdException, InvalidParamsException {
 
         if (ticketId > 0 && Helper.isStringValid(subject) && Helper.isStringValid(agentName)) {
-            if(setOfTags.size() > 0) {
+            if (setOfTags.size() > 0) {
                 return ticketDAO.create(new Ticket.Builder(ticketId, subject, agentName).withTags(setOfTags).build());
-            }else
-            {
+            } else {
                 return ticketDAO.create(new Ticket.Builder(ticketId, subject, agentName).build());
             }
-        } else {
-            logger.error("Invalid Param");
-            throw new InvalidParamsException("Invalid Param");
         }
+        logger.error("Invalid Param");
+        throw new InvalidParamsException("Invalid Param");
+
     }
 
     /**
@@ -65,10 +64,9 @@ public class TicketService {
             Ticket ticket = ticketDAO.find(ticketId);
             ticket.setAgentName(agentName);
             return ticketDAO.update(ticket);
-        } else {
-            logger.error("Invalid Param");
-            throw new InvalidParamsException("Invalid Param");
         }
+        logger.error("Invalid Param");
+        throw new InvalidParamsException("Invalid Param");
     }
 
     /**
@@ -85,10 +83,9 @@ public class TicketService {
             Ticket ticket = ticketDAO.find(ticketId);
             ticket.setTags(tags);
             return ticketDAO.update(ticket);
-        } else {
-            logger.error("Invalid Param");
-            throw new InvalidParamsException("Invalid Param");
         }
+        logger.error("Invalid Param");
+        throw new InvalidParamsException("Invalid Param");
     }
 
     /**
@@ -107,10 +104,9 @@ public class TicketService {
             ticket.setTags(tags);
             ticket.setAgentName(agentName);
             return ticketDAO.update(ticket);
-        } else {
-            logger.error("Invalid Param");
-            throw new InvalidParamsException("Invalid Param");
         }
+        logger.error("Invalid Param");
+        throw new InvalidParamsException("Invalid Param");
     }
 
     /**
@@ -125,10 +121,9 @@ public class TicketService {
     public final boolean deleteTicket(int ticketId) throws InvalidParamsException, TicketNotFoundException {
         if (ticketId > 0) {
             return ticketDAO.delete(ticketId);
-        } else {
-            logger.error("Invalid Param");
-            throw new InvalidParamsException("Invalid Param");
         }
+        logger.error("Invalid Param");
+        throw new InvalidParamsException("Invalid Param");
     }
 
     /**
@@ -142,10 +137,10 @@ public class TicketService {
     public final Ticket getTicketDetail(int ticketId) throws TicketNotFoundException, InvalidParamsException {
         if (ticketId > 0) {
             return ticketDAO.find(ticketId);
-        } else {
-            logger.error("Invalid Param");
-            throw new InvalidParamsException("Invalid Param");
         }
+        logger.error("Invalid Param");
+        throw new InvalidParamsException("Invalid Param");
+
     }
 
     /**

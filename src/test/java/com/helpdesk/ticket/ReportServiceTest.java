@@ -5,6 +5,7 @@ import com.helpdesk.exception.InvalidParamsException;
 import com.helpdesk.exception.InvalidTicketDAOFactoryTypeException;
 import com.helpdesk.exception.TicketNotFoundException;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -30,8 +31,7 @@ public class ReportServiceTest {
         private static String text_tags2;
         private static Set<String> set_tagSet;
         private static Set<String> set_tagSet2;
-        private static String text_updatetags;
-
+        private static ReportService reportService;
 
 
         private static void initialize() throws InvalidTicketDAOFactoryTypeException {
@@ -48,7 +48,7 @@ public class ReportServiceTest {
             set_tagSet = new HashSet<>(Arrays.asList(text_tags.toLowerCase().split(",")));
             set_tagSet2 = new HashSet<>(Arrays.asList(text_tags2.toLowerCase().split(",")));
             text_tags = text_tags + ", tag4";
-            text_updatetags = "tag4, tag5";
+
             Data.initialized = true;
         }
 
@@ -61,21 +61,25 @@ public class ReportServiceTest {
         }
     }
 
+    @Before
+    public void classInit() throws InvalidTicketDAOFactoryTypeException {
+        Data.reportService = new ReportService();
+    }
+
+
     @Test
     public void testTicketsCountInSystem() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
-        ReportService reportService = new ReportService();
-        reportService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
-        reportService.createTicket(Data.int_ticketId2, Data.text_subject2, Data.text_agent2, Data.set_tagSet2);
-        Assert.assertEquals(2, reportService.getTicketsCountInSystem());
+        Data.reportService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
+        Data.reportService.createTicket(Data.int_ticketId2, Data.text_subject2, Data.text_agent2, Data.set_tagSet2);
+        Assert.assertEquals(2, Data.reportService.getTicketsCountInSystem());
     }
 
 
     @Test
     public void testTagsWithTicketCount() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
-        ReportService reportService = new ReportService();
-        reportService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
-        reportService.createTicket(Data.int_ticketId2, Data.text_subject2, Data.text_agent2, Data.set_tagSet2);
-        Map map = reportService.getTagsWithTicketCount();
+        Data.reportService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
+        Data.reportService.createTicket(Data.int_ticketId2, Data.text_subject2, Data.text_agent2, Data.set_tagSet2);
+        Map map = Data.reportService.getTagsWithTicketCount();
         Assert.assertEquals(2, map.get("tag1"));
         Assert.assertEquals(2, map.get("tag2"));
         Assert.assertEquals(2, map.get("tag3"));
@@ -84,29 +88,27 @@ public class ReportServiceTest {
 
     @Test
     public void testOldestTicketInSystem() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
-        ReportService reportService = new ReportService();
-        reportService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
-        reportService.createTicket(Data.int_ticketId2, Data.text_subject2, Data.text_agent2, Data.set_tagSet2);
-        Ticket ticket = reportService.getOldestTicketInSystem();
+        Data.reportService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
+        Data.reportService.createTicket(Data.int_ticketId2, Data.text_subject2, Data.text_agent2, Data.set_tagSet2);
+        Ticket ticket = Data.reportService.getOldestTicketInSystem();
         Assert.assertEquals(Data.int_ticketId, ticket.getId());
     }
 
     @Test(expected = InvalidParamsException.class)
     public void testTicketsOlderThanNDaysWithInvalidNoofDays() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
-        ReportService reportService = new ReportService();
-        reportService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
-        reportService.createTicket(Data.int_ticketId2, Data.text_subject2, Data.text_agent2, Data.set_tagSet2);
-        reportService.getTicketsOlderThanNDays(Data.int_invalidNoOfDay);
+
+        Data.reportService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
+        Data.reportService.createTicket(Data.int_ticketId2, Data.text_subject2, Data.text_agent2, Data.set_tagSet2);
+        Data.reportService.getTicketsOlderThanNDays(Data.int_invalidNoOfDay);
 
     }
 
-
+    @Test
     public void testTicketsOlderThanNDays() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
-        ReportService reportService = new ReportService();
-        reportService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
-        reportService.createTicket(Data.int_ticketId2, Data.text_subject2, Data.text_agent2, Data.set_tagSet2);
-        List<Ticket> list = reportService.getTicketsOlderThanNDays(Data.int_noOfDay);
-        Assert.assertEquals(2,reportService.getTicketsCountInSystem());
+        Data.reportService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
+        Data.reportService.createTicket(Data.int_ticketId2, Data.text_subject2, Data.text_agent2, Data.set_tagSet2);
+        List<Ticket> list = Data.reportService.getTicketsOlderThanNDays(Data.int_noOfDay);
+        Assert.assertEquals(2, Data.reportService.getTicketsCountInSystem());
 
     }
 

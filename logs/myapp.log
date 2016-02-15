@@ -1598,3 +1598,337 @@ com.helpdesk.exception.InvalidParamsException: Ticket Not Found
 15-02-2016 14:10:07 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
 15-02-2016 14:10:07 ERROR TicketService:49 - Invalid Param
 15-02-2016 14:10:07 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:12:08 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:12:08 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:12:08 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:12:08 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:12:08 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:12:08 ERROR TicketService:69 - Invalid Param
+15-02-2016 14:12:08 ERROR TicketService:69 - Invalid Param
+15-02-2016 14:12:08 ERROR TicketService:129 - Invalid Param
+15-02-2016 14:12:08 ERROR TicketService:146 - Invalid Param
+15-02-2016 14:12:08 ERROR TicketService:174 - Invalid Param
+15-02-2016 14:12:08 ERROR TicketService:174 - Invalid Param
+15-02-2016 14:12:08 ERROR TicketDAOInMemoryImpl:190 - Ticket Not Founds
+15-02-2016 14:12:08 ERROR TicketDAOInMemoryImpl:211 - Ticket not found
+15-02-2016 14:12:08 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:12:08 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
+15-02-2016 14:12:12 INFO  TicketDAOInMemoryImpl:121 - Entered Calculate total number of tickets present in the system function
+15-02-2016 14:12:12 INFO  TicketDAOInMemoryImpl:141 - Entered tags with ticket count function
+15-02-2016 14:12:12 ERROR ReportService:53 - Invalid number of days
+15-02-2016 14:12:12 INFO  TicketDAOInMemoryImpl:131 - Entered find oldest ticket in system function
+15-02-2016 14:41:30 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:42:29 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:42:53 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:43:17 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:43:38 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:44:33 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:44:59 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:45:53 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:46:08 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:46:16 ERROR TicketService:129 - Invalid Param
+15-02-2016 14:46:16 ERROR TicketService:146 - Invalid Param
+15-02-2016 14:46:16 ERROR TicketService:174 - Invalid Param
+15-02-2016 14:46:16 ERROR TicketService:174 - Invalid Param
+15-02-2016 14:46:16 ERROR TicketDAOInMemoryImpl:190 - Ticket Not Founds
+15-02-2016 14:46:16 ERROR TicketDAOInMemoryImpl:211 - Ticket not found
+15-02-2016 14:46:16 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
+15-02-2016 14:46:16 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:46:16 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:46:16 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:46:16 ERROR TicketService:69 - Invalid Param
+15-02-2016 14:46:16 ERROR TicketService:69 - Invalid Param
+15-02-2016 14:46:16 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:46:16 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:46:16 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:46:16 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:47:08 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:52:12 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:52:12 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:52:12 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:52:12 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:52:12 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:52:12 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:52:12 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:12 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:12 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:12 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:12 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:12 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:12 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:12 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:12 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:12 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:12 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:12 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:12 ERROR TicketDAOInMemoryImpl:190 - Ticket Not Founds
+15-02-2016 14:52:12 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:12 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:12 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:12 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:12 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:12 ERROR TicketService:69 - Invalid Param
+15-02-2016 14:52:25 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:52:25 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:52:25 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:52:25 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:52:25 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:25 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:25 ERROR TicketService:69 - Invalid Param
+15-02-2016 14:52:25 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:25 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:25 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:25 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:25 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:25 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:25 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:25 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:25 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:25 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:25 ERROR TicketDAOInMemoryImpl:190 - Ticket Not Founds
+15-02-2016 14:52:25 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:25 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:25 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:25 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:25 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:52:25 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:52:25 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:52:25 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:53:42 ERROR TicketService:174 - Invalid Param
+15-02-2016 14:53:42 ERROR TicketService:174 - Invalid Param
+15-02-2016 14:53:42 ERROR TicketDAOInMemoryImpl:190 - Ticket Not Founds
+15-02-2016 14:53:42 ERROR TicketDAOInMemoryImpl:211 - Ticket not found
+15-02-2016 14:53:42 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
+15-02-2016 14:53:42 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:53:42 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:53:42 ERROR TicketService:69 - Invalid Param
+15-02-2016 14:53:42 ERROR TicketService:129 - Invalid Param
+15-02-2016 14:53:42 ERROR TicketService:146 - Invalid Param
+15-02-2016 14:53:42 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:53:42 ERROR TicketService:69 - Invalid Param
+15-02-2016 14:53:42 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:53:42 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:53:42 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:53:42 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:54:01 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:54:01 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:54:01 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:54:01 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:54:01 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:54:01 ERROR TicketService:129 - Invalid Param
+15-02-2016 14:54:01 ERROR TicketService:146 - Invalid Param
+15-02-2016 14:54:01 ERROR TicketService:174 - Invalid Param
+15-02-2016 14:54:01 ERROR TicketService:174 - Invalid Param
+15-02-2016 14:54:01 ERROR TicketDAOInMemoryImpl:190 - Ticket Not Founds
+15-02-2016 14:54:01 ERROR TicketDAOInMemoryImpl:211 - Ticket not found
+15-02-2016 14:54:01 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
+15-02-2016 14:54:01 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:54:01 ERROR TicketService:69 - Invalid Param
+15-02-2016 14:54:01 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:54:01 ERROR TicketService:69 - Invalid Param
+15-02-2016 14:54:21 ERROR TicketService:146 - Invalid Param
+15-02-2016 14:54:21 ERROR TicketService:174 - Invalid Param
+15-02-2016 14:54:21 ERROR TicketService:174 - Invalid Param
+15-02-2016 14:54:21 ERROR TicketDAOInMemoryImpl:190 - Ticket Not Founds
+15-02-2016 14:54:21 ERROR TicketDAOInMemoryImpl:211 - Ticket not found
+15-02-2016 14:54:21 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
+15-02-2016 14:54:21 ERROR TicketService:69 - Invalid Param
+15-02-2016 14:54:21 ERROR TicketService:69 - Invalid Param
+15-02-2016 14:54:21 ERROR TicketService:129 - Invalid Param
+15-02-2016 14:54:21 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:54:21 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:54:21 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:54:21 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:54:21 ERROR TicketService:49 - Invalid Param
+15-02-2016 14:54:21 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 14:54:21 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:02:39 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:06:07 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:06:13 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:06:59 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:06:59 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:06:59 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 15:06:59 ERROR TicketService:69 - Invalid Param
+15-02-2016 15:06:59 ERROR TicketService:69 - Invalid Param
+15-02-2016 15:06:59 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:06:59 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:06:59 ERROR TicketService:129 - Invalid Param
+15-02-2016 15:06:59 ERROR TicketService:146 - Invalid Param
+15-02-2016 15:06:59 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:06:59 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:06:59 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:06:59 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:06:59 ERROR TicketService:174 - Invalid Param
+15-02-2016 15:06:59 ERROR TicketService:174 - Invalid Param
+15-02-2016 15:06:59 ERROR TicketDAOInMemoryImpl:190 - Ticket Not Founds
+15-02-2016 15:06:59 ERROR TicketDAOInMemoryImpl:211 - Ticket not found
+15-02-2016 15:06:59 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
+15-02-2016 15:07:14 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:07:14 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:07:14 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:07:14 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:07:14 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:07:14 ERROR TicketService:69 - Invalid Param
+15-02-2016 15:07:14 ERROR TicketService:69 - Invalid Param
+15-02-2016 15:07:14 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:07:14 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 15:07:14 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:07:14 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:07:14 ERROR TicketService:129 - Invalid Param
+15-02-2016 15:07:14 ERROR TicketService:146 - Invalid Param
+15-02-2016 15:07:14 ERROR TicketService:174 - Invalid Param
+15-02-2016 15:07:14 ERROR TicketService:174 - Invalid Param
+15-02-2016 15:07:14 ERROR TicketDAOInMemoryImpl:190 - Ticket Not Founds
+15-02-2016 15:07:14 ERROR TicketDAOInMemoryImpl:211 - Ticket not found
+15-02-2016 15:07:14 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
+15-02-2016 15:07:47 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:07:47 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:07:47 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:07:47 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:07:47 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 15:07:47 ERROR TicketService:69 - Invalid Param
+15-02-2016 15:07:47 ERROR TicketService:69 - Invalid Param
+15-02-2016 15:07:47 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:07:47 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:07:47 ERROR TicketService:146 - Invalid Param
+15-02-2016 15:07:47 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:07:47 ERROR TicketService:49 - Invalid Param
+15-02-2016 15:07:47 ERROR TicketService:129 - Invalid Param
+15-02-2016 15:07:47 ERROR TicketService:174 - Invalid Param
+15-02-2016 15:07:47 ERROR TicketService:174 - Invalid Param
+15-02-2016 15:07:47 ERROR TicketDAOInMemoryImpl:190 - Ticket Not Founds
+15-02-2016 15:07:47 ERROR TicketDAOInMemoryImpl:211 - Ticket not found
+15-02-2016 15:07:47 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
+15-02-2016 15:09:55 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:09:55 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:09:55 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:09:55 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:09:55 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:09:55 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 15:09:55 ERROR TicketService:68 - Invalid Param
+15-02-2016 15:09:55 ERROR TicketService:68 - Invalid Param
+15-02-2016 15:09:55 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:09:55 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:09:55 ERROR TicketService:125 - Invalid Param
+15-02-2016 15:09:55 ERROR TicketService:141 - Invalid Param
+15-02-2016 15:09:55 ERROR TicketService:169 - Invalid Param
+15-02-2016 15:09:55 ERROR TicketService:169 - Invalid Param
+15-02-2016 15:09:55 ERROR TicketDAOInMemoryImpl:190 - Ticket Not Founds
+15-02-2016 15:09:55 ERROR TicketDAOInMemoryImpl:211 - Ticket not found
+15-02-2016 15:09:55 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
+15-02-2016 15:09:55 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:12:16 ERROR TicketService:87 - Invalid Param
+15-02-2016 15:13:26 ERROR TicketService:87 - Invalid Param
+15-02-2016 15:13:26 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:13:26 ERROR TicketService:125 - Invalid Param
+15-02-2016 15:13:26 ERROR TicketService:141 - Invalid Param
+15-02-2016 15:13:26 ERROR TicketService:169 - Invalid Param
+15-02-2016 15:13:26 ERROR TicketService:169 - Invalid Param
+15-02-2016 15:13:26 ERROR TicketDAOInMemoryImpl:190 - Ticket Not Founds
+15-02-2016 15:13:26 ERROR TicketDAOInMemoryImpl:211 - Ticket not found
+15-02-2016 15:13:26 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
+15-02-2016 15:13:26 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 15:13:26 ERROR TicketService:68 - Invalid Param
+15-02-2016 15:13:26 ERROR TicketService:68 - Invalid Param
+15-02-2016 15:13:26 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:13:26 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:13:26 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:13:26 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:13:26 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:13:26 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:15:55 ERROR TicketService:185 - Invalid Param
+15-02-2016 15:16:02 ERROR TicketService:68 - Invalid Param
+15-02-2016 15:16:02 ERROR TicketService:68 - Invalid Param
+15-02-2016 15:16:02 ERROR TicketService:87 - Invalid Param
+15-02-2016 15:16:02 ERROR TicketService:87 - Invalid Param
+15-02-2016 15:16:02 ERROR TicketService:125 - Invalid Param
+15-02-2016 15:16:02 ERROR TicketService:141 - Invalid Param
+15-02-2016 15:16:02 ERROR TicketService:169 - Invalid Param
+15-02-2016 15:16:02 ERROR TicketService:169 - Invalid Param
+15-02-2016 15:16:02 ERROR TicketDAOInMemoryImpl:190 - Ticket Not Founds
+15-02-2016 15:16:02 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:16:02 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:16:02 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:16:02 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:16:02 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:16:02 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:16:02 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 15:16:02 ERROR TicketDAOInMemoryImpl:211 - Ticket not found
+15-02-2016 15:16:02 ERROR TicketService:185 - Invalid Param
+15-02-2016 15:16:02 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
+15-02-2016 15:19:25 ERROR TicketService:68 - Invalid Param
+15-02-2016 15:19:25 ERROR TicketService:87 - Invalid Param
+15-02-2016 15:19:25 ERROR TicketService:87 - Invalid Param
+15-02-2016 15:19:25 ERROR TicketService:125 - Invalid Param
+15-02-2016 15:19:25 ERROR TicketService:141 - Invalid Param
+15-02-2016 15:19:25 ERROR TicketService:169 - Invalid Param
+15-02-2016 15:19:25 ERROR TicketService:169 - Invalid Param
+15-02-2016 15:19:25 ERROR TicketDAOInMemoryImpl:190 - Ticket Not Founds
+15-02-2016 15:19:25 ERROR TicketDAOInMemoryImpl:211 - Ticket not found
+15-02-2016 15:19:25 ERROR TicketService:185 - Invalid Param
+15-02-2016 15:19:25 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
+15-02-2016 15:19:25 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:19:25 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:19:25 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:19:25 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:19:25 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:19:25 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 15:19:25 ERROR TicketService:68 - Invalid Param
+15-02-2016 15:19:25 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:21:06 ERROR TicketService:108 - Invalid Param
+15-02-2016 15:21:10 ERROR TicketService:108 - Invalid Param
+15-02-2016 15:21:10 ERROR TicketService:125 - Invalid Param
+15-02-2016 15:21:10 ERROR TicketService:141 - Invalid Param
+15-02-2016 15:21:10 ERROR TicketService:169 - Invalid Param
+15-02-2016 15:21:10 ERROR TicketService:169 - Invalid Param
+15-02-2016 15:21:10 ERROR TicketDAOInMemoryImpl:190 - Ticket Not Founds
+15-02-2016 15:21:10 ERROR TicketDAOInMemoryImpl:211 - Ticket not found
+15-02-2016 15:21:10 ERROR TicketService:185 - Invalid Param
+15-02-2016 15:21:10 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
+15-02-2016 15:21:10 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:21:10 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 15:21:10 ERROR TicketService:68 - Invalid Param
+15-02-2016 15:21:10 ERROR TicketService:68 - Invalid Param
+15-02-2016 15:21:10 ERROR TicketService:87 - Invalid Param
+15-02-2016 15:21:10 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:21:10 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:21:10 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:21:10 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:21:10 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:25:32 INFO  TicketDAOInMemoryImpl:131 - Entered find oldest ticket in system function
+15-02-2016 15:25:32 ERROR ReportService:53 - Invalid number of days
+15-02-2016 15:25:32 INFO  TicketDAOInMemoryImpl:141 - Entered tags with ticket count function
+15-02-2016 15:25:32 INFO  TicketDAOInMemoryImpl:121 - Entered Calculate total number of tickets present in the system function
+15-02-2016 15:31:32 ERROR ReportService:53 - Invalid number of days
+15-02-2016 15:35:34 ERROR ReportService:53 - Invalid number of days
+15-02-2016 15:36:14 INFO  TicketDAOInMemoryImpl:121 - Entered Calculate total number of tickets present in the system function
+15-02-2016 15:36:14 INFO  TicketDAOInMemoryImpl:141 - Entered tags with ticket count function
+15-02-2016 15:36:14 ERROR ReportService:53 - Invalid number of days
+15-02-2016 15:36:14 INFO  TicketDAOInMemoryImpl:131 - Entered find oldest ticket in system function
+15-02-2016 15:39:12 INFO  TicketDAOInMemoryImpl:164 - In find oldest ticket in system function
+15-02-2016 15:39:12 INFO  TicketDAOInMemoryImpl:121 - Entered Calculate total number of tickets present in the system function
+15-02-2016 15:39:22 INFO  TicketDAOInMemoryImpl:121 - Entered Calculate total number of tickets present in the system function
+15-02-2016 15:39:22 INFO  TicketDAOInMemoryImpl:141 - Entered tags with ticket count function
+15-02-2016 15:39:22 INFO  TicketDAOInMemoryImpl:131 - Entered find oldest ticket in system function
+15-02-2016 15:39:22 ERROR ReportService:53 - Invalid number of days
+15-02-2016 15:39:22 INFO  TicketDAOInMemoryImpl:164 - In find oldest ticket in system function
+15-02-2016 15:39:22 INFO  TicketDAOInMemoryImpl:121 - Entered Calculate total number of tickets present in the system function
+15-02-2016 15:39:37 ERROR TicketDAOInMemoryImpl:211 - Ticket not found
+15-02-2016 15:39:37 ERROR TicketService:185 - Invalid Param
+15-02-2016 15:39:37 ERROR TicketDAOInMemoryImpl:111 - Ticket not found
+15-02-2016 15:39:37 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:39:37 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:39:37 ERROR TicketDAOInMemoryImpl:32 - Duplicate Ticket Id
+15-02-2016 15:39:37 ERROR TicketService:68 - Invalid Param
+15-02-2016 15:39:37 ERROR TicketService:68 - Invalid Param
+15-02-2016 15:39:37 ERROR TicketService:87 - Invalid Param
+15-02-2016 15:39:37 ERROR TicketService:108 - Invalid Param
+15-02-2016 15:39:37 ERROR TicketService:125 - Invalid Param
+15-02-2016 15:39:37 ERROR TicketService:141 - Invalid Param
+15-02-2016 15:39:37 ERROR TicketService:169 - Invalid Param
+15-02-2016 15:39:37 ERROR TicketService:169 - Invalid Param
+15-02-2016 15:39:37 ERROR TicketDAOInMemoryImpl:190 - Ticket Not Founds
+15-02-2016 15:39:37 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:39:37 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:39:37 ERROR TicketService:48 - Invalid Param
+15-02-2016 15:39:37 ERROR TicketService:48 - Invalid Param

@@ -34,7 +34,7 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
         }
         ticketInMemoryStorage.writeData(ticketId, ticket);
 
-        return new Ticket(ticket);
+        return ticket;
     }
 
     /**
@@ -47,8 +47,8 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
     public Ticket update(Ticket ticket) throws TicketNotFoundException {
         int ticketId = ticket.getId();
         if (isExist(ticketId)) {
-            ticketInMemoryStorage.writeData(ticketId, ticket);
-            return new Ticket(ticket);
+//            ticketInMemoryStorage.writeData(ticketId, ticket);
+            return ticket;
         }
         logger.error("Ticket not found");
         throw new TicketNotFoundException("Ticket Not Found");
