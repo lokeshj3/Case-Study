@@ -53,6 +53,7 @@ public class TicketFactory {
      * provides new TicketSerializeServiceImpl object for TicketSerializeService
      * @return Object
      */
+    //VD: unused method
     public static TicketSerializeService newTicketSerializeServiceInstance(){  return new TicketSerializeServiceImpl(); }
 
     private static int getTicketId(){

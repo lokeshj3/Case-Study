@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.Set;
 import java.util.stream.Collectors;
-
+//VD: Lots of unused imports.
 /**
  * Hello world!
  *
@@ -23,7 +23,7 @@ public class App
     public static void main( String[] args )
     {
         TLogger.writeLog(Level.INFO,"asdfsdfs");
-
+//VD: unnecessary print
         System.out.println( "Hello World!" );
 
 //        //Serialization test

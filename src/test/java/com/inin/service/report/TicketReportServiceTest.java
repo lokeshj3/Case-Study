@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.util.*;
-
+//VD: avoid using generic imports
 /**
  * Created by root on 11/2/16.
  */
@@ -150,6 +150,8 @@ public class TicketReportServiceTest {
      * @return List<Integer>
      */
     private List<Integer> generateDummyTicket(TicketService ticketService){
+        //VD: this is duplicate code and can be made common at one place.
+
         List<Integer> ticketIdList = new ArrayList<>();
         ticketIdList.add(ticketService.create("Test Subject1","Agent1",new HashSet<>(Arrays.asList("tag1","tag2","tag3"))));
         ticketIdList.add(ticketService.create("Test Subject2","Agent2",new HashSet<>(Arrays.asList("tag4","tag1","tag2"))));

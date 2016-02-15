@@ -65,6 +65,7 @@ public class TicketUtil {
      */
     public static String getAtributeNameValue(TicketAttribute ticketAttribute)
     {
+        //VD: unused method
         String value = "";
         switch (ticketAttribute)
         {
