@@ -66,8 +66,6 @@ public class Ticket implements Serializable{
         return agent;
     }
 
-    //Ganesh D: You don't use this function
-    // MS update  : Need to use in test cases
     public String getSubject() {
         return subject;
     }
@@ -95,6 +93,7 @@ public class Ticket implements Serializable{
     }
 
     public void removeTags(@NotNull Set<String> tags){
+        System.out.println("Inside this....");
         this.tags.removeAll(tags);
         this.updated = LocalDateTime.now();
     }

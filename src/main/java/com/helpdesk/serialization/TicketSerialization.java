@@ -14,7 +14,6 @@ public class TicketSerialization {
     File file = null;
 
     public TicketSerialization(String path, String fileName){
-        // Directory and File check should be there. Should not be manual process to create directories.
        file = Util.createFile(path, fileName);
     }
 
@@ -26,7 +25,6 @@ public class TicketSerialization {
     public boolean saveTicketsInFile(Map<Integer, Ticket> ticketMap, boolean append){
         FileOutputStream fos;
         ObjectOutputStream oos = null;
-        //MD:We can use try with resources.Refer below method code
         try{
             fos = new FileOutputStream(file, append);
 

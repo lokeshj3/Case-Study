@@ -1,8 +1,6 @@
 package com.helpdesk.logger;
 
 import com.helpdesk.components.Util;
-//MD:Unused import statement
-import java.io.File;
 import java.io.IOException;
 import java.util.logging.*;
 

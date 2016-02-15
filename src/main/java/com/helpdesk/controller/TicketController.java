@@ -1,5 +1,6 @@
 package com.helpdesk.controller;
 
+import com.helpdesk.components.Util;
 import com.helpdesk.exception.InvalidParamsException;
 import com.helpdesk.exception.TicketExceptions;
 import com.helpdesk.model.Ticket;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 
 public class TicketController {
     private TicketService ticketService = null;
@@ -26,15 +28,12 @@ public class TicketController {
         ticketReportService = new TicketReportService();
     }
 
-    //MD: If you commenting the function then should use proper java doc comment
     /**
      * controller to get data for create ticket
      * */
     public Ticket create(String subject, String agentName, HashSet<String> tagSet) throws TicketExceptions {
         writeLog(Level.INFO, "create controller start");
-        //MD: Instead of checking all string for null and empty individual, create one util function .Then we reduce code
-        // duplication and improve readability
-        if(subject != null && !subject.trim().isEmpty() && agentName != null && !agentName.trim().isEmpty() && tagSet != null) {
+        if(Util.isValidString(subject) && Util.isValidString(agentName) && tagSet != null) {
             return ticketService.createTicket(subject, agentName, tagSet);
         }
         else throw new InvalidParamsException("Please give proper input!");
@@ -44,17 +43,15 @@ public class TicketController {
     public Ticket update(int id, String agentName, Set<String> tagSet, String action)  throws TicketExceptions{
         writeLog(Level.INFO, "update controller start");
 
-        if(id>0 && ((agentName != null && !agentName.trim().isEmpty()) || (tagSet != null && !action.trim().isEmpty()))) {
+        if(id>0 && (Util.isValidString(agentName) || (tagSet != null && !action.trim().isEmpty()))) {
             return ticketService.update(id, agentName, tagSet, action);
         }
         else   throw new TicketExceptions("Invalid Params!!! Base controller");
     }
-    //MD: Is Boolean class return type is required  -- done
+
+
     public boolean delete(int id) throws TicketExceptions {
         writeLog(Level.INFO, "delete controller start");
-        //Ganesh D: Y this code? -- done
-        //MD:Here we have required only for id existence, not fetching ticket. Delete method itself return the null value  when
-        // no record deleted;
         //this.getDetails(id);
 
         if(ticketService.delete(id))
@@ -93,7 +90,7 @@ public class TicketController {
         return ticketService.getAllTickets();
     }
 
-    public Map<String , List<Ticket>> getAllAgentsTicketCount(){
+    public Map<String , Long> getAllAgentsTicketCount(){
         writeLog(Level.INFO, "getAllAgentsTicketCount controller start");
         return ticketReportService.ticketCountsGroupByAgent();
     }
@@ -103,7 +100,7 @@ public class TicketController {
        return ticketReportService.getTotalTicketCounts();
     }
 
-    public Ticket getOldestTicket() throws TicketExceptions{
+    public Ticket getOldestTicket(){
         writeLog(Level.INFO, "getOldestTicket count controller starts");
         return ticketReportService.oldestTicket();
     }
@@ -123,7 +120,7 @@ public class TicketController {
         writeLog(Level.INFO, "Display ticket list controller start");
         if(ticketList.size() > 0){
             ticketList
-                    .stream()   //MD:Use proper stream method format.Here sorted method break in between
+                    .stream()
                     .sorted((Ticket t1, Ticket t2)
                             -> t2.getUpdated()
                             .compareTo(t1.getUpdated())).forEach(System.out::println);
@@ -138,7 +135,7 @@ public class TicketController {
     public void getTicketCountByTag(){
         writeLog(Level.INFO, "get ticket count by tag controller starts");
         ticketReportService.getTicketCountByTag()
-                .forEach((String tagName,List<Ticket> ticketList)-> System.out.println(tagName+"   :   "+ticketList.size()));
+                .forEach((String tagName, Integer count)-> System.out.println(tagName+"   :   "+count));
     }
 
     public boolean removeAllTickets(){

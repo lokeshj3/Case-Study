@@ -24,17 +24,11 @@ public class UserDataController extends  TicketController{
         String subject = Util.readString("Enter Ticket Subject : ");
         String agentName = Util.readString("Enter Agent Name : ");
         String tags = Util.readString("Enter Tags (separated by comma(,) : ");
-        //MD: Not necessary, but better to use Parent type reference when it is available
-        HashSet<String> tagSet = new HashSet<>(Arrays.asList(tags.toLowerCase().trim().split(",")));
+        HashSet<String> tagSet = new HashSet<>(Arrays.asList(tags.split(",")));
 
         try{
-            //MD:Bad use of Inheritance, here you are override create method not extending the functionality of create
-            // method of parent class . Here you use child class create method only for User interaction.This can also done
-            // by creating TicketController class.
-
-            //Here single ticket return by the create method, name also should be singular form e.g. ticket
-            Ticket tickets = this.create(subject,agentName,tagSet);
-            this.displaySingleTicket(tickets);
+            Ticket ticket = this.create(subject,agentName,tagSet);
+            this.displaySingleTicket(ticket);
         } catch (TicketExceptions e) {
             writeLog(Level.WARNING, "error occurred: "+e.getMessage());
             System.out.println(e.getMessage());
@@ -59,7 +53,7 @@ public class UserDataController extends  TicketController{
             action = Util.readString("Enter a-adding new tag(s) / r-remove existing tag(s) / n-no");
 
             if (!action.trim().isEmpty() && (action.trim().equals("a") || action.trim().equals("r"))) {
-                String tag = Util.readString("Enter tags separated by comma(,) (Enter 'all' to remove all tags) : ");
+                String tag = Util.readString("Enter tags separated by comma(,)");
                 tagSet = new HashSet<>(Arrays.asList(tag.trim().split(",")));
             }
         }
@@ -167,11 +161,9 @@ public class UserDataController extends  TicketController{
     public void allAgentsTicketCount(){
         writeLog(Level.INFO, "allAgentsTicketCount start");
 
-        //Ganesh D: if you just required ticket count, then it make sense to have an Integer value
-        // rather than List<Ticket>, as if you using list it makes process heavy
-        Map<String, List<Ticket>> ticketCountList = this.getAllAgentsTicketCount();
+        Map<String, Long> ticketCountList = this.getAllAgentsTicketCount();
         if(ticketCountList.size()>0){
-            ticketCountList.forEach((String agentName, List<Ticket> ticketList) -> System.out.println(agentName + " :  " + ticketList.size()));
+            ticketCountList.forEach((String agentName, Long count) -> System.out.println(agentName + " :  " + count));
         }
         else     System.out.println("No Records Found!!!");
     }
@@ -188,17 +180,8 @@ public class UserDataController extends  TicketController{
      * */
     public void oldestTicket(){
         writeLog(Level.INFO, "oldest ticket start");
-        //MD:
-        // 1:- You handle TicketExceptions which never thrown.
-        // 2:- Not here , In reporting function you first fetch the all record and then apply filter on them.Why not we ,
-        // query it directly in data base.It is more faster than fetching and applying filter.
-        try {
-            Ticket ticket = this.getOldestTicket();
-            this.displaySingleTicket(ticket);
-        }catch (TicketExceptions e){
-            writeLog(Level.WARNING, "error occurred: "+e.getMessage());
-            System.out.println(e.getMessage());
-        }
+        Ticket ticket = this.getOldestTicket();
+        this.displaySingleTicket(ticket);
     }
 
     /**
@@ -226,7 +209,6 @@ public class UserDataController extends  TicketController{
      * */
     public void displaySingleTicket(Ticket ticket){
         writeLog(Level.INFO, "display single ticket start");
-        //MD: No need to call toString method explicitly
         System.out.println(ticket.toString());
     }
 

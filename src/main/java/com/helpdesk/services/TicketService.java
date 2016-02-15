@@ -1,5 +1,6 @@
 package com.helpdesk.services;
 
+import com.helpdesk.components.Util;
 import com.helpdesk.exception.InvalidParamsException;
 import com.helpdesk.exception.TicketExceptions;
 import com.helpdesk.model.Ticket;
@@ -28,8 +29,6 @@ public class TicketService {
     public Ticket createTicket(String subject, String agentName, HashSet<String> tagSet) throws TicketExceptions {
         writeLog(Level.INFO, "create service start");
 
-        //You can have a constructor which takes required fields like id, subject & after that you
-        // can use withTags method to build ticket model with Tags as tags is optional, currently if you can build ticket without using withSubject method
         Ticket ticket = new Ticket.Builder().withId(++max_id).withAgent(agentName).withSubject(subject).withTags(tagSet).build();
 
         if(objRepository.addTicket(ticket)){
@@ -38,40 +37,24 @@ public class TicketService {
         }
         else{
             writeLog(Level.WARNING, "Ticket create failed");
-            throw new TicketExceptions("Somthing went worng! Ticket not created");
+            throw new TicketExceptions("Something went wrong! Ticket not created");
         }
     }
 
+    /**
+     * ticket update service */
     public Ticket update(int id, String agentName, Set<String> tagSet, String action) throws TicketExceptions {
         writeLog(Level.INFO, "Update ticket service start");
         Ticket ticket = objRepository.getTicket(id);
 
-        //MD:Here you also need Null check because Or condition in agent and Tags. here is possibility to either agent and tag -- done
-        // is null
-        if(agentName != null && !agentName.isEmpty())
+        if(Util.isValidString(agentName))
             ticket.updateAgent(agentName);
 
-        if (action.trim().equals("a")) {  // Adding new  tags
-            //MD: Is this operation is required
-            tagSet.addAll(ticket.getTags());
+        if (action.trim().equals("a")) {
             ticket.addTags(tagSet);
         }
-        else if (action.trim().equals("r")) {  // remove tags
-            if(tagSet.contains("all")){
-                ticket.removeTags(ticket.getTags());
-            }
-            else {
-                // MD: For this inbuilt method removeAll is available, check doc for more details
-                HashSet<String> oldTags = new HashSet<>();
-                oldTags.addAll(ticket.getTags());
-                ticket.getTags().forEach((tag) -> {
-                    if (tagSet.contains(tag)) {
-                        oldTags.remove(tag);
-                    }
-                });
-                ticket.removeTags(ticket.getTags());
-                ticket.addTags(oldTags);
-            }
+        else if (action.trim().equals("r")) {
+            ticket.removeTags(tagSet);
         }
 
         if(objRepository.updateTicket(id, ticket)){

@@ -42,8 +42,6 @@ public class AppRunner {
                     objUserDataController.getAllTickets();
                     break;
                case 6:
-                   //MD: At the time of returning collection of ticket some where you use unmodifiable method and some times
-                   // not. You are following consistency in code. Pleas avoid this
                     //Find Ticket assigned to Agent
                     objUserDataController.TicketsByAgent();
                     break;
@@ -70,21 +68,16 @@ public class AppRunner {
                 case 12:
                     //Number of Tickets with entered tag
                     objUserDataController.ticketsReportForTag();
+                    break;
                 case 13:
-                    System.exit(0);
                     System.out.println("Good Bye!!");
                     break;
-                case 14 :
-                    // delete all records // only for internal use right now.
-                    objUserDataController.deleteAllTickets();
-                    break;
                 default:
-                    //Exit Case
                     System.out.println("Please enter correct option.");
                     break;
             }
         }
-        while (choice != 14);
+        while (choice != 13);
 
         TicketLogger.writeLog(Level.INFO, "End Application");
     }
