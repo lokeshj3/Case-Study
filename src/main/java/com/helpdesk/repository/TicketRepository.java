@@ -1,23 +1,18 @@
 package com.helpdesk.repository;
 
-import com.helpdesk.exception.InvalidParamsException;
 import com.helpdesk.exception.TicketExceptions;
 import com.helpdesk.model.Ticket;
 import com.helpdesk.serialization.TicketSerialization;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 
 import static com.helpdesk.logger.TicketLogger.writeLog;
 
-/**
- * Created by root on 9/2/16.
- */
+
 public class TicketRepository {
 
     private static Map<Integer, Ticket> ticketMap;
@@ -30,7 +25,8 @@ public class TicketRepository {
 
     /**
      * add ticket to repository
-     * @param ticket */
+     * @param ticket ticket object
+     * */
     public boolean addTicket(Ticket ticket){
         writeLog(Level.INFO, "add ticket repository start");
         if(ticketSerialization.saveSingelTicket(ticket)){
@@ -62,7 +58,7 @@ public class TicketRepository {
 
     /**
      * delete ticket from repository
-     * @param id */
+     * @param id ticket id */
     public boolean deleteTicket(int id) {
         if (ticketMap.containsKey(id)){
             ticketMap.remove(id);
@@ -83,7 +79,7 @@ public class TicketRepository {
 
     /**
      * add all the tickets in map
-     * @param tickets
+     * @param tickets tickets map
      * */
     public void addAll(Map<Integer, Ticket> tickets){
         writeLog(Level.INFO, "add all ticket repository start");

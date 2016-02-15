@@ -21,10 +21,10 @@ public class TicketSerialization {
 
     /**
      * serialize tickets
-     * @param ticketMap
+     * @param ticketMap Map of tickets created
      * */
     public boolean saveTicketsInFile(Map<Integer, Ticket> ticketMap, boolean append){
-        FileOutputStream fos = null;
+        FileOutputStream fos;
         ObjectOutputStream oos = null;
         try{
             fos = new FileOutputStream(file, append);
@@ -37,8 +37,6 @@ public class TicketSerialization {
             fos.close();
             return true;
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -55,8 +53,6 @@ public class TicketSerialization {
             oos.writeObject(ticket);
             return true;
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -73,14 +69,14 @@ public class TicketSerialization {
         if(file.length() == 0){
             return concurrentTicketMap;
         }
-        FileInputStream fis = null;
+        FileInputStream fis;
         ObjectInputStream ois = null;
-        try{
+        try {
             fis = new FileInputStream(file);
-            while(fis.available() > 0){
-                    ois = new ObjectInputStream(fis);
-                    Ticket ticket = (Ticket) ois.readObject();
-                    concurrentTicketMap.put(ticket.getId(), ticket);
+            while (fis.available() > 0) {
+                ois = new ObjectInputStream(fis);
+                Ticket ticket = (Ticket) ois.readObject();
+                concurrentTicketMap.put(ticket.getId(), ticket);
             }
             ois.close();
             fis.close();
@@ -89,7 +85,7 @@ public class TicketSerialization {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -98,7 +94,7 @@ public class TicketSerialization {
 
     /**
      * To remove all tickest from the file
-     * @return
+     * @return boolean
      */
     public boolean removeAllTickets(){
         try(FileOutputStream fos = new FileOutputStream(file)){

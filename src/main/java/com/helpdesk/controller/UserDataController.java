@@ -3,11 +3,10 @@ package com.helpdesk.controller;
 import com.helpdesk.components.Util;
 import com.helpdesk.exception.InvalidParamsException;
 import com.helpdesk.exception.TicketExceptions;
-import com.helpdesk.logger.TicketLogger;
+import static com.helpdesk.logger.TicketLogger.*;
 import com.helpdesk.model.Ticket;
 
 
-import java.security.InvalidParameterException;
 import java.util.*;
 import java.util.logging.Level;
 
@@ -19,29 +18,26 @@ public class UserDataController extends  TicketController{
    // Static import can be used for TicketLogger
 
    public void create(){
-        TicketLogger.writeLog(Level.INFO, "start");
+        writeLog(Level.INFO, "start");
 
         String subject = Util.readString("Enter Ticket Subject : ");
         String agentName = Util.readString("Enter Agent Name : ");
         String tags = Util.readString("Enter Tags (separated by comma(,) : ");
 
-        HashSet<String> tagSet = new HashSet<>(Arrays.asList(tags.toLowerCase().split(",")));
+        HashSet<String> tagSet = new HashSet<>(Arrays.asList(tags.toLowerCase().trim().split(",")));
 
         try{
             Ticket tickets = this.create(subject,agentName,tagSet);
             this.displaySingleTicket(tickets);
-        } catch (InvalidParamsException e) {
-            TicketLogger.writeLog(Level.WARNING, "error occurred: "+e.getMessage());
-            System.out.println(e.getMessage());
         } catch (TicketExceptions e) {
-            TicketLogger.writeLog(Level.WARNING, "error occurred: "+e.getMessage());
+            writeLog(Level.WARNING, "error occurred: "+e.getMessage());
             System.out.println(e.getMessage());
         }
    }
 
 
     public  void update() {
-        TicketLogger.writeLog(Level.INFO, "update start");
+        writeLog(Level.INFO, "update start");
         int id = Util.readInteger("Enter ticket Id to update : ");
         String agentName = "";
         HashSet<String> tagSet = null;
@@ -80,7 +76,7 @@ public class UserDataController extends  TicketController{
     }
 
     public void delete(){
-        TicketLogger.writeLog(Level.INFO, "delete start");
+        writeLog(Level.INFO, "delete start");
         int id = Util.readInteger("Enter ticket Id for deletion : ");
         if(id>0){
             try {
@@ -96,22 +92,19 @@ public class UserDataController extends  TicketController{
      * get ticket by id
      *  */
     public void getTicket(){
-        TicketLogger.writeLog(Level.INFO, "getTicket start");
+        writeLog(Level.INFO, "getTicket start");
         int id = Util.readInteger("Enter ticket Id for showing details : ");
         try {
-            Ticket ticket = this.getDetails(id);;
+            Ticket ticket = this.getDetails(id);
             displaySingleTicket(ticket);
-        }catch (InvalidParameterException e){
-            TicketLogger.writeLog(Level.WARNING, "error occurred: "+e.getMessage());
-            System.out.println(e.getMessage());
-        } catch (TicketExceptions e) {
-            TicketLogger.writeLog(Level.WARNING, "error occurred: "+e.getMessage());
+        }catch (TicketExceptions e) {
+            writeLog(Level.WARNING, "error occurred: "+e.getMessage());
             System.out.println(e.getMessage());
         }
     }
 
     public void TicketsByAgent() {
-        TicketLogger.writeLog(Level.INFO, "TicketsByAgent start");
+        writeLog(Level.INFO, "TicketsByAgent start");
          String agentName = Util.readString("Please enter Agent Name : ");
 
          if(!agentName.isEmpty()){
@@ -128,7 +121,7 @@ public class UserDataController extends  TicketController{
      * get ticket by tags
      *  */
     public void getTicketsByTag() {
-        TicketLogger.writeLog(Level.INFO, "getTickets by tag start");
+        writeLog(Level.INFO, "getTickets by tag start");
         String tags = Util.readString("Enter Tags (separated by comma(,) : ");
         HashSet<String> tagSet = new HashSet<>(Arrays.asList(tags.toLowerCase().split(",")));
         if(!tagSet.isEmpty()){
@@ -141,7 +134,7 @@ public class UserDataController extends  TicketController{
              else System.out.println("No tickets match with criteria!");
          }
          catch (TicketExceptions e){
-             TicketLogger.writeLog(Level.WARNING, "error occurred: "+e.getMessage());
+             writeLog(Level.WARNING, "error occurred: "+e.getMessage());
              System.out.println(e.getMessage());
          }
      }
@@ -154,7 +147,7 @@ public class UserDataController extends  TicketController{
      * get all tickets
      *  */
     public void getAllTickets() {
-        TicketLogger.writeLog(Level.INFO, "getAllTickets start");
+        writeLog(Level.INFO, "getAllTickets start");
         List<Ticket> ticketList = this.getAll();
         this.displayTickets(ticketList);
     }
@@ -164,7 +157,7 @@ public class UserDataController extends  TicketController{
      * get ticket count by agent name
      *  */
     public void allAgentsTicketCount(){
-        TicketLogger.writeLog(Level.INFO, "allAgentsTicketCount start");
+        writeLog(Level.INFO, "allAgentsTicketCount start");
 
         Map<String, List<Ticket>> ticketCountList = this.getAllAgentsTicketCount();
         if(ticketCountList.size()>0){
@@ -184,12 +177,12 @@ public class UserDataController extends  TicketController{
      * get oldest ticket
      * */
     public void oldestTicket(){
-        TicketLogger.writeLog(Level.INFO, "oldest ticket start");
+        writeLog(Level.INFO, "oldest ticket start");
         try {
             Ticket ticket = this.getOldestTicket();
             this.displaySingleTicket(ticket);
         }catch (TicketExceptions e){
-            TicketLogger.writeLog(Level.WARNING, "error occurred: "+e.getMessage());
+            writeLog(Level.WARNING, "error occurred: "+e.getMessage());
             System.out.println(e.getMessage());
         }
     }
@@ -198,14 +191,14 @@ public class UserDataController extends  TicketController{
      * get older ticket than no of days
      * */
     public void getOlderTicketsThanDays() {
-        TicketLogger.writeLog(Level.INFO, "older than days ticket start");
+        writeLog(Level.INFO, "older than days ticket start");
         int days = Util.readInteger("Enter day(s) to get tickets older than a entered number of days");
 
         List<Ticket> ticketList = null;
         try {
             ticketList = this.olderTicketsThanDays(days);
         } catch (InvalidParamsException e) {
-            TicketLogger.writeLog(Level.WARNING, "error occurred: "+e.getMessage());
+            writeLog(Level.WARNING, "error occurred: "+e.getMessage());
             System.out.println(e.getMessage());
         }
 
@@ -218,7 +211,7 @@ public class UserDataController extends  TicketController{
      * get display single ticket
      * */
     public void displaySingleTicket(Ticket ticket){
-        TicketLogger.writeLog(Level.INFO, "display single ticket start");
+        writeLog(Level.INFO, "display single ticket start");
         System.out.println(ticket.toString());
     }
 
@@ -226,12 +219,12 @@ public class UserDataController extends  TicketController{
      * get ticket count by tag
      * */
     public void ticketsReportForTag(){
-        TicketLogger.writeLog(Level.INFO, "ticket count by tag starts");
+        writeLog(Level.INFO, "ticket count by tag starts");
         this.getTicketCountByTag();
     }
 
     public void deleteAllTickets(){
-        TicketLogger.writeLog(Level.INFO, "delete all tickets controller starts");
+        writeLog(Level.INFO, "delete all tickets controller starts");
         if(this.removeAllTickets())
             System.out.println("Deleted all tickets Successfully!");
         else

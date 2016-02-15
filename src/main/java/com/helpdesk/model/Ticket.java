@@ -62,10 +62,6 @@ public class Ticket implements Serializable{
         return id;
     }
 
-    public String getSubject() {
-        return subject;
-    }
-
     public String getAgent() {
         return agent;
     }

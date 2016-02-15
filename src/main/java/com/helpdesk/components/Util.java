@@ -40,8 +40,15 @@ public class Util {
     public static File createFile(String filePath, String fileName){
         File file = null;
         try {
-            file= new File(filePath + fileName);
-            file.createNewFile();
+            file = new File(filePath);
+            if(!file.exists() || !file.isDirectory()){
+                file.mkdir();
+            }
+
+            file= new File(filePath, fileName);
+            if(!file.exists())
+                file.createNewFile();
+
         }catch(IOException ie){
             ie.printStackTrace();
         }

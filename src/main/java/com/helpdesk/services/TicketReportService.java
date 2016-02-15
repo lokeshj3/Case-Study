@@ -10,9 +10,6 @@ import java.util.stream.Collectors;
 
 import static com.helpdesk.logger.TicketLogger.writeLog;
 
-/**
- * Created by root on 10/2/16.
- */
 public class TicketReportService {
 
     private TicketRepository objRepository;
@@ -35,7 +32,7 @@ public class TicketReportService {
                 .stream()
                 .filter(ticket -> ticket.getTags()
                         .stream()
-                        .anyMatch(tag -> tagSet.contains(tag)))
+                        .anyMatch(tagSet::contains))
                 .collect(Collectors.toList());
     }
 
@@ -69,17 +66,15 @@ public class TicketReportService {
         writeLog(Level.INFO, "getTicketCountByTag service start");
         Map<String, List<Ticket>> tagCountMap = new HashMap<>();
         objRepository.getAllTickets().stream()
-                .forEach(ticket -> {
-                    ticket.getTags().forEach(tag ->{
-                        if(tagCountMap.containsKey(tag))
-                            tagCountMap.get(tag).add(ticket);
-                        else{
-                            List<Ticket> list = new ArrayList<>();
-                            list.add(ticket);
-                            tagCountMap.put(tag, list);
-                        }
-                    });
-                });
+                .forEach(ticket -> ticket.getTags().forEach(tag ->{
+                    if(tagCountMap.containsKey(tag))
+                        tagCountMap.get(tag).add(ticket);
+                    else{
+                        List<Ticket> list = new ArrayList<>();
+                        list.add(ticket);
+                        tagCountMap.put(tag, list);
+                    }
+                }));
 
         return tagCountMap;
     }
