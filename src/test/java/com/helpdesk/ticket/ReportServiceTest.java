@@ -48,10 +48,8 @@ public class ReportServiceTest {
             set_tagSet = new HashSet<>(Arrays.asList(text_tags.toLowerCase().split(",")));
             set_tagSet2 = new HashSet<>(Arrays.asList(text_tags2.toLowerCase().split(",")));
             text_tags = text_tags + ", tag4";
-
             Data.initialized = true;
         }
-
     }
 
     @BeforeClass
@@ -108,7 +106,7 @@ public class ReportServiceTest {
         Data.reportService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
         Data.reportService.createTicket(Data.int_ticketId2, Data.text_subject2, Data.text_agent2, Data.set_tagSet2);
         List<Ticket> list = Data.reportService.getTicketsOlderThanNDays(Data.int_noOfDay);
-        Assert.assertEquals(2, Data.reportService.getTicketsCountInSystem());
+        Assert.assertEquals(2, list.size());
 
     }
 

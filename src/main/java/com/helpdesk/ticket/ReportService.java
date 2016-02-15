@@ -53,7 +53,6 @@ public class ReportService {
             logger.error("Invalid number of days");
             throw new InvalidParamsException("Number of days cannot be less than zero");
         } else {
-            System.out.println("came here");
             return ticketDAO.findAllOlderThanNDays(noOfDays);
         }
     }

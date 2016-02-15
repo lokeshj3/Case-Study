@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * Created by root on 8/2/16.
  */
-public class Ticket implements Serializable{
+public class Ticket implements Serializable {
 
     private static final long serialVersionUID = 42L;
     private int id;
@@ -111,13 +111,13 @@ public class Ticket implements Serializable{
         out.writeObject(this.modified);
     }
 
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException{
-        this.id         = in.readInt();
-        this.subject    = in.readUTF();
-        this.agentName  = in.readUTF();
-        this.tags       = (HashSet) in.readObject();
-        this.created    = (LocalDateTime) in.readObject();
-        this.modified   = (LocalDateTime) in.readObject();
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        this.id = in.readInt();
+        this.subject = in.readUTF();
+        this.agentName = in.readUTF();
+        this.tags = (HashSet) in.readObject();
+        this.created = (LocalDateTime) in.readObject();
+        this.modified = (LocalDateTime) in.readObject();
     }
 
     @Override

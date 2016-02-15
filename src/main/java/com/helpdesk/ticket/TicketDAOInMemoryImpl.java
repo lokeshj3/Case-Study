@@ -7,21 +7,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * Created by root on 9/2/16.
  */
-//MS :  Is really need to make interface TicketDAO ?
 public class TicketDAOInMemoryImpl implements TicketDAO {
     static Logger logger = LoggerFactory.getLogger(TicketDAOInMemoryImpl.class);
 
     TicketInMemoryStorage ticketInMemoryStorage = TicketInMemoryStorage.newInstance();
 
     /**
-     * create eticket
+     * create ticket
      *
      * @param ticket
      * @return
@@ -47,9 +45,8 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
      */
     public Ticket update(Ticket ticket) throws TicketNotFoundException {
         int ticketId = ticket.getId();
-        // MS : You are already checking isExist in find() then Why do you need to check isExist once again?
         if (isExist(ticketId)) {
-//            ticketInMemoryStorage.writeData(ticketId, ticket);
+            ticketInMemoryStorage.writeData(ticketId, ticket);
             return ticket;
         }
         logger.error("Ticket not found");
@@ -165,12 +162,8 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
      */
 
     //MS :  Use camel Case for variable
-
     public List<Ticket> findAllOlderThanNDays(int noofDays) {
         logger.info("In find oldest ticket in system function");
-//        LocalDateTime olderDays = LocalDateTime.now().minus(noofdays, ChronoUnit.DAYS);
-//        return ticketInMemoryStorage.getTicketData().values().stream().filter(ticket -> ticket.getCreated().isBefore(noofdays)).collect(Collectors.toList());
-
         return this.ticketInMemoryStorage.getTicketData().values().stream()
                 .filter(tickets -> tickets.getCreated().isBefore(LocalDateTime.now().minusDays(noofDays))).collect(Collectors.toList());
 

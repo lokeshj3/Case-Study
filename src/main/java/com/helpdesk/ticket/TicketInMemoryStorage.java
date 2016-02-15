@@ -15,7 +15,6 @@ public class TicketInMemoryStorage {
         return new TicketInMemoryStorage();
     }
 
-    // MS : Why do you need to create new Ticket object?
     public void writeData(int id, Ticket ticket) {
         ticketData.put(id, new Ticket(ticket));
     }
