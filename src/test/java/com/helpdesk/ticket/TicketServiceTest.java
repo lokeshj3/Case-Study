@@ -57,11 +57,12 @@ public class TicketServiceTest {
             text_emptyAgent = "";
             text_updateAgent = "Ganesh";
             text_tags = "tag1,tag2,tag3";
+            //text_tags = "tag1,tag2,tag3,tag1 ,   tag2"; // if same tags added with space(s) then ticket tags set will update with duplicate values
             set_tagSet = new HashSet<>(Arrays.asList(text_tags.toLowerCase().split(",")));
             set_emptyTagSet = new HashSet<>();
             text_tags = text_tags + ", tag4";
 
-            text_updatetags = "tag4, tag5";
+            text_updatetags = "tag4, tag5";// if same tags added with space(s) then ticket tags set will update with duplicate values
             updateTagSet = new HashSet<>(Arrays.asList(text_updatetags.toLowerCase().split(",")));
             text_searchTag = "tag1";
             ticketDAO = TicketDAOFactory.get(TicketDAOFactoryType.INMEMORY);
@@ -132,6 +133,8 @@ public class TicketServiceTest {
         Assert.assertEquals(Data.text_subject, ticket.getSubject());
         Assert.assertEquals(Data.text_agent, ticket.getAgentName());
         Assert.assertEquals(Data.set_tagSet, ticket.getTags());
+        //Check here duplicate tags with spaces are accepted
+        //System.out.println("tags : "+ticket.getTags());
         ticketService.deleteTicket(Data.int_ticketId);
     }
 
@@ -140,6 +143,9 @@ public class TicketServiceTest {
         TicketService ticketService = new TicketService();
         ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
         ticketService.deleteTicket(Data.int_ticketId);
+        // MS : Here first you are creating the ticket then deleting the ticket & then updating the ticket
+        // Is this the correct way
+        // refer doc of @afterClass  : here delete all tickets
         ticketService.updateAgent(Data.text_invalidTicketId, Data.text_agent);
 
     }
@@ -148,7 +154,7 @@ public class TicketServiceTest {
     public void testUpdateTicketWithNullAgent() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
         TicketService ticketService = new TicketService();
         ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
-        ticketService.deleteTicket(Data.int_ticketId);
+        ticketService.deleteTicket(Data.int_ticketId); // Same refer @afterClass
         ticketService.updateAgent(Data.int_ticketId, Data.text_nullAgent);
 
     }
@@ -174,6 +180,7 @@ public class TicketServiceTest {
     }
 
     @Test()
+    // missing camel case
     public void testUpdateTicketWithTagsandAgentName() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
         TicketService ticketService = new TicketService();
         ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
@@ -188,7 +195,7 @@ public class TicketServiceTest {
     public void testDeleteTicketWithInvalidTicketId() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
         TicketService ticketService = new TicketService();
         ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
-        ticketService.deleteTicket(Data.int_ticketId);
+        ticketService.deleteTicket(Data.int_ticketId); // Same refer @afterClass
         ticketService.deleteTicket(Data.text_invalidTicketId);
     }
 
@@ -206,7 +213,7 @@ public class TicketServiceTest {
     public void testTicketDetailsByInvalidId() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
         TicketService ticketService = new TicketService();
         ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
-        ticketService.deleteTicket(Data.int_ticketId);
+        ticketService.deleteTicket(Data.int_ticketId); // Same refer @afterClass
         ticketService.getTicketDetail(Data.text_invalidTicketId);
 
     }
@@ -229,8 +236,8 @@ public class TicketServiceTest {
         TicketService ticketService = new TicketService();
         ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
         ticketService.createTicket(Data.int_ticketId + 1, Data.text_subject, Data.text_agent, Data.set_tagSet);
-        ticketService.deleteTicket(Data.int_ticketId);
-        ticketService.deleteTicket(Data.int_ticketId + 1);
+        ticketService.deleteTicket(Data.int_ticketId); // Same refer @afterClass
+        ticketService.deleteTicket(Data.int_ticketId + 1); // Same refer @afterClass
         ticketService.getTicketListDetailByAgentName(Data.text_nullAgent);
     }
 
@@ -239,8 +246,8 @@ public class TicketServiceTest {
         TicketService ticketService = new TicketService();
         ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
         ticketService.createTicket(Data.int_ticketId + 1, Data.text_subject, Data.text_agent, Data.set_tagSet);
-        ticketService.deleteTicket(Data.int_ticketId);
-        ticketService.deleteTicket(Data.int_ticketId + 1);
+        ticketService.deleteTicket(Data.int_ticketId); // Same refer @afterClass
+        ticketService.deleteTicket(Data.int_ticketId + 1); // Same refer @afterClass
         ticketService.getTicketListDetailByAgentName(Data.text_emptyAgent);
     }
 
@@ -249,8 +256,8 @@ public class TicketServiceTest {
         TicketService ticketService = new TicketService();
         ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
         ticketService.createTicket(Data.int_ticketId + 1, Data.text_subject, Data.text_agent, Data.set_tagSet);
-        ticketService.deleteTicket(Data.int_ticketId);
-        ticketService.deleteTicket(Data.int_ticketId + 1);
+        ticketService.deleteTicket(Data.int_ticketId); // Same refer @afterClass
+        ticketService.deleteTicket(Data.int_ticketId + 1); // Same refer @afterClass
         ticketService.getTicketListDetailByAgentName(Data.text_invalidAgent);
 
     }
@@ -276,9 +283,9 @@ public class TicketServiceTest {
         TicketService ticketService = new TicketService();
         ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
         ticketService.createTicket(Data.int_ticketId + 1, Data.text_subject, Data.text_agent, Data.set_tagSet);
-        ticketService.deleteTicket(Data.int_ticketId);
-        ticketService.deleteTicket(Data.int_ticketId + 1);
-        List<Ticket> agentTickets = ticketService.getTicketListDetailByTag(Data.text_agent);
+        ticketService.deleteTicket(Data.int_ticketId); // Same refer @afterClass
+        ticketService.deleteTicket(Data.int_ticketId + 1); // Same refer @afterClass
+        List<Ticket> agentTickets = ticketService.getTicketListDetailByTag(Data.text_agent); // variable is never used
     }
 
     @Test()
@@ -297,7 +304,8 @@ public class TicketServiceTest {
 
     }
 
-
+    // Missing camel case
+    // Here you can create few dummy tickets & then delete all dummy tickets then you can call getTicketList()
     @Test(expected = TicketNotFoundException.class)
     public void testGetAllTicketswithNoRecord() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
         TicketService ticketService = new TicketService();

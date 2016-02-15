@@ -34,9 +34,9 @@ public class TicketService {
         }
     }
 
-
     public final Ticket updateAgent(int ticketId, String agentName) throws InvalidParamsException, TicketNotFoundException {
         if (ticketId > 0 && Helper.isStringValid(agentName)) {
+            //MS :  You can use isExist() directly & return the ticket object
             Ticket ticket = ticketDAO.find(ticketId);
             ticket.setAgentName(agentName);
             return ticketDAO.update(ticket);
@@ -49,6 +49,7 @@ public class TicketService {
     public final Ticket updateTags(int ticketId, Set<String> tags) throws InvalidParamsException, TicketNotFoundException {
         if (ticketId > 0 && Helper.isCollectionValid(tags)) {
             Ticket ticket = ticketDAO.find(ticketId);
+            //MS :  if same tags added with space(s) then ticket tags set will update with duplicate values (Refer comments mentioned in test cases)
             ticket.setTags(tags);
             return ticketDAO.update(ticket);
         } else {
@@ -57,6 +58,7 @@ public class TicketService {
         }
     }
 
+    //MS :  Why do you require different functions to update ticket?
     public final Ticket updateAgentAndTags(int ticketId, String agentName, Set<String> tags) throws InvalidParamsException, TicketNotFoundException {
         if (ticketId > 0 && Helper.isCollectionValid(tags) && Helper.isStringValid(agentName)) {
             Ticket ticket = ticketDAO.find(ticketId);
@@ -80,7 +82,7 @@ public class TicketService {
     }
 
     public final Ticket getTicketDetail(int ticketId) throws TicketNotFoundException, InvalidParamsException {
-        if (ticketId > 0) {
+        if (ticketId > 0) {// MS : instead of find function you can use isExist() & you can return directly ticket using isExist()
             return ticketDAO.find(ticketId);
         } else {
             logger.error("Invalid Param");

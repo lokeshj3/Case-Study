@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 /**
  * Created by root on 9/2/16.
  */
+//MS :  Is really need to make interface TicketDAO ?
 public class TicketDAOInMemoryImpl implements TicketDAO {
     static Logger logger = LoggerFactory.getLogger(TicketDAOInMemoryImpl.class);
 
@@ -46,6 +47,7 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
      */
     public Ticket update(Ticket ticket) throws TicketNotFoundException {
         int ticketId = ticket.getId();
+        // MS : You are already checking isExist in find() then Why do you need to check isExist once again?
         if (isExist(ticketId)) {
             ticketInMemoryStorage.writeData(ticketId, ticket);
             return new Ticket(ticket);
@@ -118,6 +120,7 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
      */
     public int getTotalTicketInSystem() {
         logger.info("Entered Calculate total number of tickets present in the system function");
+        // MS : you can directly return the size of map instead of getting all data.
         return ticketInMemoryStorage.getTicketData().size();
     }
 
@@ -156,6 +159,7 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
      * @param noofdays
      * @return list of tickets
      */
+    //MS :  Use camel Case for variable
     public List<Ticket> findAllOlderThanNDays(int noofdays) {
         logger.info("In find oldest ticket in system function");
         LocalDateTime olderDays = LocalDateTime.now().minus(noofdays, ChronoUnit.DAYS);
@@ -179,7 +183,7 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
         if (!arrList.isEmpty()) {
             return Collections.unmodifiableList(arrList);
         }
-        logger.error("");
+        logger.error(""); //MS :  what is this?
         throw new TicketNotFoundException("Ticket Not Found");
 
     }
