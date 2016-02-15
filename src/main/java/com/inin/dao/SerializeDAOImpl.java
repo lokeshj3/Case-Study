@@ -3,8 +3,13 @@ package com.inin.dao;
 import com.inin.model.Ticket;
 import com.inin.util.FileHandler;
 import com.inin.util.TicketUtil;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.EOFException;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -93,10 +98,7 @@ public class SerializeDAOImpl implements SerializeDAO{
         Ticket ticket = null;
         File file = FileHandler.createFile(TicketUtil.getProperty("serializeTicketFile"));
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-            //Ganesh D: no need of loop when you are deserializing single ticket
-            while (true) {
-                 ticket = (Ticket)ois.readObject();
-            }
+            ticket = (Ticket)ois.readObject();
         }catch (EOFException e){
 //            e.printStackTrace();
         }catch (IOException e) {

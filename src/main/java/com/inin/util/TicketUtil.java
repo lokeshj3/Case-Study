@@ -1,7 +1,5 @@
 package com.inin.util;
 
-import com.inin.constant.TicketAttribute;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -56,44 +54,5 @@ public class TicketUtil {
             e.printStackTrace();
         }
         return propertyValue;
-    }
-
-    /**
-     * Return the TicketAttribute constant value
-     * @param ticketAttribute
-     * @return
-     */
-    //Ganesh D : You don't use this function
-    public static String getAtributeNameValue(TicketAttribute ticketAttribute)
-    {
-        //VD: unused method
-        String value = "";
-        switch (ticketAttribute)
-        {
-            case ID:
-                value = "id";
-                break;
-
-            case SUBJECT:
-                value = "subject";
-                break;
-
-            case AGENT:
-                value = "agent";
-                break;
-
-            case TAGS:
-                value = "tags";
-                break;
-
-            case CREATED:
-                value = "created";
-                break;
-
-            case MODIFIED:
-                value = "modified";
-                break;
-        }
-        return value;
     }
 }

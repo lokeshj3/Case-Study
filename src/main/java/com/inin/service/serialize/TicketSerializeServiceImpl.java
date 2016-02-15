@@ -3,9 +3,7 @@ package com.inin.service.serialize;
 import com.inin.dao.DAOFactory;
 import com.inin.dao.SerializeDAO;
 import com.inin.model.Ticket;
-
 import java.util.List;
-//VD: unused class
 /**
  * Created by root on 11/2/16.
  */

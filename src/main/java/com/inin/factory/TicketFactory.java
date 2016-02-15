@@ -5,9 +5,6 @@ import com.inin.service.core.TicketService;
 import com.inin.service.core.TicketServiceImpl;
 import com.inin.service.report.TicketReportService;
 import com.inin.service.report.TicketReportServiceImpl;
-import com.inin.service.serialize.TicketSerializeServiceImpl;
-import com.inin.service.serialize.TicketSerializeService;
-
 import java.util.Set;
 
 /**
@@ -53,8 +50,7 @@ public class TicketFactory {
      * provides new TicketSerializeServiceImpl object for TicketSerializeService
      * @return Object
      */
-    //VD: unused method
-    public static TicketSerializeService newTicketSerializeServiceInstance(){  return new TicketSerializeServiceImpl(); }
+//    public static TicketSerializeService newTicketSerializeServiceInstance(){  return new TicketSerializeServiceImpl(); }
 
     private static int getTicketId(){
         return ++counter;

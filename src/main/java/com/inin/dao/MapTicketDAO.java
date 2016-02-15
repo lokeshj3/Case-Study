@@ -6,7 +6,12 @@ import com.inin.logger.TLogger;
 import com.inin.model.Ticket;
 import com.inin.util.TicketUtil;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 
@@ -133,7 +138,6 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
                     .filter(ticket -> ticket.getAgent().toLowerCase().equals(tempAgent))
                     .sorted((ticket1,ticket2)->ticket1.getCreated().compareTo(ticket2.getCreated()))
                     .collect(Collectors.toList());
-        // EB: Negative test case missing.
         return new ArrayList<>();
     }
 
@@ -151,7 +155,6 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
                     .filter(ticket -> ticket.getTags().contains(tempTag))
                     .sorted((ticket1,ticket2)->ticket1.getCreated().compareTo(ticket2.getCreated()))
                     .collect(Collectors.toList());
-        // EB: Negative test case missing.
         return new ArrayList<>();
     }
 
@@ -161,17 +164,13 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
      * @return Ticket
      */
     @Override
-    public Ticket findOldestRecord() {
+    public Ticket findOldestRecord() throws TicketNotFoundException{
         if (ticketMap.getTicketMap().isEmpty())
-            // EB: Negative test case missing.
             throw new TicketNotFoundException("No Ticket found.");
 
-        //Ganesh D: instead of sorting all tickets by created & finding first element, it would be much better
-        // if you can compare & find the oldest element, as sorting is heaving operation, swapping/shifting is heavy
         return ticketMap.getTicketMap().values()
                 .stream()
-                .sorted((Ticket t1, Ticket t2) -> t1.getCreated().compareTo(t2.getCreated()))
-                .findFirst()
+                .min((Ticket t1, Ticket t2) -> t1.getCreated().compareTo(t2.getCreated()))
                 .get();
     }
 
@@ -185,7 +184,6 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
     @Override
     public List<Ticket> findTicketsFromDate(LocalDateTime date){
         if (ticketMap.getTicketMap().isEmpty())
-            // EB: Negative test case missing.
             return new ArrayList<>();
         return ticketMap.getTicketMap().values()
                 .stream()
@@ -213,11 +211,10 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
      * Return the tag's Ticket count
      * @return
      */
-    // EB: Test case missing.
     @Override
     public Map<String, Long> ticketsCountByTag() {
         Map<String,Long> ticketByTag = new HashMap<>();
-        if(ticketByTag.size() > 0)
+        if(ticketMap.getTicketMap().size() > 0)
             ticketMap.getTicketMap().values()
                     .stream()
                     .forEach(ticket -> {

@@ -1,5 +1,6 @@
 package com.inin.service.report;
 
+import com.inin.exception.TicketNotFoundException;
 import com.inin.factory.TicketFactory;
 import com.inin.model.Ticket;
 import com.inin.service.core.TicketService;
@@ -9,7 +10,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.HashSet;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Arrays;
+
+
 //VD: avoid using generic imports
 /**
  * Created by root on 11/2/16.
@@ -19,6 +27,7 @@ public class TicketReportServiceTest {
     private TicketReportService ticketReportService;
     private TicketService ticketService;
     private List<Integer> ticketIdList;
+    private boolean deleteDummyTicket = true;
 
     @Before
     public void setUp()
@@ -46,6 +55,14 @@ public class TicketReportServiceTest {
     }
 
     @Test
+    public void testTicketsByTagWithBlankData(){
+        deleteDummyTicket(ticketIdList,ticketService);
+        deleteDummyTicket = false;
+        List<Ticket> ticketList = ticketReportService.ticketsByTag("tag1");
+        Assert.assertEquals(0, ticketList.size());
+    }
+
+    @Test
     public void testTicketsByTagWithEmptyTag(){
         List<Ticket> ticketList = ticketReportService.ticketsByTag("");
         Assert.assertEquals(0,ticketList.size());
@@ -68,8 +85,16 @@ public class TicketReportServiceTest {
     @Test
     public void testTicketsByAgent(){
         List<Ticket> ticketList = ticketReportService.ticketsByAgent("Agent1");
-        System.out.println(ticketList);
         ticketList.forEach(ticket -> Assert.assertTrue(ticket.getAgent().equals("Agent1")));
+    }
+
+    //Negative Test Cases for ticketsByAgent
+    @Test
+    public void testTicketsByAgentWithBlankData(){
+        deleteDummyTicket(ticketIdList,ticketService);
+        deleteDummyTicket = false;
+        List<Ticket> ticketList = ticketReportService.ticketsByAgent("Agent1");
+        Assert.assertEquals(0 , ticketList.size());
     }
     @Test
     public void testTicketsByAgentWithUpperCase(){
@@ -105,6 +130,14 @@ public class TicketReportServiceTest {
         agentTicketCount.forEach((agent,count)-> Assert.assertEquals(count.toString(),Integer.toString(ticketReportService.ticketsByAgent(agent).size())));
     }
 
+    @Test
+    public void testTicketsCountByAgentWithBlankData()
+    {
+        deleteDummyTicket(ticketIdList,ticketService);
+        deleteDummyTicket = false;
+        Map<String, Long> agentTicketCount = ticketReportService.ticketsCountByAgent();
+        Assert.assertEquals(new HashMap<String, Long>(), agentTicketCount);
+    }
 
     //Test Cases for ticketsCountByTag
     @Test
@@ -136,6 +169,14 @@ public class TicketReportServiceTest {
 
     }
 
+    //Test Cases for oldestTicket
+    @Test(expected = TicketNotFoundException.class)
+    public void testOldestTicketWithBlankData(){
+        deleteDummyTicket(ticketIdList,ticketService);
+        deleteDummyTicket = false;
+        Ticket ticket = ticketReportService.oldestTicket();
+    }
+
         //Test Cases for ticketOlderByDate
     @Test
     public void testTicketOlderByDate(){
@@ -143,6 +184,14 @@ public class TicketReportServiceTest {
         Assert.assertEquals(ticketIdList.size(),ticketList.size());
     }
 
+    // Negative Test Case for findTicketsFromDate
+    @Test
+    public void testFindTicketsFromDateWithBlankData(){
+        deleteDummyTicket(ticketIdList,ticketService);
+        deleteDummyTicket = false;
+        List<Ticket> ticketList = ticketReportService.ticketOlderByDate(LocalDateTime.now());
+        Assert.assertEquals(new ArrayList<>(), ticketList);
+    }
 
     /**
      * Generate the dummy Ticket
@@ -150,8 +199,6 @@ public class TicketReportServiceTest {
      * @return List<Integer>
      */
     private List<Integer> generateDummyTicket(TicketService ticketService){
-        //VD: this is duplicate code and can be made common at one place.
-
         List<Integer> ticketIdList = new ArrayList<>();
         ticketIdList.add(ticketService.create("Test Subject1","Agent1",new HashSet<>(Arrays.asList("tag1","tag2","tag3"))));
         ticketIdList.add(ticketService.create("Test Subject2","Agent2",new HashSet<>(Arrays.asList("tag4","tag1","tag2"))));
@@ -166,8 +213,8 @@ public class TicketReportServiceTest {
      * @param ticketService
      */
     private void deleteDummyTicket(List<Integer> ticketIdList,TicketService ticketService){
-        ticketIdList.forEach(id -> ticketService.delete(id));
-
+        if (deleteDummyTicket)
+            ticketIdList.forEach(id -> ticketService.delete(id));
     }
 
 
