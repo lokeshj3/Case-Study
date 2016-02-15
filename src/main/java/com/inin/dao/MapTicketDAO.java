@@ -133,7 +133,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
                     .filter(ticket -> ticket.getAgent().toLowerCase().equals(tempAgent))
                     .sorted((ticket1,ticket2)->ticket1.getCreated().compareTo(ticket2.getCreated()))
                     .collect(Collectors.toList());
-
+        // EB: Negative test case missing.
         return new ArrayList<>();
     }
 
@@ -151,7 +151,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
                     .filter(ticket -> ticket.getTags().contains(tempTag))
                     .sorted((ticket1,ticket2)->ticket1.getCreated().compareTo(ticket2.getCreated()))
                     .collect(Collectors.toList());
-
+        // EB: Negative test case missing.
         return new ArrayList<>();
     }
 
@@ -163,6 +163,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
     @Override
     public Ticket findOldestRecord() {
         if (ticketMap.getTicketMap().isEmpty())
+            // EB: Negative test case missing.
             throw new TicketNotFoundException("No Ticket found.");
 
         //Ganesh D: instead of sorting all tickets by created & finding first element, it would be much better
@@ -184,6 +185,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
     @Override
     public List<Ticket> findTicketsFromDate(LocalDateTime date){
         if (ticketMap.getTicketMap().isEmpty())
+            // EB: Negative test case missing.
             return new ArrayList<>();
         return ticketMap.getTicketMap().values()
                 .stream()
@@ -211,6 +213,7 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
      * Return the tag's Ticket count
      * @return
      */
+    // EB: Test case missing.
     @Override
     public Map<String, Long> ticketsCountByTag() {
         Map<String,Long> ticketByTag = new HashMap<>();
