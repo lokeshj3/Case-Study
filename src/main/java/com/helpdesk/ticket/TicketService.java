@@ -24,15 +24,41 @@ public class TicketService {
         ticketDAO = TicketDAOFactory.get(TicketDAOFactoryType.INMEMORY);
     }
 
+    /**
+     * create new Ticket
+     *
+     * @param ticketId
+     * @param subject
+     * @param agentName
+     * @param setOfTags
+     * @return
+     * @throws DuplicateTicketIdException
+     * @throws InvalidParamsException
+     */
+
     public final Ticket createTicket(int ticketId, String subject, String agentName, Set<String> setOfTags) throws DuplicateTicketIdException, InvalidParamsException {
 
         if (ticketId > 0 && Helper.isStringValid(subject) && Helper.isStringValid(agentName)) {
-            return ticketDAO.create(new Ticket.Builder(ticketId, subject, agentName).withTags(setOfTags).build());
-        } else {
-            logger.error("Invalid Param");
-            throw new InvalidParamsException("Invalid Param");
+            if (setOfTags.size() > 0) {
+                return ticketDAO.create(new Ticket.Builder(ticketId, subject, agentName).withTags(setOfTags).build());
+            } else {
+                return ticketDAO.create(new Ticket.Builder(ticketId, subject, agentName).build());
+            }
         }
+        logger.error("Invalid Param");
+        throw new InvalidParamsException("Invalid Param");
+
     }
+
+    /**
+     * update Agent
+     *
+     * @param ticketId
+     * @param agentName
+     * @return Ticket
+     * @throws InvalidParamsException
+     * @throws TicketNotFoundException
+     */
 
     public final Ticket updateAgent(int ticketId, String agentName) throws InvalidParamsException, TicketNotFoundException {
         if (ticketId > 0 && Helper.isStringValid(agentName)) {
@@ -40,23 +66,41 @@ public class TicketService {
             Ticket ticket = ticketDAO.find(ticketId);
             ticket.setAgentName(agentName);
             return ticketDAO.update(ticket);
-        } else {
-            logger.error("Invalid Param");
-            throw new InvalidParamsException("Invalid Param");
         }
+        logger.error("Invalid Param");
+        throw new InvalidParamsException("Invalid Param");
     }
 
+    /**
+     * update Tags
+     *
+     * @param ticketId
+     * @param tags
+     * @return Ticket
+     * @throws InvalidParamsException
+     * @throws TicketNotFoundException
+     */
     public final Ticket updateTags(int ticketId, Set<String> tags) throws InvalidParamsException, TicketNotFoundException {
         if (ticketId > 0 && Helper.isCollectionValid(tags)) {
             Ticket ticket = ticketDAO.find(ticketId);
             //MS :  if same tags added with space(s) then ticket tags set will update with duplicate values (Refer comments mentioned in test cases)
             ticket.setTags(tags);
             return ticketDAO.update(ticket);
-        } else {
-            logger.error("Invalid Param");
-            throw new InvalidParamsException("Invalid Param");
         }
+        logger.error("Invalid Param");
+        throw new InvalidParamsException("Invalid Param");
     }
+
+    /**
+     * update Agent And Tags
+     *
+     * @param ticketId
+     * @param agentName
+     * @param tags
+     * @return Ticket
+     * @throws InvalidParamsException
+     * @throws TicketNotFoundException
+     */
 
     //MS :  Why do you require different functions to update ticket?
     public final Ticket updateAgentAndTags(int ticketId, String agentName, Set<String> tags) throws InvalidParamsException, TicketNotFoundException {
@@ -65,35 +109,63 @@ public class TicketService {
             ticket.setTags(tags);
             ticket.setAgentName(agentName);
             return ticketDAO.update(ticket);
-        } else {
-            logger.error("Invalid Param");
-            throw new InvalidParamsException("Invalid Param");
         }
+        logger.error("Invalid Param");
+        throw new InvalidParamsException("Invalid Param");
     }
 
+    /**
+     * Delete Ticket
+     *
+     * @param ticketId
+     * @return boolean
+     * @throws InvalidParamsException
+     * @throws TicketNotFoundException
+     */
 
     public final boolean deleteTicket(int ticketId) throws InvalidParamsException, TicketNotFoundException {
         if (ticketId > 0) {
             return ticketDAO.delete(ticketId);
-        } else {
-            logger.error("Invalid Param");
-            throw new InvalidParamsException("Invalid Param");
         }
+        logger.error("Invalid Param");
+        throw new InvalidParamsException("Invalid Param");
     }
 
+    /**
+     * get Ticket Detail
+     *
+     * @param ticketId
+     * @return Ticket
+     * @throws TicketNotFoundException
+     * @throws InvalidParamsException
+     */
     public final Ticket getTicketDetail(int ticketId) throws TicketNotFoundException, InvalidParamsException {
         if (ticketId > 0) {// MS : instead of find function you can use isExist() & you can return directly ticket using isExist()
             return ticketDAO.find(ticketId);
-        } else {
-            logger.error("Invalid Param");
-            throw new InvalidParamsException("Invalid Param");
         }
+        logger.error("Invalid Param");
+        throw new InvalidParamsException("Invalid Param");
+
     }
 
+    /**
+     * get List
+     *
+     * @return List
+     * @throws TicketNotFoundException
+     */
     public final List<Ticket> getTicketList() throws TicketNotFoundException {
         return ticketDAO.findAll();
     }
 
+    /**
+     * get List By AgentName
+     *
+     * @param agentName
+     * @return List
+     * @throws InvalidParamsException
+     * @throws TicketNotFoundException
+     */
     public final List<Ticket> getTicketListDetailByAgentName(String agentName) throws InvalidParamsException, TicketNotFoundException {
 
         if (Helper.isStringValid(agentName)) {
@@ -103,6 +175,14 @@ public class TicketService {
         throw new InvalidParamsException("Invalid Param");
     }
 
+    /**
+     * get List by tags
+     *
+     * @param tag
+     * @return List
+     * @throws TicketNotFoundException
+     * @throws InvalidParamsException
+     */
     public final List<Ticket> getTicketListDetailByTag(String tag) throws TicketNotFoundException, InvalidParamsException {
         if (Helper.isStringValid(tag)) {
             return ticketDAO.findAllByTag(tag);
@@ -111,6 +191,12 @@ public class TicketService {
         throw new InvalidParamsException("Invalid Param");
     }
 
+    /**
+     * Agent With Ticket Count
+     *
+     * @return Map
+     * @throws TicketNotFoundException
+     */
     public final Map<String, Integer> getAllAgentWithTicketCount() throws TicketNotFoundException {
         return ticketDAO.findAllAgentWithTicketCount();
     }

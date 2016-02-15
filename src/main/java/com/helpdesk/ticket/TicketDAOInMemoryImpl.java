@@ -35,7 +35,7 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
         }
         ticketInMemoryStorage.writeData(ticketId, ticket);
 
-        return new Ticket(ticket);
+        return ticket;
     }
 
     /**
@@ -49,8 +49,8 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
         int ticketId = ticket.getId();
         // MS : You are already checking isExist in find() then Why do you need to check isExist once again?
         if (isExist(ticketId)) {
-            ticketInMemoryStorage.writeData(ticketId, ticket);
-            return new Ticket(ticket);
+//            ticketInMemoryStorage.writeData(ticketId, ticket);
+            return ticket;
         }
         logger.error("Ticket not found");
         throw new TicketNotFoundException("Ticket Not Found");
@@ -116,6 +116,7 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
 
     /**
      * Calculate total number of tickets present in the system
+     *
      * @return count
      */
     public int getTotalTicketInSystem() {
@@ -126,15 +127,17 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
 
     /**
      * Calculate oldest ticket present in the system
+     *
      * @return oldest ticket
      */
     public Ticket findOldestTicketInSystem() {
         logger.info("Entered find oldest ticket in system function");
-        return ticketInMemoryStorage.getTicketData().values().stream().max( (ticket1, ticket2) -> ticket2.getCreated().compareTo(ticket1.getCreated())).get();
+        return ticketInMemoryStorage.getTicketData().values().stream().max((ticket1, ticket2) -> ticket2.getCreated().compareTo(ticket1.getCreated())).get();
     }
 
     /**
      * Calculate ticket count for all tags
+     *
      * @return tags with ticket count
      */
     public Map<String, Integer> findAllTagsWithTicketCount() {
@@ -156,14 +159,21 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
 
     /**
      * Calculate tickets older than specified N number of days
-     * @param noofdays
+     *
+     * @param noofDays
      * @return list of tickets
      */
+
     //MS :  Use camel Case for variable
-    public List<Ticket> findAllOlderThanNDays(int noofdays) {
+
+    public List<Ticket> findAllOlderThanNDays(int noofDays) {
         logger.info("In find oldest ticket in system function");
-        LocalDateTime olderDays = LocalDateTime.now().minus(noofdays, ChronoUnit.DAYS);
-        return ticketInMemoryStorage.getTicketData().values().stream().filter(ticket -> ticket.getCreated().isBefore(olderDays)).collect(Collectors.toList());
+//        LocalDateTime olderDays = LocalDateTime.now().minus(noofdays, ChronoUnit.DAYS);
+//        return ticketInMemoryStorage.getTicketData().values().stream().filter(ticket -> ticket.getCreated().isBefore(noofdays)).collect(Collectors.toList());
+
+        return this.ticketInMemoryStorage.getTicketData().values().stream()
+                .filter(tickets -> tickets.getCreated().isBefore(LocalDateTime.now().minusDays(noofDays))).collect(Collectors.toList());
+
 
     }
 
@@ -183,7 +193,9 @@ public class TicketDAOInMemoryImpl implements TicketDAO {
         if (!arrList.isEmpty()) {
             return Collections.unmodifiableList(arrList);
         }
-        logger.error(""); //MS :  what is this?
+
+        logger.error("Ticket Not Founds");
+
         throw new TicketNotFoundException("Ticket Not Found");
 
     }
