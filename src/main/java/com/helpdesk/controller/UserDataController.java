@@ -23,10 +23,15 @@ public class UserDataController extends  TicketController{
         String subject = Util.readString("Enter Ticket Subject : ");
         String agentName = Util.readString("Enter Agent Name : ");
         String tags = Util.readString("Enter Tags (separated by comma(,) : ");
-
+        //MD: Not necessary, but better to use Parent type reference when it is available
         HashSet<String> tagSet = new HashSet<>(Arrays.asList(tags.toLowerCase().trim().split(",")));
 
         try{
+            //MD:Bad use of Inheritance, here you are override create method not extending the functionality of create
+            // method of parent class . Here you use child class create method only for User interaction.This can also done
+            // by creating TicketController class.
+
+            //Here single ticket return by the create method, name also should be singular form e.g. ticket
             Ticket tickets = this.create(subject,agentName,tagSet);
             this.displaySingleTicket(tickets);
         } catch (TicketExceptions e) {
@@ -178,6 +183,10 @@ public class UserDataController extends  TicketController{
      * */
     public void oldestTicket(){
         writeLog(Level.INFO, "oldest ticket start");
+        //MD:
+        // 1:- You handle TicketExceptions which never thrown.
+        // 2:- Not here , In reporting function you first fetch the all record and then apply filter on them.Why not we ,
+        // query it directly in data base.It is more faster than fetching and applying filter.
         try {
             Ticket ticket = this.getOldestTicket();
             this.displaySingleTicket(ticket);
@@ -212,6 +221,7 @@ public class UserDataController extends  TicketController{
      * */
     public void displaySingleTicket(Ticket ticket){
         writeLog(Level.INFO, "display single ticket start");
+        //MD: No need to call toString method explicitly
         System.out.println(ticket.toString());
     }
 

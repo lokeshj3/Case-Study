@@ -10,6 +10,7 @@ public class Util {
         System.out.println(message);
         int userInput = 0;
         try{
+            //MD:You are not closing the resources
             BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
             userInput = Integer.parseInt(consoleReader.readLine());
             //consoleReader.close();
@@ -27,6 +28,7 @@ public class Util {
         System.out.println(message);
         String userInput = "";
         try{
+            //MD:You are not closing the resources
             BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
             userInput = consoleReader.readLine();
 

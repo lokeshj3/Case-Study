@@ -26,13 +26,14 @@ public class TicketController {
         ticketReportService = new TicketReportService();
     }
 
-
+    //MD: If you commenting the function then should use proper java doc comment
     /**
      * controller to get data for create ticket
      * */
     public Ticket create(String subject, String agentName, HashSet<String> tagSet) throws TicketExceptions {
         writeLog(Level.INFO, "create controller start");
-
+        //MD: Instead of checking all string for null and empty individual, create one util function .Then we reduce code
+        // duplication and improve readability
         if(subject != null && !subject.trim().isEmpty() && agentName != null && !agentName.trim().isEmpty() && tagSet != null) {
             return ticketService.createTicket(subject, agentName, tagSet);
         }
@@ -48,10 +49,11 @@ public class TicketController {
         }
         else   throw new TicketExceptions("Invalid Params!!! Base controller");
     }
-
+    //MD: Is Boolean class return type is required
     public Boolean delete(int id) throws TicketExceptions {
         writeLog(Level.INFO, "delete controller start");
-
+        //MD:Here we have required only for id existence, not fetching ticket. Delete method itself return the null value  when
+        // no record deleted;
         this.getDetails(id);
 
         if(ticketService.delete(id))
@@ -120,7 +122,7 @@ public class TicketController {
         writeLog(Level.INFO, "Display ticket list controller start");
         if(ticketList.size() > 0){
             ticketList
-                    .stream()
+                    .stream()   //MD:Use proper stream method format.Here sorted method break in between
                     .sorted((Ticket t1, Ticket t2) -> t2.getUpdated()
                     .compareTo(t1.getUpdated())).forEach(System.out::println);
         }

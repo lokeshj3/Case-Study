@@ -38,11 +38,16 @@ public class TicketReportService {
 
     public Map<String , List<Ticket>> ticketCountsGroupByAgent(){
         writeLog(Level.INFO, "ticketCountsGroupByAgent start");
+        //MD: Here we need only agent with it's ticket count. No need to pass List of Ticket of each agent. We can achieve
+        // this by passing Collectors.counting() second parameter in groupingBy function.
         return Collections.unmodifiableMap(objRepository.getAllTickets().stream().collect(Collectors.groupingBy(Ticket::getAgent)));
     }
 
     public int getTotalTicketCounts() {
         writeLog(Level.INFO, "getTotalTicketCounts service start");
+
+        //MD: For only ticket count you fetch all ticket and then cont its size. I think it better to directly count the
+        // record in data base.
         return objRepository.getAllTickets().size();
     }
 
@@ -58,12 +63,14 @@ public class TicketReportService {
     public List<Ticket> ticketsOlderByDays(int days){
         writeLog(Level.INFO, "ticketsOlderByDays service start");
         LocalDateTime localDateTime = LocalDateTime.now().minusDays(days);
+        //MD:Why you need sorting according to created here?
         return objRepository.getAllTickets().stream().filter(ticket -> ticket.getCreated().compareTo(localDateTime) < 0).sorted(Comparator.comparing(Ticket::getCreated)).collect(Collectors.toList());
     }
 
 
     public Map<String, List<Ticket>> getTicketCountByTag(){
         writeLog(Level.INFO, "getTicketCountByTag service start");
+        //MD:Here you need ticket count, no need to return Ticket list
         Map<String, List<Ticket>> tagCountMap = new HashMap<>();
         objRepository.getAllTickets().stream()
                 .forEach(ticket -> ticket.getTags().forEach(tag ->{

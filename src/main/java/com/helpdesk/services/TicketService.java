@@ -44,10 +44,13 @@ public class TicketService {
         writeLog(Level.INFO, "Update ticket service start");
         Ticket ticket = objRepository.getTicket(id);
 
+        //MD:Here you also need Null check because Or condition in agent and Tags. here is possibility to either agent and tag
+        // is null
         if(!agentName.isEmpty())
             ticket.updateAgent(agentName);
 
         if (action.trim().equals("a")) {  // Adding new  tags
+            //MD: Is this operation is required
             tagSet.addAll(ticket.getTags());
             ticket.addTags(tagSet);
         }
@@ -56,7 +59,7 @@ public class TicketService {
                 ticket.removeTags(ticket.getTags());
             }
             else {
-
+                // MD: For this inbuilt method removeAll is available, check doc for more details
                 HashSet<String> oldTags = new HashSet<>();
                 oldTags.addAll(ticket.getTags());
                 ticket.getTags().forEach((tag) -> {
