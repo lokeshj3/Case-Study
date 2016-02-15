@@ -26,6 +26,7 @@ public class TicketSerialization {
     public boolean saveTicketsInFile(Map<Integer, Ticket> ticketMap, boolean append){
         FileOutputStream fos;
         ObjectOutputStream oos = null;
+        //MD:We can use try with resources.Refer below method code
         try{
             fos = new FileOutputStream(file, append);
 
