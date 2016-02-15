@@ -4,8 +4,6 @@ import com.inin.dao.DAOFactory;
 import com.inin.dao.TicketReportDAO;
 import com.inin.model.Ticket;
 import com.inin.util.TicketUtil;
-
-import java.security.InvalidParameterException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

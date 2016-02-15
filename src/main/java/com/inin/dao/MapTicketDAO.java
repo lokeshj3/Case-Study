@@ -5,11 +5,8 @@ import com.inin.factory.TicketFactory;
 import com.inin.logger.TLogger;
 import com.inin.model.Ticket;
 import com.inin.util.TicketUtil;
-import sun.management.resources.agent;
-
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 
@@ -29,8 +26,11 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
      */
     @Override
     public int create(String subject,String agent, Set<String> tags) throws IllegalArgumentException{
-        if(!TicketUtil.isValidString(subject) || !TicketUtil.isValidString(agent))
+        if(!TicketUtil.isValidString(subject) || !TicketUtil.isValidString(agent)){
+            TLogger.writeLog(Level.WARNING, "Invalid Agent Name/Subject sent.");
             throw new IllegalArgumentException();
+        }
+
         tags = tags != null ? new HashSet<>(tags) : new HashSet<>();
 
         Ticket ticket   = TicketFactory.newTicketInstance(subject, agent, tags);
@@ -45,8 +45,11 @@ public class MapTicketDAO implements TicketServiceDAO,TicketReportDAO {
      */
     @Override
     public Ticket update(int id, String agent, Set<String> tags) throws TicketNotFoundException{
-        if(!isExist(id))
+        if(!isExist(id)){
+            TLogger.writeLog(Level.WARNING,"No Ticket found with id"+id);
             throw new TicketNotFoundException("No Ticket found with id"+id);
+        }
+
 
         Ticket ticket = ticketMap.getTicketMap().get(id);
         ticket.setAgent(agent);

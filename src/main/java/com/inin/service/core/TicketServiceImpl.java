@@ -4,11 +4,12 @@ import com.inin.dao.DAOFactory;
 import com.inin.dao.TicketServiceDAO;
 import com.inin.exception.TicketNotFoundException;
 import com.inin.factory.TicketFactory;
+import com.inin.logger.TLogger;
 import com.inin.model.Ticket;
 import com.inin.util.TicketUtil;
 
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.logging.Level;
 
 /**
  * Created by root on 8/2/16.
@@ -40,8 +41,11 @@ public class TicketServiceImpl implements TicketService {
      * @throws TicketNotFoundException
      */
     public Ticket update(int id, String agent, Set<String> tags) throws IllegalArgumentException,TicketNotFoundException{
-        if (!TicketUtil.isValidString(agent))
+        if (!TicketUtil.isValidString(agent)){
+            TLogger.writeLog(Level.WARNING, "Invalid Agent Name sent.");
             throw new IllegalArgumentException();
+        }
+
         return TicketFactory.newTicketInstance(ticketServiceDAO.update(id, agent, tags));
 
     }
