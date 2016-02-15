@@ -67,6 +67,7 @@ public class Ticket implements Serializable{
     }
 
     //Ganesh D: You don't use this function
+    // MS update  : Need to use in test cases
     public String getSubject() {
         return subject;
     }

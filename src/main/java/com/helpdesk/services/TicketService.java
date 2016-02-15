@@ -46,9 +46,9 @@ public class TicketService {
         writeLog(Level.INFO, "Update ticket service start");
         Ticket ticket = objRepository.getTicket(id);
 
-        //MD:Here you also need Null check because Or condition in agent and Tags. here is possibility to either agent and tag
+        //MD:Here you also need Null check because Or condition in agent and Tags. here is possibility to either agent and tag -- done
         // is null
-        if(!agentName.isEmpty())
+        if(agentName != null && !agentName.isEmpty())
             ticket.updateAgent(agentName);
 
         if (action.trim().equals("a")) {  // Adding new  tags
@@ -95,6 +95,9 @@ public class TicketService {
 
     public boolean delete(int id) throws TicketExceptions {
         writeLog(Level.INFO, "Update ticket service start");
+        if(id > max_id)
+            throw new InvalidParamsException("Invalid ticket id!");
+
         return objRepository.deleteTicket(id);
     }
 

@@ -49,19 +49,18 @@ public class TicketController {
         }
         else   throw new TicketExceptions("Invalid Params!!! Base controller");
     }
-    //MD: Is Boolean class return type is required
-    public Boolean delete(int id) throws TicketExceptions {
+    //MD: Is Boolean class return type is required  -- done
+    public boolean delete(int id) throws TicketExceptions {
         writeLog(Level.INFO, "delete controller start");
-
-        //Ganesh D: Y this code?
+        //Ganesh D: Y this code? -- done
         //MD:Here we have required only for id existence, not fetching ticket. Delete method itself return the null value  when
         // no record deleted;
-        this.getDetails(id);
+        //this.getDetails(id);
 
         if(ticketService.delete(id))
             return  true;
         else
-             throw  new TicketExceptions("Ticket Deletion Failed!");
+             throw  new TicketExceptions("Invalid ticket id ");
     }
 
     public Ticket getDetails(int id) throws TicketExceptions{
@@ -125,8 +124,9 @@ public class TicketController {
         if(ticketList.size() > 0){
             ticketList
                     .stream()   //MD:Use proper stream method format.Here sorted method break in between
-                    .sorted((Ticket t1, Ticket t2) -> t2.getUpdated()
-                    .compareTo(t1.getUpdated())).forEach(System.out::println);
+                    .sorted((Ticket t1, Ticket t2)
+                            -> t2.getUpdated()
+                            .compareTo(t1.getUpdated())).forEach(System.out::println);
         }
         else {
             writeLog(Level.INFO, "No tickets in system");

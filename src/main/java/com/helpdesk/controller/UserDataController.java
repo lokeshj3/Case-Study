@@ -7,6 +7,7 @@ import static com.helpdesk.logger.TicketLogger.*;
 import com.helpdesk.model.Ticket;
 
 
+import java.security.InvalidParameterException;
 import java.util.*;
 import java.util.logging.Level;
 
@@ -91,6 +92,8 @@ public class UserDataController extends  TicketController{
                 System.out.println(te.getMessage());
             }
         }
+        else
+            throw new InvalidParameterException("Invalid ticket id!");
     }
 
     /**
