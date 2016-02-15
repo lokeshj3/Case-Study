@@ -46,6 +46,8 @@ public class TicketRepository {
      * @param id, ticket */
     public boolean updateTicket(int id, Ticket ticket){
         Ticket tempTicket = ticketMap.get(id);
+        //Ganesh D : need to maintain consistency as in addTicket function you are first writing to a file &
+        // then putting it in Map, but here you are doing opposite
         ticketMap.put(id, ticket);
         if(ticketSerialization.saveSingelTicket(ticket)){
             return true;
@@ -81,6 +83,7 @@ public class TicketRepository {
      * add all the tickets in map
      * @param tickets tickets map
      * */
+    //Ganesh D: You don't use this function
     public void addAll(Map<Integer, Ticket> tickets){
         writeLog(Level.INFO, "add all ticket repository start");
         ticketMap.putAll(tickets);

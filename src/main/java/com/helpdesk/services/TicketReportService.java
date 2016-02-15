@@ -48,6 +48,8 @@ public class TicketReportService {
 
     public Ticket oldestTicket() {
         writeLog(Level.INFO, "oldestTicket service start");
+        //Ganesh D: instead of sorting all tickets by created & finding first element, it would be much better
+        // if you can compare & find the oldest element, as sorting is heaving operation, swapping/shifting is heavy
         return objRepository.getAllTickets()
                 .stream()
                 .sorted((Ticket t1, Ticket t2) -> t1.getCreated()
@@ -64,6 +66,8 @@ public class TicketReportService {
 
     public Map<String, List<Ticket>> getTicketCountByTag(){
         writeLog(Level.INFO, "getTicketCountByTag service start");
+        //Ganesh D: if you just required ticket count, then it make sense to have an Integer value
+        // rather than List<Ticket>, as if you using list it makes process heavy
         Map<String, List<Ticket>> tagCountMap = new HashMap<>();
         objRepository.getAllTickets().stream()
                 .forEach(ticket -> ticket.getTags().forEach(tag ->{

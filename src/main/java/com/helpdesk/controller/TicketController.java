@@ -52,6 +52,7 @@ public class TicketController {
     public Boolean delete(int id) throws TicketExceptions {
         writeLog(Level.INFO, "delete controller start");
 
+        //Ganesh D: Y this code?
         this.getDetails(id);
 
         if(ticketService.delete(id))

@@ -66,6 +66,7 @@ public class Ticket implements Serializable{
         return agent;
     }
 
+    //Ganesh D: You don't use this function
     public String getSubject() {
         return subject;
     }

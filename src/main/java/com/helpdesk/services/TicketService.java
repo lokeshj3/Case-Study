@@ -28,6 +28,8 @@ public class TicketService {
     public Ticket createTicket(String subject, String agentName, HashSet<String> tagSet) throws TicketExceptions {
         writeLog(Level.INFO, "create service start");
 
+        //You can have a constructor which takes required fields like id, subject & after that you
+        // can use withTags method to build ticket model with Tags as tags is optional, currently if you can build ticket without using withSubject method
         Ticket ticket = new Ticket.Builder().withId(++max_id).withAgent(agentName).withSubject(subject).withTags(tagSet).build();
 
         if(objRepository.addTicket(ticket)){

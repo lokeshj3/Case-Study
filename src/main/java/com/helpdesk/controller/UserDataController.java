@@ -159,6 +159,8 @@ public class UserDataController extends  TicketController{
     public void allAgentsTicketCount(){
         writeLog(Level.INFO, "allAgentsTicketCount start");
 
+        //Ganesh D: if you just required ticket count, then it make sense to have an Integer value
+        // rather than List<Ticket>, as if you using list it makes process heavy
         Map<String, List<Ticket>> ticketCountList = this.getAllAgentsTicketCount();
         if(ticketCountList.size()>0){
             ticketCountList.forEach((String agentName, List<Ticket> ticketList) -> System.out.println(agentName + " :  " + ticketList.size()));
