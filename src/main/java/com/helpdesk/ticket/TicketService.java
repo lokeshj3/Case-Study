@@ -60,9 +60,15 @@ public class TicketService {
      * @throws TicketNotFoundException
      */
 
+    /** DA: to update ticket it can be agent or can be tags or anything, but for updating you must cal single update function
+     * rather than update agent or update tag. Internally you can segregate functions on changes required. */
+
     public final Ticket updateAgent(int ticketId, String agentName) throws InvalidParamsException, TicketNotFoundException {
         if (ticketId > 0 && Helper.isStringValid(agentName)) {
             //MS :  You can use isExist() directly & return the ticket object
+
+            /**DA: While updating tag you are checking ticket available or not?
+             * this check also required here. use your ticketDAO.find() */
             Ticket ticket = ticketDAO.find(ticketId);
             ticket.setAgentName(agentName);
             return ticketDAO.update(ticket);

@@ -36,6 +36,8 @@ public class TicketServiceTest {
         private static Set<String> set_tagSet;
         private static Set<String> set_emptyTagSet;
 
+        /** DA: use camelCase for variables, using Underscore is not advisable.
+         */
         private static String text_updatetags;
         private static Set<String> updateTagSet;
         private static String text_searchTag;
@@ -58,15 +60,28 @@ public class TicketServiceTest {
             text_updateAgent = "Ganesh";
             text_tags = "tag1,tag2,tag3";
             //text_tags = "tag1,tag2,tag3,tag1 ,   tag2"; // if same tags added with space(s) then ticket tags set will update with duplicate values
+
+
+
+
+            /**DA:test for duplicate tags also.
+             * use like this:
+             *  (Arrays.asList(tags.toLowerCase().trim().split(",")));
+             *  if we gives params like "tag,   tag,tag   "
+             *  it will consider all above as different and put into tag SET.
+             *  */
+
             text_tags.replaceAll("\\s+","");
             set_tagSet = new HashSet<>(Arrays.asList(text_tags.toLowerCase().split(",")));
             set_emptyTagSet = new HashSet<>();
             text_tags = text_tags + ", tag4";
-            text_tags.replaceAll("\\s+","");
             text_updatetags = "tag4, tag5";// if same tags added with space(s) then ticket tags set will update with duplicate values
             text_updatetags.replaceAll("\\s+","");
             updateTagSet = new HashSet<>(Arrays.asList(text_updatetags.toLowerCase().split(",")));
             text_searchTag = "tag1";
+
+            /**DA: why do you required to create ticketDAO object here?
+             * and you again recreating in TicketService constructor */
             Data.initialized = true;
 
         }
@@ -168,9 +183,14 @@ public class TicketServiceTest {
 
     @Test(expected = InvalidParamsException.class)
     public void testUpdateTicketWithNullAgent() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
-
         Data.ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
         Data.ticketService.updateAgent(Data.int_ticketId, Data.text_nullAgent);
+        TicketService ticketService = new TicketService();
+        ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
+        /**DA: Why you need to delete ticket to update with null agent?
+         * It should be valid ticket(not deleted ticket) and null agent name */
+        ticketService.deleteTicket(Data.int_ticketId);
+        ticketService.updateAgent(Data.int_ticketId, Data.text_nullAgent);
 
     }
 
@@ -179,7 +199,9 @@ public class TicketServiceTest {
         Data.ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
         Ticket ticket = Data.ticketService.updateAgent(Data.int_ticketId, Data.text_updateAgent);
         Assert.assertEquals(Data.text_updateAgent, ticket.getAgentName());
+        Assert.assertEquals(Data.int_ticketId, ticket.getId());
 
+        /**DA: while updating agent or any other attribute, there should be some other check also required like check ticket id */
 
     }
 
