@@ -87,7 +87,7 @@ public class TicketController {
 
     public List<Ticket> getAll(){
         TicketLogger.writeLog(Level.INFO, "getAll controller start");
-        return ticketService.getAlltickets();
+        return ticketService.getAllTickets();
     }
 
     public Map<String , List<Ticket>> getAllAgentsTicketCount(){

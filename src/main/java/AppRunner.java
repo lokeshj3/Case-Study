@@ -69,9 +69,11 @@ public class AppRunner {
                     //Number of Tickets with entered tag
                     objUserDataController.ticketsReportForTag();
                 case 13:
+                    System.exit(0);
                     System.out.println("Good Bye!!");
                     break;
                 case 14 :
+                    // delete all records // only for internal use right now.
                     objUserDataController.deleteAllTickets();
                     break;
                 default:
@@ -80,8 +82,7 @@ public class AppRunner {
                     break;
             }
         }
-        // Option 13 for Exit, but condition says 14?
-        while (choice != 13);
+        while (choice != 14);
 
         TicketLogger.writeLog(Level.INFO, "End Application");
     }

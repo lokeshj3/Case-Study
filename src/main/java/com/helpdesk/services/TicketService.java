@@ -93,8 +93,7 @@ public class TicketService {
         return objRepository.deleteTicket(id);
     }
 
-    // Use camelcase for method names.
-    public List<Ticket> getAlltickets(){
+    public List<Ticket> getAllTickets(){
         writeLog(Level.INFO, "get all tickets service start");
         return objRepository.getAllTickets();
     }
