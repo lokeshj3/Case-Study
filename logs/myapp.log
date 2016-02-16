@@ -2206,3 +2206,24 @@ com.helpdesk.exception.InvalidParamsException: Ticket Not Found
 15-02-2016 19:28:53 INFO  TicketDAOInMemoryImpl:131 - Entered find oldest ticket in system function
 15-02-2016 19:28:53 ERROR ReportService:53 - Invalid number of days
 15-02-2016 19:28:53 INFO  TicketDAOInMemoryImpl:166 - In find oldest ticket in system function
+16-02-2016 10:42:41 ERROR TicketService:48 - Invalid Param
+16-02-2016 10:42:41 ERROR TicketService:171 - Invalid Param
+16-02-2016 10:42:41 ERROR TicketService:48 - Invalid Param
+16-02-2016 10:42:41 ERROR TicketService:171 - Invalid Param
+16-02-2016 10:42:41 ERROR TicketDAOInMemoryImpl:190 - Ticket Not Founds
+16-02-2016 10:42:41 ERROR TicketService:48 - Invalid Param
+16-02-2016 10:42:41 ERROR TicketService:48 - Invalid Param
+16-02-2016 10:42:41 ERROR TicketService:48 - Invalid Param
+16-02-2016 10:42:41 ERROR TicketDAOInMemoryImpl:31 - Duplicate Ticket Id
+16-02-2016 10:42:41 ERROR TicketService:69 - Invalid Param
+16-02-2016 10:42:41 ERROR TicketService:69 - Invalid Param
+16-02-2016 10:42:41 ERROR TicketService:88 - Invalid Param
+16-02-2016 10:42:41 ERROR TicketService:110 - Invalid Param
+16-02-2016 10:42:41 ERROR TicketService:127 - Invalid Param
+16-02-2016 10:42:41 ERROR TicketService:143 - Invalid Param
+16-02-2016 10:42:41 ERROR TicketDAOInMemoryImpl:212 - Ticket not found
+16-02-2016 10:42:41 ERROR TicketService:187 - Invalid Param
+16-02-2016 10:42:41 ERROR TicketDAOInMemoryImpl:110 - Ticket not found
+16-02-2016 10:42:41 ERROR TicketService:48 - Invalid Param
+16-02-2016 11:03:34 INFO  TicketDAOInMemoryImpl:131 - Entered find oldest ticket in system function
+16-02-2016 11:03:46 INFO  TicketDAOInMemoryImpl:131 - Entered find oldest ticket in system function

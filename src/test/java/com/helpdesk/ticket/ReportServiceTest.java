@@ -88,8 +88,7 @@ public class ReportServiceTest {
     public void testOldestTicketInSystem() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
         Data.reportService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
         Data.reportService.createTicket(Data.int_ticketId2, Data.text_subject2, Data.text_agent2, Data.set_tagSet2);
-        Ticket ticket = Data.reportService.getOldestTicketInSystem();
-        Assert.assertEquals(Data.int_ticketId, ticket.getId());
+        Assert.assertEquals(Data.int_ticketId, Data.reportService.getOldestTicketInSystem().getId());
     }
 
     @Test(expected = InvalidParamsException.class)

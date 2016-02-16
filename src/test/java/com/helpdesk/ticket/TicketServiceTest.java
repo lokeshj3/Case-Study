@@ -180,6 +180,7 @@ public class TicketServiceTest {
     public void testUpdateTicketWithTagsAndAgentName() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
         Data.ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
         Ticket ticket = Data.ticketService.updateAgentAndTags(Data.int_ticketId, Data.text_updateAgent, Data.updateTagSet);
+        Assert.assertEquals(Data.updateTagSet, ticket.getId());
         Assert.assertEquals(Data.updateTagSet, ticket.getTags());
         Assert.assertEquals(Data.text_updateAgent, ticket.getAgentName());
 
@@ -242,7 +243,7 @@ public class TicketServiceTest {
     public void testGetTicketsByInvalidAgentName() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
 
         Data.ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_tagSet);
-        Data.ticketService.createTicket(Data.int_ticketId + 1, Data.text_subject, Data.text_agent, Data.set_tagSet);
+        Data.ticketService.createTicket(Data.int_ticketId2, Data.text_subject2, Data.text_agent2, Data.set_tagSet);
         Data.ticketService.getTicketListDetailByAgentName(Data.text_invalidAgent);
 
     }
@@ -299,17 +300,22 @@ public class TicketServiceTest {
     public void testGetAllTickets() throws InvalidTicketDAOFactoryTypeException, InvalidParamsException, DuplicateTicketIdException, TicketNotFoundException {
         Data.ticketService.createTicket(Data.int_ticketId, Data.text_subject, Data.text_agent, Data.set_emptyTagSet);
         Data.ticketService.createTicket(Data.int_ticketId2, Data.text_subject2, Data.text_agent2, Data.set_tagSet);
-        List<Ticket> agentTickets = Data.ticketService.getTicketList();
-        Ticket ticket = agentTickets.get(0);
-        Assert.assertEquals(Data.int_ticketId, ticket.getId());
-        Assert.assertEquals(Data.text_subject, ticket.getSubject());
-        Assert.assertEquals(Data.text_agent, ticket.getAgentName());
-        Assert.assertEquals(Data.set_emptyTagSet, ticket.getTags());
-        Ticket ticket_2 = agentTickets.get(1);
-        Assert.assertEquals(Data.int_ticketId2, ticket_2.getId());
-        Assert.assertEquals(Data.text_subject2, ticket_2.getSubject());
-        Assert.assertEquals(Data.text_agent2, ticket_2.getAgentName());
-        Assert.assertEquals(Data.set_tagSet.size(), ticket_2.getTags().size());
+        List<Ticket> tickets = Data.ticketService.getTicketList();
+
+            tickets.forEach(ticket -> {
+            if (ticket.getId() == Data.int_ticketId) {
+                Assert.assertEquals(Data.int_ticketId, ticket.getId());
+                Assert.assertEquals(Data.text_subject, ticket.getSubject());
+                Assert.assertEquals(Data.text_agent, ticket.getAgentName());
+                Assert.assertEquals(Data.set_emptyTagSet, ticket.getTags());
+            } else {
+                Assert.assertEquals(Data.int_ticketId2, ticket.getId());
+                Assert.assertEquals(Data.text_subject2, ticket.getSubject());
+                Assert.assertEquals(Data.text_agent2, ticket.getAgentName());
+                Assert.assertEquals(Data.set_tagSet.size(), ticket.getTags().size());
+            }
+        });
+
     }
 
 
